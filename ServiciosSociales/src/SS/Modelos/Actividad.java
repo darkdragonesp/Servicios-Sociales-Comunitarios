@@ -87,7 +87,13 @@ public class Actividad implements Serializable {
         this.descripcion = descripcion;
     }
 
-       
+    public Intervencion getInter() {
+        return inter;
+    }
+
+    public void setInter(Intervencion inter) {
+        this.inter = inter;
+    }
    
     
     @Override
