@@ -31,6 +31,9 @@ public class Actividad implements Serializable {
     @JoinColumn(nullable = false)
     private Usuario usuario;
     
+    @OneToOne(mappedBy = "actividad")
+    private Intervencion intercencion;
+    
     public Long getId() {
         return id;
     }
