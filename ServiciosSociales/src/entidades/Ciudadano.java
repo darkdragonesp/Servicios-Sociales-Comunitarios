@@ -1,11 +1,13 @@
 package entidades;
 
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,6 +23,11 @@ public class Ciudadano extends Persona {
     @JoinColumn(nullable=false)
     private Expediente ciudadano_TO_id_expediente;
 
+    @OneToMany(mappedBy="ciudadano1")
+    private List<Parentesco> parentescos1;
+    @OneToMany(mappedBy="ciudadano2")
+    private List<Parentesco> parentescos2;
+    
     public Expediente getCiudadano_TO_id_expediente() {
         return ciudadano_TO_id_expediente;
     }
