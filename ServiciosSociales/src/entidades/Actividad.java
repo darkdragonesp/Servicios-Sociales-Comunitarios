@@ -26,8 +26,9 @@ public class Actividad implements Serializable {
     @Column(nullable=true, length=200)
     private String descripcion;
     
-    //Relacion MuchosaMuchos con USUARIO
+    //Relacion MuchosAUno con USUARIO
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
     
     public Long getId() {

@@ -2,6 +2,7 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -38,11 +40,20 @@ public class Expediente implements Serializable {
     @ManyToOne
     @JoinColumn(name="Expediente_id_expediente", referencedColumnName="id_expediente")
     private Expediente expedienteLigado;
+   
+    @OneToMany(mappedBy = "expedienteLigado")
+    private List<Expediente> expedientesLigados;
     
     @ManyToOne
-    @JoinColumn(name="id_uts", referencedColumnName="id_uts", nullable=false)
-    private UTS uts;
-
+    @JoinColumn(nullable = false)
+    private Usuario id_to_usuario;
+    
+    @OneToMany(mappedBy = "expediente_to_inter")
+    private List<Intervencion> intervenciones;
+    
+    @OneToMany(mappedBy = "ciudadano_TO_id_expediente")
+    private List<Ciudadano> ciudadanos;
+    
     public Long getId() {
         return id;
     }

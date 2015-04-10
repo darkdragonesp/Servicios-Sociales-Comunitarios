@@ -1,10 +1,12 @@
 package entidades;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,9 +23,15 @@ public class Usuario extends Persona {
     private String contraseña;
     
     @ManyToOne
-    @JoinColumn(name="usuario_TO_id_uts",nullable=false)
-    private UTS uts;
-
+    @JoinColumn(nullable = false)
+    private UTS usuario_TO_id_uts;
+    
+    @OneToMany(mappedBy = "usuario")
+    private List<Actividad> actividades;
+    
+    @OneToMany(mappedBy = "id_to_usuario")
+    private List<Expediente> expedientes;
+    
     public String getTipo_profesional() {
         return tipo_profesional;
     }

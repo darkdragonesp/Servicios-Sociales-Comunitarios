@@ -1,10 +1,12 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -20,6 +22,9 @@ public class UTS implements Serializable {
     private String id_zona;
     private String id_css;
 
+    @OneToMany(mappedBy = "usuario_TO_id_uts")
+    private List<Usuario> utsS;
+    
     public Long getId() {
         return id_uts;
     }

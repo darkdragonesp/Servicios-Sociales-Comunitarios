@@ -42,6 +42,10 @@ public class Intervencion implements Serializable {
     @JoinColumn(nullable = false)
     private Actividad actividad;
     
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Expediente expediente_to_inter;
+    
     public Long getId() {
         return id;
     }
