@@ -27,8 +27,7 @@ public class Parentesco implements Serializable {
     @ManyToOne(optional = false)
     private Ciudadano ciudadano2;
 
-    public Parentesco() {
-    }
+    public Parentesco() { }
 
     public Parentesco(ParentescoID parentescoPK) {
         this.parentescoPK = parentescoPK;

@@ -7,37 +7,36 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Portátil
  */
 @Entity
-@DiscriminatorValue("USUARIO")
+@Table(name = "USUARIO")
+@DiscriminatorValue("U")
 public class Usuario extends Persona {
     private static final long serialVersionUID = 1L;
     
-    @Column(nullable=false)
-    private String tipo_profesional;
-    @Column(nullable=false)
+    @Column(name="TIPO_PROFESIONAL", nullable=false)
+    private String tipoProfesional;
+    @Column(name="CONTRASENA", nullable=false)
     private String contraseña;
     
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private UTS usuario_TO_id_uts;
+    @JoinColumn(name="UTS_ID_UTS", referencedColumnName="ID_UTS", nullable = false)
+    private UTS uts;
     
     @OneToMany(mappedBy = "usuario")
     private List<Actividad> actividades;
     
-    @OneToMany(mappedBy = "id_to_usuario")
-    private List<Expediente> expedientes;
-    
-    public String getTipo_profesional() {
-        return tipo_profesional;
+    public String getTipoProfesional() {
+        return tipoProfesional;
     }
 
-    public void setTipo_profesional(String tipo_profesional) {
-        this.tipo_profesional = tipo_profesional;
+    public void setTipoProfesional(String tipoProfesional) {
+        this.tipoProfesional = tipoProfesional;
     }
 
     public String getContraseña() {
@@ -48,7 +47,19 @@ public class Usuario extends Persona {
         this.contraseña = contraseña;
     }
 
+    public UTS getUts() {
+        return uts;
+    }
 
+    public void setUts(UTS uts) {
+        this.uts = uts;
+    }
 
-    
+    public List<Actividad> getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(List<Actividad> actividades) {
+        this.actividades = actividades;
+    }
 }

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
@@ -15,31 +16,48 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
-@DiscriminatorValue("CIUDADANO")
+@Table(name = "CIUDADANO")
+@DiscriminatorValue("C")
 public class Ciudadano extends Persona {
     private static final long serialVersionUID = 1L;
     
     @ManyToOne
-    @JoinColumn(nullable=false)
-    private Expediente ciudadano_TO_id_expediente;
+    @JoinColumn(name="EXPEDIENTE_ID_EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable=false)
+    private Expediente expediente;
 
     @OneToMany(mappedBy="ciudadano1")
     private List<Parentesco> parentescos1;
     @OneToMany(mappedBy="ciudadano2")
     private List<Parentesco> parentescos2;
     
-    public Expediente getCiudadano_TO_id_expediente() {
-        return ciudadano_TO_id_expediente;
+    public Expediente getExpediente() {
+        return expediente;
     }
 
-    public void setCiudadano_TO_id_expediente(Expediente ciudadano_TO_id_expediente) {
-        this.ciudadano_TO_id_expediente = ciudadano_TO_id_expediente;
+    public void setCiudadanoExpediente(Expediente expediente) {
+        this.expediente = expediente;
+    }
+
+    public List<Parentesco> getParentescos1() {
+        return parentescos1;
+    }
+
+    public void setParentescos1(List<Parentesco> parentescos1) {
+        this.parentescos1 = parentescos1;
+    }
+
+    public List<Parentesco> getParentescos2() {
+        return parentescos2;
+    }
+
+    public void setParentescos2(List<Parentesco> parentescos2) {
+        this.parentescos2 = parentescos2;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.ciudadano_TO_id_expediente);
+        hash = 37 * hash + Objects.hashCode(this.expediente);
         return hash;
     }
 
@@ -52,7 +70,7 @@ public class Ciudadano extends Persona {
             return false;
         }
         final Ciudadano other = (Ciudadano) obj;
-        if (!Objects.equals(this.ciudadano_TO_id_expediente, other.ciudadano_TO_id_expediente)) {
+        if (!Objects.equals(this.expediente, other.expediente)) {
             return false;
         }
         return true;

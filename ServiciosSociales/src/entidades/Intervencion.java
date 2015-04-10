@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -18,33 +19,40 @@ import javax.persistence.TemporalType;
  * @author JuanJo
  */
 @Entity
+@Table(name = "INTERVENCION")
 public class Intervencion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ID_INTERVENCION")
     private Long id;
     
-    @Column(nullable=false)
+    @Column(name="FECHA_INICIO", nullable=false)
     @Temporal(TemporalType.DATE)
-    private Date fecha_inicio; 
-    @Column(nullable=false)
+    private Date fechaInicio; 
+    @Column(name="FECHA_FIN")
     @Temporal(TemporalType.DATE)
-    private Date fecha_fin;
+    private Date fechaFin;
+    @Column(name="VALORACION")
     private String valoracion;
+    @Column(name="TIPO")
     private String tipo;
-    private String recurso_aplicado;
+    @Column(name="RECURSO_APLICADO")
+    private String recursoAplicado;
+    @Column(name="RECURSO_IDEAL")
+    private String recursoIdeal;
+    @Column(name="AYUDA")
     private String ayuda;
+    @Column(name="NOTAS")
     private String notas;
     
-    @ManyToOne
-    private Expediente expediente;
     @OneToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name="ACTIVIDAD_ID_ACTIVIDAD", referencedColumnName="ID_ACTIVIDAD", nullable = false)
     private Actividad actividad;
     
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Expediente expediente_to_inter;
+    @JoinColumn(name="EXPEDIENTE_ID_EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable = false)
+    private Expediente expediente;
     
     public Long getId() {
         return id;
@@ -54,20 +62,20 @@ public class Intervencion implements Serializable {
         this.id = id;
     }
 
-    public Date getFecha_inicio() {
-        return fecha_inicio;
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setFecha_inicio(Date fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public Date getFecha_fin() {
-        return fecha_fin;
+    public Date getFechaFin() {
+        return fechaFin;
     }
 
-    public void setFecha_fin(Date fecha_fin) {
-        this.fecha_fin = fecha_fin;
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public String getValoracion() {
@@ -86,12 +94,20 @@ public class Intervencion implements Serializable {
         this.tipo = tipo;
     }
 
-    public String getRecurso_aplicado() {
-        return recurso_aplicado;
+    public String getRecursoAplicado() {
+        return recursoAplicado;
     }
 
-    public void setRecurso_aplicado(String recurso_aplicado) {
-        this.recurso_aplicado = recurso_aplicado;
+    public void setRecursoAplicado(String recursoAplicado) {
+        this.recursoAplicado = recursoAplicado;
+    }
+
+    public String getRecursoIdeal() {
+        return recursoIdeal;
+    }
+
+    public void setRecursoIdeal(String recursoIdeal) {
+        this.recursoIdeal = recursoIdeal;
     }
 
     public String getAyuda() {
@@ -126,7 +142,6 @@ public class Intervencion implements Serializable {
         this.actividad = actividad;
     }
     
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -151,5 +166,4 @@ public class Intervencion implements Serializable {
     public String toString() {
         return "entidades.Intervencion[ id=" + id + " ]";
     }
-    
 }

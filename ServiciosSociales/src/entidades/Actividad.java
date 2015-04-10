@@ -10,29 +10,30 @@ import javax.persistence.*;
  * @author Fran Molina
  */
 @Entity
+@Table(name = "ACTIVIDAD")
 public class Actividad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ID_ACTIVIDAD")
     private Long id;
-    @Column(nullable=false, length=50)
+    @Column(name="LUGAR", nullable=false, length=50)
     private String lugar;
-    @Column(nullable=false)
+    @Column(name="FECHA", nullable=false)
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @Column(nullable=false)
+    @Column(name="HORA", nullable=false)
     @Temporal(TemporalType.TIME)
     private Date hora;
-    @Column(nullable=true, length=200)
+    @Column(name="DESCRIPCION", nullable=true, length=200)
     private String descripcion;
     
-    //Relacion MuchosAUno con USUARIO
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name="USUARIO_DNI", referencedColumnName="DNI", nullable = false)
     private Usuario usuario;
     
     @OneToOne(mappedBy = "actividad")
-    private Intervencion intercencion;
+    private Intervencion intervencion;
     
     public Long getId() {
         return id;
@@ -40,6 +41,14 @@ public class Actividad implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Intervencion getIntervencion() {
+        return intervencion;
+    }
+
+    public void setIntervencion(Intervencion intervencion) {
+        this.intervencion = intervencion;
     }
 
     public String getLugar() {
@@ -74,15 +83,14 @@ public class Actividad implements Serializable {
         this.descripcion = descripcion;
     }
 
-/*    public Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }*/
+    }
    
-    
     @Override
     public int hashCode() {
         int hash = 0;
