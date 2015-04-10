@@ -18,6 +18,8 @@ import javax.persistence.InheritanceType;
  * @author Portátil
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn (name = "TIPO_PERSONA", discriminatorType = DiscriminatorType.CHAR)
 public class Persona implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

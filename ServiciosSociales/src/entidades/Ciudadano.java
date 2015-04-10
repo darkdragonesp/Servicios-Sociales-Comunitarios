@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
  */
 
 @Entity
+@DiscriminatorValue("CIUDADANO")
 public class Ciudadano extends Persona {
     private static final long serialVersionUID = 1L;
     
