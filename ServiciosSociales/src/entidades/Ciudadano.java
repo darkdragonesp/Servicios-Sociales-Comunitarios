@@ -1,7 +1,6 @@
 package entidades;
 
 import javax.persistence.DiscriminatorValue;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,7 +11,7 @@ import javax.persistence.ManyToOne;
  */
 
 @Entity
-@DiscriminatorValue("CIUDADANO")
+@DiscriminatorValue("C")
 public class Ciudadano extends Persona {
     private static final long serialVersionUID = 1L;
     
