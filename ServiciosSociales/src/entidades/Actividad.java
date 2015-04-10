@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package SS.Modelos;
+package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -30,23 +25,11 @@ public class Actividad implements Serializable {
     private Date hora;
     @Column(nullable=true, length=200)
     private String descripcion;
-    //Relacion 1to1 con Intervencion
-    private Intervencion inter;
+    
     //Relacion MuchosaMuchos con USUARIO
-    @ManyToMany(mappedBy= "ActividadPorUsuario")
+    @ManyToOne
+    private Usuario usuario;
     
-    
-    //METER EN LA ENTIDAD USUARIO
-    /*
-    
-    @JoinTable(name="UsuarioYActividad",joinColumns = @JoinColumn(name= "usuario_fk"),
-    inverseJoinColumns= @JoinColumn(name= "Actividad_fk"))
-    private List<Actividad> ActividadPorUsuario;
-    
-    
-    
-    
-    */
     public Long getId() {
         return id;
     }
@@ -87,13 +70,13 @@ public class Actividad implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Intervencion getInter() {
-        return inter;
+/*    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setInter(Intervencion inter) {
-        this.inter = inter;
-    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }*/
    
     
     @Override
