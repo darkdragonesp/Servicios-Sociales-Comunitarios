@@ -18,7 +18,7 @@ public class Parentesco implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ParentescoID parentescoPK;
-    @Column(name = "PARENTESCO")
+    @Column(name = "PARENTESCO",nullable =false)
     private String parentesco;
     @JoinColumn(name = "CIUDADANO_DNI_1", referencedColumnName = "DNI", insertable = false, updatable = false)
     @ManyToOne(optional = false)
