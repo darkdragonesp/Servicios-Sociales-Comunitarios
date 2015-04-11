@@ -12,40 +12,43 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 /**
  *
  * @author Portátil
  */
 @Entity
+@Table(name = "PERSONA")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn (name = "TIPO_PERSONA", discriminatorType = DiscriminatorType.CHAR)
 public class Persona implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="DNI")
     private String dni;
-    @Column(nullable=false)
+    @Column(name="NOMBRE", nullable=false)
     private String nombre;
-    @Column(nullable=false)
+    @Column(name="APELLIDO_1",nullable=false)
     private String apellido1;
-    @Column
+    @Column(name="APELLIDO_2")
     private String apellido2;
-    @Column(nullable=false)
+    @Column(name="DIRECCION", nullable=false)
     private String direccion;
-    @Column(nullable=false)
+    @Column(name="TELEFONO", nullable=false)
     private Integer telefono;
-    @Column(nullable=false)
+    @Column(name="SEXO", nullable=false)
     private Character sexo;
-    @Column(nullable=false)
+    @Column(name="ESTADO_CIVIL", nullable=false)
     private String estado_civil;
-    @Column(nullable=false)
+    @Column(name="FECHA_NACIMIENTO", nullable=false)
     private Date fecha_nacimiento;
-    @Column(nullable=false)
+    @Column(name="LOCALIDAD", nullable=false)
     private String localidad;
-    @Column(nullable=false)
+    @Column(name="NACIONALIDAD", nullable=false)
     private String nacionalidad;
-    @Column
+    @Column(name="EMAIL")
     private String email;
     
     public String getDni() {

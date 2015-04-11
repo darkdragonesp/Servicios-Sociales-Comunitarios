@@ -2,6 +2,7 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,32 +20,67 @@ import javax.persistence.TemporalType;
  * @author FranciscoJosé
  */
 @Entity
+@Table(name = "EXPEDIENTE")
 public class Expediente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     
-    @Column(name="id_expediente")
+    @Column(name="ID_EXPEDIENTE")
     private Long id;
     
-    @Column(name="fecha_apertura", nullable=false)
+    @Column(name="FECHA_APERTURA", nullable=false)
     @Temporal(TemporalType.DATE)
     private Date fechaApertura;
     
-    @Column(name="fecha_cierre")
+    @Column(name="FECHA_CIERRE")
     @Temporal(TemporalType.DATE)
     private Date fechaCierre;
     
+    @Column(name="ESTADO")
     private String estado;
     
     @ManyToOne
-    @JoinColumn(name="Expediente_id_expediente", referencedColumnName="id_expediente")
+    @JoinColumn(name="EXPEDIENTE_ID_EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE")
     private Expediente expedienteLigado;
+   
+    @OneToMany(mappedBy = "expedienteLigado")
+    private List<Expediente> expedientesLigados;
     
     @ManyToOne
-    @JoinColumn(name="id_uts", referencedColumnName="id_uts", nullable=false)
+    @JoinColumn(name="UTS_ID_UTS", referencedColumnName="ID_UTS", nullable = false)
     private UTS uts;
+    
+    @OneToMany(mappedBy = "expediente")
+    private List<Ciudadano> ciudadanos;
+    
+    @OneToMany(mappedBy = "expediente")
+    private List<Intervencion> intervenciones;
 
+    public List<Expediente> getExpedientesLigados() {
+        return expedientesLigados;
+    }
+
+    public void setExpedientesLigados(List<Expediente> expedientesLigados) {
+        this.expedientesLigados = expedientesLigados;
+    }
+
+    public List<Intervencion> getIntervenciones() {
+        return intervenciones;
+    }
+
+    public void setIntervenciones(List<Intervencion> intervenciones) {
+        this.intervenciones = intervenciones;
+    }
+
+    public List<Ciudadano> getCiudadanos() {
+        return ciudadanos;
+    }
+
+    public void setCiudadanos(List<Ciudadano> ciudadanos) {
+        this.ciudadanos = ciudadanos;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -75,21 +113,21 @@ public class Expediente implements Serializable {
         this.estado = estado;
     }
 
-    /*public Expediente getExpedienteLigado() {
+    public Expediente getExpedienteLigado() {
         return expedienteLigado;
     }
 
     public void setExpedienteLigado(Expediente expedienteLigado) {
         this.expedienteLigado = expedienteLigado;
-    }*/
+    }
 
-    /*public UTS getUts() {
+    public UTS getUts() {
         return uts;
     }
 
     public void setUts(UTS uts) {
         this.uts = uts;
-    }*/
+    }
 
     @Override
     public int hashCode() {
@@ -115,5 +153,4 @@ public class Expediente implements Serializable {
     public String toString() {
         return "entidades.Expediente[ id=" + id + " ]";
     }
-    
 }

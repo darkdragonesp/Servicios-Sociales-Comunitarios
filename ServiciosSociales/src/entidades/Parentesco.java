@@ -1,81 +1,97 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
- * @author JuanJo
+ * @author FranciscoJosé
  */
 @Entity
+@Table(name = "PARENTESCO")
 public class Parentesco implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @ManyToOne
-    private Ciudadano c1;
-    
-    @Id
-    @ManyToOne
-    private Ciudadano c2;
-    
-    private String tipo_parentesco;
+    @EmbeddedId
+    protected ParentescoID parentescoPK;
+    @Column(name = "PARENTESCO",nullable =false)
+    private String parentesco;
+    @JoinColumn(name = "CIUDADANO_DNI_1", referencedColumnName = "DNI", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Ciudadano ciudadano1;
+    @JoinColumn(name = "CIUDADANO_DNI_2", referencedColumnName = "DNI", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Ciudadano ciudadano2;
 
-    
-    
+    public Parentesco() { }
 
-    public Ciudadano getC1() {
-        return c1;
+    public Parentesco(ParentescoID parentescoPK) {
+        this.parentescoPK = parentescoPK;
     }
 
-    public void setC1(Ciudadano c1) {
-        this.c1 = c1;
+    public Parentesco(String ciudadanoDni, String ciudadanoDni1) {
+        this.parentescoPK = new ParentescoID(ciudadanoDni, ciudadanoDni1);
     }
 
-    public Ciudadano getC2() {
-        return c2;
+    public ParentescoID getParentescoPK() {
+        return parentescoPK;
     }
 
-    public void setC2(Ciudadano c2) {
-        this.c2 = c2;
+    public void setParentescoPK(ParentescoID parentescoPK) {
+        this.parentescoPK = parentescoPK;
     }
 
-    public String getTipo_parentesco() {
-        return tipo_parentesco;
+    public String getParentesco() {
+        return parentesco;
     }
 
-    public void setTipo_parentesco(String tipo_parentesco) {
-        this.tipo_parentesco = tipo_parentesco;
+    public void setParentesco(String parentesco) {
+        this.parentesco = parentesco;
+    }
+
+    public Ciudadano getCiudadano1() {
+        return ciudadano1;
+    }
+
+    public void setCiudadano1(Ciudadano ciudadano1) {
+        this.ciudadano1 = ciudadano1;
+    }
+
+    public Ciudadano getCiudadano2() {
+        return ciudadano2;
+    }
+
+    public void setCiudadano2(Ciudadano ciudadano2) {
+        this.ciudadano2 = ciudadano2;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.c1);
-        hash = 29 * hash + Objects.hashCode(this.c2);
+        int hash = 0;
+        hash += (parentescoPK != null ? parentescoPK.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Parentesco)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Parentesco other = (Parentesco) obj;
-        if (!Objects.equals(this.c1, other.c1)) {
-            return false;
-        }
-        if (!Objects.equals(this.c2, other.c2)) {
+        Parentesco other = (Parentesco) object;
+        if ((this.parentescoPK == null && other.parentescoPK != null) || (this.parentescoPK != null && !this.parentescoPK.equals(other.parentescoPK))) {
             return false;
         }
         return true;
     }
-    
-    
 
+    @Override
+    public String toString() {
+        return "pruebajpa.Parentesco[ parentescoPK=" + parentescoPK + " ]";
+    }
+    
 }

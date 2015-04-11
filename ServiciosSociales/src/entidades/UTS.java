@@ -1,37 +1,81 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author JuanJo
  */
 @Entity
+@Table(name = "UTS")
 public class UTS implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_uts;
+    @Column(name="ID_UTS")
+    private Long id;
     
-    private String id_zona;
-    private String id_css;
+    private String zona;
+    private String css;
 
+    @OneToMany(mappedBy = "uts")
+    private List<Usuario> usuarios;
+    
+    @OneToMany(mappedBy = "uts")
+    private List<Usuario> expedientes;
+    
     public Long getId() {
-        return id_uts;
+        return id;
     }
 
     public void setId(Long id) {
-        this.id_uts = id;
+        this.id = id;
+    }
+
+    public String getZona() {
+        return zona;
+    }
+
+    public void setZona(String zona) {
+        this.zona = zona;
+    }
+
+    public String getCss() {
+        return css;
+    }
+
+    public void setCss(String css) {
+        this.css = css;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public List<Usuario> getExpedientes() {
+        return expedientes;
+    }
+
+    public void setExpedientes(List<Usuario> expedientes) {
+        this.expedientes = expedientes;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_uts != null ? id_uts.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -42,7 +86,7 @@ public class UTS implements Serializable {
             return false;
         }
         UTS other = (UTS) object;
-        if ((this.id_uts == null && other.id_uts != null) || (this.id_uts != null && !this.id_uts.equals(other.id_uts))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -50,7 +94,7 @@ public class UTS implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.UTS[ id=" + id_uts + " ]";
+        return "entidades.UTS[ id=" + id + " ]";
     }
     
 }

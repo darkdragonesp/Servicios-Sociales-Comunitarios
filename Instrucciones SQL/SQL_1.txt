@@ -1,0 +1,26 @@
+
+insert into APP.UTS values(123,'Malaga','El Palo');
+
+insert into APP.PERSONA values('0123456789A','USUARIO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
+insert into APP.USUARIO values('0123456789A','pass','Admin',123);
+
+
+
+insert into APP.EXPEDIENTE values(1,'activo','1/1/2010',null,null,123);
+insert into APP.EXPEDIENTE values(2,'activo','1/1/2010',null,null,123);
+
+insert into APP.PERSONA values('0123456789B','CIUDADANO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
+insert into APP.PERSONA values('0123456789C','CIUDADANO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Luis','M',952292222); 
+insert into APP.CIUDADANO values('0123456789B',1);
+insert into APP.CIUDADANO values('0123456789C',2);
+
+insert into APP.PERSONA values('0123456789D','CIUDADANO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
+insert into APP.CIUDADANO values('0123456789D',1);
+
+insert into APP.PARENTESCO values('hermano','0123456789B','0123456789C');
+
+select * from APP.CIUDADANO;
+select * from APP.PERSONA;
+select * from APP.UTS;
+select * from APP.EXPEDIENTE;
+select * from APP.PARENTESCO;
