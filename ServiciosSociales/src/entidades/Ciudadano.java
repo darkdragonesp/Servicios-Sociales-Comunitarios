@@ -22,7 +22,7 @@ public class Ciudadano extends Persona {
     private static final long serialVersionUID = 1L;
     
     @ManyToOne
-    @JoinColumn(name="EXPEDIENTE_ID_EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable=false)
+    @JoinColumn(name="EXPEDIENTE_ID_EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable=true)
     private Expediente expediente;
 
     @OneToMany(mappedBy="ciudadano1")
