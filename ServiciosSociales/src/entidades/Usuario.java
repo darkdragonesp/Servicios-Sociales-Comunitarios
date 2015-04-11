@@ -22,7 +22,7 @@ public class Usuario extends Persona {
     @Column(name="TIPO_PROFESIONAL", nullable=false)
     private String tipoProfesional;
     @Column(name="CONTRASENA", nullable=false)
-    private String contraseña;
+    private String contrasena;
     
     @ManyToOne
     @JoinColumn(name="UTS_ID_UTS", referencedColumnName="ID_UTS", nullable = false)
@@ -39,12 +39,12 @@ public class Usuario extends Persona {
         this.tipoProfesional = tipoProfesional;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public UTS getUts() {
