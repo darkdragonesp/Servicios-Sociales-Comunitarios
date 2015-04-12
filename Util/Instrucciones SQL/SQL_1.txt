@@ -1,13 +1,19 @@
+﻿
 
 insert into APP.UTS values(123,'Malaga','El Palo');
 
 insert into APP.PERSONA values('0123456789A','USUARIO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
 insert into APP.USUARIO values('0123456789A','pass','Admin',123);
 
+------OJO  --> Las fechas van en formato Americano osea mes/dia/año.
+
+insert into actividad values(1,'prueba de actividad','4/14/2015','21:12','Malaga','0123456789A');
 
 
 insert into APP.EXPEDIENTE values(1,'activo','1/1/2010',null,null,123);
 insert into APP.EXPEDIENTE values(2,'activo','1/1/2010',null,null,123);
+
+insert into intervencion values(1,'prueba',null,'4/12/2015',null,null,null,'Demolicion','en ruinas',1,1)
 
 insert into APP.PERSONA values('0123456789B','CIUDADANO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
 insert into APP.PERSONA values('0123456789C','CIUDADANO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Luis','M',952292222); 
