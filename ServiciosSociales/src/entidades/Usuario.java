@@ -1,4 +1,4 @@
-﻿package entidades;
+package entidades;
 
 import java.util.List;
 import javax.persistence.Column;
