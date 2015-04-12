@@ -33,7 +33,7 @@ public class Ciudadano extends Persona {
         return expediente;
     }
 
-    public void setCiudadanoExpediente(Expediente expediente) {
+    public void setExpediente(Expediente expediente) {
         this.expediente = expediente;
     }
 
