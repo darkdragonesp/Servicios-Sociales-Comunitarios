@@ -1,4 +1,4 @@
-﻿package entidades;
+package entidades;
 
 import java.util.List;
 import javax.persistence.Column;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Portátil
+ * @author Robin
  */
 @Entity
 @Table(name = "USUARIO")
