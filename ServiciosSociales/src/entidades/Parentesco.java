@@ -91,7 +91,9 @@ public class Parentesco implements Serializable {
 
     @Override
     public String toString() {
-        return "pruebajpa.Parentesco[ parentescoPK=" + parentescoPK + " ]";
+        return "Parentesco{" + "parentescoPK=" + parentescoPK + ", parentesco=" + parentesco + '}';
     }
+
+
     
 }

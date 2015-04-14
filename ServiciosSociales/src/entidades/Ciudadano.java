@@ -102,7 +102,9 @@ public class Ciudadano implements Serializable{
         this.persona = persona;
     }
 
+    @Override
+    public String toString() {
+        return "Ciudadano{" + "dni=" + dni + '}';
+    }
 
-    
-    
 }

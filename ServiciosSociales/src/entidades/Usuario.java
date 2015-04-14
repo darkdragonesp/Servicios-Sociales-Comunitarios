@@ -2,6 +2,7 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -87,4 +88,33 @@ public class Usuario implements Serializable {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + Objects.hashCode(this.dni);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.dni, other.dni)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return "Usuario{" + "dni=" + dni + '}';
+    }
+    
 }

@@ -113,7 +113,7 @@ public class Actividad implements Serializable {
 
     @Override
     public String toString() {
-        return "SS.Modelos.Actividad[ id=" + id + " ]";
+        return "Actividad{" + "id=" + id + '}';
     }
-    
+
 }
