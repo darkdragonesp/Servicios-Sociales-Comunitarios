@@ -1,12 +1,15 @@
 package entidades;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -15,10 +18,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "USUARIO")
-@DiscriminatorValue("U")
-public class Usuario extends Persona {
+public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     
+    @Id
+    @Column(name="DNI")
+    private String dni;
     @Column(name="TIPO_PROFESIONAL", nullable=false)
     private String tipoProfesional;
     @Column(name="CONTRASENA", nullable=false)
@@ -30,6 +35,10 @@ public class Usuario extends Persona {
     
     @OneToMany(mappedBy = "usuario")
     private List<Actividad> actividades;
+    
+    @OneToOne
+    @JoinColumn(name="DNI", referencedColumnName="DNI", insertable=false, updatable=false)
+    private Persona persona;
     
     public String getTipoProfesional() {
         return tipoProfesional;
@@ -61,5 +70,21 @@ public class Usuario extends Persona {
 
     public void setActividades(List<Actividad> actividades) {
         this.actividades = actividades;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 }

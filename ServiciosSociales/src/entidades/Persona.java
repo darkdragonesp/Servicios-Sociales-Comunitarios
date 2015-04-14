@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,8 +21,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "PERSONA")
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn (name = "TIPO_PERSONA", discriminatorType = DiscriminatorType.CHAR)
 public class Persona implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,6 +49,11 @@ public class Persona implements Serializable {
     private String nacionalidad;
     @Column(name="EMAIL")
     private String email;
+    
+    @OneToOne(mappedBy="persona")
+    private Ciudadano ciudadano;
+    @OneToOne(mappedBy="persona")
+    private Usuario usuario;
     
     public String getDni() {
         return dni;
@@ -145,6 +149,22 @@ public class Persona implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Ciudadano getCiudadano() {
+        return ciudadano;
+    }
+
+    public void setCiudadano(Ciudadano ciudadano) {
+        this.ciudadano = ciudadano;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
