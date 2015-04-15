@@ -1,14 +1,12 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -30,9 +28,6 @@ public class Usuario implements Serializable {
     @ManyToOne
     @JoinColumn(name="UTS", referencedColumnName="ID_UTS", nullable = false)
     private UTS uts;
-    
-    @OneToMany(mappedBy = "usuario")
-    private List<Actividad> actividades;
     
     @OneToOne
     @JoinColumn(name="DNI", referencedColumnName="DNI", insertable=false, updatable=false)
@@ -60,14 +55,6 @@ public class Usuario implements Serializable {
 
     public void setUts(UTS uts) {
         this.uts = uts;
-    }
-
-    public List<Actividad> getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(List<Actividad> actividades) {
-        this.actividades = actividades;
     }
 
     public String getDni() {
@@ -110,7 +97,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "dni=" + dni + ", tipoProfesional=" + tipoProfesional + ", contrasena=" + contrasena + ", uts=" + uts + ", actividades=" + actividades + ", persona=" + persona + '}';
+        return "Usuario{" + "dni=" + dni + ", tipoProfesional=" + tipoProfesional + ", contrasena=" + contrasena + ", uts=" + uts + ", persona=" + persona + '}';
     }
     
     

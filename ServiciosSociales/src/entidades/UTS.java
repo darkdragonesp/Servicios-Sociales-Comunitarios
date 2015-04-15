@@ -26,12 +26,6 @@ public class UTS implements Serializable {
     private String zona;
     @Column(name="CSS", nullable=false)
     private String css;
-
-    @OneToMany(mappedBy = "uts")
-    private List<Usuario> usuarios;
-    
-    @OneToMany(mappedBy = "uts")
-    private List<Usuario> expedientes;
     
     public Long getId() {
         return id;
@@ -55,22 +49,6 @@ public class UTS implements Serializable {
 
     public void setCss(String css) {
         this.css = css;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    public List<Usuario> getExpedientes() {
-        return expedientes;
-    }
-
-    public void setExpedientes(List<Usuario> expedientes) {
-        this.expedientes = expedientes;
     }
 
     public String getUts() {
@@ -103,7 +81,7 @@ public class UTS implements Serializable {
 
     @Override
     public String toString() {
-        return "UTS{" + "id=" + id + ", uts=" + uts + ", zona=" + zona + ", css=" + css + ", usuarios=" + usuarios + ", expedientes=" + expedientes + '}';
+        return "UTS{" + "id=" + id + ", uts=" + uts + ", zona=" + zona + ", css=" + css + '}';
     }
 
 

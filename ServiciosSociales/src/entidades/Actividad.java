@@ -31,23 +31,12 @@ public class Actividad implements Serializable {
     @JoinColumn(name="USUARIO_DNI", referencedColumnName="DNI", nullable = false)
     private Usuario usuario;
     
-    @OneToOne(mappedBy = "actividad")
-    private Intervencion intervencion;
-    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Intervencion getIntervencion() {
-        return intervencion;
-    }
-
-    public void setIntervencion(Intervencion intervencion) {
-        this.intervencion = intervencion;
     }
 
     public String getLugar() {
@@ -112,7 +101,7 @@ public class Actividad implements Serializable {
 
     @Override
     public String toString() {
-        return "Actividad{" + "id=" + id + ", lugar=" + lugar + ", fecha=" + fecha + ", hora=" + hora + ", descripcion=" + descripcion + ", usuario=" + usuario + ", intervencion=" + intervencion + '}';
+        return "Actividad{" + "id=" + id + ", lugar=" + lugar + ", fecha=" + fecha + ", hora=" + hora + ", descripcion=" + descripcion + ", usuario=" + usuario + '}';
     }
 
 

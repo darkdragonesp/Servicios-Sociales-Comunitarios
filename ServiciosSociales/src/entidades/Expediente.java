@@ -51,9 +51,6 @@ public class Expediente implements Serializable {
     
     @OneToMany(mappedBy = "expediente")
     private List<Ciudadano> ciudadanos;
-    
-    @OneToMany(mappedBy = "expediente")
-    private List<Intervencion> intervenciones;
 
     public List<Expediente> getExpedientesLigados() {
         return expedientesLigados;
@@ -61,14 +58,6 @@ public class Expediente implements Serializable {
 
     public void setExpedientesLigados(List<Expediente> expedientesLigados) {
         this.expedientesLigados = expedientesLigados;
-    }
-
-    public List<Intervencion> getIntervenciones() {
-        return intervenciones;
-    }
-
-    public void setIntervenciones(List<Intervencion> intervenciones) {
-        this.intervenciones = intervenciones;
     }
 
     public List<Ciudadano> getCiudadanos() {
@@ -149,7 +138,7 @@ public class Expediente implements Serializable {
 
     @Override
     public String toString() {
-        return "Expediente{" + "id=" + id + ", fechaApertura=" + fechaApertura + ", fechaCierre=" + fechaCierre + ", estado=" + estado + ", expedienteLigado=" + expedienteLigado + ", expedientesLigados=" + expedientesLigados + ", uts=" + uts + ", ciudadanos=" + ciudadanos + ", intervenciones=" + intervenciones + '}';
+        return "Expediente{" + "id=" + id + ", fechaApertura=" + fechaApertura + ", fechaCierre=" + fechaCierre + ", estado=" + estado + ", expedienteLigado=" + expedienteLigado + ", expedientesLigados=" + expedientesLigados + ", uts=" + uts + ", ciudadanos=" + ciudadanos + '}';
     }
 
 
