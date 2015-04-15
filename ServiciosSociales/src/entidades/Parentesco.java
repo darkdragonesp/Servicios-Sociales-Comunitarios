@@ -6,24 +6,22 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  *
  * @author FranciscoJosé
  */
 @Entity
-@Table(name = "PARENTESCO")
 public class Parentesco implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ParentescoID parentescoPK;
     @Column(name = "PARENTESCO",nullable =false)
     private String parentesco;
-    @JoinColumn(name = "CIUDADANO_DNI_1", referencedColumnName = "DNI", insertable = false, updatable = false)
+    @JoinColumn(name = "CIUDADANO1", referencedColumnName = "DNI", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Ciudadano ciudadano1;
-    @JoinColumn(name = "CIUDADANO_DNI_2", referencedColumnName = "DNI", insertable = false, updatable = false)
+    @JoinColumn(name = "CIUDADANO2", referencedColumnName = "DNI", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Ciudadano ciudadano2;
 

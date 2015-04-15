@@ -4,14 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 /**
  *
@@ -19,7 +17,6 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "CIUDADANO")
 public class Ciudadano implements Serializable{
     private static final long serialVersionUID = 1L;
     
@@ -28,7 +25,7 @@ public class Ciudadano implements Serializable{
     private String dni;
     
     @ManyToOne
-    @JoinColumn(name="EXPEDIENTE_ID_EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable=false)
+    @JoinColumn(name="EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable=false)
     private Expediente expediente;
 
     @OneToMany(mappedBy="ciudadano1")

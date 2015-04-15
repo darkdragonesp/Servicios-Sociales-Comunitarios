@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,7 +19,6 @@ import javax.persistence.TemporalType;
  * @author FranciscoJosé
  */
 @Entity
-@Table(name = "EXPEDIENTE")
 public class Expediente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,14 +39,14 @@ public class Expediente implements Serializable {
     private String estado;
     
     @ManyToOne
-    @JoinColumn(name="EXPEDIENTE_ID_EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE")
+    @JoinColumn(name="EXPEDIENTE_RELACIONADO", referencedColumnName="ID_EXPEDIENTE")
     private Expediente expedienteLigado;
    
     @OneToMany(mappedBy = "expedienteLigado")
     private List<Expediente> expedientesLigados;
     
     @ManyToOne
-    @JoinColumn(name="UTS_ID_UTS", referencedColumnName="ID_UTS", nullable = false)
+    @JoinColumn(name="UTS", referencedColumnName="ID_UTS", nullable = false)
     private UTS uts;
     
     @OneToMany(mappedBy = "expediente")

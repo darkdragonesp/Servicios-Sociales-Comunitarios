@@ -10,7 +10,6 @@ import javax.persistence.*;
  * @author Fran Molina
  */
 @Entity
-@Table(name = "ACTIVIDAD")
 public class Actividad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

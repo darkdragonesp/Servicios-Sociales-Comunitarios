@@ -4,21 +4,18 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 /**
  *
  * @author Robin
  */
 @Entity
-@Table(name = "USUARIO")
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -31,7 +28,7 @@ public class Usuario implements Serializable {
     private String contrasena;
     
     @ManyToOne
-    @JoinColumn(name="UTS_ID_UTS", referencedColumnName="ID_UTS", nullable = false)
+    @JoinColumn(name="UTS", referencedColumnName="ID_UTS", nullable = false)
     private UTS uts;
     
     @OneToMany(mappedBy = "usuario")

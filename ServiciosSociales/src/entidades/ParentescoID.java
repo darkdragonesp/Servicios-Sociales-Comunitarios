@@ -16,9 +16,9 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class ParentescoID implements Serializable {
-    @Column(name = "CIUDADANO_DNI_1")
+    @Column(name = "CIUDADANO1")
     private String ciudadanoDni1;
-    @Column(name = "CIUDADANO_DNI_2")
+    @Column(name = "CIUDADANO2")
     private String ciudadanoDni2;
 
     public ParentescoID() {

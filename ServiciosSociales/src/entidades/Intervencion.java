@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -19,7 +18,6 @@ import javax.persistence.TemporalType;
  * @author JuanJo
  */
 @Entity
-@Table(name = "INTERVENCION")
 public class Intervencion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,11 +45,11 @@ public class Intervencion implements Serializable {
     private String notas;
     
     @OneToOne
-    @JoinColumn(name="ACTIVIDAD_ID_ACTIVIDAD", referencedColumnName="ID_ACTIVIDAD", nullable = false)
+    @JoinColumn(name="ACTIVIDAD", referencedColumnName="ID_ACTIVIDAD", nullable = false)
     private Actividad actividad;
     
     @ManyToOne
-    @JoinColumn(name="EXPEDIENTE_ID_EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable = false)
+    @JoinColumn(name="EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable = false)
     private Expediente expediente;
     
     public Long getId() {
