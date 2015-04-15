@@ -37,7 +37,7 @@ public class Expediente implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaCierre;
     
-    @Column(name="ESTADO")
+    @Column(name="ESTADO",nullable=false)
     private String estado;
     
     @ManyToOne
@@ -151,6 +151,8 @@ public class Expediente implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Expediente[ id=" + id + " ]";
+        return "Expediente{" + "id=" + id + ", fechaApertura=" + fechaApertura + ", fechaCierre=" + fechaCierre + ", estado=" + estado + ", expedienteLigado=" + expedienteLigado + ", expedientesLigados=" + expedientesLigados + ", uts=" + uts + ", ciudadanos=" + ciudadanos + ", intervenciones=" + intervenciones + '}';
     }
+
+
 }

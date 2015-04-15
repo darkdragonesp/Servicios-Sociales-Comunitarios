@@ -104,7 +104,9 @@ public class Ciudadano implements Serializable{
 
     @Override
     public String toString() {
-        return "Ciudadano{" + "dni=" + dni + '}';
+        return "Ciudadano{" + "dni=" + dni + ", expediente=" + expediente + ", parentescos1=" + parentescos1 + ", parentescos2=" + parentescos2 + ", persona=" + persona + '}';
     }
+
+
 
 }

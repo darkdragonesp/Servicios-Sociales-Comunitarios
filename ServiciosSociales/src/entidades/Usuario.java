@@ -110,11 +110,13 @@ public class Usuario implements Serializable {
         }
         return true;
     }
-    
-    
+
     @Override
     public String toString() {
-        return "Usuario{" + "dni=" + dni + '}';
+        return "Usuario{" + "dni=" + dni + ", tipoProfesional=" + tipoProfesional + ", contrasena=" + contrasena + ", uts=" + uts + ", actividades=" + actividades + ", persona=" + persona + '}';
     }
+    
+    
+
     
 }

@@ -91,8 +91,10 @@ public class Parentesco implements Serializable {
 
     @Override
     public String toString() {
-        return "Parentesco{" + "parentescoPK=" + parentescoPK + ", parentesco=" + parentesco + '}';
+        return "Parentesco{" + "parentescoPK=" + parentescoPK + ", parentesco=" + parentesco + ", ciudadano1=" + ciudadano1 + ", ciudadano2=" + ciudadano2 + '}';
     }
+
+
 
 
     

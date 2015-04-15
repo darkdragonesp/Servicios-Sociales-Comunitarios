@@ -33,9 +33,9 @@ public class Intervencion implements Serializable {
     @Column(name="FECHA_FIN")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
-    @Column(name="VALORACION")
+    @Column(name="VALORACION", nullable=false)
     private String valoracion;
-    @Column(name="TIPO")
+    @Column(name="TIPO", nullable=false)
     private String tipo;
     @Column(name="RECURSO_APLICADO")
     private String recursoAplicado;
@@ -164,6 +164,8 @@ public class Intervencion implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Intervencion[ id=" + id + " ]";
+        return "Intervencion{" + "id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", valoracion=" + valoracion + ", tipo=" + tipo + ", recursoAplicado=" + recursoAplicado + ", recursoIdeal=" + recursoIdeal + ", ayuda=" + ayuda + ", notas=" + notas + ", actividad=" + actividad + ", expediente=" + expediente + '}';
     }
+
+
 }

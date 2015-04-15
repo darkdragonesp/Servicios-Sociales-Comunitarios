@@ -22,8 +22,11 @@ public class UTS implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ID_UTS")
     private Long id;
-    
+    @Column(name="UTS", nullable=false)
+    private String uts;
+    @Column(name="ZONA", nullable=false)
     private String zona;
+    @Column(name="CSS", nullable=false)
     private String css;
 
     @OneToMany(mappedBy = "uts")
@@ -72,6 +75,14 @@ public class UTS implements Serializable {
         this.expedientes = expedientes;
     }
 
+    public String getUts() {
+        return uts;
+    }
+
+    public void setUts(String uts) {
+        this.uts = uts;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -94,7 +105,9 @@ public class UTS implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.UTS[ id=" + id + " ]";
+        return "UTS{" + "id=" + id + ", uts=" + uts + ", zona=" + zona + ", css=" + css + ", usuarios=" + usuarios + ", expedientes=" + expedientes + '}';
     }
+
+
     
 }
