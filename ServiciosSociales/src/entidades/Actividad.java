@@ -17,7 +17,7 @@ public class Actividad implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ID_ACTIVIDAD")
     private Long id;
-    @Column(name="LUGAR", nullable=false, length=50)
+    @Column(name="LUGAR", nullable=true, length=50)
     private String lugar;
     @Column(name="FECHA", nullable=false)
     @Temporal(TemporalType.DATE)
@@ -113,7 +113,9 @@ public class Actividad implements Serializable {
 
     @Override
     public String toString() {
-        return "Actividad{" + "id=" + id + '}';
+        return "Actividad{" + "id=" + id + ", lugar=" + lugar + ", fecha=" + fecha + ", hora=" + hora + ", descripcion=" + descripcion + ", usuario=" + usuario + ", intervencion=" + intervencion + '}';
     }
+
+
 
 }
