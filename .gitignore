@@ -2,9 +2,8 @@ ServiciosSociales/build
 ServiciosSociales/nbproject
 ServiciosSociales/build.xml
 ServiciosSociales/manifest.mf
-/ServiciosSociales2/nbproject/private/
-/ServiciosSociales2/ServiciosSociales-war/nbproject/private/
-/ServiciosSociales2/ServiciosSociales-ejb/nbproject/private/
-/ServiciosSociales2/ServiciosSociales-war/build/
-/ServiciosSociales2/ServiciosSociales-ejb/build/
-/ServiciosSociales2/ServiciosSociales-ejb/dist/
+/ServiciosSociales/nbproject/private/
+/ServiciosSociales/ServiciosSociales-war/nbproject/
+/ServiciosSociales/ServiciosSociales-ejb/nbproject/
+/ServiciosSociales/ServiciosSociales-war/build/
+/ServiciosSociales/ServiciosSociales-ejb/build/
