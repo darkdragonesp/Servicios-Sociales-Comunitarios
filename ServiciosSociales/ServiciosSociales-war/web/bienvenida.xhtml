@@ -1,0 +1,23 @@
+<ui:composition template="/WEB-INF/plantillas/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                >
+                    
+                    
+    <ui:define name="title">Bienvenido.</ui:define>
+    <ui:define name="content">
+        <!--   FacesContext ctx = FacesContext.getCurrentInstance();
+Application app = ctx.getApplication();
+LoginBean lb = (LoginBean)app.createValueBinding("#{login}).getValue(ctx);--> 
+                <h1>Bienvenido, "insertar nombre de usuario".</h1>
+                <h3>Pulse una opción del menú superior para proceder.
+                Para salir, pulse Desconectar.</h3>
+                
+            
+            </ui:define>
+        </ui:composition>
+

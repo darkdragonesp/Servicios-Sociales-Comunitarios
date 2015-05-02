@@ -9,7 +9,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Facelets Template</title>
+        <title>Servicios Sociales</title>
     </h:head>
 
     <h:body>
@@ -22,11 +22,16 @@
                                 <p:menuitem value="Añadir actividad" url="#" />
                             </p:submenu>
 
-                            <p:menuitem value="Expedientes" icon="ui-icon-pencil" url="/ssc/expedientes.xhtml">
+                            <p:menuitem value="Expedientes" icon="ui-icon-pencil" url="/ssc/expediente.xhtml">
                             </p:menuitem>
-
+                                
+                            <p:submenu label="Usuarios" icon="ui-icon-pencil">
+                                <p:menuitem value="Añadir usuario" url="/ssc/usuarioanyadir.xhtml" />
+                                <p:menuitem value="Eliminar usuario" url="/ssc/usuarioeliminar.xhtml" />
+                            </p:submenu>
+                                
                             <f:facet name="options">
-                                <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                                <p:commandButton type="button" value="Desconectar" icon="ui-icon-extlink" />
                             </f:facet>
                         </p:menubar>
                     </h:form>
