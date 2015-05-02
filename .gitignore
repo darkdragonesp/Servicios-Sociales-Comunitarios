@@ -1,3 +1,4 @@
+ServiciosSociales/dist/
 ServiciosSociales/build
 ServiciosSociales/nbproject
 ServiciosSociales/build.xml
@@ -7,3 +8,5 @@ ServiciosSociales/ServiciosSociales-war/nbproject/
 ServiciosSociales/ServiciosSociales-ejb/nbproject/
 ServiciosSociales/ServiciosSociales-war/build/
 ServiciosSociales/ServiciosSociales-ejb/build/
+ServiciosSociales/ServiciosSociales-war/dist/
+ServiciosSociales/ServiciosSociales-ejb/dist/
