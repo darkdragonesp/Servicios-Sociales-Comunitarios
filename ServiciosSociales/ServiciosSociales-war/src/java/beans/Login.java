@@ -49,7 +49,7 @@ public class Login implements Serializable {
         for(Usuario s : usuarios){
             if(s.getDni().equals(usuario)){
                 if(s.getDni().equals(password)){
-                    return "usuarioEditar.xhtml";
+                    return "bienvenida.xhtml";
                 }else{
                     FacesContext ctx = FacesContext.getCurrentInstance();
                     ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña no válida", "Contraseña no válida"));
