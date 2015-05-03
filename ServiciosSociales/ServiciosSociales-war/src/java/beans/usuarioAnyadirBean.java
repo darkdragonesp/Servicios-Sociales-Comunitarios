@@ -5,13 +5,16 @@
 */
 package beans;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import modelo.Usuario;
 
 
 /**
@@ -39,6 +42,16 @@ public class usuarioAnyadirBean{
     private String tipo_profesional;
     private String contrasenya;
     
+    private List<Usuario> usuarios;
+    /**
+     * Creates a new instance of usuarios
+     */
+    public usuarioAnyadirBean(){
+        usuarios = new ArrayList<Usuario>();
+        usuarios.add(new Usuario("33333333P"));
+        usuarios.add(new Usuario("22222222J"));
+        usuarios.add(new Usuario("11111111H"));
+    }
     
     
     public String getText() {
@@ -187,9 +200,21 @@ public class usuarioAnyadirBean{
             throw new ValidatorException(
                     new FacesMessage("Introduzca un DNI válido con una longitud igual a 9.", null));
         }
-       if(!var.substring(8).equals(calcularDNI(var.substring(0,8)))){ 
-        throw new ValidatorException(
-        new FacesMessage("Introduzca un DNI válido.La letra no coincide", null));
+        if(!var.substring(8).equals(calcularDNI(var.substring(0,8)))){
+            throw new ValidatorException(
+                    new FacesMessage("Introduzca un DNI válido.La letra no coincide", null));
+        }
+        //si ya existe el DNI
+        
+        boolean esta=false;
+        int cont=0;
+        while(cont<usuarios.size()-1 && !esta){
+            if(var.equalsIgnoreCase(usuarios.get(cont).getDni())){
+                esta=true;
+                throw new ValidatorException(
+                        new FacesMessage("El DNI introducido ya existe en la base de datos.", null));
+            }
+            cont++;
         }
         
     }
