@@ -33,6 +33,13 @@ public class Usuario implements Serializable {
     @JoinColumn(name="DNI", referencedColumnName="DNI", insertable=false, updatable=false)
     private Persona persona;
     
+    public Usuario(){
+        
+    }
+    public Usuario(String s){
+        setDni(s);
+    }
+    
     public String getTipoProfesional() {
         return tipoProfesional;
     }
