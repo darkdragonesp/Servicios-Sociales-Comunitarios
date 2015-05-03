@@ -14,7 +14,7 @@
 
     <h:body>
         <p:layout fullPage="true">
-            <p:layoutUnit position="center" footer="pie de pagina">
+            <p:layoutUnit position="center" footer="pie de pagina" >
                 <h:form>  
                     <p:growl id="messages"/>
                     <p:menubar autoDisplay="false" style="margin-left: 100px; margin-right:100px; margin-bottom: 5px ">
@@ -22,7 +22,7 @@
                             <p:menuitem value="Añadir actividad" url="#" />
                         </p:submenu>
                     
-                        <p:menuitem value="Expedientes" icon="ui-icon-pencil" url="#{listadoExpedientes.listarExpedientes()}">
+                        <p:menuitem value="Expedientes" icon="ui-icon-pencil" url="/ssc/#{listadoExpedientes.listarExpedientes()}">
                         </p:menuitem>
 
                         <p:submenu label="Usuarios" icon="ui-icon-pencil">
