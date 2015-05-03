@@ -7,6 +7,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="title">Ciudadano</ui:define>
     <ui:define name="content">
+        <h:outputScript library="script" name="calendario_espanol.js"/>
         <h:form>
             <h:panelGrid columns="3">
                 <h:outputLabel value="DNI:*"/>
@@ -33,7 +34,7 @@
                     <f:validateRegex pattern="[a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+(\ [a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+)*"/>
                 </p:inputText>
                 <p:message for="apellido1"/>
-                
+
                 <h:outputLabel value="Segundo apellidos:"/>
                 <p:inputText id="apellido2" value="#{expedienteController.ciudadano.persona.apellido2}"
                              validatorMessage="Apellido no valido">
@@ -42,7 +43,8 @@
                 <p:message for="apellido2"/>
 
                 <h:outputLabel value="Sexo:*"/>
-                <p:selectOneRadio id="sexo" value="#{expedienteController.ciudadano.persona.sexo}">
+                <p:selectOneRadio id="sexo" value="#{expedienteController.ciudadano.persona.sexo}" required="true"
+                                  requiredMessage="Campo sexo obligatorio">
                     <f:selectItem itemLabel="Hombre" itemValue="Hombre"/>
                     <f:selectItem itemLabel="Mujer" itemValue="Mujer"/>
                 </p:selectOneRadio>
@@ -73,7 +75,6 @@
                              validatorMessage="Telefono no válido">
                     <f:validateLongRange minimum="100000000" maximum="999999999"/>
                     <f:validateLength minimum="9" maximum="14"/>
-                    <!--<f:validateRegex pattern="(\+)?[0-9]+"/>-->
                 </p:inputText>
                 <p:message for="telefono"/>
 
@@ -95,14 +96,56 @@
                 <p:message for="nacionalidad"/>
 
                 <h:outputLabel value="Fecha de nacimiento:*"/>
-                <p:calendar id="fecha_nacimiento" value="#{expedienteController.ciudadano.persona.fechaNacimiento}"
+                <p:calendar id="fecha_nacimiento" value="#{expedienteController.fechaNacimiento}"
                             requiredMessage="Campo fecha de nacimiento obligatorio" required="true"
-                            showOn="button" locale="es" maxdate="#{ciudadanoBean.fechaActual}" mindate="01-01-1900"
-                            navigator="true" pattern="dd-mm-yyyy"/>
+                            showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
+                            navigator="true" />
                 <p:message for="fecha_nacimiento"/>
-                
-                <p:commandButton value="Terminar" action="#{expedienteController.actualizarCiudadano}" ajax="false"/>
             </h:panelGrid>
+            <p:commandButton value="Confirmar" action="#{expedienteController.actualizarCiudadano}" ajax="false"/>
+        </h:form>
+        <h:form>
+            <p:commandButton value="Descartar cambios" action="ciudadano.xhtml" ajax="false"/>
+        </h:form>
+        <h:form>
+            <p:dataTable id="listaParentescos" var="parentesco" value="#{expedienteController.ciudadano.parentescos}" editable="true">
+                <p:column headerText="DNI">
+                    <p:commandLink action="#{expedienteController.verCiudadano(parentesco.ciudadano2.dni)}" ajax="false">
+                        <h:outputText value="#{parentesco.ciudadano2.dni}"/>
+                    </p:commandLink>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{parentesco.ciudadano2.persona.nombre}"/>
+                </p:column>
+                <p:column headerText="Primer apellido">
+                    <h:outputText value="#{parentesco.ciudadano2.persona.apellido1}"/>
+                </p:column>
+                <p:column headerText="Segundo apellido">
+                    <h:outputText value="#{parentesco.ciudadano2.persona.apellido2}"/>
+                </p:column>
+                <p:column headerText="Parentesco">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{parentesco.parentesco}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{parentesco.parentesco}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column style="width:32px">
+                    <p:rowEditor/>
+                </p:column>
+                <p:column width="38">
+                    <p:commandButton icon="ui-icon-trash" update="listaParentescos" action="#{expedienteController.eliminarParentesco(parentesco.ciudadano2.dni)}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:selectOneMenu value="#{expedienteController.ciudadanoSeleccionado}">
+                        <f:selectItems value="#{datosFicticios.ciudadanos}" var="ciudadano"
+                                       itemValue="#{ciudadano.dni}" itemLabel="#{ciudadano.dni}"/>
+                    </p:selectOneMenu>
+                    <p:inputText value="#{expedienteController.parentescoSeleccionado1}"/>
+                    <p:inputText value="#{expedienteController.parentescoSeleccionado2}"/>
+                    <p:commandButton icon="ui-icon-plus"
+                                     action="#{expedienteController.anadirParentesco}" update="listaParentescos"/>
+                </f:facet>
+            </p:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>

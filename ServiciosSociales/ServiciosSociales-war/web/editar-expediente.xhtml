@@ -9,21 +9,41 @@
     <ui:define name="title">Expediente #{expedienteController.expediente.id}</ui:define>
 
     <ui:define name="content">
+        <h:outputScript library="script" name="calendario_espanol.js"/>
         <h:form>
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="3">
                 <h:outputLabel value="Expediente"/>
                 <h:outputLabel value="#{expedienteController.expediente.id}"/>
-                <h:outputLabel value="Fecha de apertura"/>
-                <p:inputText value="#{expedienteController.expediente.fechaApertura}"/>
-                <h:outputLabel value="Fecha de cierre"/>
-                <p:inputText value="#{expedienteController.expediente.fechaCierre}"/>
-                <h:outputLabel value="Estado"/>
-                <p:inputText value="#{expedienteController.expediente.estado}"/>
+                <h:outputLabel/>
+
+                <h:outputLabel value="Fecha de apertura:*"/>
+                <p:calendar id="fecha_apertura" value="#{expedienteController.fechaApertura}"
+                            requiredMessage="Campo fecha de apertura obligatorio" required="true"
+                            showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
+                            navigator="true" />
+                <p:message for="fecha_apertura"/>
+
+                <h:outputLabel value="Fecha de cierre:"/>
+                <p:calendar id="fecha_cierre" value="#{expedienteController.expediente.fechaCierre}"
+                            showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
+                            navigator="true" />
+                <h:outputLabel/>
+
+                <h:outputLabel for="estado" value="Estado:*"/>
+                <p:inputText id="estado" value="#{expedienteController.expediente.estado}" required="true"
+                             requiredMessage="Campo estado obligatorio"/>
+                <p:message for="estado"/>
+
+                <p:commandButton value="Confirmar" action="#{expedienteController.actualizarExpediente}" ajax="false"/>
             </h:panelGrid>
+        </h:form>
+        <h:form>
+            <p:commandButton value="Descartar cambios" action="expediente.xhtml" ajax="false"/>
         </h:form>
         <h3>Ciudadanos</h3>
         <h:form>
-            <p:dataTable id="listaCiudadanos" var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}">
+            <p:dataTable id="lista_ciudadanos_editar" var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}"
+                         emptyMessage="No hay ciudadanos en este expediente">
                 <p:column headerText="DNI">
                     <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
                         <h:outputText value="#{ciudadanos.dni}"/>
@@ -36,11 +56,11 @@
                     <h:outputText value="#{ciudadanos.persona.apellido1}"/>
                 </p:column>
                 <p:column headerText="Segundo apellido">
-                    <h:outputText value="#{ciudadanos.persona.apellido1}"/>
+                    <h:outputText value="#{ciudadanos.persona.apellido2}"/>
                 </p:column>
                 <p:column width="90">
-                    <p:commandButton icon="ui-icon-pencil" action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false"/>
-                    <p:commandButton icon="ui-icon-trash" update="listaCiudadanos" action="#{expedienteController.eliminarCiudadano(ciudadanos.dni)}"/>
+                    <p:commandButton icon="ui-icon-pencil" action="#{expedienteController.verEditarCiudadano(ciudadanos.dni)}" ajax="false"/>
+                    <p:commandButton icon="ui-icon-trash" update="lista_ciudadanos_editar" action="#{expedienteController.eliminarCiudadano(ciudadanos.dni)}"/>
                 </p:column>
                 <f:facet name="footer">
                     <p:commandButton value="Añadir ciudadano" icon="ui-icon-plus"/>
@@ -49,7 +69,8 @@
         </h:form>
         <h3>Intervenciones</h3>
         <h:form>
-            <p:dataTable var="intervenciones" value="#{expedienteController.expediente.intervenciones}">
+            <p:dataTable var="intervenciones" value="#{expedienteController.expediente.intervenciones}"
+                         emptyMessage="Este expediente no ha recibido intervenciones">
                 <p:column headerText="ID">
                     <h:outputText value="#{intervenciones.id}"/>
                 </p:column>

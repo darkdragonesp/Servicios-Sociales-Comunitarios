@@ -10,13 +10,13 @@
 
     <ui:define name="content">
         <h:panelGrid columns="2">
-            <h:outputLabel value="Expediente"/>
+            <h:outputLabel value="Expediente:"/>
             <h:outputLabel value="#{expedienteController.expediente.id}"/>
-            <h:outputLabel value="Fecha de apertura"/>
+            <h:outputLabel value="Fecha de apertura:"/>
             <h:outputLabel value="#{expedienteController.expediente.fechaApertura}"/>
-            <h:outputLabel value="Fecha de cierre"/>
+            <h:outputLabel value="Fecha de cierre:"/>
             <h:outputLabel value="#{expedienteController.expediente.fechaCierre}"/>
-            <h:outputLabel value="Estado"/>
+            <h:outputLabel value="Estado:"/>
             <h:outputLabel value="#{expedienteController.expediente.estado}"/>
         </h:panelGrid>
         <h3>Ciudadanos</h3>
@@ -55,10 +55,10 @@
                 <p:column headerText="Valoracion">
                     <h:outputText value="#{intervenciones.valoracion}"/>
                 </p:column>
-                <f:facet name="footer">
-                    <p:commandButton value="Añadir intervencion" icon="ui-icon-plus"/>
-                </f:facet>
             </p:dataTable>
+        </h:form>
+        <h:form>
+            <p:commandButton value="Editar expediente" action="editar-expediente.xhtml" ajax="false"/>
         </h:form>
     </ui:define>
 </ui:composition>
