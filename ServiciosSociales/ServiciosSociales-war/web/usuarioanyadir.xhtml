@@ -14,8 +14,8 @@
             <p:panel id="panelUsuarioAnyadir" header="Añadir nuevo usuario" style="margin-left: 100px; margin-right:100px; margin-bottom: 5px ">   
                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                     <h:outputLabel for="dni" value="DNI:*" style="font-weight:bold" />
-                    <p:inputText id="dni" value="#{usuarioAnyadirBean.dni}" required="true" maxlength="9" validator="#{usuarioAnyadirBean.validarDni}"                 
-                                
+                    <p:inputText id="dni" value="#{usuarioAnyadirBean.dni}" required="true" maxlength="9" 
+                                 validator="#{usuarioAnyadirBean.validarDni}"                 
                                  requiredMessage="Introduzca un DNI ."
                                  />
                     
@@ -37,11 +37,10 @@
                     
                     <h:outputLabel for="email" value="Email:" style="font-weight:bold" />      
                     <p:inputText id="email" required="false" label="email" maxlength="50"
-                                 validatorMessage="Introduzca un email válido."
-                                 value="#{usuarioAnyadirBean.email}">
-                        <f:validateRegex
-                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                    </p:inputText>
+                                 
+                                 value="#{usuarioAnyadirBean.email}"
+                                 validator="#{usuarioAnyadirBean.validarEmail}"
+                    />
                     
                     
                     

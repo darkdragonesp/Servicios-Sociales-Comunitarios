@@ -14,6 +14,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import modelo.Usuario;
 
 
@@ -226,4 +229,32 @@ public class usuarioAnyadirBean{
         return "Usuario con DNI "+getDni()+ " creado con éxito.";
         //limpiar usuario?
     }
+    
+    public static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    }
+    
+    
+    public void validarEmail(FacesContext context,UIComponent component,Object input) throws ValidatorException {
+        String m = (String)input;
+        System.out.print(m);
+        if(!m.isEmpty()){
+            if(!isValidEmailAddress(m)){
+                
+                throw new ValidatorException(
+                        new FacesMessage("El email no es válido.", null));
+            }
+        }
+        
+    }
+    
+    
+    
 }
