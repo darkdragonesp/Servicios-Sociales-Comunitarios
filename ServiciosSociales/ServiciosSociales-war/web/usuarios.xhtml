@@ -6,7 +6,7 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     
- 
+ <ui:define name="title">Usuarios</ui:define>
     <ui:define name="content">
         <h:form id="form">
             <p:contextMenu for="usuarios">
@@ -16,7 +16,7 @@
                 </c:if>
             </p:contextMenu>
             
-            <p:dataTable id="usuarios" var="usuarios" value="#{usuarioAnyadirBean.selectedUsuario}" style="margin-left: 100px; margin-right:100px; margin-bottom: 5px "
+            <p:dataTable id="usuarios" var="usuarios" value="#{usuarioAnyadirBean.usuarios}" style="margin-left: 100px; margin-right:100px; margin-bottom: 5px "
                          selection="#{usuarioAnyadirBean.selectedUsuario}" selectionMode="single" rowKey="#{usuario.dni}" 
                          emptyMessage="No hay usuarios disponibles">
                 <f:facet name="header">

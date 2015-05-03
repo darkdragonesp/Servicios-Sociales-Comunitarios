@@ -182,6 +182,14 @@ public class usuarioAnyadirBean  implements Serializable{
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
     
     private String calcularDNI(String s){
         String res="error";
