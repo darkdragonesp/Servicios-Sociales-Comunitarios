@@ -9,32 +9,34 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Facelets Template</title>
+        <title>Servicios Sociales</title>
     </h:head>
 
     <h:body>
-            <p:layout fullPage="true">
-                <p:layoutUnit position="center" footer="pie de pagina">
-                    <h:form>  
-                        <p:growl id="messages"/>
-                        <p:menubar>
-                            <p:submenu label="Agenda" icon="ui-icon-document">
-                                <p:menuitem value="Añadir actividad" url="#" />
-                            </p:submenu>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="center" footer="pie de pagina">
+                <h:form>  
+                    <p:growl id="messages"/>
+                    <p:menubar autoDisplay="false" style="margin-left: 100px; margin-right:100px; margin-bottom: 5px ">
+                        <p:submenu label="Agenda" icon="ui-icon-document">
+                            <p:menuitem value="Añadir actividad" url="#" />
+                        </p:submenu>
 
-                            <p:menuitem value="Expedientes" icon="ui-icon-pencil" url="/ssc/expedientes.xhtml">
-                            </p:menuitem>
+                        <p:menuitem value="Expedientes" icon="ui-icon-pencil" url="#{listadoExpedientes.listarExpedientes()}">
+                        </p:menuitem>
 
-                            <f:facet name="options">
-                                <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
-                            </f:facet>
-                        </p:menubar>
-                    </h:form>
-                    
-                        <ui:insert name="content">Content</ui:insert>
-                    
-                </p:layoutUnit>
-            </p:layout>
+                        <p:menuitem value="Usuarios" icon="ui-icon-pencil" url="#">
+                        </p:menuitem>                            
+
+                        <f:facet name="options">
+                            <p:commandButton type="button" value="Mi perfil" icon="ui-icon-person" />
+                            <p:commandButton type="button" value="Salir" icon="ui-icon-extlink" />
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+                <ui:insert name="content">Content</ui:insert>
+            </p:layoutUnit>
+        </p:layout>
         
         
     </h:body>
