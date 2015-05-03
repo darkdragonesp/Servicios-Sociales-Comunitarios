@@ -13,9 +13,9 @@
             <h:outputLabel value="Expediente"/>
             <h:outputLabel value="#{expedienteController.expediente.id}"/>
             <h:outputLabel value="Fecha de apertura"/>
-            <h:outputLabel value="#{expedienteController.expediente.fechaApertura}"/>
+            <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaApertura)}"/>
             <h:outputLabel value="Fecha de cierre"/>
-            <h:outputLabel value="#{expedienteController.expediente.fechaCierre}"/>
+            <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaApertura)}"/>
             <h:outputLabel value="Estado"/>
             <h:outputLabel value="#{expedienteController.expediente.estado}"/>
         </h:panelGrid>

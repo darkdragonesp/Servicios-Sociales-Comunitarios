@@ -5,9 +5,12 @@
  */
 package beans;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
@@ -100,5 +103,10 @@ public class ExpedienteController {
     
     public void eliminarCiudadano(String dni) {
         this.expediente.getCiudadanos().remove(obtenerCiudadano(dni));
+    }
+    
+    public String formatFecha(Date fecha){
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRENCH);
+        return df.format(fecha);     
     }
 }

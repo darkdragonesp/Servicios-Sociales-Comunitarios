@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -60,8 +61,10 @@ public class Expediente implements Serializable {
         
     }
     
-    public Expediente(long id){
+    public Expediente(long id, Date fechaApertura){
         setId(id);
+        setFechaApertura(fechaApertura);
+        
     }
     
     public List<Expediente> getExpedientesLigados() {
