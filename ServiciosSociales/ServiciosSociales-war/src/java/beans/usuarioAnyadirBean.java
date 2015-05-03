@@ -214,25 +214,18 @@ public class usuarioAnyadirBean  implements Serializable{
         
         if(var.length() < 9){
             throw new ValidatorException(
-                    new FacesMessage("Introduzca un DNI válido con una longitud igual a 9.", null));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca un DNI válido con una longitud igual a 9.", null));
         }
         if(!var.substring(8).equals(calcularDNI(var.substring(0,8)))){
             throw new ValidatorException(
-                    new FacesMessage("Introduzca un DNI válido.La letra no coincide", null));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca un DNI válido.La letra no coincide", null));
         }
         //si ya existe el DNI
         
-        boolean esta=false;
-        int cont=0;
-        while(cont<usuarios.size()-1 && !esta){
-            if(var.equalsIgnoreCase(usuarios.get(cont).getDni())){
-                esta=true;
-                throw new ValidatorException(
-                        new FacesMessage("El DNI introducido ya existe en la base de datos.", null));
-            }
-            cont++;
+        for (Usuario user : usuarios) {
+            if (user.getDni().equalsIgnoreCase(var))throw new ValidatorException(
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "El DNI introducido ya existe en la base de datos.", null));
         }
-        
     }
     public String enviar() {
         return "usuarioAnyadirExito.xhtml?faces-redirect=true";
@@ -262,7 +255,7 @@ public class usuarioAnyadirBean  implements Serializable{
             if(!isValidEmailAddress(m)){
                 
                 throw new ValidatorException(
-                        new FacesMessage("El email no es válido.", null));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "El email no es válido.", null));
             }
         }
         
