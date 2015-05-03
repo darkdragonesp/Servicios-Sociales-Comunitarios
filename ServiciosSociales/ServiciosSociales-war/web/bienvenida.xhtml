@@ -13,10 +13,11 @@
         <!--   FacesContext ctx = FacesContext.getCurrentInstance();
 Application app = ctx.getApplication();
 LoginBean lb = (LoginBean)app.createValueBinding("#{login}).getValue(ctx);--> 
-                <h1>Bienvenido, "insertar nombre de usuario".</h1>
+         <p:panel id="panelBienvenida" header="Bienvenido usuario" style="margin-left: 100px; margin-right:100px; margin-bottom: 5px ">           
+        <h1>Bienvenido, "insertar nombre de usuario".</h1>
                 <h3>Pulse una opción del menú superior para proceder.
                 Para salir, pulse Desconectar.</h3>
-                
+        </p:panel>     
             
     </ui:define>
 </ui:composition>
