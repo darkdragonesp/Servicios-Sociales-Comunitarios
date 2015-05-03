@@ -2,8 +2,10 @@
 
 insert into APP.UTS values(123,'Malaga','El Palo');
 
-insert into APP.PERSONA values('0123456789A','USUARIO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
-insert into APP.USUARIO values('0123456789A','pass','Admin',123);
+insert into APP.PERSONA values('22222222J','USUARIO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
+insert into APP.USUARIO values('22222222J','pass','Admin',123);
+insert into APP.PERSONA values('33333333P','USUARIO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
+insert into APP.USUARIO values('33333333P','pass','Admin',123);
 
 ------OJO  --> Las fechas van en formato Americano osea mes/dia/año.
 
@@ -15,10 +17,10 @@ insert into APP.EXPEDIENTE values(2,'activo','1/1/2010',null,null,123);
 
 insert into intervencion values(1,'prueba',null,'4/12/2015',null,null,null,'Demolicion','en ruinas',1,1)
 
-insert into APP.PERSONA values('0123456789B','CIUDADANO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
-insert into APP.PERSONA values('0123456789C','CIUDADANO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Luis','M',952292222); 
-insert into APP.CIUDADANO values('0123456789B',1);
-insert into APP.CIUDADANO values('0123456789C',2);
+insert into APP.PERSONA values('11111111H','CIUDADANO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
+insert into APP.PERSONA values('44444444A','CIUDADANO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Luis','M',952292222); 
+insert into APP.CIUDADANO values('11111111H',1);
+insert into APP.CIUDADANO values('44444444A',2);
 
 insert into APP.PERSONA values('0123456789D','CIUDADANO','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
 insert into APP.CIUDADANO values('0123456789D',1);
