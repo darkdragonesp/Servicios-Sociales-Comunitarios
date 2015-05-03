@@ -5,6 +5,7 @@
 */
 package beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import modelo.Usuario;
@@ -27,7 +27,7 @@ import modelo.Usuario;
 
 @ManagedBean
 @SessionScoped
-public class usuarioAnyadirBean{
+public class usuarioAnyadirBean  implements Serializable{
     
     private String text;
     private String dni;
@@ -46,6 +46,7 @@ public class usuarioAnyadirBean{
     private String contrasenya;
     
     private List<Usuario> usuarios;
+    private Usuario selectedUsuario;
     /**
      * Creates a new instance of usuarios
      */
@@ -55,8 +56,12 @@ public class usuarioAnyadirBean{
         usuarios.add(new Usuario("22222222J"));
         usuarios.add(new Usuario("11111111H"));
     }
-    
-    
+    public Usuario getSelectedUsuario() {
+        return selectedUsuario;
+    }
+    public void setSelectedUsuario(Usuario selectedUsuario) {
+        this.selectedUsuario=selectedUsuario;
+    }
     public String getText() {
         return text;
     }
