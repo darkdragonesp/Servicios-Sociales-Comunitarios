@@ -13,12 +13,12 @@
         <!--   FacesContext ctx = FacesContext.getCurrentInstance();
 Application app = ctx.getApplication();
 LoginBean lb = (LoginBean)app.createValueBinding("#{login}).getValue(ctx);--> 
-         <p:panel id="panelUserExito" header="Resumen" style="margin-left: 100px; margin-right:100px; margin-bottom: 5px ">           
+          
         
                 <h:outputText value="#{usuarioAnyadirBean.crearUsuario()}" />
                 
                 <p:button outcome="usuarioanyadir.xhtml" value="Crear nuevo usuario" icon="ui-icon-star"/>
-        </p:panel>     
+    
             
     </ui:define>
 </ui:composition>
