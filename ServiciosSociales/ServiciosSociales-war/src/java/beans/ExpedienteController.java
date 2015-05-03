@@ -28,38 +28,6 @@ public class ExpedienteController {
     private Ciudadano ciudadano = new Ciudadano();
     
     public ExpedienteController() {
-        Ciudadano[] ciudadanos = new Ciudadano[5];
-        ciudadanos[0] = new Ciudadano();
-        ciudadanos[0].setDni("25354845J");
-        ciudadanos[0].setPersona(new Persona());
-        ciudadanos[0].getPersona().setNombre("Francisco Jose");
-        ciudadanos[0].getPersona().setApellido1("Torralvo");
-        ciudadanos[0].getPersona().setApellido2("Ariza");
-        ciudadanos[1] = new Ciudadano();
-        ciudadanos[1].setDni("1");
-        ciudadanos[1].setPersona(new Persona());
-        ciudadanos[1].getPersona().setNombre("Juan Jose");
-        ciudadanos[1].getPersona().setApellido1("Trujillo");
-        ciudadanos[1].getPersona().setApellido2("Bueno");
-        ciudadanos[2] = new Ciudadano();
-        ciudadanos[2].setDni("2");
-        ciudadanos[2].setPersona(new Persona());
-        ciudadanos[2].getPersona().setNombre("Robin");
-        ciudadanos[2].getPersona().setApellido1("Sorries");
-        ciudadanos[2].getPersona().setApellido2("");
-        ciudadanos[3] = new Ciudadano();
-        ciudadanos[3].setDni("3");
-        ciudadanos[3].setPersona(new Persona());
-        ciudadanos[3].getPersona().setNombre("Laura");
-        ciudadanos[3].getPersona().setApellido1("Urbano");
-        ciudadanos[3].getPersona().setApellido2("Salinas");
-        ciudadanos[4] = new Ciudadano();
-        ciudadanos[4].setDni("4");
-        ciudadanos[4].setPersona(new Persona());
-        ciudadanos[4].getPersona().setNombre("Francisco");
-        ciudadanos[4].getPersona().setApellido1("Molina");
-        ciudadanos[4].getPersona().setApellido2("Sanchez");
-        this.expediente.setCiudadanos(new ArrayList<Ciudadano>(Arrays.asList(ciudadanos)));
     }
     
     public Expediente getExpediente() {
@@ -79,6 +47,13 @@ public class ExpedienteController {
     }
     
     public String verExpediente(Expediente expediente){
+        List<Ciudadano> ciudadanos = new ArrayList<Ciudadano>();
+        ciudadanos.add(new Ciudadano("25354845J", "Francisco Jose", "Torralvo", "Ariza"));
+        ciudadanos.add(new Ciudadano("1", "Juan Jose", "Trujillo", "Bueno"));
+        ciudadanos.add(new Ciudadano("2", "Robin", "Sorries", null));
+        ciudadanos.add(new Ciudadano("3", "Laura", "Urbano", "Salinas"));
+        ciudadanos.add(new Ciudadano("4", "Francisco", "Molina", "Sanchez"));
+        expediente.setCiudadanos(ciudadanos);
         this.expediente = expediente;
         return "expediente.xhtml";
     }
@@ -100,5 +75,9 @@ public class ExpedienteController {
     
     public void eliminarCiudadano(String dni) {
         this.expediente.getCiudadanos().remove(obtenerCiudadano(dni));
+    }
+    
+    public String actualizarCiudadano() {
+        return "ciudadano.xhtml";
     }
 }

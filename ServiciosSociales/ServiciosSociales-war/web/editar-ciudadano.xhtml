@@ -7,39 +7,102 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="title">Ciudadano</ui:define>
     <ui:define name="content">
-        <h:panelGrid columns="2">
-            <h:outputLabel value="DNI:"/>
-            <h:outputText value="#{expedienteController.ciudadano.dni}"/>
-            
-            <h:outputLabel value="Nombre:"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.nombre}"/>
-            
-            <h:outputLabel value="Apellidos:"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.apellido1} #{expedienteController.ciudadano.persona.apellido2}"/>
-            
-            <h:outputLabel value="Sexo:"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.sexo}"/>
-            
-            <h:outputLabel value="Localidad:"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.localidad}"/>
-            
-            <h:outputLabel value="Direccion"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.direccion}"/>
-            
-            <h:outputLabel value="Email:"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.email}"/>
-            
-            <h:outputLabel value="Teléfono"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.telefono}"/>
-            
-            <h:outputLabel value="Estado civil"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.estadoCivil}"/>
-            
-            <h:outputLabel value="Nacionalidad"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.nacionalidad}"/>
-            
-            <h:outputLabel value="Fecha nacimiento"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.fechaNacimiento}"/>
-        </h:panelGrid>
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputLabel value="DNI:*"/>
+                <p:inputText id="dni" value="#{expedienteController.ciudadano.dni}" required="true"
+                             requiredMessage="Campo DNI obligatorio"
+                             validatorMessage="DNI no valido">
+                    <f:validateLength minimum="9" maximum="10"/>
+                    <f:validateRegex pattern="[a-zA-Z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][a-zA-Z]"/>
+                </p:inputText>
+                <p:message for="dni"/>
+
+                <h:outputLabel value="Nombre:*"/>
+                <p:inputText id="nombre" value="#{expedienteController.ciudadano.persona.nombre}" required="true"
+                             requiredMessage="Campo nombre obligatorio"
+                             validatorMessage="Nombre no valido">
+                    <f:validateRegex pattern="[a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+(\ [a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+)*"/>
+                </p:inputText>
+                <p:message for="nombre"/>
+
+                <h:outputLabel value="Primer apellido:*"/>
+                <p:inputText id="apellido1" value="#{expedienteController.ciudadano.persona.apellido1}" required="true"
+                             requiredMessage="Campo apellido obligatorio"
+                             validatorMessage="Apellido no valido">
+                    <f:validateRegex pattern="[a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+(\ [a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+)*"/>
+                </p:inputText>
+                <p:message for="apellido1"/>
+                
+                <h:outputLabel value="Segundo apellidos:"/>
+                <p:inputText id="apellido2" value="#{expedienteController.ciudadano.persona.apellido2}"
+                             validatorMessage="Apellido no valido">
+                    <f:validateRegex pattern="([a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+(\ [a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+)*)|"/>
+                </p:inputText>
+                <p:message for="apellido2"/>
+
+                <h:outputLabel value="Sexo:*"/>
+                <p:selectOneRadio id="sexo" value="#{expedienteController.ciudadano.persona.sexo}">
+                    <f:selectItem itemLabel="Hombre" itemValue="Hombre"/>
+                    <f:selectItem itemLabel="Mujer" itemValue="Mujer"/>
+                </p:selectOneRadio>
+                <p:message for="sexo"/>
+
+                <h:outputLabel value="Localidad:*"/>
+                <p:inputText id="localidad" value="#{expedienteController.ciudadano.persona.localidad}" required="true"
+                             requiredMessage="Campo localidad obligatorio"
+                             validatorMessage="Localidad no valida">
+                    <f:validateRegex pattern="[a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+(\ [a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+)*"/>
+                </p:inputText>
+                <p:message for="localidad"/>
+
+                <h:outputLabel value="Direccion:"/>
+                <p:inputText id="direccion" value="#{expedienteController.ciudadano.persona.direccion}"/>
+                <p:message for="direccion"/>
+
+                <h:outputLabel value="Email:"/>
+                <p:inputText id="email" value="#{expedienteController.ciudadano.persona.email}"
+                             validatorMessage="Email no valido">
+                    <f:validateRegex pattern="([a-z0-9_-]+\@[a-z]+\.[a-z]+)|"/>
+                </p:inputText>
+                <p:message for="email"/>
+
+                <h:outputLabel value="Teléfono:*"/>
+                <p:inputText id="telefono" value="#{expedienteController.ciudadano.persona.telefono}" required="true"
+                             requiredMessage="Campo obligatorio"
+                             validatorMessage="Telefono no válido">
+                    <f:validateLongRange minimum="100000000" maximum="999999999"/>
+                    <f:validateLength minimum="9" maximum="14"/>
+                    <!--<f:validateRegex pattern="(\+)?[0-9]+"/>-->
+                </p:inputText>
+                <p:message for="telefono"/>
+
+                <h:outputLabel value="Estado civil:*"/>
+                <p:selectOneMenu id="estado_civil" value="#{expedienteController.ciudadano.persona.estadoCivil}">
+                    <f:selectItem itemLabel="Soltero/a" itemValue="Soltero"/>
+                    <f:selectItem itemLabel="Casado/a" itemValue="Casado"/>
+                    <f:selectItem itemLabel="Divorciado/a" itemValue="Divorciado"/>
+                    <f:selectItem itemLabel="Viudo/a" itemValue="Viudo"/>
+                </p:selectOneMenu>
+                <p:message for="estado_civil"/>
+
+                <h:outputLabel value="Nacionalidad:*"/>
+                <p:inputText id="nacionalidad" value="#{expedienteController.ciudadano.persona.nacionalidad}" required="true"
+                             requiredMessage="Campo obligatorio"
+                             validatorMessage="Nacionalidad no valida">
+                    <f:validateRegex pattern="[a-zA-ZáéíóúàèìòùäëïöüâêîôûÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÂÊÎÔÛçÇñÑ]+"/>
+                </p:inputText>
+                <p:message for="nacionalidad"/>
+
+                <h:outputLabel value="Fecha de nacimiento:*"/>
+                <p:calendar id="fecha_nacimiento" value="#{expedienteController.ciudadano.persona.fechaNacimiento}"
+                            requiredMessage="Campo fecha de nacimiento obligatorio" required="true"
+                            showOn="button" locale="es" maxdate="#{ciudadanoBean.fechaActual}" mindate="01-01-1900"
+                            navigator="true" pattern="dd-mm-yyyy"/>
+                <p:message for="fecha_nacimiento"/>
+                
+                <p:commandButton value="Terminar" action="#{expedienteController.actualizarCiudadano}" ajax="false"/>
+            </h:panelGrid>
+        </h:form>
     </ui:define>
 </ui:composition>

@@ -7,6 +7,9 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="title">Ciudadano</ui:define>
     <ui:define name="content">
+        <h:form>
+            <p:commandButton value="Editar ciudadano" action="editar-ciudadano.xhtml" ajax="false"/>
+        </h:form>
         <h:panelGrid columns="2">
             <h:outputLabel value="DNI:"/>
             <h:outputText value="#{expedienteController.ciudadano.dni}"/>
