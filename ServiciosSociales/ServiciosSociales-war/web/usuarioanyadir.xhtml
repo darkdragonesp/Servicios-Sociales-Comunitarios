@@ -1,0 +1,109 @@
+<ui:composition template="/WEB-INF/plantillas/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                >
+    
+    
+    <ui:define name="title">Añadir usuario.</ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:panel id="panelUsuarioAnyadir" header="Añadir nuevo usuario">   
+                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                    <h:outputLabel for="dni" value="DNI:*" style="font-weight:bold" />
+                    <p:inputText id="dni" value="#{usuarioAnyadirBean.dni}" required="true" maxlength="9" validator="#{usuarioAnyadirBean.validarDni}"                 
+                                
+                                 requiredMessage="Introduzca un DNI ."
+                                 />
+                    
+                    
+                    <h:outputLabel for="contrasenya" value="Contraseña:*" style="font-weight:bold" />
+                    <p:password id="contrasenya" value="#{usuarioAnyadirBean.contrasenya}" feedback="true" required="true" maxlength="50"
+                                requiredMessage="Introduzca una contraseña."
+                                />
+                    
+                    
+                    
+                    
+                    <p:outputLabel for="tipo_profesional" value="Tipo profesional:"  style="font-weight:bold" />
+                    <p:selectOneMenu id="tipo_profesional" value="#{usuarioAnyadirBean.tipo_profesional}" style="width:200px" required="true">
+                        <f:selectItem itemLabel="Auxiliar administrativo" itemValue="Auxiliar administrativo" />
+                        <f:selectItem itemLabel="Profesional" itemValue="Profesional" />
+                        <f:selectItem itemLabel="Técnico Superior" itemValue="Tecnico_Superior" />                        
+                    </p:selectOneMenu>
+                    
+                    <h:outputLabel for="email" value="Email:" style="font-weight:bold" />      
+                    <p:inputText id="email" required="false" label="email" maxlength="50"
+                                 validatorMessage="Introduzca un email válido."
+                                 value="#{usuarioAnyadirBean.email}">
+                        <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                    </p:inputText>
+                    
+                    
+                    
+                    
+                    
+                    <h:outputLabel for="nombre" value="Nombre:*" style="font-weight:bold" />
+                    <p:inputText id="nombre" value="#{usuarioAnyadirBean.nombre}" required="true"  maxlength="50"
+                                 requiredMessage="Introduzca un nombre ."/>
+                    
+                    <h:outputLabel for="apellido1" value="Apellido1:*" style="font-weight:bold" />
+                    <p:inputText id="apellido1" value="#{usuarioAnyadirBean.apellido1}" required="true" maxlength="50"
+                                 requiredMessage="Introduzca el primer apellido ."/>
+                    
+                    <h:outputLabel for="apellido2" value="Apellido2:" style="font-weight:bold" />
+                    <p:inputText id="apellido2" value="#{usuarioAnyadirBean.apellido2}" maxlength="50" />
+                    
+                    <h:outputLabel for="direccion" value="Dirección:*" style="font-weight:bold" />
+                    <p:inputText id="direccion" value="#{usuarioAnyadirBean.direccion}" required="true" maxlength="50"
+                                 requiredMessage="Introduzca una dirección ."/>
+                    
+                    <h:outputLabel for="telefono" value="Telefono:*" style="font-weight:bold" />
+                    <p:inputText id="telefono" value="#{usuarioAnyadirBean.telefono}" required="true" maxlength="9" converter="javax.faces.Integer"
+                                 requiredMessage="Introduzca un teléfono .">
+                        <f:validateLength minimum="9" maximum="9"/>
+                    </p:inputText>           
+                    
+                    
+                    
+                    
+                    <h:outputLabel for="sexo" value="Sexo:*" style="font-weight:bold" />
+                    <p:selectOneMenu id="sexo" value="#{usuarioAnyadirBean.sexo}" style="width:200px" required="true">
+                        <f:selectItem itemLabel="Hombre" itemValue="Hombre" />
+                        <f:selectItem itemLabel="Mujer" itemValue="Mujer" />                      
+                    </p:selectOneMenu>
+                    
+                    
+                    
+                    <p:outputLabel for="estado_civil" value="Estado civil:"  style="font-weight:bold" />
+                    <p:selectOneMenu id="estado_civil" value="#{usuarioAnyadirBean.estado_civil}" style="width:200px" required="true">
+                        <f:selectItem itemLabel="Soltero" itemValue="Soltero" />
+                        <f:selectItem itemLabel="Casado" itemValue="Casado" />                     
+                    </p:selectOneMenu>
+                    
+                    
+                    <p:outputLabel for="fecha_nacimiento" value="Fecha nacimiento:" style="font-weight:bold"  />
+                    <p:calendar id="fecha_nacimiento" value="#{usuarioAnyadirBean.fecha_nacimiento}" locale="es" navigator="true" pattern="dd-mm-yyyy" 
+                                requiredMessage="Introduzca una fecha de nacimiento" required="true" />
+                    
+                    <h:outputLabel for="localidad" value="Localidad:*" style="font-weight:bold" />
+                    <p:inputText id="localidad" value="#{usuarioAnyadirBean.localidad}" required="true" maxlength="50" requiredMessage="Introduzca una localidad ."/>
+                    
+                    <h:outputLabel for="nacionalidad" value="Nacionalidad:*" style="font-weight:bold" />
+                    <p:inputText id="nacionalidad" value="#{usuarioAnyadirBean.nacionalidad}" required="true" maxlength="50" requiredMessage="Introduzca una nacionalidad ."/>
+                    
+                </h:panelGrid>     
+                
+                
+                <p:commandButton icon="ui-icon-check" value="Enviar" 
+                                 action="#{usuarioAnyadirBean.enviar}" ajax="false" />
+            </p:panel>
+        </h:form>
+        
+    </ui:define>
+</ui:composition>
+
