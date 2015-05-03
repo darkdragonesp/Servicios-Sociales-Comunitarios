@@ -1,16 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<ui:composition template="/WEB-INF/plantillas/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+ 
+    <ui:define name="content">
+        <h:form id="form">
+            <p:contextMenu for="usuarios">
+                <p:menuitem value="Eliminar usuario" icon="ui-icon-plus" url="#"/>
+                <c:if test="true">
+                    <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="#"/>
+                </c:if>
+            </p:contextMenu>
+            
+            <p:dataTable id="usuarios" var="usuarios" value="#{usuarioAnyadirBean.selectedUsuario}" style="margin-left: 100px; margin-right:100px; margin-bottom: 5px "
+                         selection="#{usuarioAnyadirBean.selectedUsuario}" selectionMode="single" rowKey="#{usuario.dni}" 
+                         emptyMessage="No hay usuarios disponibles">
+                <f:facet name="header">
+                    Lista de Usuarios
+                </f:facet>
+                
+                <p:column headerText="DNI de usuario" filterBy="#{usuario.dni}" filterMatchMode="contains">
+                    <h:outputText value="Usuario  #{usuario.dni}" />
+                </p:column>   
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+    
+    
+</ui:composition>
+
