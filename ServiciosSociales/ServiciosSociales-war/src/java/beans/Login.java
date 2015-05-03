@@ -8,21 +8,24 @@ package beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
+import javax.faces.validator.ValidatorException;
 import modelo.Usuario;
 
 /**
  *
  * @author Portátil
  */
-@Named(value = "login")
+/*@Named(value = "login")
+@SessionScoped*/
+@ManagedBean
 @SessionScoped
 public class Login implements Serializable {
     private String usuario;
-    private String password;  
+    private String password;
     ArrayList<Usuario> usuarios;
     
     public Login(){
@@ -45,28 +48,62 @@ public class Login implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String validar(){
-        for(Usuario s : usuarios){
-            if(s.getDni().equals(usuario)){
-                if(s.getDni().equals(password)){
-                    return "bienvenida.xhtml";
-                }else{
-                    FacesContext ctx = FacesContext.getCurrentInstance();
-                    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña no válida", "Contraseña no válida"));
-                    return null;
-                }
-            }
-        }
-        FacesContext ctx = FacesContext.getCurrentInstance();
-        ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario no se encuentra", "El usuario no se encuentra"));
-        return null;
-    }
-
-    public ArrayList<Usuario> getUsuarios() {
+        public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
 
     public void setUsuarios(ArrayList<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
+    public void validarusuario(FacesContext context,UIComponent component,Object input) throws ValidatorException {
+        String var = (String)input;
+        boolean esta=false;
+        for(Usuario s: usuarios){
+            if(s.getDni().equals(var)){
+                esta=true;
+                usuario=var;
+                break;
+            }
+        }
+        if(!esta){
+           throw new ValidatorException(
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no existe", null));
+        }
+    
+    }
+    public void validarpassword(FacesContext context,UIComponent component,Object input) throws ValidatorException {
+        String var = (String)input;
+            boolean esta=false;
+
+        for(Usuario s: usuarios){
+            System.out.println(s.getContrasena());
+            System.out.println(this.getUsuario());
+            if(s.getDni().equals(this.getUsuario())){
+                if(s.getContrasena().equals(var)){
+                    esta=true;
+                }
+            }
+        }
+        if(!esta){
+           throw new ValidatorException(
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña Incorrecta.", null));
+        }
+        
+    }
+    public String validar() throws ValidatorException{
+      /*  for(Usuario s : usuarios){
+            if(s.getDni().equals(usuario)){
+                if(s.getDni().equals(password)){
+                    return "bienvenida.xhtml";
+                }else{
+                    throw new ValidatorException(
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña incorrecta", null));
+                }
+            }
+        }
+        throw new ValidatorException(
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Existe", null));
+        }*/
+        return "bienvenida.xhtml";
+        }
 }

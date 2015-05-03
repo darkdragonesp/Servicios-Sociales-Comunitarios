@@ -82,18 +82,17 @@
                     <p:outputLabel for="fecha_nacimiento" value="Fecha nacimiento:" style="font-weight:bold"  />
                     <p:calendar id="fecha_nacimiento" locale="es" navigator="true" 
                                 disabled="true" />
-                    
+                   
                     <h:outputLabel for="localidad" value="Localidad:*" style="font-weight:bold" />
-                    <p:inputText id="localidad" value="#{usaurioEditar.localidad}" required="true" maxlength="50" requiredMessage="Introduzca una localidad ."/>
-                    
+                    <p:inputText id="localidad" value="#{usuarioEditar.localidad}" required="true" maxlength="50" requiredMessage="Introduzca una localidad ."/>
+                  
                     <h:outputLabel for="nacionalidad" value="Nacionalidad:*" style="font-weight:bold" />
                     <p:inputText id="nacionalidad" value="NACIONALIDAD" disabled="true"/>
                     
                 </h:panelGrid>     
                 
                 
-                <p:commandButton icon="ui-icon-check" value="Enviar" 
-                                 action="#{usuarioEditar.enviar()}" ajax="false" />
+                <p:commandButton icon="ui-icon-check" value="Enviar" action="#{usuarioEditar.enviar()}" ajax="false" />
             </p:panel>
         </h:form>
         

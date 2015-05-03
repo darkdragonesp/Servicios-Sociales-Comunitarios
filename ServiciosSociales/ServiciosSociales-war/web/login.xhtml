@@ -5,7 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
@@ -27,12 +27,20 @@ and open the template in the editor.
                     <h:form>
                         <h:panelGrid columns="2" cellpadding="5">
                             <p:outputLabel for="usuario" value="Usuario: " />
-                            <p:inputText id="usuario" value="#{login.usuario}" label="usuario"/>
+                            <p:inputText id="usuario" value="#{login.usuario}" label="usuario"
+                                         validator="#{login.validarusuario}"
+                                         requiredMessage="Introduzca un DNI ."
+                                         required="true"/>
+                            
 
                             <p:outputLabel for="password" value="Contraseña: "/>
-                            <p:inputText id="password" value="#{login.password}" label="password" type="PASSWORD"/>
+                            <p:inputText id="password" value="#{login.password}" label="password" type="PASSWORD"
+                                         validator="#{login.validarpassword}"
+                                         requiredMessage="Introduzca contraseña ."
+                                         required="true"/>
                             
-                            <h:commandButton value="Enviar" action="#{login.validar()}"/>
+                            
+                            <p:commandButton icon= "ui-icon-key" value="Enviar" action="#{login.validar()}" ajax="false"/>
                         </h:panelGrid>
                       </h:form> 
                     
@@ -44,4 +52,4 @@ and open the template in the editor.
         
         
     </h:body>
-</html>
+</ui:composition>

@@ -5,18 +5,23 @@
  */
 package beans;
 
+
+import java.util.List;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
 import modelo.Usuario;
 
 /**
  *
  * @author Portátil
  */
+/*@Named(value = "usuarioEditar")
+@SessionScoped*/
 @ManagedBean
 @SessionScoped
 public class UsuarioEditar implements Serializable {
@@ -118,7 +123,7 @@ public class UsuarioEditar implements Serializable {
     }
     
     public String enviar(){
-        if(this.getContrasenya()!=this.getContrasenya2()){
+        if(!this.getContrasenya().equals(this.getContrasenya2())){
             return "usuarioEditar.xhtml?faces-redirect=true";
         }else{
             usuarios.add(selectedUsuario);

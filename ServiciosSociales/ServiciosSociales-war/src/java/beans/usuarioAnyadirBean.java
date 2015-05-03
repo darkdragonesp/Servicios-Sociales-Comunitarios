@@ -266,4 +266,5 @@ public class usuarioAnyadirBean  implements Serializable{
        return "usuarios.xhtml?faces-redirect=true";
     }
     
+    
 }
