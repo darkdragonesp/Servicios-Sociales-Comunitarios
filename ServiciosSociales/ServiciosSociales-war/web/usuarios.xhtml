@@ -10,7 +10,7 @@
     <ui:define name="content">
         <h:form id="form">
             <p:contextMenu for="usuarios">
-                <p:menuitem value="Eliminar usuario" icon="ui-icon-plus" url="#"/>
+                <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" action="#{usuarioAnyadirBean.eliminar}"/>
                 <c:if test="true">
                     <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="#"/>
                 </c:if>
@@ -24,7 +24,7 @@
                 </f:facet>
                 
                 <p:column headerText="DNI de usuario" filterBy="#{usuario.dni}" filterMatchMode="contains">
-                    <h:outputText value="Usuario  #{usuario.dni}" />
+                    <h:outputText value="DNI:   #{usuario.dni}" />
                 </p:column>   
             </p:dataTable>
         </h:form>
