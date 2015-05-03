@@ -219,6 +219,11 @@ public class usuarioAnyadirBean{
         
     }
     public String enviar() {
-        return "usuarioAnyadirResultado.xhtml?faces-redirect=true";
+        return "usuarioAnyadirExito.xhtml?faces-redirect=true";
+    }
+    public String crearUsuario(){
+        usuarios.add(new Usuario(getDni()));
+        return "Usuario con DNI "+getDni()+ " creado con éxito.";
+        //limpiar usuario?
     }
 }
