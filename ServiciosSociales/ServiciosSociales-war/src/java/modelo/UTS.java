@@ -27,6 +27,13 @@ public class UTS implements Serializable {
     @Column(name="CSS", nullable=false)
     private String css;
     
+    public UTS(){
+        
+    }
+    public UTS(Long id,String uts){
+        setUts(uts);
+        setId(id);
+    }
     public Long getId() {
         return id;
     }

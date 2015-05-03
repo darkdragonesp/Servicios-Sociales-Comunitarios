@@ -1,0 +1,35 @@
+<ui:composition template="/WEB-INF/plantillas/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+ <ui:define name="title">UTS</ui:define>
+    <ui:define name="content">
+        <h:form id="form">
+            <p:contextMenu for="utss">
+                <p:menuitem value="Eliminar uts" icon="ui-icon-trash" action="#{utsBean.eliminar}"/>
+
+            </p:contextMenu>
+            
+            <p:dataTable id="utss" var="uts" value="#{utsBean.utss}"
+                         selection="#{utsBean.selectedUTS}" selectionMode="single" rowKey="#{uts.id}" 
+                         emptyMessage="No hay utss disponibles">
+                <f:facet name="header">
+                    Lista de UTS
+                </f:facet>
+                
+                <p:column headerText="UTS" filterBy="#{uts.uts}" filterMatchMode="contains">
+                    <h:outputText value="ID:   #{uts.id}        " />
+                    <h:outputText value="UTS:   #{uts.uts}" />
+                </p:column>   
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+    
+    
+</ui:composition>
+
