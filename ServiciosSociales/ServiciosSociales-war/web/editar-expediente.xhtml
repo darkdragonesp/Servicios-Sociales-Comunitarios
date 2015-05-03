@@ -1,0 +1,75 @@
+<ui:composition template="/WEB-INF/plantillas/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Expediente #{expedienteController.expediente.id}</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Expediente"/>
+                <h:outputLabel value="#{expedienteController.expediente.id}"/>
+                <h:outputLabel value="Fecha de apertura"/>
+                <p:inputText value="#{expedienteController.expediente.fechaApertura}"/>
+                <h:outputLabel value="Fecha de cierre"/>
+                <p:inputText value="#{expedienteController.expediente.fechaCierre}"/>
+                <h:outputLabel value="Estado"/>
+                <p:inputText value="#{expedienteController.expediente.estado}"/>
+            </h:panelGrid>
+        </h:form>
+        <h3>Ciudadanos</h3>
+        <h:form>
+            <p:dataTable id="listaCiudadanos" var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}">
+                <p:column headerText="DNI">
+                    <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
+                        <h:outputText value="#{ciudadanos.dni}"/>
+                    </p:commandLink>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{ciudadanos.persona.nombre}"/>
+                </p:column>
+                <p:column headerText="Primer apellido">
+                    <h:outputText value="#{ciudadanos.persona.apellido1}"/>
+                </p:column>
+                <p:column headerText="Segundo apellido">
+                    <h:outputText value="#{ciudadanos.persona.apellido1}"/>
+                </p:column>
+                <p:column width="90">
+                    <p:commandButton icon="ui-icon-pencil" action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false"/>
+                    <p:commandButton icon="ui-icon-trash" update="listaCiudadanos" action="#{expedienteController.eliminarCiudadano(ciudadanos.dni)}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton value="Añadir ciudadano" icon="ui-icon-plus"/>
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+        <h3>Intervenciones</h3>
+        <h:form>
+            <p:dataTable var="intervenciones" value="#{expedienteController.expediente.intervenciones}">
+                <p:column headerText="ID">
+                    <h:outputText value="#{intervenciones.id}"/>
+                </p:column>
+                <p:column headerText="Fecha de inicio">
+                    <h:outputText value="#{intervenciones.fechaInicio}"/>
+                </p:column>
+                <p:column headerText="Fecha fin">
+                    <h:outputText value="#{intervenciones.fechaFin}"/>
+                </p:column>
+                <p:column headerText="Valoracion">
+                    <h:outputText value="#{intervenciones.valoracion}"/>
+                </p:column>
+                <p:column width="90">
+                    <p:button icon="ui-icon-minus"/>
+                    <p:button icon="ui-icon-trash"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton value="Añadir intervencion" icon="ui-icon-plus"/>
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

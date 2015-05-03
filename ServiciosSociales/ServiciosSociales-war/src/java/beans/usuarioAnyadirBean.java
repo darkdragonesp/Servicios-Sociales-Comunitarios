@@ -37,12 +37,12 @@ public class usuarioAnyadirBean{
     private String direccion;
     private String telefono;
     private String sexo;
-    private String estado_civil;
-    private Date fecha_nacimiento;
+    private String estadoCivil;
+    private Date fechaNacimiento;
     private String localidad;
     private String nacionalidad;
     private String email;
-    private String tipo_profesional;
+    private String tipoProfesional;
     private String contrasenya;
     
     private List<Usuario> usuarios;
@@ -121,12 +121,12 @@ public class usuarioAnyadirBean{
         this.sexo = sexo;
     }
     
-    public String getEstado_civil() {
-        return estado_civil;
+    public String getEstadoCivil() {
+        return estadoCivil;
     }
     
-    public void setEstado_civil(String estado_civil) {
-        this.estado_civil = estado_civil;
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
     
     
@@ -154,12 +154,12 @@ public class usuarioAnyadirBean{
         this.email = email;
     }
     
-    public String getTipo_profesional() {
-        return tipo_profesional;
+    public String getTipoProfesional() {
+        return tipoProfesional;
     }
     
-    public void setTipo_profesional(String tipo_profesional) {
-        this.tipo_profesional = tipo_profesional;
+    public void setTipoProfesional(String tipoProfesional) {
+        this.tipoProfesional = tipoProfesional;
     }
     
     public String getContrasenya() {
@@ -170,12 +170,12 @@ public class usuarioAnyadirBean{
         this.contrasenya = contrasenya;
     }
     
-    public Date getFecha_nacimiento() {
-        return fecha_nacimiento;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
     
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
     
     private String calcularDNI(String s){

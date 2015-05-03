@@ -61,28 +61,6 @@ public class Ciudadano implements Serializable{
         this.parentescos2 = parentescos2;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.expediente);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Ciudadano other = (Ciudadano) obj;
-        if (!Objects.equals(this.expediente, other.expediente)) {
-            return false;
-        }
-        return true;
-    }
-
     public String getDni() {
         return dni;
     }
@@ -104,6 +82,25 @@ public class Ciudadano implements Serializable{
         return "Ciudadano{" + "dni=" + dni + ", expediente=" + expediente + ", parentescos1=" + parentescos1 + ", parentescos2=" + parentescos2 + ", persona=" + persona + '}';
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.dni);
+        return hash;
+    }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ciudadano other = (Ciudadano) obj;
+        if (!Objects.equals(this.dni, other.dni)) {
+            return false;
+        }
+        return true;
+    }
 }

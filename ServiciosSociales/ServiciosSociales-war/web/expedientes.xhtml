@@ -6,7 +6,7 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     
-    <!--<ui:define name="title">Index</ui:define>-->
+    <ui:define name="title">Expedientes</ui:define>
     <ui:define name="content">
         <h:form id="form">
             <p:contextMenu for="expedientes">
@@ -25,7 +25,9 @@
                 </f:facet>
                 
                 <p:column headerText="Id de expediente" filterBy="#{expediente.id}" filterMatchMode="contains">
-                    <h:outputText value="Expediente nº #{expediente.id}" />
+                    <p:commandLink action="#{expedienteController.verExpediente(expediente)}" ajax="false">
+                        <h:outputText value="Expediente nº #{expediente.id}" />
+                    </p:commandLink>
                 </p:column>   
             </p:dataTable>
         </h:form>

@@ -34,9 +34,9 @@ public class Persona implements Serializable {
     @Column(name="SEXO", nullable=false)
     private Character sexo;
     @Column(name="ESTADO_CIVIL", nullable=false)
-    private String estado_civil;
+    private String estadoCivil;
     @Column(name="FECHA_NACIMIENTO", nullable=false)
-    private Date fecha_nacimiento;
+    private Date fechaNacimiento;
     @Column(name="LOCALIDAD", nullable=false)
     private String localidad;
     @Column(name="NACIONALIDAD", nullable=false)
@@ -105,20 +105,20 @@ public class Persona implements Serializable {
         this.sexo = sexo;
     }
 
-    public String getEstado_civil() {
-        return estado_civil;
+    public String getEstadoCivil() {
+        return estadoCivil;
     }
 
-    public void setEstado_civil(String estado_civil) {
-        this.estado_civil = estado_civil;
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
-    public Date getFecha_nacimiento() {
-        return fecha_nacimiento;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getLocalidad() {
@@ -185,10 +185,6 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" + "dni=" + dni + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", direccion=" + direccion + ", telefono=" + telefono + ", sexo=" + sexo + ", estado_civil=" + estado_civil + ", fecha_nacimiento=" + fecha_nacimiento + ", localidad=" + localidad + ", nacionalidad=" + nacionalidad + ", email=" + email + ", ciudadano=" + ciudadano + ", usuario=" + usuario + '}';
+        return "Persona{" + "dni=" + dni + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", direccion=" + direccion + ", telefono=" + telefono + ", sexo=" + sexo + ", estado_civil=" + estadoCivil + ", fecha_nacimiento=" + fechaNacimiento + ", localidad=" + localidad + ", nacionalidad=" + nacionalidad + ", email=" + email + ", ciudadano=" + ciudadano + ", usuario=" + usuario + '}';
     }
-
-
-
- 
 }
