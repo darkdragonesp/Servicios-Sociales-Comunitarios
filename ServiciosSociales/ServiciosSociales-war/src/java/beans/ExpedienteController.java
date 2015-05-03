@@ -27,27 +27,7 @@ public class ExpedienteController {
     private Expediente expediente = new Expediente();
     private Ciudadano ciudadano = new Ciudadano();
     
-//    public ExpedienteController() {
-//    }
-    
-    public Expediente getExpediente() {
-        return this.expediente;
-    }
-    
-    public void setExpediente(Expediente expediente) {
-        this.expediente = expediente;
-    }
-
-    public Ciudadano getCiudadano() {
-        return ciudadano;
-    }
-
-    public void setCiudadano(Ciudadano ciudadano) {
-        this.ciudadano = ciudadano;
-    }
-    
-    public String verExpediente(Expediente expediente){
-        this.expediente = expediente;
+    public ExpedienteController() {
         Ciudadano[] ciudadanos = new Ciudadano[5];
         ciudadanos[0] = new Ciudadano();
         ciudadanos[0].setDni("25354845J");
@@ -80,6 +60,26 @@ public class ExpedienteController {
         ciudadanos[4].getPersona().setApellido1("Molina");
         ciudadanos[4].getPersona().setApellido2("Sanchez");
         this.expediente.setCiudadanos(new ArrayList<Ciudadano>(Arrays.asList(ciudadanos)));
+    }
+    
+    public Expediente getExpediente() {
+        return this.expediente;
+    }
+    
+    public void setExpediente(Expediente expediente) {
+        this.expediente = expediente;
+    }
+
+    public Ciudadano getCiudadano() {
+        return ciudadano;
+    }
+
+    public void setCiudadano(Ciudadano ciudadano) {
+        this.ciudadano = ciudadano;
+    }
+    
+    public String verExpediente(Expediente expediente){
+        this.expediente = expediente;
         return "expediente.xhtml";
     }
     

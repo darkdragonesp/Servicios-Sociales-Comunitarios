@@ -21,7 +21,8 @@
         </h:panelGrid>
         <h3>Ciudadanos</h3>
         <h:form>
-            <p:dataTable var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}">
+            <p:dataTable var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}"
+                         emptyMessage="No hay ciudadanos en este expediente">
                 <p:column headerText="DNI">
                     <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
                         <h:outputText value="#{ciudadanos.dni}"/>
@@ -34,13 +35,14 @@
                     <h:outputText value="#{ciudadanos.persona.apellido1}"/>
                 </p:column>
                 <p:column headerText="Segundo apellido">
-                    <h:outputText value="#{ciudadanos.persona.apellido1}"/>
+                    <h:outputText value="#{ciudadanos.persona.apellido2}"/>
                 </p:column>
             </p:dataTable>
         </h:form>
         <h3>Intervenciones</h3>
         <h:form>
-            <p:dataTable var="intervenciones" value="#{expedienteController.expediente.intervenciones}">
+            <p:dataTable var="intervenciones" value="#{expedienteController.expediente.intervenciones}"
+                         emptyMessage="Este expediente no ha recibido intervenciones">
                 <p:column headerText="ID">
                     <h:outputText value="#{intervenciones.id}"/>
                 </p:column>
