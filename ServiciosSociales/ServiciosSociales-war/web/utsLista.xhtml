@@ -13,18 +13,22 @@
                 <p:menuitem value="Eliminar uts" icon="ui-icon-trash" action="#{utsBean.eliminar}"/>
 
             </p:contextMenu>
-            
+                
             <p:dataTable id="utss" var="uts" value="#{utsBean.utss}"
                          selection="#{utsBean.selectedUTS}" selectionMode="single" rowKey="#{uts.id}" 
                          emptyMessage="No hay utss disponibles">
                 <f:facet name="header">
                     Lista de UTS
                 </f:facet>
-                
-                <p:column headerText="UTS" filterBy="#{uts.uts}" filterMatchMode="contains">
+                <p:column headerText="ID">
                     <h:outputText value="ID:   #{uts.id}        " />
+                </p:column>
+                <p:column headerText="UTS" filterBy="#{uts.uts}" filterMatchMode="contains">
+                    
                     <h:outputText value="UTS:   #{uts.uts}" />
                 </p:column>   
+                
+
             </p:dataTable>
         </h:form>
     </ui:define>
