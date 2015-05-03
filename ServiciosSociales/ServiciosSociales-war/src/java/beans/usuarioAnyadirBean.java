@@ -261,6 +261,9 @@ public class usuarioAnyadirBean  implements Serializable{
         
     }
     
-    
+    public String eliminar(){
+        usuarios.remove(this.getSelectedUsuario());
+       return "usuarios.xhtml?faces-redirect=true";
+    }
     
 }
