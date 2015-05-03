@@ -39,6 +39,10 @@ public class Usuario implements Serializable {
     public Usuario(String s){
         setDni(s);
     }
+    public Usuario(String s, String c){
+        setDni(s);
+        setContrasena(c);
+    }
     
     public String getTipoProfesional() {
         return tipoProfesional;
