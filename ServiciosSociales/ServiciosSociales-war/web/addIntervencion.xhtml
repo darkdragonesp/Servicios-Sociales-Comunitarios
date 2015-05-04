@@ -1,0 +1,79 @@
+<ui:composition template="/WEB-INF/plantillas/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="title">Intervencion</ui:define>
+    <ui:define name="content">
+        <h3>Datos de Intervención</h3>
+        <p:outputLabel value="Identificador: #{expedienteController.asignarIdIntervencion()}"/>
+        <p:separator/>
+        <h:form>
+            <h:panelGrid style="margin-right: 200px; float:left">
+                <p:outputLabel class="label" for="tipo" value="Tipo"/>
+                <p:inputText id="tipo" value="#{crearIntervencion.tipo}" required="true" maxlength="50"/>
+                
+                <p:outputLabel class="label" for="ayuda" value="Ayuda" />
+                <p:selectOneMenu id="ayuda" value="#" style="width:125px">
+                    <f:selectItem itemLabel="Seleccionar" itemValue="" />
+                    <f:selectItem itemLabel="Discapacitados" itemValue="Xbox One" />
+                    <f:selectItem itemLabel="Pobreza" itemValue="PS4" />
+                    <f:selectItem itemLabel="Mayores" itemValue="Wii U" />
+                </p:selectOneMenu>
+            </h:panelGrid>
+            
+            <h:panelGrid style="margin-right: 50px; float:left">
+                <p:outputLabel class="label" for="idoneo" value="Recurso idóneo" />
+                <p:inputTextarea id="idoneo" value="#{crearIntervencion.recursoIdeal}" maxlength="5000"/>
+            </h:panelGrid>
+            
+            <h:panelGrid>
+                <p:outputLabel class="label" for="aplicado" value="Recurso aplicado" />
+                <p:inputTextarea id="aplicado" maxlength="5000" value="#{crearIntervencion.recursoAplicado}"/>
+            </h:panelGrid>
+
+            <h:panelGrid>
+                <p:outputLabel class="label" for="valoracion" value="Valoración" />
+                <p:inputTextarea cols="97" id="valoracion" required="true" value="#{crearIntervencion.valoracion}"/>
+            </h:panelGrid>
+
+            <h:panelGrid columns="4" class="panelIntervencion">
+                <p:outputLabel class="label" for="finicio" value="Fecha de inicio" /><p/>
+                <p:outputLabel class="label" for="ffin" value="Fecha de fin" /><p/>
+                <p:calendar id="finicio" class="label" value="#{crearIntervencion.fechaInicio}" showOn="button" required="true"/><p/>
+                <p:calendar class="label" id="ffin" value="#{crearIntervencion.fechaFin}" showOn="button"/>
+            </h:panelGrid>
+            
+
+            
+            <p:dataTable>
+                <f:facet name="header">
+                    Notas
+                    <p:commandButton id="addNota" type="button" value="Añadir Nota" style="float:right; font-size: 0.6em" 
+                                     icon="ui-icon-plus" onclick="PF('notaDialog').show()"
+                        actionListener="#">
+                    </p:commandButton>
+                </f:facet>
+            </p:dataTable>
+            
+            <p:dialog header="Nota" widgetVar="notaDialog" minHeight="40" resizable="false">
+                <p:inputTextarea/>
+                <p:separator/>
+                <p:commandButton value="Añadir" type="button" onclick="PF('notaDialog').hide()" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Cancelar" type="button" onclick="PF('notaDialog').hide()" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:dialog>
+            
+            <p/>
+            <p:commandButton icon="ui-icon-check" value="Enviar" action="#{crearIntervencion.crearIntervencion()}" ajax="false" />
+        </h:form>
+    </ui:define>
+
+    
+    
+</ui:composition>
+
+
+

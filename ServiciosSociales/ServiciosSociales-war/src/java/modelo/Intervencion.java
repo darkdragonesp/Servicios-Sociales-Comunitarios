@@ -52,6 +52,10 @@ public class Intervencion implements Serializable {
     @JoinColumn(name="EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable = false)
     private Expediente expediente;
     
+    public Intervencion(){
+        
+    }
+    
     public Long getId() {
         return id;
     }

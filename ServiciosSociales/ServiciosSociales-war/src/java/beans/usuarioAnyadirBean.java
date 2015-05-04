@@ -25,7 +25,7 @@ import modelo.Usuario;
  * @author DarkDragon
  */
 
-@ManagedBean
+@ManagedBean(name = "usuarioAnyadirBean")
 @SessionScoped
 public class usuarioAnyadirBean  implements Serializable{
     
