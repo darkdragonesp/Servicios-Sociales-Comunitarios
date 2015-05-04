@@ -10,7 +10,8 @@
     <ui:define name="content">
         <h:form id="form">
             <p:contextMenu for="utss">
-                <p:menuitem value="Eliminar uts" icon="ui-icon-trash" action="#{utsBean.eliminar}" update="utss"/>
+                <p:menuitem value="Eliminar uts" icon="ui-icon-trash"  onclick="PF('dlg1').show()" 
+                            />
 
             </p:contextMenu>
             
@@ -37,7 +38,16 @@
                     <h:outputText value="#{uts.css}" />
                 </p:column>   
             </p:dataTable>
+        <p:remoteCommand name="irAConf"
+                             action="#{utsBean.eliminar}" update=":form:utss" /> 
         </h:form>
+        <p:dialog widgetVar="dlg1" header="¿Está seguro?" >
+            <h:form>
+                <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"   onclick="irAConf();PF('dlg1').hide()" 
+                                 ajax="false" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlg1').hide()"/>
+            </h:form>   
+        </p:dialog> 
     </ui:define>
 
     
