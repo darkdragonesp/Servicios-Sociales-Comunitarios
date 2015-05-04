@@ -62,10 +62,13 @@ public class Expediente implements Serializable {
         
     }
     
+    public Expediente(long id) {
+        this.id=id;
+    }
+    
     public Expediente(long id, Date fechaApertura){
-        setId(id);
-        setFechaApertura(fechaApertura);
-        
+        this.id = id;
+        this.fechaApertura = fechaApertura;
     }
     
     public List<Expediente> getExpedientesLigados() {
