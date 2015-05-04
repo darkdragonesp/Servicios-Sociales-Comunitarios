@@ -18,7 +18,7 @@ import org.primefaces.event.SelectEvent;
  *
  * @author JuanJo
  */
-@ManagedBean
+@ManagedBean(name = "listadoExpedientes")
 @SessionScoped
 public class ListadoExpedientes implements Serializable{
     private List<Expediente> expedientes;
