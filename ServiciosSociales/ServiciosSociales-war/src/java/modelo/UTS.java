@@ -30,9 +30,11 @@ public class UTS implements Serializable {
     public UTS(){
         
     }
-    public UTS(Long id,String uts){
+    public UTS(Long id,String uts,String z,String c){
         setUts(uts);
         setId(id);
+        setCss(c);
+        setZona(z);
     }
     public Long getId() {
         return id;
