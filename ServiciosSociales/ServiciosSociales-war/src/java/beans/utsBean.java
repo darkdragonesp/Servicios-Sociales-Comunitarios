@@ -84,4 +84,17 @@ public class utsBean  implements Serializable{
         utss.remove(this.getSelectedUTS());
 //       return "usuarios.xhtml?faces-redirect=true";
     }
+public String enviar() {
+        return "utsAnyadirExito.xhtml?faces-redirect=true";
+    }
+    public String crearUTS(){
+        long ide=0;
+        if(!utss.isEmpty()){
+            ide=(utss.get(utss.size()-1).getId())+1;
+        }
+        setId(ide);
+        utss.add(new UTS(ide,getUts(),getZona(),getCss()));
+        return "UTS "+getUts()+ "con id "+id+" creado con éxito .";
+        //limpiar uts?
+    }
 }

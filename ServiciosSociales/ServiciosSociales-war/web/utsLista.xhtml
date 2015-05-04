@@ -6,29 +6,24 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     
- <ui:define name="title">UTS</ui:define>
+    <ui:define name="title">UTS</ui:define>
     <ui:define name="content">
         <h:form id="form">
             <p:contextMenu for="utss">
-                <p:menuitem value="Eliminar uts" icon="ui-icon-trash" action="#{utsBean.eliminar}"/>
+                <p:menuitem value="Eliminar uts" icon="ui-icon-trash" action="#{utsBean.eliminar}" update="utss"/>
 
             </p:contextMenu>
-                
+            
             <p:dataTable id="utss" var="uts" value="#{utsBean.utss}"
                          selection="#{utsBean.selectedUTS}" selectionMode="single" rowKey="#{uts.id}" 
                          emptyMessage="No hay utss disponibles">
                 <f:facet name="header">
-                    Lista de UTS
+                    Lista de Expedientes
                 </f:facet>
-                <p:column headerText="ID">
-                    <h:outputText value="ID:   #{uts.id}        " />
-                </p:column>
-                <p:column headerText="UTS" filterBy="#{uts.uts}" filterMatchMode="contains">
-                    
-                    <h:outputText value="UTS:   #{uts.uts}" />
-                </p:column>   
                 
-
+                 <p:column headerText="DNI de usuario" filterBy="#{uts.id}" filterMatchMode="contains">
+                    <h:outputText value="DNI:   #{uts.id}" />
+                </p:column>   
             </p:dataTable>
         </h:form>
     </ui:define>
@@ -36,4 +31,3 @@
     
     
 </ui:composition>
-

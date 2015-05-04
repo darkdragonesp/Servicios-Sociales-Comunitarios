@@ -9,9 +9,14 @@
  <ui:define name="title">Usuarios</ui:define>
     <ui:define name="content">
         <h:form id="form">
+            
+             
+  
+            
+            
             <p:contextMenu for="usuarios">
                 <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" onclick="PF('dlg1').show()" 
-                          action="#{usuarioAnyadirBean.eliminar}"  update="usuarios" />
+                           />
                 <c:if test="true">
                     <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="#"/>
                 </c:if>
@@ -32,12 +37,18 @@
                 </p:column>  
             </p:dataTable>
             
-             <p:dialog widgetVar="dlg1" >
-                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"   onclick="PF('dlg1').hide()" />
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlg1').hide()"/>
-            </p:dialog> 
-            
+                    <p:remoteCommand name="irAConf"
+            action="#{usuarioAnyadirBean.eliminar}" update=":form:usuarios" /> 
         </h:form>
+              <p:dialog widgetVar="dlg1" >
+             <h:form>
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"   onclick="irAConf();PF('dlg1').hide()" 
+                                ajax="false" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlg1').hide()"/>
+         </h:form>   
+         </p:dialog> 
+
+        
     </ui:define>
 
     
