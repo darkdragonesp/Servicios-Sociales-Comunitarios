@@ -49,6 +49,8 @@ public class Persona implements Serializable {
     @OneToOne(mappedBy="persona")
     private Usuario usuario;
     
+    public Persona() { }
+    
     public Persona (String dni, String nombre, String apellido1, String apellido2) {
         this.dni=dni;
         this.nombre=nombre;

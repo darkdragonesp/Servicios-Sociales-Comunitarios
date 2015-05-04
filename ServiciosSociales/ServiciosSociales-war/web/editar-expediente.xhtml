@@ -17,7 +17,7 @@
                 <h:outputLabel/>
 
                 <h:outputLabel value="Fecha de apertura:*"/>
-                <p:calendar id="fecha_apertura" value="#{expedienteController.fechaApertura}"
+                <p:calendar id="fecha_apertura" value="#{expedienteController.expediente.fechaApertura}"
                             requiredMessage="Campo fecha de apertura obligatorio" required="true"
                             showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
                             navigator="true" />
@@ -34,7 +34,7 @@
                              requiredMessage="Campo estado obligatorio"/>
                 <p:message for="estado"/>
 
-                <p:commandButton value="Confirmar" action="#{datosFicticios.actualizarExpediente(expedienteController.expediente, expedienteController.fechaApertura, expedienteController.fechaCierre)}" ajax="false"/>
+                <p:commandButton value="Confirmar" action="expediente.xhtml" ajax="false"/>
             </h:panelGrid>
         </h:form>
         <h:form>

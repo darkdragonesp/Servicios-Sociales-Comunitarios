@@ -35,7 +35,9 @@ public class Ciudadano implements Serializable{
     @JoinColumn(name="DNI", referencedColumnName="DNI", insertable=false, updatable=false)
     private Persona persona;
     
-    public Ciudadano(){}
+    public Ciudadano(){
+        this.persona = new Persona();
+    }
     
     public Ciudadano(String dni, String nombre, String apellido1, String apellido2) {
         this.persona = new Persona(dni, nombre, apellido1, apellido2);

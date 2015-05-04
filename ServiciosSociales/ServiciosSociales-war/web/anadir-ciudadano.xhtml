@@ -11,8 +11,13 @@
         <h:form>
             <h:panelGrid columns="3">
                 <h:outputLabel value="DNI:*"/>
-                <h:outputText id="dni" value="#{expedienteController.ciudadano.dni}"/>
-                <h:outputText/>
+                <p:inputText id="dni" value="#{expedienteController.ciudadano.dni}" required="true"
+                             requiredMessage="Campo DNI obligatorio"
+                             validatorMessage="DNI no valido">
+                    <f:validateLength minimum="9" maximum="10"/>
+                    <f:validateRegex pattern="[a-zA-Z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][a-zA-Z]"/>
+                </p:inputText>
+                <p:message for="dni"/>
 
                 <h:outputLabel value="Nombre:*"/>
                 <p:inputText id="nombre" value="#{expedienteController.ciudadano.persona.nombre}" required="true"
@@ -44,6 +49,14 @@
                     <f:selectItem itemLabel="Mujer" itemValue="Mujer"/>
                 </p:selectOneRadio>
                 <p:message for="sexo"/>
+                
+                <h:outputText id="expediente" value="Expediente:"/>
+                <p:selectOneMenu value="#{expedienteController.expediente}">
+                    <f:selectItem itemValue="" itemLabel=""/>
+                    <f:selectItems value="#{datosFicticios.expedientes}" var="expediente"
+                                   itemValue="#{expediente.id}" itemLabel="#{expediente.id}"/>
+                </p:selectOneMenu>
+                <p:message for="expediente"/>
 
                 <h:outputLabel value="Localidad:*"/>
                 <p:inputText id="localidad" value="#{expedienteController.ciudadano.persona.localidad}" required="true"
@@ -91,58 +104,13 @@
                 <p:message for="nacionalidad"/>
 
                 <h:outputLabel value="Fecha de nacimiento:*"/>
-                <p:calendar id="fecha_nacimiento" value="#{expedienteController.ciudadano.persona.fechaNacimiento}"
+                <p:calendar id="fecha_nacimiento" value="#{expedienteController.fechaNacimiento}"
                             requiredMessage="Campo fecha de nacimiento obligatorio" required="true"
                             showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
                             navigator="true" />
                 <p:message for="fecha_nacimiento"/>
             </h:panelGrid>
-            <p:commandButton value="Confirmar" action="ciudadano.xhtml" ajax="false"/>
-        </h:form>
-        <h:form>
-            <p:commandButton value="Descartar cambios" action="ciudadano.xhtml" ajax="false"/>
-        </h:form>
-        <h:form>
-            <p:dataTable id="listaParentescos" var="parentesco" value="#{expedienteController.ciudadano.parentescos}" editable="true"
-                         emptyMessage="Este ciudadano no tiene ningún pariente">
-                <p:column headerText="DNI">
-                    <p:commandLink action="#{expedienteController.verCiudadano(parentesco.ciudadano2.dni)}" ajax="false">
-                        <h:outputText value="#{parentesco.ciudadano2.dni}"/>
-                    </p:commandLink>
-                </p:column>
-                <p:column headerText="Nombre">
-                    <h:outputText value="#{parentesco.ciudadano2.persona.nombre}"/>
-                </p:column>
-                <p:column headerText="Primer apellido">
-                    <h:outputText value="#{parentesco.ciudadano2.persona.apellido1}"/>
-                </p:column>
-                <p:column headerText="Segundo apellido">
-                    <h:outputText value="#{parentesco.ciudadano2.persona.apellido2}"/>
-                </p:column>
-                <p:column headerText="Parentesco">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{parentesco.parentesco}"/></f:facet>
-                        <f:facet name="input"><p:inputText value="#{parentesco.parentesco}"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column style="width:32px">
-                    <p:rowEditor/>
-                </p:column>
-                <p:column width="38">
-                    <p:commandButton icon="ui-icon-trash" update="listaParentescos" action="#{datosFicticios.eliminarParentesco(expedienteController.ciudadano, parentesco.ciudadano2)}"/>
-                </p:column>
-                <f:facet name="footer">
-                    <p:selectOneMenu value="#{expedienteController.pariente.dni}">
-                        <f:selectItems value="#{datosFicticios.ciudadanos}" var="pariente"
-                                       itemValue="#{pariente.dni}" itemLabel="#{pariente.dni}"/>
-                    </p:selectOneMenu>
-                    <p:inputText value="#{expedienteController.parentescoSeleccionado1}"/>
-                    <p:inputText value="#{expedienteController.parentescoSeleccionado2}"/>
-                    <p:commandButton icon="ui-icon-plus"
-                                     action="#{datosFicticios.anadirParentesco(expedienteController.ciudadano, datosFicticios.obtenerCiudadano(expedienteController.pariente.dni),
-                                               expedienteController.parentescoSeleccionado1, expedienteController.parentescoSeleccionado2)}" update="listaParentescos"/>
-                </f:facet>
-            </p:dataTable>
+            <p:commandButton value="Crear" action="#{datosFicticios.crearCiudadano(expedienteController.ciudadano, datosFicticios.obtenerExpediente(expedienteController.expediente.id))}" ajax="false"/>
         </h:form>
     </ui:define>
 </ui:composition>

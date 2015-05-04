@@ -49,10 +49,11 @@
             <h:outputText value="#{expedienteController.ciudadano.persona.nacionalidad}"/>
 
             <h:outputLabel value="Fecha nacimiento"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.fechaNacimiento}"/>
+            <h:outputText value="#{expedienteController.formatFecha(expedienteController.ciudadano.persona.fechaNacimiento)}"/>
         </h:panelGrid>
         <h:form>
-            <p:dataTable var="parentesco" value="#{expedienteController.ciudadano.parentescos}">
+            <p:dataTable var="parentesco" value="#{expedienteController.ciudadano.parentescos}"
+                         emptyMessage="Este ciudadano no tiene ningún pariente">
                 <p:column headerText="DNI">
                     <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
                         <h:outputText value="#{parentesco.ciudadano2.dni}"/>

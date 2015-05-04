@@ -92,7 +92,6 @@ public class DatosFicticios {
     }
 
     public List<Expediente> getExpedientes() {
-        for (Expediente expediente : expedientes) System.out.println(expediente.getCiudadanos());
         return expedientes;
     }
 
@@ -171,17 +170,6 @@ public class DatosFicticios {
         ciudadano.getParentescos().remove(obtenerParentesco(ciudadano, pariente));
     }
     
-    public String actualizarCiudadano(Ciudadano ciudadano, java.util.Date fechaNacimiento) {
-        ciudadano.getPersona().setFechaNacimiento(new java.sql.Date(fechaNacimiento.getTime()));
-        return "ciudadano.xhtml";
-    }
-    
-    public String actualizarExpediente(Expediente expediente, java.util.Date fechaApertura, java.util.Date fechaCierre) {
-        expediente.setFechaApertura(new java.sql.Date(fechaApertura.getTime()));
-        if (fechaCierre!=null)expediente.setFechaCierre(new java.sql.Date(fechaCierre.getTime()));
-        return "expediente.xhtml";
-    }
-    
     public void anadirParentesco(Ciudadano ciudadano, Ciudadano pariente, String parentescoSeleccionado1, String parentescoSeleccionado2) {
         System.out.println("Entrada ciudadano: "+ciudadano);
         System.out.println("Entrada pariente: "+pariente);
@@ -220,5 +208,18 @@ public class DatosFicticios {
             expedienteAnterior.getCiudadanos().remove(ciudadano);
         }
         ciudadano.setExpediente(expediente);
+    }
+    
+    public String crearCiudadano(Ciudadano ciudadano, Expediente expediente) {
+        this.ciudadanos.add(ciudadano);
+        if (expediente!=null) {
+            anadirCiudadano(expediente, ciudadano);
+        }
+        return "expedientes.xhtml";
+    }
+    
+    public String crearExpediente(Expediente expediente) {
+        this.expedientes.add(expediente);
+        return "expedientes.xhtml";
     }
 }
