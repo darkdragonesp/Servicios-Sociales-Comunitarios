@@ -10,7 +10,8 @@
     <ui:define name="content">
         <h:form id="form">
             <p:contextMenu for="usuarios">
-                <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" action="#{usuarioAnyadirBean.eliminar}"/>
+                <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" onclick="PF('dlg1').show()" 
+                          action="#{usuarioAnyadirBean.eliminar}"  update="usuarios" />
                 <c:if test="true">
                     <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="#"/>
                 </c:if>
@@ -22,11 +23,20 @@
                 <f:facet name="header">
                     Lista de Usuarios
                 </f:facet>
-                
+                    
                 <p:column headerText="DNI de usuario" filterBy="#{usuario.dni}" filterMatchMode="contains">
                     <h:outputText value="DNI:   #{usuario.dni}" />
-                </p:column>   
+                </p:column> 
+                <p:column headerText="Tipo de profesional" filterBy="#{usuario.tipoProfesional}" filterMatchMode="contains">
+                    <h:outputText value="Tipo:   #{usuario.tipoProfesional}" />
+                </p:column>  
             </p:dataTable>
+            
+             <p:dialog widgetVar="dlg1" >
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"   onclick="PF('dlg1').hide()" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlg1').hide()"/>
+            </p:dialog> 
+            
         </h:form>
     </ui:define>
 
