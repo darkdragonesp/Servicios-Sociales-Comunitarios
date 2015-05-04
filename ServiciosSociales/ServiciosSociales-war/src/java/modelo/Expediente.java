@@ -1,8 +1,9 @@
 package modelo;
 
 import java.io.Serializable;
+import java.sql.Date;
+//import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,11 +30,11 @@ public class Expediente implements Serializable {
     private Long id;
     
     @Column(name="FECHA_APERTURA", nullable=false)
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date fechaApertura;
     
     @Column(name="FECHA_CIERRE")
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date fechaCierre;
     
     @Column(name="ESTADO",nullable=false)
@@ -61,10 +62,13 @@ public class Expediente implements Serializable {
         
     }
     
+    public Expediente(long id) {
+        this.id=id;
+    }
+    
     public Expediente(long id, Date fechaApertura){
-        setId(id);
-        setFechaApertura(fechaApertura);
-        
+        this.id = id;
+        this.fechaApertura = fechaApertura;
     }
     
     public List<Expediente> getExpedientesLigados() {
@@ -162,7 +166,7 @@ public class Expediente implements Serializable {
 
     @Override
     public String toString() {
-        return "Expediente{" + "id=" + id + ", fechaApertura=" + fechaApertura + ", fechaCierre=" + fechaCierre + ", estado=" + estado + ", expedienteLigado=" + expedienteLigado + ", expedientesLigados=" + expedientesLigados + ", uts=" + uts + ", ciudadanos=" + ciudadanos + ", intervenciones=" + intervenciones + '}';
+        return "Expediente{" + "id=" + id + ", fechaApertura=" + fechaApertura + ", fechaCierre=" + fechaCierre + ", estado=" + estado + ", expedienteLigado=" + expedienteLigado + ", uts=" + uts + '}';
     }
 
 

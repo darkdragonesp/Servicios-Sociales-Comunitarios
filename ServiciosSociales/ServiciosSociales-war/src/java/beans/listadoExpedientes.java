@@ -31,14 +31,14 @@ public class listadoExpedientes implements Serializable{
     /**
      * Creates a new instance of listadoExpedientes
      */
-    public listadoExpedientes() throws ParseException {
-        expedientes = new ArrayList<Expediente>();
-        Date today = new Date();
-        expedientes.add(new Expediente(12345678, today));
-        expedientes.add(new Expediente(22245563, today));
-        expedientes.add(new Expediente(39832492, today));
-        expedientes.add(new Expediente(1234567855, today));       
 
+    public listadoExpedientes() throws ParseException {
+//        expedientes = new ArrayList<Expediente>();
+//        Date today = new Date();
+//        expedientes.add(new Expediente(12345678, today));
+//        expedientes.add(new Expediente(22245563, today));
+//        expedientes.add(new Expediente(39832492, today));
+//        expedientes.add(new Expediente(1234567855, today));
     }
     
     public Expediente getSelectedExpediente() {

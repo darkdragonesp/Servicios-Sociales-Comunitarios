@@ -29,13 +29,19 @@ public class Ciudadano implements Serializable{
     private Expediente expediente;
 
     @OneToMany(mappedBy="ciudadano1")
-    private List<Parentesco> parentescos1;
-    @OneToMany(mappedBy="ciudadano2")
-    private List<Parentesco> parentescos2;
+    private List<Parentesco> parentescos;
     
     @OneToOne
     @JoinColumn(name="DNI", referencedColumnName="DNI", insertable=false, updatable=false)
     private Persona persona;
+    
+    public Ciudadano(){}
+    
+    public Ciudadano(String dni, String nombre, String apellido1, String apellido2) {
+        this.persona = new Persona(dni, nombre, apellido1, apellido2);
+        this.dni=dni;
+        this.persona.setCiudadano(this);
+    }
     
     public Expediente getExpediente() {
         return expediente;
@@ -45,20 +51,12 @@ public class Ciudadano implements Serializable{
         this.expediente = expediente;
     }
 
-    public List<Parentesco> getParentescos1() {
-        return parentescos1;
+    public List<Parentesco> getParentescos() {
+        return parentescos;
     }
 
-    public void setParentescos1(List<Parentesco> parentescos1) {
-        this.parentescos1 = parentescos1;
-    }
-
-    public List<Parentesco> getParentescos2() {
-        return parentescos2;
-    }
-
-    public void setParentescos2(List<Parentesco> parentescos2) {
-        this.parentescos2 = parentescos2;
+    public void setParentescos(List<Parentesco> parentescos) {
+        this.parentescos = parentescos;
     }
 
     public String getDni() {
@@ -79,7 +77,7 @@ public class Ciudadano implements Serializable{
 
     @Override
     public String toString() {
-        return "Ciudadano{" + "dni=" + dni + ", expediente=" + expediente + ", parentescos1=" + parentescos1 + ", parentescos2=" + parentescos2 + ", persona=" + persona + '}';
+        return "Ciudadano{" + "dni=" + dni + ", expediente=" + expediente + ", persona=" + persona + '}';
     }
 
     @Override

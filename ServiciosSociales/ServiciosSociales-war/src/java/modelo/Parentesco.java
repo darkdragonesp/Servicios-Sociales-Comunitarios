@@ -24,8 +24,14 @@ public class Parentesco implements Serializable {
     @JoinColumn(name = "CIUDADANO2", referencedColumnName = "DNI", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Ciudadano ciudadano2;
-
+    
     public Parentesco() { }
+    
+    public Parentesco(String dni1, String dni2, String parentesco) {
+        this.parentescoPK.setCiudadanoDni1(dni1);
+        this.parentescoPK.setCiudadanoDni2(dni2);
+        this.parentesco = parentesco;
+    }
 
     public Parentesco(ParentescoID parentescoPK) {
         this.parentescoPK = parentescoPK;
