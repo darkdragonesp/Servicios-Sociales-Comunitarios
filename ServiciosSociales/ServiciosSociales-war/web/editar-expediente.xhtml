@@ -80,10 +80,10 @@
                     <h:outputText value="#{intervenciones.id}"/>
                 </p:column>
                 <p:column headerText="Fecha de inicio">
-                    <h:outputText value="#{intervenciones.fechaInicio}"/>
+                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaInicio)}"/>
                 </p:column>
                 <p:column headerText="Fecha fin">
-                    <h:outputText value="#{intervenciones.fechaFin}"/>
+                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaFin)}"/>
                 </p:column>
                 <p:column headerText="Valoracion">
                     <h:outputText value="#{intervenciones.valoracion}"/>

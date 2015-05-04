@@ -13,7 +13,7 @@ import javax.faces.bean.RequestScoped;
  *
  * @author FranciscoJosé
  */
-@ManagedBean
+@ManagedBean(name = "fechaBean")
 @RequestScoped
 public class FechaBean {
     private Date fechaActual = new Date();

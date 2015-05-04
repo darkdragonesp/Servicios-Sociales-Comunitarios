@@ -15,7 +15,7 @@
             <h:outputLabel value="Fecha de apertura"/>
             <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaApertura)}"/>
             <h:outputLabel value="Fecha de cierre"/>
-            <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaApertura)}"/>
+            <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaCierre)}"/>
             <h:outputLabel value="Estado"/>
             <h:outputLabel value="#{expedienteController.expediente.estado}"/>
         </h:panelGrid>
@@ -47,20 +47,17 @@
                     <h:outputText value="#{intervenciones.id}"/>
                 </p:column>
                 <p:column headerText="Fecha de inicio">
-                    <h:outputText value="#{intervenciones.fechaInicio}"/>
+                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaInicio)}"/>
                 </p:column>
                 <p:column headerText="Fecha fin">
-                    <h:outputText value="#{intervenciones.fechaFin}"/>
+                <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaFin)}"/>   
                 </p:column>
                 <p:column headerText="Valoracion">
                     <h:outputText value="#{intervenciones.valoracion}"/>
                 </p:column>
-<<<<<<< HEAD
-=======
                 <f:facet name="footer">
                     <p:commandButton value="Añadir intervencion" icon="ui-icon-plus" action="addIntervencion.xhtml"/>
                 </f:facet>
->>>>>>> 94eeef7e23ce175a009d7a18a6786a30ee7fe7e4
             </p:dataTable>
         </h:form>
         <h:form>

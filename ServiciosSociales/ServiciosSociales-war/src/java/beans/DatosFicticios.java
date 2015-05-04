@@ -6,6 +6,7 @@
 package beans;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
@@ -15,7 +16,6 @@ import modelo.Expediente;
 import modelo.Intervencion;
 import modelo.Parentesco;
 import modelo.ParentescoID;
-import modelo.Persona;
 import modelo.UTS;
 import modelo.Usuario;
 
@@ -23,7 +23,7 @@ import modelo.Usuario;
  *
  * @author FranciscoJosé
  */
-@ManagedBean
+@ManagedBean(name = "datosFicticios")
 @ApplicationScoped
 public class DatosFicticios {
 
@@ -37,7 +37,10 @@ public class DatosFicticios {
     
     
     public DatosFicticios() {
-        Expediente e1 = new Expediente(12345678);
+        Date today = new Date();
+        Expediente e1 = new Expediente(12345678, today);
+        List<Intervencion> e1intervenciones = new ArrayList<Intervencion>();
+        e1.setIntervenciones(e1intervenciones);
         Ciudadano c1 = new Ciudadano("11111111A", "Joan Manuel", "Serrat", "Teresa");
         Ciudadano c2 = new Ciudadano("22222222A", "Joaquin Ramon", "Martinez", "Sabina");
         ciudadanos.add(c1);
@@ -50,7 +53,9 @@ public class DatosFicticios {
         e1.setCiudadanos(lc1);
         expedientes.add(e1);
         
-        Expediente e2 = new Expediente(22245563);
+        Expediente e2 = new Expediente(22245563, today);
+        List<Intervencion> e2intervenciones = new ArrayList<Intervencion>();
+        e2.setIntervenciones(e2intervenciones);
         Ciudadano c3 = new Ciudadano("33333333A", "Jose Miguel", "Conejo", "Torres");
         Ciudadano c4 = new Ciudadano("44444444A", "Ruben", "Pozo", "Prats");
         ciudadanos.add(c3);

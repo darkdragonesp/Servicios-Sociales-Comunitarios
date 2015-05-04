@@ -43,8 +43,8 @@
             <h:panelGrid columns="4" class="panelIntervencion">
                 <p:outputLabel class="label" for="finicio" value="Fecha de inicio" /><p/>
                 <p:outputLabel class="label" for="ffin" value="Fecha de fin" /><p/>
-                <p:calendar id="finicio" class="label" value="#{crearIntervencion.fechaInicio}" showOn="button" required="true"/><p/>
-                <p:calendar class="label" id="ffin" value="#{crearIntervencion.fechaFin}" showOn="button"/>
+                <p:calendar id="finicio" class="label" value="#{crearIntervencion.fechaInicio}" showOn="button" maxdate="#{fechaBean.fechaActual}" locale="es" required="true"/><p/>
+                <p:calendar class="label" id="ffin" value="#{crearIntervencion.fechaFin}" locale="es" showOn="button" mindate="#{fechaBean.fechaActual}"/>
             </h:panelGrid>
             
 

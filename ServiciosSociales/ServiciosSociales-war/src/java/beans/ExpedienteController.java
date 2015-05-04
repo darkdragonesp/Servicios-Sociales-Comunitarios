@@ -5,20 +5,13 @@
  */
 package beans;
 
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import modelo.Ciudadano;
 import modelo.Expediente;
-import modelo.Parentesco;
-import modelo.ParentescoID;
-import modelo.Persona;
 import modelo.Intervencion;
 import org.primefaces.event.SelectEvent;
 
@@ -154,6 +147,8 @@ public class ExpedienteController {
     
     public String formatFecha(Date fecha){
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRENCH);
+        if(fecha == null)
+            return "";
         return df.format(fecha);     
     }
     
