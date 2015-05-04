@@ -63,7 +63,12 @@
                     <p:commandButton icon="ui-icon-trash" update="lista_ciudadanos_editar" action="#{datosFicticios.eliminarCiudadano(expedienteController.expediente, ciudadanos)}"/>
                 </p:column>
                 <f:facet name="footer">
-                    <p:commandButton value="Añadir ciudadano" icon="ui-icon-plus"/>
+                    <p:selectOneMenu value="#{expedienteController.ciudadano.dni}">
+                        <f:selectItems value="#{datosFicticios.ciudadanos}" var="ciudadano"
+                                       itemValue="#{ciudadano.dni}" itemLabel="#{ciudadano.dni}"/>
+                    </p:selectOneMenu>
+                    <p:commandButton icon="ui-icon-plus"
+                                     action="#{datosFicticios.anadirCiudadano(expedienteController.expediente, datosFicticios.obtenerCiudadano(expedienteController.ciudadano.dni))}" update="lista_ciudadanos_editar"/>
                 </f:facet>
             </p:dataTable>
         </h:form>

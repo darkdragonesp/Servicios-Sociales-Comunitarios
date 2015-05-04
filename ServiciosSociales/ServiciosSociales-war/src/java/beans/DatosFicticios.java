@@ -201,4 +201,19 @@ public class DatosFicticios {
         this.parentescos.add(parentesco);
         this.parentescos.add(parentesco2);
     }
+    
+    public void anadirCiudadano(Expediente expediente, Ciudadano ciudadano) {
+        System.out.println("EXPEDIENTE ENTRADA: "+expediente);
+        System.out.println("CIUDADANOS ENTRADA: "+expediente.getCiudadanos());
+        System.out.println("CIUDADANO ENTRADA: "+ciudadano);
+        List<Ciudadano> ciudadanos = expediente.getCiudadanos();
+        if (ciudadanos==null) ciudadanos = new ArrayList<Ciudadano>();
+        ciudadanos.add(ciudadano);
+        Expediente expedienteAnterior = ciudadano.getExpediente();
+        if (expedienteAnterior==null) ciudadano.setExpediente(expediente);
+        else if (expedienteAnterior.getCiudadanos()!=null) {
+            expedienteAnterior.getCiudadanos().remove(ciudadano);
+        }
+        ciudadano.setExpediente(expediente);
+    }
 }
