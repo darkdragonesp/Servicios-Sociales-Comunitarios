@@ -28,9 +28,6 @@ public class ExpedienteController {
     private Ciudadano pariente = new Ciudadano();
     private String parentescoSeleccionado1;
     private String parentescoSeleccionado2;
-    private Date fechaNacimiento;
-    private Date fechaApertura;
-    private Date fechaCierre;
     private Expediente selectedExpediente;
     
     public ExpedienteController() { }
@@ -98,30 +95,6 @@ public class ExpedienteController {
         return "editar-ciudadano.xhtml";
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public Date getFechaApertura() {
-        return fechaApertura;
-    }
-
-    public void setFechaApertura(Date fechaApertura) {
-        this.fechaApertura = fechaApertura;
-    }
-
-    public Date getFechaCierre() {
-        return fechaCierre;
-    }
-
-    public void setFechaCierre(Date fechaCierre) {
-        this.fechaCierre = fechaCierre;
-    }
-    
     public Ciudadano obtenerCiudadano(String dni) {
         for (Ciudadano ciudadano : this.expediente.getCiudadanos()) {
             if(ciudadano.getDni().equals(dni)) {
