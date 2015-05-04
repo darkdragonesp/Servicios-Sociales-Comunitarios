@@ -104,6 +104,6 @@ public class Login implements Serializable {
         throw new ValidatorException(
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Existe", null));
         }*/
-        return "bienvenida.xhtml";
-        }
+        return "bienvenida.xhtml?faces-redirect=true";
+    }
 }

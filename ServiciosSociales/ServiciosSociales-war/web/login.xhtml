@@ -31,6 +31,8 @@ and open the template in the editor.
                                          validator="#{login.validarusuario}"
                                          requiredMessage="Introduzca un DNI ."
                                          required="true"/>
+                            <p:message for="usuario"/>
+                         
                             
 
                             <p:outputLabel for="password" value="Contraseña: "/>
@@ -38,6 +40,7 @@ and open the template in the editor.
                                          validator="#{login.validarpassword}"
                                          requiredMessage="Introduzca contraseña ."
                                          required="true"/>
+                            <p:message for="password"/>
                             
                             
                             <p:commandButton icon= "ui-icon-key" value="Enviar" action="#{login.validar()}" ajax="false"/>
