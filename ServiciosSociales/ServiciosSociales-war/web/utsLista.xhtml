@@ -16,13 +16,25 @@
             
             <p:dataTable id="utss" var="uts" value="#{utsBean.utss}"
                          selection="#{utsBean.selectedUTS}" selectionMode="single" rowKey="#{uts.id}" 
-                         emptyMessage="No hay utss disponibles">
+                         emptyMessage="No hay UTSs disponibles">
                 <f:facet name="header">
-                    Lista de Expedientes
+                    Lista de UTS
                 </f:facet>
                 
-                 <p:column headerText="DNI de usuario" filterBy="#{uts.id}" filterMatchMode="contains">
-                    <h:outputText value="DNI:   #{uts.id}" />
+                 <p:column headerText="Id de UTS" filterBy="#{uts.id}" filterMatchMode="contains">
+                    <h:outputText value="Id:   #{uts.id}" />
+                </p:column>   
+                
+                 <p:column headerText="UTS" filterBy="#{uts.uts}" filterMatchMode="contains">
+                    <h:outputText value="#{uts.uts}" />
+                </p:column>   
+                
+                 <p:column headerText="Zona" filterBy="#{uts.zona}" filterMatchMode="contains">
+                    <h:outputText value="#{uts.zona}" />
+                </p:column>   
+                
+                 <p:column headerText="CSS" filterBy="#{uts.css}" filterMatchMode="contains">
+                    <h:outputText value="#{uts.css}" />
                 </p:column>   
             </p:dataTable>
         </h:form>
