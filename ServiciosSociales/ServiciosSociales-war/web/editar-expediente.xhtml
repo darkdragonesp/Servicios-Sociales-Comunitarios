@@ -34,7 +34,7 @@
                              requiredMessage="Campo estado obligatorio"/>
                 <p:message for="estado"/>
 
-                <p:commandButton value="Confirmar" action="#{expedienteController.actualizarExpediente}" ajax="false"/>
+                <p:commandButton value="Confirmar" action="#{datosFicticios.actualizarExpediente(expedienteController.expediente, expedienteController.fechaApertura, expedienteController.fechaCierre)}" ajax="false"/>
             </h:panelGrid>
         </h:form>
         <h:form>
@@ -60,7 +60,7 @@
                 </p:column>
                 <p:column width="90">
                     <p:commandButton icon="ui-icon-pencil" action="#{expedienteController.verEditarCiudadano(ciudadanos.dni)}" ajax="false"/>
-                    <p:commandButton icon="ui-icon-trash" update="lista_ciudadanos_editar" action="#{expedienteController.eliminarCiudadano(ciudadanos.dni)}"/>
+                    <p:commandButton icon="ui-icon-trash" update="lista_ciudadanos_editar" action="#{datosFicticios.eliminarCiudadano(expedienteController.expediente, ciudadanos)}"/>
                 </p:column>
                 <f:facet name="footer">
                     <p:commandButton value="Añadir ciudadano" icon="ui-icon-plus"/>

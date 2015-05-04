@@ -17,7 +17,7 @@
                 </c:if>
             </p:contextMenu>
             
-            <p:dataTable id="expedientes" var="expediente" value="#{listadoExpedientes.expedientes}"
+            <p:dataTable id="expedientes" var="expediente" value="#{datosFicticios.expedientes}"
                          selection="#{listadoExpedientes.selectedExpediente}" selectionMode="single" rowKey="#{expediente.id}" 
                          emptyMessage="No hay expedientes disponibles">
                 <f:facet name="header">

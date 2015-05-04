@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import modelo.Ciudadano;
 import modelo.Expediente;
@@ -30,7 +31,7 @@ import modelo.Persona;
 public class ExpedienteController {
     private Expediente expediente = new Expediente();
     private Ciudadano ciudadano = new Ciudadano();
-    private String ciudadanoSeleccionado;
+    private Ciudadano pariente = new Ciudadano();
     private String parentescoSeleccionado1;
     private String parentescoSeleccionado2;
     private Date fechaNacimiento;
@@ -55,12 +56,12 @@ public class ExpedienteController {
         this.ciudadano = ciudadano;
     }
 
-    public String getCiudadanoSeleccionado() {
-        return ciudadanoSeleccionado;
+    public Ciudadano getPariente() {
+        return pariente;
     }
 
-    public void setCiudadanoSeleccionado(String ciudadanoSeleccionado) {
-        this.ciudadanoSeleccionado = ciudadanoSeleccionado;
+    public void setPariente(Ciudadano pariente) {
+        this.pariente = pariente;
     }
 
     public String getParentescoSeleccionado1() {
@@ -80,17 +81,7 @@ public class ExpedienteController {
     }
     
     public String verExpediente(Expediente expediente){
-        List<Ciudadano> ciudadanos = new ArrayList<Ciudadano>();
-        ciudadanos.add(new Ciudadano("25354845J", "Francisco Jose", "Torralvo", "Ariza"));
-        ciudadanos.add(new Ciudadano("1", "Juan Jose", "Trujillo", "Bueno"));
-        ciudadanos.add(new Ciudadano("2", "Robin", "Sorries", null));
-        ciudadanos.add(new Ciudadano("3", "Laura", "Urbano", "Salinas"));
-        ciudadanos.add(new Ciudadano("4", "Francisco", "Molina", "Sanchez"));
-        expediente.setCiudadanos(ciudadanos);
         this.expediente = expediente;
-        for (Ciudadano ciudadano : ciudadanos) {
-            ciudadano.setExpediente(expediente);
-        }
         return "expediente.xhtml";
     }
     
@@ -129,63 +120,11 @@ public class ExpedienteController {
     }
     
     public Ciudadano obtenerCiudadano(String dni) {
-        List<Ciudadano> ciudadanos = this.expediente.getCiudadanos();
-        for (Ciudadano ciudadano : ciudadanos) {
+        for (Ciudadano ciudadano : this.expediente.getCiudadanos()) {
             if(ciudadano.getDni().equals(dni)) {
                 return ciudadano;
             }
         }
         return null;
-    }
-    
-    public Parentesco obtenerParentesco(Ciudadano ciudadano, String dni) {
-        List<Parentesco> parentescos = ciudadano.getParentescos();
-        for (Parentesco parentesco : parentescos) {
-            if (parentesco.getCiudadano2().getDni().equals(dni)) return parentesco;
-        }
-        return null;
-    }
-    
-    public void eliminarCiudadano(String dni) {
-        this.expediente.getCiudadanos().remove(obtenerCiudadano(dni));
-    }
-    
-    public void eliminarParentesco(String dni) {
-        Ciudadano pariente = obtenerCiudadano(dni);
-        pariente.getParentescos().remove(obtenerParentesco(pariente, this.ciudadano.getDni()));
-        this.ciudadano.getParentescos().remove(obtenerParentesco(this.ciudadano, dni));
-    }
-    
-    public String actualizarCiudadano() {
-        ciudadano.getPersona().setFechaNacimiento(new java.sql.Date(fechaNacimiento.getTime()));
-        return "ciudadano.xhtml";
-    }
-    
-    public String actualizarExpediente() {
-        expediente.setFechaApertura(new java.sql.Date(fechaApertura.getTime()));
-        if (this.fechaCierre!=null)expediente.setFechaCierre(new java.sql.Date(fechaCierre.getTime()));
-        return "expediente.xhtml";
-    }
-    
-    public void anadirParentesco() {
-        Ciudadano pariente = obtenerCiudadano(ciudadanoSeleccionado);
-        Parentesco parentesco = new Parentesco();
-        parentesco.setCiudadano1(this.ciudadano);
-        parentesco.setCiudadano2(pariente);
-        parentesco.setParentesco(parentescoSeleccionado1);
-        parentesco.setParentescoPK(new ParentescoID(this.ciudadano.getDni(), ciudadanoSeleccionado));
-        List<Parentesco> parentescos = this.ciudadano.getParentescos();
-        if (parentescos==null) parentescos=new ArrayList<>();
-        parentescos.add(parentesco);
-        this.ciudadano.setParentescos(parentescos);
-        Parentesco parentesco2 = new Parentesco();
-        parentesco2.setCiudadano1(pariente);
-        parentesco2.setCiudadano2(this.ciudadano);
-        parentesco2.setParentesco(parentescoSeleccionado2);
-        parentesco2.setParentescoPK(new ParentescoID(ciudadanoSeleccionado, this.ciudadano.getDni()));
-        List<Parentesco> parentescos2 = pariente.getParentescos();
-        if (parentescos2==null) parentescos2=new ArrayList<>();
-        parentescos2.add(parentesco2);
-        pariente.setParentescos(parentescos2);
     }
 }
