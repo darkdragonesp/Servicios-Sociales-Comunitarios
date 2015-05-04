@@ -6,11 +6,17 @@
 package beans;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import modelo.Expediente;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -25,37 +31,22 @@ public class listadoExpedientes implements Serializable{
     /**
      * Creates a new instance of listadoExpedientes
      */
-    public listadoExpedientes() {
-//        expedientes = new ArrayList<Expediente>();
-//        expedientes.add(new Expediente(12345678));
-//        expedientes.add(new Expediente(22245563));
-//        expedientes.add(new Expediente(39832492));
-//        expedientes.add(new Expediente(12345678));
-//        expedientes.add(new Expediente(22245563));
-//        expedientes.add(new Expediente(39832492));
-//        expedientes.add(new Expediente(1234567855));
-//        expedientes.add(new Expediente(22245563));
-//        expedientes.add(new Expediente(39832492));
-//        expedientes.add(new Expediente(12345678));
-//        expedientes.add(new Expediente(22245563));
-//        expedientes.add(new Expediente(39832492));
-//        expedientes.add(new Expediente(1234567855));
-//        expedientes.add(new Expediente(22245563));
-//        expedientes.add(new Expediente(39832492));
-//        expedientes.add(new Expediente(12345678));
-//        expedientes.add(new Expediente(22245563));
-//        expedientes.add(new Expediente(39832492));
-//        expedientes.add(new Expediente(1234567855));
-//        expedientes.add(new Expediente(22245563));
-//        expedientes.add(new Expediente(39832492));
-//        expedientes.add(new Expediente(12345678));
-//        expedientes.add(new Expediente(22245563));
-//        expedientes.add(new Expediente(39832492));        
 
+    public listadoExpedientes() throws ParseException {
+//        expedientes = new ArrayList<Expediente>();
+//        Date today = new Date();
+//        expedientes.add(new Expediente(12345678, today));
+//        expedientes.add(new Expediente(22245563, today));
+//        expedientes.add(new Expediente(39832492, today));
+//        expedientes.add(new Expediente(1234567855, today));
     }
     
     public Expediente getSelectedExpediente() {
         return selectedExpediente;
+    }
+    
+    public void onRowSelect(SelectEvent event){
+       selectedExpediente = (Expediente) event.getObject();
     }
  
     public void setSelectedExpediente(Expediente selectedExpediente) {

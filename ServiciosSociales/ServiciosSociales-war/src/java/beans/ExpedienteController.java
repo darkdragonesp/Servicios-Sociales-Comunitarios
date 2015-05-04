@@ -5,11 +5,16 @@
  */
 package beans;
 
+<<<<<<< HEAD
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+=======
+import java.text.DateFormat;
+>>>>>>> master
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
@@ -126,5 +131,10 @@ public class ExpedienteController {
             }
         }
         return null;
+    }
+
+    public String formatFecha(Date fecha){
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRENCH);
+        return df.format(fecha);     
     }
 }
