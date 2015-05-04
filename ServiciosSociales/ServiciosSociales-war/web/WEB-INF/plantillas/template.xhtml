@@ -17,7 +17,7 @@
         <p:layout fullPage="true">
             <p:layoutUnit position="center" footer="pie de pagina" >
                 <h:form>  
-                    <p:growl id="messages"/>
+                  <!--  <p:growl id="messages"/>-->
                     <p:menubar autoDisplay="false" class="panelContenido">
                         <p:submenu label="Agenda" icon="ui-icon-calendar">
                             <p:menuitem value="Añadir actividad" url="#" />
@@ -30,7 +30,12 @@
                             <p:menuitem value="Añadir usuario" url="/ssc/usuarioanyadir.xhtml" />
                             <p:menuitem value="Lista usuarios" url="/ssc/usuarios.xhtml" />
                         </p:submenu>
-
+                            
+                        <p:submenu label="UTS" icon="ui-icon-pencil">
+                            <p:menuitem value="Añadir UTS" url="/ssc/utsAnyadir.xhtml" />
+                            <p:menuitem value="Lista UTS" url="/ssc/utsLista.xhtml" />
+                        </p:submenu>
+                            
                         <f:facet name="options">
                             <p:commandButton type="button" value="Mi perfil" icon="ui-icon-person" />
                             <p:commandButton type="button" value="Desconectar" icon="ui-icon-extlink" />

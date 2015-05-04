@@ -36,8 +36,9 @@ public class Usuario implements Serializable {
     public Usuario(){
         
     }
-    public Usuario(String s){
+    public Usuario(String s,String s1){
         setDni(s);
+        setTipoProfesional(s1);
     }
     
     public String getTipoProfesional() {

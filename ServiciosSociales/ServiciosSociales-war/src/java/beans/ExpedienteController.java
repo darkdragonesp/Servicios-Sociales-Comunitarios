@@ -5,9 +5,8 @@
  */
 package beans;
 
+import java.io.Serializable;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -20,15 +19,16 @@ import modelo.Expediente;
 import modelo.Parentesco;
 import modelo.ParentescoID;
 import modelo.Persona;
+import modelo.Intervencion;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
  * @author FranciscoJosé
  */
-
-@Named
-@ManagedBean
+@ManagedBean(name = "expedienteController")
 @SessionScoped
+
 public class ExpedienteController {
     private Expediente expediente = new Expediente();
     private Ciudadano ciudadano = new Ciudadano();
@@ -38,6 +38,7 @@ public class ExpedienteController {
     private Date fechaNacimiento;
     private Date fechaApertura;
     private Date fechaCierre;
+    private Expediente selectedExpediente;
     
     public ExpedienteController() { }
     
@@ -80,6 +81,14 @@ public class ExpedienteController {
     public void setParentescoSeleccionado2(String parentescoSeleccionado2) {
         this.parentescoSeleccionado2 = parentescoSeleccionado2;
     }
+
+    public Expediente getSelectedExpediente() {
+        return selectedExpediente;
+    }
+
+    public void setSelectedExpediente(Expediente selectedExpediente) {
+        this.selectedExpediente = selectedExpediente;
+    }
     
     public String verExpediente(Expediente expediente){
         this.expediente = expediente;
@@ -87,7 +96,7 @@ public class ExpedienteController {
     }
     
     public String verCiudadano(String dni) {
-        this.ciudadano = obtenerCiudadano(dni);
+        ciudadano = obtenerCiudadano(dni);
         return "ciudadano.xhtml";
     }
     
@@ -128,9 +137,27 @@ public class ExpedienteController {
         }
         return null;
     }
-
+    
+    public String addIntervencion(Intervencion intervencion){
+        intervencion.setId(asignarIdIntervencion());
+        expediente.getIntervenciones().add(intervencion);
+        return "expediente.xhtml";
+    }
+    
+    public long asignarIdIntervencion(){
+        return expediente.getIntervenciones().size()+1;
+    }
+    
+    public void eliminarCiudadano(String dni) {
+        this.expediente.getCiudadanos().remove(obtenerCiudadano(dni));
+    }
+    
     public String formatFecha(Date fecha){
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRENCH);
         return df.format(fecha);     
+    }
+    
+    public void onRowSelect(SelectEvent event){
+       selectedExpediente = (Expediente) event.getObject();
     }
 }

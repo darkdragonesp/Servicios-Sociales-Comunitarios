@@ -13,3 +13,12 @@ and open the template in the editor.
     margin-right:100px;
     margin-bottom: 5px
 }
+
+.label {
+    font-weight: bold;
+    float: left;
+}
+
+.panelIntervencion {
+    margin-bottom: 5px;
+}
