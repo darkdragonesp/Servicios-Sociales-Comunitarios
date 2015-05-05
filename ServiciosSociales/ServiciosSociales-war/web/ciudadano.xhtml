@@ -7,42 +7,53 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="title">Ciudadano</ui:define>
     <ui:define name="content">
+        <h:form>
+            <p:commandButton value="Editar ciudadano" action="editar-ciudadano.xhtml" ajax="false"/>
+        </h:form>
         <h:panelGrid columns="2">
             <h:outputLabel value="DNI:"/>
             <h:outputText value="#{expedienteController.ciudadano.dni}"/>
-            
+
             <h:outputLabel value="Nombre:"/>
             <h:outputText value="#{expedienteController.ciudadano.persona.nombre}"/>
-            
+
             <h:outputLabel value="Apellidos:"/>
             <h:outputText value="#{expedienteController.ciudadano.persona.apellido1} #{expedienteController.ciudadano.persona.apellido2}"/>
-            
+
+            <h:outputLabel value="Expediente:"/>
+            <h:form>
+                <p:commandLink action="#{expedienteController.verExpediente(expedienteController.expediente)}" ajax="false">
+                    <h:outputText value="#{expedienteController.ciudadano.expediente.id}" />
+                </p:commandLink>
+            </h:form>
+
             <h:outputLabel value="Sexo:"/>
             <h:outputText value="#{expedienteController.ciudadano.persona.sexo}"/>
-            
+
             <h:outputLabel value="Localidad:"/>
             <h:outputText value="#{expedienteController.ciudadano.persona.localidad}"/>
-            
+
             <h:outputLabel value="Direccion"/>
             <h:outputText value="#{expedienteController.ciudadano.persona.direccion}"/>
-            
+
             <h:outputLabel value="Email:"/>
             <h:outputText value="#{expedienteController.ciudadano.persona.email}"/>
-            
+
             <h:outputLabel value="Teléfono"/>
             <h:outputText value="#{expedienteController.ciudadano.persona.telefono}"/>
-            
+
             <h:outputLabel value="Estado civil"/>
             <h:outputText value="#{expedienteController.ciudadano.persona.estadoCivil}"/>
-            
+
             <h:outputLabel value="Nacionalidad"/>
             <h:outputText value="#{expedienteController.ciudadano.persona.nacionalidad}"/>
-            
+
             <h:outputLabel value="Fecha nacimiento"/>
-            <h:outputText value="#{expedienteController.ciudadano.persona.fechaNacimiento}"/>
+            <h:outputText value="#{expedienteController.formatFecha(expedienteController.ciudadano.persona.fechaNacimiento)}"/>
         </h:panelGrid>
         <h:form>
-            <p:dataTable var="parentesco" value="#{expedienteController.ciudadano.parentescos1}">
+            <p:dataTable var="parentesco" value="#{expedienteController.ciudadano.parentescos}"
+                         emptyMessage="Este ciudadano no tiene ningún pariente">
                 <p:column headerText="DNI">
                     <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
                         <h:outputText value="#{parentesco.ciudadano2.dni}"/>
@@ -56,25 +67,6 @@
                 </p:column>
                 <p:column headerText="Segundo apellido">
                     <h:outputText value="#{parentesco.ciudadano2.persona.apellido2}"/>
-                </p:column>
-                <p:column headerText="Parentesco">
-                    <h:outputText value="#{parentesco.parentesco}"/>
-                </p:column>
-            </p:dataTable>
-            <p:dataTable var="parentesco" value="#{expedienteController.ciudadano.parentescos2}">
-                <p:column headerText="DNI">
-                    <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
-                        <h:outputText value="#{parentesco.ciudadano1.dni}"/>
-                    </p:commandLink>
-                </p:column>
-                <p:column headerText="Nombre">
-                    <h:outputText value="#{parentesco.ciudadano1.persona.nombre}"/>
-                </p:column>
-                <p:column headerText="Primer apellido">
-                    <h:outputText value="#{parentesco.ciudadano1.persona.apellido1}"/>
-                </p:column>
-                <p:column headerText="Segundo apellido">
-                    <h:outputText value="#{parentesco.ciudadano1.persona.apellido2}"/>
                 </p:column>
                 <p:column headerText="Parentesco">
                     <h:outputText value="#{parentesco.parentesco}"/>

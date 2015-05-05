@@ -1,7 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,6 +48,15 @@ public class Persona implements Serializable {
     private Ciudadano ciudadano;
     @OneToOne(mappedBy="persona")
     private Usuario usuario;
+    
+    public Persona() { }
+    
+    public Persona (String dni, String nombre, String apellido1, String apellido2) {
+        this.dni=dni;
+        this.nombre=nombre;
+        this.apellido1=apellido1;
+        this.apellido2=apellido2;
+    }
     
     public String getDni() {
         return dni;
@@ -185,6 +194,6 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" + "dni=" + dni + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", direccion=" + direccion + ", telefono=" + telefono + ", sexo=" + sexo + ", estado_civil=" + estadoCivil + ", fecha_nacimiento=" + fechaNacimiento + ", localidad=" + localidad + ", nacionalidad=" + nacionalidad + ", email=" + email + ", ciudadano=" + ciudadano + ", usuario=" + usuario + '}';
+        return "Persona{" + "dni=" + dni + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", direccion=" + direccion + ", telefono=" + telefono + ", sexo=" + sexo + ", estado_civil=" + estadoCivil + ", fecha_nacimiento=" + fechaNacimiento + ", localidad=" + localidad + ", nacionalidad=" + nacionalidad + ", email=" + email + '}';
     }
 }

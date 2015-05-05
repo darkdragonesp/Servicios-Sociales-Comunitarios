@@ -10,12 +10,12 @@
 
     <ui:define name="content">
         <h:panelGrid columns="2">
-            <h:outputLabel value="Expediente"/>
+            <h:outputLabel value="Expediente:"/>
             <h:outputLabel value="#{expedienteController.expediente.id}"/>
             <h:outputLabel value="Fecha de apertura"/>
             <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaApertura)}"/>
             <h:outputLabel value="Fecha de cierre"/>
-            <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaApertura)}"/>
+            <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaCierre)}"/>
             <h:outputLabel value="Estado"/>
             <h:outputLabel value="#{expedienteController.expediente.estado}"/>
         </h:panelGrid>
@@ -41,24 +41,25 @@
         </h:form>
         <h3>Intervenciones</h3>
         <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:dataTable var="intervenciones" value="#{expedienteController.expediente.intervenciones}"
                          emptyMessage="Este expediente no ha recibido intervenciones">
                 <p:column headerText="ID">
                     <h:outputText value="#{intervenciones.id}"/>
                 </p:column>
                 <p:column headerText="Fecha de inicio">
-                    <h:outputText value="#{intervenciones.fechaInicio}"/>
+                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaInicio)}"/>
                 </p:column>
                 <p:column headerText="Fecha fin">
-                    <h:outputText value="#{intervenciones.fechaFin}"/>
+                <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaFin)}"/>   
                 </p:column>
                 <p:column headerText="Valoracion">
                     <h:outputText value="#{intervenciones.valoracion}"/>
                 </p:column>
-                <f:facet name="footer">
-                    <p:commandButton value="Añadir intervencion" icon="ui-icon-plus"/>
-                </f:facet>
             </p:dataTable>
+        </h:form>
+        <h:form>
+            <p:commandButton value="Editar expediente" action="editar-expediente.xhtml" ajax="false"/>
         </h:form>
     </ui:define>
 </ui:composition>

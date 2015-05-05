@@ -47,7 +47,7 @@ public class UsuarioEditar implements Serializable {
     
     public UsuarioEditar(){
         usuarios = new ArrayList<Usuario>();
-        selectedUsuario=new Usuario("11111111H");
+        selectedUsuario=new Usuario("11111111H", "1234");
     }
 
     public String getDireccion() {

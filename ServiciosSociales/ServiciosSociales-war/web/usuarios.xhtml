@@ -9,8 +9,14 @@
  <ui:define name="title">Usuarios</ui:define>
     <ui:define name="content">
         <h:form id="form">
+            
+             
+  
+            
+            
             <p:contextMenu for="usuarios">
-                <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" action="#{usuarioAnyadirBean.eliminar}"/>
+                <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" onclick="PF('dlg1').show()" 
+                           />
                 <c:if test="true">
                     <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="#"/>
                 </c:if>
@@ -22,15 +28,30 @@
                 <f:facet name="header">
                     Lista de Usuarios
                 </f:facet>
-                
+                    
                 <p:column headerText="DNI de usuario" filterBy="#{usuario.dni}" filterMatchMode="contains">
                     <h:outputText value="DNI:   #{usuario.dni}" />
-                </p:column>   
+                </p:column> 
+                <p:column headerText="Tipo de profesional" filterBy="#{usuario.tipoProfesional}" filterMatchMode="contains">
+                    <h:outputText value="Tipo:   #{usuario.tipoProfesional}" />
+                </p:column>  
             </p:dataTable>
+                
+            <p:remoteCommand name="irAConf"
+                             action="#{usuarioAnyadirBean.eliminar}" update=":form:usuarios" /> 
         </h:form>
+        <p:dialog widgetVar="dlg1" header="¿Está seguro?" >
+            <h:form>
+                <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"   onclick="irAConf();PF('dlg1').hide()" 
+                                 ajax="true" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlg1').hide()"/>
+            </h:form>   
+        </p:dialog> 
+            
+            
     </ui:define>
-
-    
-    
+        
+        
+        
 </ui:composition>
 

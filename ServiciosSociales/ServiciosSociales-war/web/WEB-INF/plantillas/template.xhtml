@@ -10,31 +10,38 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Servicios Sociales</ui:insert></title>
+        <h:outputStylesheet library="css" name="estilosPanel.css"/>
+        
     </h:head>
 
     <h:body>
-        <h:outputStylesheet library="css" name="estilosPanel.css"/>
+        
         <p:layout fullPage="true">
             <p:layoutUnit position="center" footer="pie de pagina" >
                 <h:form>  
-                    <p:growl id="messages"/>
+                  <!--  <p:growl id="messages"/>-->
                     <p:menubar autoDisplay="false" class="panelContenido">
                         <p:submenu label="Agenda" icon="ui-icon-calendar">
                             <p:menuitem value="Añadir actividad" url="#" />
                         </p:submenu>
                     
-                        <p:menuitem value="Expedientes" icon="ui-icon-pencil" url="/ssc/#{listadoExpedientes.listarExpedientes()}">
+                        <p:menuitem value="Expedientes" icon="ui-icon-folder-open" url="/ssc/expedientes.xhtml">
                         </p:menuitem>
 
-                        <p:submenu label="Usuarios" icon="ui-icon-pencil">
+                        <p:submenu label="Usuarios" icon="ui-icon-person">
                             <p:menuitem value="Añadir usuario" url="/ssc/usuarioanyadir.xhtml" />
                             <p:menuitem value="Editar usuarios" url="/ssc/usuarioEditar.xhtml" />
                             <p:menuitem value="Lista usuarios" url="/ssc/usuarios.xhtml" />
                         </p:submenu>
-
+                            
+                        <p:submenu label="UTS" icon="ui-icon-pencil">
+                            <p:menuitem value="Añadir UTS" url="/ssc/utsAnyadir.xhtml" />
+                            <p:menuitem value="Lista UTS" url="/ssc/utsLista.xhtml" />
+                        </p:submenu>
+                            
                         <f:facet name="options">
-                            <p:commandButton type="button" value="Mi perfil" icon="ui-icon-person" />
-                            <p:commandButton type="button" value="Desconectar" icon="ui-icon-extlink" />
+                            <p:commandButton type="button" value="Mi perfil" icon="ui-icon-home" />
+                            <p:commandButton type="button" value="Desconectar" icon="ui-icon-power" />
                         </f:facet>
                     </p:menubar>
                 </h:form>

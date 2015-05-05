@@ -25,7 +25,7 @@ import modelo.Usuario;
  * @author DarkDragon
  */
 
-@ManagedBean
+@ManagedBean(name = "usuarioAnyadirBean")
 @SessionScoped
 public class usuarioAnyadirBean  implements Serializable{
     
@@ -52,9 +52,9 @@ public class usuarioAnyadirBean  implements Serializable{
      */
     public usuarioAnyadirBean(){
         usuarios = new ArrayList<Usuario>();
-        usuarios.add(new Usuario("33333333P"));
-        usuarios.add(new Usuario("22222222J"));
-        usuarios.add(new Usuario("11111111H"));
+        usuarios.add(new Usuario("33333333P", "1234","Técnico"));
+        usuarios.add(new Usuario("22222222J", "1234","Auxiliar administrativo"));
+        usuarios.add(new Usuario("11111111H", "1234","Profesional"));
     }
     public Usuario getSelectedUsuario() {
         return selectedUsuario;
@@ -231,7 +231,7 @@ public class usuarioAnyadirBean  implements Serializable{
         return "usuarioAnyadirExito.xhtml?faces-redirect=true";
     }
     public String crearUsuario(){
-        usuarios.add(new Usuario(getDni()));
+        usuarios.add(new Usuario(getDni(),this.getTipoProfesional()));
         return "Usuario con DNI "+getDni()+ " creado con éxito.";
         //limpiar usuario?
     }
@@ -261,9 +261,9 @@ public class usuarioAnyadirBean  implements Serializable{
         
     }
     
-    public String eliminar(){
+    public void eliminar(){
         usuarios.remove(this.getSelectedUsuario());
-       return "usuarios.xhtml?faces-redirect=true";
+       //return "usuarios.xhtml?faces-redirect=true";
     }
     
     
