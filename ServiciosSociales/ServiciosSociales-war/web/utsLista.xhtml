@@ -8,48 +8,65 @@
     
     <ui:define name="title">UTS</ui:define>
     <ui:define name="content">
-        <h:form id="form">
-            <p:contextMenu for="utss">
-                <p:menuitem value="Eliminar uts" icon="ui-icon-trash"  onclick="PF('dlg1').show()" 
-                            />
-
-            </p:contextMenu>
-            
-            <p:dataTable id="utss" var="uts" value="#{datosFicticios.uts}"
-                         selection="#{utsBean.selectedUTS}" selectionMode="single" rowKey="#{uts.id}" 
-                         emptyMessage="No hay UTSs disponibles">
-                <f:facet name="header">
-                    Lista de UTS
-                </f:facet>
+        <c:choose>
+            <c:when test="#{login.auxiliarAdministrativo || login.profesional}">
                 
-                 <p:column headerText="Id de UTS" filterBy="#{uts.id}" filterMatchMode="contains">
-                    <h:outputText value="Id:   #{uts.id}" />
-                </p:column>   
-                
-                 <p:column headerText="UTS" filterBy="#{uts.uts}" filterMatchMode="contains">
-                    <h:outputText value="#{uts.uts}" />
-                </p:column>   
-                
-                 <p:column headerText="Zona" filterBy="#{uts.zona}" filterMatchMode="contains">
-                    <h:outputText value="#{uts.zona}" />
-                </p:column>   
-                
-                 <p:column headerText="CSS" filterBy="#{uts.css}" filterMatchMode="contains">
-                    <h:outputText value="#{uts.css}" />
-                </p:column>   
-            </p:dataTable>
-        <p:remoteCommand name="irAConf"
-                             action="#{utsBean.eliminar}" update=":form:utss" /> 
-        </h:form>
-        <p:dialog widgetVar="dlg1" header="¿Está seguro?" >
-            <h:form>
-                <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"   onclick="irAConf();PF('dlg1').hide()" 
-                                 ajax="true" />
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlg1').hide()"/>
-            </h:form>   
-        </p:dialog> 
+                <ui:include src="noAutorizado.xhtml"/>
+            </c:when>
+            <c:otherwise>
+                <c:choose>
+                    
+                    <c:when test="#{login.tecnicoSuperior}">
+                        
+                        <h:form id="form">
+                            <p:contextMenu for="utss">
+                                <p:menuitem value="Eliminar uts" icon="ui-icon-trash"  onclick="PF('dlg1').show()" 
+                                            />
+                                
+                            </p:contextMenu>
+                            
+                            <p:dataTable id="utss" var="uts" value="#{datosFicticios.uts}"
+                                         selection="#{utsBean.selectedUTS}" selectionMode="single" rowKey="#{uts.id}" 
+                                         emptyMessage="No hay UTSs disponibles">
+                                <f:facet name="header">
+                                    Lista de UTS
+                                </f:facet>
+                                
+                                <p:column headerText="Id de UTS" filterBy="#{uts.id}" filterMatchMode="contains">
+                                    <h:outputText value="Id:   #{uts.id}" />
+                                </p:column>   
+                                
+                                <p:column headerText="UTS" filterBy="#{uts.uts}" filterMatchMode="contains">
+                                    <h:outputText value="#{uts.uts}" />
+                                </p:column>   
+                                
+                                <p:column headerText="Zona" filterBy="#{uts.zona}" filterMatchMode="contains">
+                                    <h:outputText value="#{uts.zona}" />
+                                </p:column>   
+                                
+                                <p:column headerText="CSS" filterBy="#{uts.css}" filterMatchMode="contains">
+                                    <h:outputText value="#{uts.css}" />
+                                </p:column>   
+                            </p:dataTable>
+                            <p:remoteCommand name="irAConf"
+                                             action="#{utsBean.eliminar}" update=":form:utss" /> 
+                        </h:form>
+                        <p:dialog widgetVar="dlg1" header="¿Está seguro?" >
+                            <h:form>
+                                <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"   onclick="irAConf();PF('dlg1').hide()" 
+                                                 ajax="true" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlg1').hide()"/>
+                            </h:form>   
+                        </p:dialog> 
+                        
+                        
+                    </c:when>
+                </c:choose>
+            </c:otherwise> 
+        </c:choose>
+        
     </ui:define>
-
+    
     
     
 </ui:composition>
