@@ -91,7 +91,14 @@
                 <h:outputLabel for="nacionalidad" value="Nacionalidad:*" style="font-weight:bold" />
                 <p:inputText id="nacionalidad" value="#{usuarioAnyadirBean.nacionalidad}" required="true" maxlength="50" requiredMessage="Introduzca una nacionalidad ."/>
                 <p:message for="nacionalidad"/>
-
+                
+                <p:outputLabel for="uts" value="UTS:"  style="font-weight:bold" />
+                <p:selectOneMenu id="uts" value="#{usuarioAnyadirBean.uts}" style="width:200px" required="true">
+                    <f:selectItems value="#{datosFicticios.uts}" />
+                                
+                </p:selectOneMenu>
+                <p:message for="uts"/>
+                
             </h:panelGrid>     
 
             <p:commandButton icon="ui-icon-check" value="Enviar" 

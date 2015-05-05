@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import modelo.UTS;
 import modelo.Usuario;
 
 
@@ -45,7 +46,7 @@ public class usuarioAnyadirBean  implements Serializable{
     private String email;
     private String tipoProfesional;
     private String contrasenya;
-    
+    private UTS uts;
     private List<Usuario> usuarios;
     private Usuario selectedUsuario;
     /**
@@ -272,6 +273,14 @@ public class usuarioAnyadirBean  implements Serializable{
     public void eliminar(){
         datos.getUsuarios().remove(this.getSelectedUsuario());
        //return "usuarios.xhtml?faces-redirect=true";
+    }
+
+    public UTS getUts() {
+        return uts;
+    }
+
+    public void setUts(UTS uts) {
+        this.uts = uts;
     }
     
     
