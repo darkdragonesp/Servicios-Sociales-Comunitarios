@@ -95,8 +95,8 @@ public String enviar() {
     }
     public String crearUTS(){
         long ide=0;
-        if(!utss.isEmpty()){
-            ide=(utss.get(utss.size()-1).getId())+1;
+        if(! datos.getUts().isEmpty()){
+            ide=( datos.getUts().get( datos.getUts().size()-1).getId())+1;
         }
         setId(ide);
         datos.getUts().add(new UTS(ide,getUts(),getZona(),getCss()));
