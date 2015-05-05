@@ -26,7 +26,8 @@ import modelo.Usuario;
 public class Login implements Serializable {
     private String usuario;
     private String password;
-    ArrayList<Usuario> usuarios;
+    private ArrayList<Usuario> usuarios;
+    private Usuario user = new Usuario();
     
     public Login(){
         usuarios = new ArrayList<>();
@@ -90,6 +91,14 @@ public class Login implements Serializable {
         }
         
     }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
     public String validar() throws ValidatorException{
       /*  for(Usuario s : usuarios){
             if(s.getDni().equals(usuario)){
@@ -104,6 +113,7 @@ public class Login implements Serializable {
         throw new ValidatorException(
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Existe", null));
         }*/
-        return "bienvenida.xhtml?faces-redirect=true";
+        user = usuarios.get(usuarios.indexOf(user));
+        return "bienvenida.xhtml";
     }
 }
