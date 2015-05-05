@@ -69,8 +69,8 @@
                         <f:selectItems value="#{datosFicticios.ciudadanos}" var="ciudadano"
                                        itemValue="#{ciudadano.dni}" itemLabel="#{ciudadano.dni}"/>
                     </p:selectOneMenu>
-                    <p:commandButton icon="ui-icon-plus"
-                                     action="#{datosFicticios.anadirCiudadano(expedienteController.expediente, datosFicticios.obtenerCiudadano(expedienteController.ciudadano.dni))}" update="lista_ciudadanos_editar"/>
+                    <p:commandButton icon="ui-icon-plus" update="lista_ciudadanos_editar"
+                                     action="#{datosFicticios.anadirCiudadano(expedienteController.expediente, datosFicticios.obtenerCiudadano(expedienteController.ciudadano.dni))}"/>
                 </f:facet>
             </p:dataTable>
         </h:form>

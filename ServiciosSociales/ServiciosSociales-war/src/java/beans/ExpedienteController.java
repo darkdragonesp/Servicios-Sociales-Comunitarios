@@ -25,9 +25,9 @@ import org.primefaces.event.SelectEvent;
 @SessionScoped
 
 public class ExpedienteController {
-    private Expediente expediente;
-    private Ciudadano ciudadano;
-    private Ciudadano pariente;
+    private Expediente expediente = new Expediente();
+    private Ciudadano ciudadano = new Ciudadano();
+    private Ciudadano pariente = new Ciudadano();
     private String parentescoSeleccionado1;
     private String parentescoSeleccionado2;
     private Expediente selectedExpediente;

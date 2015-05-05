@@ -204,12 +204,11 @@ public class DatosFicticios {
         List<Ciudadano> ciudadanos = expediente.getCiudadanos();
         if (ciudadanos==null) ciudadanos = new ArrayList<Ciudadano>();
         ciudadanos.add(ciudadano);
-        Expediente expedienteAnterior = ciudadano.getExpediente();
-        if (expedienteAnterior==null) ciudadano.setExpediente(expediente);
-        else if (expedienteAnterior.getCiudadanos()!=null) {
-            expedienteAnterior.getCiudadanos().remove(ciudadano);
+        if (ciudadano.getExpediente().getCiudadanos()!=null) {
+            ciudadano.getExpediente().getCiudadanos().remove(ciudadano);
         }
         ciudadano.setExpediente(expediente);
+        expediente.setCiudadanos(ciudadanos);
     }
     
     public String crearCiudadano(Ciudadano ciudadano, Expediente expediente) {
