@@ -8,10 +8,8 @@ package beans;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
-import javax.faces.context.FacesContext;
 import modelo.Actividad;
 import modelo.Ciudadano;
 import modelo.Expediente;
@@ -83,6 +81,9 @@ public class DatosFicticios {
         usuarios.add(new Usuario("33333333P","33333333P"));
         usuarios.add(new Usuario("22222222J","22222222J"));
         usuarios.add(new Usuario("11111111H","11111111H"));
+        
+        actividades = new ArrayList<Actividad>();
+        
     }
 
     public List<Usuario> getUsuarios() {
