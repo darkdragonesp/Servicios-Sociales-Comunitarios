@@ -116,4 +116,25 @@ public class Login implements Serializable {
         user = usuarios.get(usuarios.indexOf(user));
         return "bienvenida.xhtml";
     }
+    public boolean isTecnicoSuperior(){
+        boolean is = false;
+        if(user.getTipoProfesional().equals("Tecnico Superior")){
+            is=true;
+        }  
+        
+        return is;
+    }
+    public boolean isProfesional(){
+        boolean is = false;
+        if(user.getTipoProfesional().equals("Profesional")){
+            is=true;
+        } 
+  
+        return is;        
+    }
+    public boolean isAuxiliarAdministrativo(){
+        boolean is = false;
+        if(user.getTipoProfesional().equals("Auxiliar administrativo")){
+            is=true;
+        } 
 }
