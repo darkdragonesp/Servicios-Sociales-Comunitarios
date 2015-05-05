@@ -8,12 +8,10 @@
     
     <ui:define name="title">UTS</ui:define>
     <ui:define name="content">
-        <c:choose>
-            <c:when test="#{login.auxiliarAdministrativo || login.profesional}">
+        
                 
-                <ui:include src="noAutorizado.xhtml"/>
-            </c:when>
-            <c:otherwise>
+                
+        
                 <c:choose>
                     
                     <c:when test="#{login.tecnicoSuperior}">
@@ -61,7 +59,10 @@
                         
                         
                     </c:when>
-                </c:choose>
+                    <c:otherwise>
+                        <ui:include src="noAutorizado.xhtml"/>
+                        
+                
             </c:otherwise> 
         </c:choose>
         
