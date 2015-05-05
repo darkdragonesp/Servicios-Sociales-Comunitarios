@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -29,11 +30,16 @@ public class Login implements Serializable {
     private ArrayList<Usuario> usuarios;
     private Usuario user = new Usuario();
     
-    public Login(){
+   /*public Login(){
         usuarios = new ArrayList<>();
         usuarios.add(new Usuario("11111111H","1234"));
+    }*/
+    @ManagedProperty(value = "#{datosFicticios}")
+    private DatosFicticios datos;
+    
+    public void setDatos(DatosFicticios datos) {
+        this.datos = datos;
     }
-
     public String getUsuario() {
         return usuario;
     }
@@ -59,7 +65,7 @@ public class Login implements Serializable {
     public void validarusuario(FacesContext context,UIComponent component,Object input) throws ValidatorException {
         String var = (String)input;
         boolean esta=false;
-        for(Usuario s: usuarios){
+        for(Usuario s: datos.getUsuarios()){
             if(s.getDni().equals(var)){
                 esta=true;
                 usuario=var;
@@ -76,7 +82,7 @@ public class Login implements Serializable {
         String var = (String)input;
         boolean esta=false;
         
-        for(Usuario s: usuarios){
+        for(Usuario s: datos.getUsuarios()){
             System.out.println(s.getContrasena());
             System.out.println(this.getUsuario());
             if(s.getDni().equals(this.getUsuario())){
@@ -113,7 +119,7 @@ public class Login implements Serializable {
         throw new ValidatorException(
         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Existe", null));
         }*/
-        user = usuarios.get(usuarios.indexOf(user));
+        user = datos.getUsuarios().get(datos.getUsuarios().indexOf(user));
         return "bienvenida.xhtml";
     }
     public boolean isTecnicoSuperior(){
