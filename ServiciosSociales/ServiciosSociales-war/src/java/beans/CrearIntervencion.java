@@ -114,11 +114,11 @@ public class CrearIntervencion implements Serializable{
     public String editarIntervencion(){
         Expediente expediente = expctrl.getExpediente();
         expediente.getIntervenciones().set(expediente.getIntervenciones().indexOf(expctrl.getIntervencion()), expctrl.getEditIntervencion());
-        return "expediente.xhtml";
+        return "editar-expediente.xhtml";
     }
     
     public String cancelarEditarIntervencion(){
-        return "expediente.xhtml";
+        return "editar-expediente.xhtml";
     }
     
     public String crearIntervencion(){

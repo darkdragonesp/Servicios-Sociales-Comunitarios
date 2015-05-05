@@ -83,10 +83,12 @@ public class DatosFicticios {
         usuarios.add(new Usuario("11111111H","11111111H"));
         
         actividades = new ArrayList<Actividad>();
-     
-        usuarios.add(new Usuario("33333333P","33333333P","tipo"));
-        usuarios.add(new Usuario("22222222J","22222222J","tipo"));
-        usuarios.add(new Usuario("11111111H","11111111H","tipo"));
+   
+        usuarios.add(new Usuario("33333333P", "1234","Técnico"));
+        usuarios.add(new Usuario("22222222J", "1234","Auxiliar administrativo"));
+        usuarios.add(new Usuario("11111111H", "1234","Profesional"));
+        
+        usuarios.get(2).setActividades(actividades);
        
         uts.add(new UTS((long)1,"Sur","El Palo","Malaga"));
         uts.add(new UTS((long)2,"Norte","Teatinos","Malaga"));
