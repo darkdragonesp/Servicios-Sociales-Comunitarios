@@ -22,7 +22,10 @@
                   <!--  <p:growl id="messages"/>-->
                     <p:menubar autoDisplay="false" class="panelContenido">
                         <p:submenu label="Agenda" icon="ui-icon-calendar">
+                            <c:if test="#{login.auxiliarAdministrativo || login.tecnicoSuperior}">
                             <p:menuitem value="Añadir actividad" url="#" />
+                            </c:if>
+                            
                         </p:submenu>
                     
                         <p:menuitem value="Expedientes" icon="ui-icon-folder-open" url="/ssc/expedientes.xhtml">

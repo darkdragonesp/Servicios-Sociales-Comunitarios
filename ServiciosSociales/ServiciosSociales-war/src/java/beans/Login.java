@@ -124,7 +124,7 @@ public class Login implements Serializable {
     }
     public boolean isTecnicoSuperior(){
         boolean is = false;
-        if(user.getTipoProfesional().equals("Tecnico Superior")){
+        if(user.getTipoProfesional().equals("Técnico Superior")){
             is=true;
         }
         
@@ -140,7 +140,7 @@ public class Login implements Serializable {
     }
     public boolean isAuxiliarAdministrativo(){
         boolean is = false;
-        if(user.getTipoProfesional().equals("Auxiliar administrativo")){
+        if(user.getTipoProfesional().equals("Auxiliar Administrativo")){
             is=true;
         }
         return is;
