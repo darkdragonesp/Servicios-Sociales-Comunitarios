@@ -56,6 +56,18 @@ public class Intervencion implements Serializable {
         
     }
     
+    public Intervencion(Intervencion intervencion){
+        setId(intervencion.getId());
+        setTipo(intervencion.getTipo());
+        setRecursoAplicado(intervencion.getRecursoAplicado());
+        setRecursoIdeal(intervencion.getRecursoIdeal());
+        setAyuda(intervencion.getAyuda());
+        setFechaInicio(intervencion.getFechaInicio());
+        setFechaFin(intervencion.getFechaFin());
+        setNotas(intervencion.getNotas());
+        setValoracion(intervencion.getValoracion());
+    }
+    
     public Long getId() {
         return id;
     }

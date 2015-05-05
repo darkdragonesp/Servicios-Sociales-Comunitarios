@@ -41,6 +41,7 @@
         </h:form>
         <h3>Intervenciones</h3>
         <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:dataTable var="intervenciones" value="#{expedienteController.expediente.intervenciones}"
                          emptyMessage="Este expediente no ha recibido intervenciones">
                 <p:column headerText="ID">

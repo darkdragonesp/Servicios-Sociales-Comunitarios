@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import modelo.Expediente;
 import modelo.Intervencion;
 
 /**
@@ -19,7 +20,7 @@ import modelo.Intervencion;
 @ManagedBean(name = "crearIntervencion")
 @RequestScoped
 public class CrearIntervencion implements Serializable{
-    private Intervencion intervencion = new Intervencion();;
+    private Intervencion intervencion;
     
     @ManagedProperty(value = "#{expedienteController}")
     private ExpedienteController expctrl;
@@ -110,8 +111,18 @@ public class CrearIntervencion implements Serializable{
         this.notas = notas;
     }
     
+    public String editarIntervencion(){
+        Expediente expediente = expctrl.getExpediente();
+        expediente.getIntervenciones().set(expediente.getIntervenciones().indexOf(expctrl.getIntervencion()), expctrl.getEditIntervencion());
+        return "expediente.xhtml";
+    }
+    
+    public String cancelarEditarIntervencion(){
+        return "expediente.xhtml";
+    }
+    
     public String crearIntervencion(){
-        
+        intervencion = new Intervencion();
         intervencion.setFechaInicio(fechaInicio);
         intervencion.setFechaFin(fechaFin);
         intervencion.setNotas(notas);

@@ -8,8 +8,10 @@ package beans;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import modelo.Ciudadano;
 import modelo.Expediente;
 import modelo.Intervencion;
@@ -23,14 +25,17 @@ import org.primefaces.event.SelectEvent;
 @SessionScoped
 
 public class ExpedienteController {
-    private Expediente expediente = new Expediente();
-    private Ciudadano ciudadano = new Ciudadano();
-    private Ciudadano pariente = new Ciudadano();
+    private Expediente expediente;
+    private Ciudadano ciudadano;
+    private Ciudadano pariente;
     private String parentescoSeleccionado1;
     private String parentescoSeleccionado2;
     private Expediente selectedExpediente;
+    private Intervencion intervencion, editIntervencion;
     
-    public ExpedienteController() { }
+    public ExpedienteController(){ 
+    
+    }
     
     public Expediente getExpediente() {
         return this.expediente;
@@ -48,6 +53,22 @@ public class ExpedienteController {
         this.ciudadano = ciudadano;
     }
 
+    public Intervencion getIntervencion() {
+        return intervencion;
+    }
+
+    public void setIntervencion(Intervencion intervencion) {
+        this.intervencion = intervencion;
+    }
+
+    public Intervencion getEditIntervencion() {
+        return editIntervencion;
+    }
+
+    public void setEditIntervencion(Intervencion editIntervencion) {
+        this.editIntervencion = editIntervencion;
+    }
+    
     public Ciudadano getPariente() {
         return pariente;
     }
@@ -80,6 +101,13 @@ public class ExpedienteController {
         this.selectedExpediente = selectedExpediente;
     }
     
+    public String editarIntervencion(Intervencion intervencion){
+        this.intervencion = intervencion;
+        editIntervencion = new Intervencion(this.intervencion);
+
+        return "editar_intervencion.xhtml";
+    }
+    
     public String verExpediente(Expediente expediente){
         this.expediente = expediente;
         return "expediente.xhtml";
@@ -106,7 +134,12 @@ public class ExpedienteController {
     
     public String addIntervencion(Intervencion intervencion){
         intervencion.setId(asignarIdIntervencion());
-        expediente.getIntervenciones().add(intervencion);
+        long id = intervencion.getId();
+        if(expediente.getIntervenciones().add(intervencion)){
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Intervención "+id+" añadida"));
+            context.getExternalContext().getFlash().setKeepMessages(true);
+        }
         return "expediente.xhtml";
     }
     
@@ -116,6 +149,14 @@ public class ExpedienteController {
     
     public void eliminarCiudadano(String dni) {
         this.expediente.getCiudadanos().remove(obtenerCiudadano(dni));
+    }
+    
+    public void eliminarIntervencion(Expediente expediente, Intervencion intervencion){
+        long id = intervencion.getId();
+        if(expediente.getIntervenciones().remove(intervencion)){
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Intervención "+id+" eliminada"));
+        }
     }
     
     public String formatFecha(Date fecha){

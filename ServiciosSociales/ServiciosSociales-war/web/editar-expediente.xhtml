@@ -20,7 +20,7 @@
                 <p:calendar id="fecha_apertura" value="#{expedienteController.expediente.fechaApertura}"
                             requiredMessage="Campo fecha de apertura obligatorio" required="true"
                             showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
-                            navigator="true" />
+                            navigator="true"/>
                 <p:message for="fecha_apertura"/>
 
                 <h:outputLabel value="Fecha de cierre:"/>
@@ -40,6 +40,8 @@
         <h:form>
             <p:commandButton value="Descartar cambios" action="expediente.xhtml" ajax="false"/>
         </h:form>
+        
+        
         <h3>Ciudadanos</h3>
         <h:form>
             <p:dataTable id="lista_ciudadanos_editar" var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}"
@@ -72,30 +74,43 @@
                 </f:facet>
             </p:dataTable>
         </h:form>
+        
+        
         <h3>Intervenciones</h3>
-        <h:form>
-            <p:dataTable var="intervenciones" value="#{expedienteController.expediente.intervenciones}"
+        <h:form id="form3">
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <p:dataTable id="intervenciones" var="intervencion" value="#{expedienteController.expediente.intervenciones}"
                          emptyMessage="Este expediente no ha recibido intervenciones">
                 <p:column headerText="ID">
-                    <h:outputText value="#{intervenciones.id}"/>
+                    <h:outputText value="#{intervencion.id}"/>
                 </p:column>
                 <p:column headerText="Fecha de inicio">
-                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaInicio)}"/>
+                    <h:outputText value="#{expedienteController.formatFecha(intervencion.fechaInicio)}"/>
                 </p:column>
                 <p:column headerText="Fecha fin">
-                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaFin)}"/>
+                    <h:outputText value="#{expedienteController.formatFecha(intervencion.fechaFin)}"/>
                 </p:column>
                 <p:column headerText="Valoracion">
-                    <h:outputText value="#{intervenciones.valoracion}"/>
+                    <h:outputText value="#{intervencion.valoracion}"/>
                 </p:column>
                 <p:column width="90">
-                    <p:button icon="ui-icon-minus"/>
-                    <p:button icon="ui-icon-trash"/>
+                    <p:button icon="ui-icon-pencil" outcome="#{expedienteController.editarIntervencion(intervencion)}"/>
+                    <p:commandButton icon="ui-icon-trash" update=":form3:intervenciones" actionListener="#{expedienteController.eliminarIntervencion(expedienteController.expediente, intervencion)}">
+                        <p:confirm header="Confirmation" message="¿Estás seguro?" icon="ui-icon-alert" />
+                    </p:commandButton>
                 </p:column>
                 <f:facet name="footer">
-                    <p:commandButton value="Añadir intervencion" icon="ui-icon-plus"/>
+                    <p:commandButton value="Añadir intervencion" icon="ui-icon-plus"  action="addIntervencion.xhtml"/>
                 </f:facet>
             </p:dataTable>
+            
+            
+            <p:confirmDialog global="true" showEffect="fade">
+                <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
         </h:form>
+        
+        
     </ui:define>
 </ui:composition>
