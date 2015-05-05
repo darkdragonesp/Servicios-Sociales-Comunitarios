@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import modelo.UTS;
 /**
@@ -26,13 +27,18 @@ public class utsBean  implements Serializable{
     private List<UTS> utss;
     private UTS selectedUTS;
     
-    public utsBean(){
+   /* public utsBean(){
         utss = new ArrayList<UTS>();
         utss.add(new UTS((long)1,"Sur","El Palo","Malaga"));
         utss.add(new UTS((long)2,"Norte","Teatinos","Malaga"));
         utss.add(new UTS((long)3,"Centro","Antequera","Malaga"));
-    }
+    }*/
+@ManagedProperty(value = "#{datosFicticios}")
+    private DatosFicticios datos;
 
+    public void setDatos(DatosFicticios datos) {
+        this.datos = datos;
+    }
     public long getId() {
         return id;
     }
@@ -81,7 +87,7 @@ public class utsBean  implements Serializable{
         this.selectedUTS = selectedUTS;
     }
      public void eliminar(){
-        utss.remove(this.getSelectedUTS());
+        datos.getUts().remove(this.getSelectedUTS());
 //       return "usuarios.xhtml?faces-redirect=true";
     }
 public String enviar() {
@@ -93,7 +99,7 @@ public String enviar() {
             ide=(utss.get(utss.size()-1).getId())+1;
         }
         setId(ide);
-        utss.add(new UTS(ide,getUts(),getZona(),getCss()));
+        datos.getUts().add(new UTS(ide,getUts(),getZona(),getCss()));
         return "UTS "+getUts()+ "con id "+id+" creado con éxito .";
         //limpiar uts?
     }
