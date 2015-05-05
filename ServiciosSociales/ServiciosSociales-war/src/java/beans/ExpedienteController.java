@@ -34,7 +34,8 @@ public class ExpedienteController {
     private Intervencion intervencion, editIntervencion;
     
     public ExpedienteController(){ 
-    
+        pariente = new Ciudadano();
+        ciudadano = new Ciudadano();
     }
     
     public Expediente getExpediente() {
