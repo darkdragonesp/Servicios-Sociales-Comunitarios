@@ -45,14 +45,14 @@ public class Login implements Serializable {
     public String getPassword() {
         return password;
     }
-
+    
     public void setPassword(String password) {
         this.password = password;
     }
-        public ArrayList<Usuario> getUsuarios() {
+    public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
-
+    
     public void setUsuarios(ArrayList<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
@@ -67,15 +67,15 @@ public class Login implements Serializable {
             }
         }
         if(!esta){
-           throw new ValidatorException(
+            throw new ValidatorException(
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no existe", null));
         }
-    
+        
     }
     public void validarpassword(FacesContext context,UIComponent component,Object input) throws ValidatorException {
         String var = (String)input;
-            boolean esta=false;
-
+        boolean esta=false;
+        
         for(Usuario s: usuarios){
             System.out.println(s.getContrasena());
             System.out.println(this.getUsuario());
@@ -86,32 +86,32 @@ public class Login implements Serializable {
             }
         }
         if(!esta){
-           throw new ValidatorException(
+            throw new ValidatorException(
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña Incorrecta.", null));
         }
         
     }
-
+    
     public Usuario getUser() {
         return user;
     }
-
+    
     public void setUser(Usuario user) {
         this.user = user;
     }
     public String validar() throws ValidatorException{
-      /*  for(Usuario s : usuarios){
-            if(s.getDni().equals(usuario)){
-                if(s.getDni().equals(password)){
-                    return "bienvenida.xhtml";
-                }else{
-                    throw new ValidatorException(
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña incorrecta", null));
-                }
-            }
+        /*  for(Usuario s : usuarios){
+        if(s.getDni().equals(usuario)){
+        if(s.getDni().equals(password)){
+        return "bienvenida.xhtml";
+        }else{
+        throw new ValidatorException(
+        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña incorrecta", null));
+        }
+        }
         }
         throw new ValidatorException(
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Existe", null));
+        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Existe", null));
         }*/
         user = usuarios.get(usuarios.indexOf(user));
         return "bienvenida.xhtml";
@@ -120,7 +120,7 @@ public class Login implements Serializable {
         boolean is = false;
         if(user.getTipoProfesional().equals("Tecnico Superior")){
             is=true;
-        }  
+        }
         
         return is;
     }
@@ -128,13 +128,15 @@ public class Login implements Serializable {
         boolean is = false;
         if(user.getTipoProfesional().equals("Profesional")){
             is=true;
-        } 
-  
-        return is;        
+        }
+        
+        return is;
     }
     public boolean isAuxiliarAdministrativo(){
         boolean is = false;
         if(user.getTipoProfesional().equals("Auxiliar administrativo")){
             is=true;
-        } 
+        }
+        return is;
+    }
 }
