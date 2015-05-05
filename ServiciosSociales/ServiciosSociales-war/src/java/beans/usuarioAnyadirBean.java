@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -50,12 +51,19 @@ public class usuarioAnyadirBean  implements Serializable{
     /**
      * Creates a new instance of usuarios
      */
-    public usuarioAnyadirBean(){
+   /* public usuarioAnyadirBean(){
         usuarios = new ArrayList<Usuario>();
         usuarios.add(new Usuario("33333333P", "1234","Técnico"));
         usuarios.add(new Usuario("22222222J", "1234","Auxiliar administrativo"));
         usuarios.add(new Usuario("11111111H", "1234","Profesional"));
+    }*/
+    @ManagedProperty(value = "#{datosFicticios}")
+    private DatosFicticios datos;
+
+    public void setDatos(DatosFicticios datos) {
+        this.datos = datos;
     }
+    
     public Usuario getSelectedUsuario() {
         return selectedUsuario;
     }
@@ -222,7 +230,7 @@ public class usuarioAnyadirBean  implements Serializable{
         }
         //si ya existe el DNI
         
-        for (Usuario user : usuarios) {
+        for (Usuario user : datos.getUsuarios()) {
             if (user.getDni().equalsIgnoreCase(var))throw new ValidatorException(
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "El DNI introducido ya existe en la base de datos.", null));
         }
@@ -231,7 +239,7 @@ public class usuarioAnyadirBean  implements Serializable{
         return "usuarioAnyadirExito.xhtml?faces-redirect=true";
     }
     public String crearUsuario(){
-        usuarios.add(new Usuario(getDni(),this.getTipoProfesional()));
+        datos.getUsuarios().add(new Usuario(getDni(),this.getContrasenya(),this.getTipoProfesional()));
         return "Usuario con DNI "+getDni()+ " creado con éxito.";
         //limpiar usuario?
     }
@@ -262,7 +270,7 @@ public class usuarioAnyadirBean  implements Serializable{
     }
     
     public void eliminar(){
-        usuarios.remove(this.getSelectedUsuario());
+        datos.getUsuarios().remove(this.getSelectedUsuario());
        //return "usuarios.xhtml?faces-redirect=true";
     }
     

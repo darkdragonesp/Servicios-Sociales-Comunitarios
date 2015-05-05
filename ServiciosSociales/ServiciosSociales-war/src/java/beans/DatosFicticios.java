@@ -32,7 +32,7 @@ public class DatosFicticios {
     private List<Ciudadano> ciudadanos = new ArrayList<Ciudadano>();
     private List<Intervencion> intervenciones;
     private List<Actividad> actividades;
-    private List<UTS> uts;
+    private List<UTS> uts=new ArrayList<UTS>();
     private List<Parentesco> parentescos = new ArrayList<Parentesco>();
     
     
@@ -83,7 +83,14 @@ public class DatosFicticios {
         usuarios.add(new Usuario("11111111H","11111111H"));
         
         actividades = new ArrayList<Actividad>();
-        
+     
+        usuarios.add(new Usuario("33333333P","33333333P","tipo"));
+        usuarios.add(new Usuario("22222222J","22222222J","tipo"));
+        usuarios.add(new Usuario("11111111H","11111111H","tipo"));
+       
+        uts.add(new UTS((long)1,"Sur","El Palo","Malaga"));
+        uts.add(new UTS((long)2,"Norte","Teatinos","Malaga"));
+        uts.add(new UTS((long)3,"Centro","Antequera","Malaga"));
     }
 
     public List<Usuario> getUsuarios() {

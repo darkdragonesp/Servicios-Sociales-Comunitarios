@@ -22,7 +22,7 @@
                 </c:if>
             </p:contextMenu>
             
-            <p:dataTable id="usuarios" var="usuario" value="#{usuarioAnyadirBean.usuarios}"
+            <p:dataTable id="usuarios" var="usuario" value="#{datosFicticios.usuarios}"
                          selection="#{usuarioAnyadirBean.selectedUsuario}" selectionMode="single" rowKey="#{usuario.dni}" 
                          emptyMessage="No hay usuarios disponibles">
                 <f:facet name="header">
