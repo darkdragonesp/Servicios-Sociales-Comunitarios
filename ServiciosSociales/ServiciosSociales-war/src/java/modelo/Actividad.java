@@ -3,6 +3,7 @@ package modelo;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import org.primefaces.model.ScheduleEvent;
 
 
 /**
@@ -31,6 +32,16 @@ public class Actividad implements Serializable {
     @JoinColumn(name="USUARIO_DNI", referencedColumnName="DNI", nullable = false)
     private Usuario usuario;
     
+    public Actividad(){
+        
+    }
+    
+    public Actividad(String descripcion, Date fecha, Date hora, String lugar){
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.lugar = lugar;
+    }
     public Long getId() {
         return id;
     }
@@ -103,7 +114,5 @@ public class Actividad implements Serializable {
     public String toString() {
         return "Actividad{" + "id=" + id + ", lugar=" + lugar + ", fecha=" + fecha + ", hora=" + hora + ", descripcion=" + descripcion + ", usuario=" + usuario + '}';
     }
-
-
 
 }

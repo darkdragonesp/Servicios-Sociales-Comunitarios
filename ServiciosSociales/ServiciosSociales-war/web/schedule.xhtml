@@ -1,0 +1,87 @@
+<ui:composition template="/WEB-INF/plantillas/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                >
+                    
+                    
+    <ui:define name="title">Agenda</ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <h:panelGrid class="calendar" columnClasses="value" >
+                <p:schedule value="#{vistaCalendario.modelo}" widgetVar="calendario" timeZone="GMT+2" locale="es" aspectRatio="2.3">
+                    <p:ajax event="dateSelect" listener="#{vistaCalendario.onSeleccionarFecha}"
+                            update="detallesActividad" oncomplete="PF('dialogActividad').show();"/>
+                    <p:ajax event="eventSelect" listener="#{vistaCalendario.onSeleccionarActividad}" update="detallesActividad" oncomplete="PF('dialogActividad').show();" />
+                    <p:ajax event="eventMove" listener="#{vistaCalendario.onEventMove}" update="messages" />
+                    <p:ajax event="eventResize" listener="#{vistaCalendario.onEventResize}" update="messages" />
+                </p:schedule>
+            </h:panelGrid>
+            
+            <p:dialog widgetVar="dialogActividad" header="Detalles de actividad" showEffect="clip" hideEffect="clip">
+                <h:panelGrid id="detallesActividad" columns="2">
+                    <h:outputLabel for="descripcion" value="Descripción: "/>
+                    <p:inputText id="descripcion" value="#{vistaCalendario.actividad.description}"/>
+                                 
+                    <h:outputLabel for="finicio" value="Fecha de comienzo: "/>
+                    <p:inputMask id="finicio" value="#{vistaCalendario.actividad.startDate}" mask="99/99/9999">
+                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>
+                    </p:inputMask>
+                    
+                    <h:outputLabel for="ffin" value="Fecha de finalización: "/>
+                    <p:inputMask id="ffin" value="#{vistaCalendario.actividad.endDate}" mask="99/99/9999">
+                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>
+                    </p:inputMask>
+                    
+                    <h:outputLabel for="lugar" value="Lugar: "/>
+                    <p:inputText id="lugar" value="#{vistaCalendario.actividad.title}"/>
+                    
+                    <p:commandButton id="guardar" value="Guardar" actionListener="#{vistaCalendario.addActividad}" oncomplete="PF('calendario').update();PF('dialogActividad').hide();" />
+                    <p:commandButton id="cancelar" value="Borrar" actionListener="#{vistaCalendario.deleteActividad}" oncomplete="PF('calendario').update();PF('dialogActividad').hide();" />
+                </h:panelGrid>
+            </p:dialog>
+            
+        </h:form>
+        
+        <script type="text/javascript">
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D','L','M','X','J','V','S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText : 'Todo el día'
+                };
+        </script>
+        
+        <style type="text/css">
+            .value {
+                width: 700px;
+            }
+           
+        </style>
+    </ui:define>
+</ui:composition>
+
