@@ -34,10 +34,17 @@ public class Usuario implements Serializable {
     private Persona persona;
     
     public Usuario(){
-        
+        this.persona = new Persona();
     }
-    public Usuario(String s,String s1){
+    public Usuario(String s,String c){
         setDni(s);
+        this.persona = new Persona();
+        contrasena = c;
+    }
+    public Usuario(String s, String c, String s1){
+        setDni(s);
+        setContrasena(c);
+        this.persona = new Persona();
         setTipoProfesional(s1);
     }
     

@@ -52,9 +52,9 @@ public class usuarioAnyadirBean  implements Serializable{
      */
     public usuarioAnyadirBean(){
         usuarios = new ArrayList<Usuario>();
-        usuarios.add(new Usuario("33333333P","Técnico Superior"));
-        usuarios.add(new Usuario("22222222J","Auxiliar administrativo"));
-        usuarios.add(new Usuario("11111111H","Profesional"));
+        usuarios.add(new Usuario("33333333P", "1234","Técnico"));
+        usuarios.add(new Usuario("22222222J", "1234","Auxiliar administrativo"));
+        usuarios.add(new Usuario("11111111H", "1234","Profesional"));
     }
     public Usuario getSelectedUsuario() {
         return selectedUsuario;
@@ -265,5 +265,6 @@ public class usuarioAnyadirBean  implements Serializable{
         usuarios.remove(this.getSelectedUsuario());
        //return "usuarios.xhtml?faces-redirect=true";
     }
+    
     
 }
