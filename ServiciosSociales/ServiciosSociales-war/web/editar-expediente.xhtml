@@ -78,7 +78,7 @@
         
         <h3>Intervenciones</h3>
         <h:form id="form3">
-            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <p:messages id="messages" showDetail="true" closable="true" />
             <p:dataTable id="intervenciones" var="intervencion" value="#{expedienteController.expediente.intervenciones}"
                          emptyMessage="Este expediente no ha recibido intervenciones">
                 <p:column headerText="ID">
@@ -96,7 +96,7 @@
                 <p:column width="90">
                     <p:button icon="ui-icon-pencil" outcome="#{expedienteController.editarIntervencion(intervencion)}"/>
                     <p:commandButton icon="ui-icon-trash" update=":form3:intervenciones" actionListener="#{expedienteController.eliminarIntervencion(expedienteController.expediente, intervencion)}">
-                        <p:confirm header="Confirmation" message="¿Estás seguro?" icon="ui-icon-alert" />
+                        <p:confirm header="Confirmación" message="¿Estás seguro?" icon="ui-icon-alert" />
                     </p:commandButton>
                 </p:column>
                 <f:facet name="footer">
