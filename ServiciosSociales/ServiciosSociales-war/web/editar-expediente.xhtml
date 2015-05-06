@@ -10,6 +10,7 @@
         
     <ui:define name="content">
         <c:choose>                   
+            <c:when test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}" >
                     
                     
                     <h:outputScript library="script" name="calendario_espanol.js"/>
