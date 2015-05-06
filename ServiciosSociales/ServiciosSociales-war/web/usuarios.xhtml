@@ -35,6 +35,10 @@
                 <p:column headerText="Tipo de profesional" filterBy="#{usuario.tipoProfesional}" filterMatchMode="contains">
                     <h:outputText value="Tipo:   #{usuario.tipoProfesional}" />
                 </p:column>  
+                
+                 <p:column headerText="UTS" filterBy="#{usuario.uts}" filterMatchMode="contains">
+                </p:column>  
+                
             </p:dataTable>
                 
             <p:remoteCommand name="irAConf"
