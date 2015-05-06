@@ -6,16 +6,19 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:p="http://primefaces.org/ui"
                 >
-                    
-                    
-  
+    
+    
+    
     <ui:define name="content">
-
+        <c:choose>                   
+            <c:when test="#{controlAutorizacion.isTecnicoSuperior()}">
                 <h:outputText value="#{usuarioAnyadirBean.crearUsuario()}" />
                 
                 <p:button outcome="usuarioanyadir.xhtml" value="Crear nuevo usuario" icon="ui-icon-star"/>
-    
-            
-    </ui:define>
-</ui:composition>
-
+                
+            </c:when>
+            <c:otherwise>
+                <ui:include src="noAutorizado.xhtml"/>
+                </ui:define>
+                </ui:composition>
+                
