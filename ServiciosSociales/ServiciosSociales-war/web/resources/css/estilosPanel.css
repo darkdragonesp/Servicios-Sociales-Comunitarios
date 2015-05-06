@@ -14,6 +14,12 @@ and open the template in the editor.
     margin-bottom: 5px
 }
 
+.calendar {
+/*    margin-left: 20px;
+    margin-right: 20px;*/
+    width: 1240px;
+}
+
 .label {
     font-weight: bold;
     float: left;

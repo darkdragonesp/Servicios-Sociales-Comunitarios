@@ -40,7 +40,8 @@ public class Usuario implements Serializable {
     public Usuario(){
         this.persona = new Persona();
     }
-    public Usuario(String dni,String pass){
+
+    public Usuario(String dni, String pass){
         setDni(dni);
         this.persona = new Persona();
         contrasena = pass;

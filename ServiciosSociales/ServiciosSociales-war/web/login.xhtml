@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Servicios Sociales</title>
+    </h:head>
+    
+    <c:choose>
+        <c:when test="#{empty controlAutorizacion.usuario}">
+            <h:body>
+                <h:form>
+                    <p:panel class="panelLogin" style="position:absolute; width:370px; height:auto; top:20%; left:35%" header="Servicios Sociales Comunitarios">
+
+                        <h:panelGrid columns="1" cellpadding="6">
+                                <p:outputLabel for="usuario" value="Usuario: " />
+                                <p:inputText id="usuario" value="#{login.usuario}" label="usuario"
+                                             requiredMessage="Introduzca un DNI ."
+                                             required="true"/>
+
+                                <p:outputLabel for="password" value="Contraseña: "/>
+                                <p:password id="password" value="#{login.password}" label="password"
+                                             requiredMessage="Introduzca contraseña ."
+                                             required="true"/>
+
+                                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+                                <p:commandButton type="submit" icon= "ui-icon-key" value="Enviar" action="#{login.autenticar()}"/>
+                        </h:panelGrid>
+                    </p:panel>    
+                </h:form>            
+            </h:body>
+        </c:when>
+        
+        <c:otherwise>
+            <ui:include src="bienvenida.xhtml"/>
+        </c:otherwise>
+    </c:choose>
+</ui:composition>
