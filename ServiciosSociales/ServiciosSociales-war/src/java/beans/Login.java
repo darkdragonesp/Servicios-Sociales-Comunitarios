@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package beans;
 
 import java.io.Serializable;
@@ -30,9 +30,9 @@ public class Login implements Serializable {
     private ArrayList<Usuario> usuarios;
     private Usuario user = new Usuario();
     
-   /*public Login(){
-        usuarios = new ArrayList<>();
-        usuarios.add(new Usuario("11111111H","1234"));
+    /*public Login(){
+    usuarios = new ArrayList<>();
+    usuarios.add(new Usuario("11111111H","1234"));
     }*/
     @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
@@ -43,11 +43,11 @@ public class Login implements Serializable {
     public String getUsuario() {
         return usuario;
     }
-
+    
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-
+    
     public String getPassword() {
         return password;
     }
@@ -124,24 +124,34 @@ public class Login implements Serializable {
     }
     public boolean isTecnicoSuperior(){
         boolean is = false;
-        if(user.getTipoProfesional().equals("Técnico Superior")){
-            is=true;
+        try{
+            if(user.getTipoProfesional().equals("Técnico Superior")){
+                is=true;
+            }
+        }catch(java.lang.NullPointerException e){
+            return false;
         }
-        
         return is;
     }
     public boolean isProfesional(){
         boolean is = false;
-        if(user.getTipoProfesional().equals("Profesional")){
-            is=true;
+        try{
+            if(user.getTipoProfesional().equals("Profesional")){
+                is=true;
+            }
+        }catch(java.lang.NullPointerException e){
+            return false;
         }
-        
         return is;
     }
     public boolean isAuxiliarAdministrativo(){
         boolean is = false;
-        if(user.getTipoProfesional().equals("Auxiliar Administrativo")){
-            is=true;
+        try{
+            if(user.getTipoProfesional().equals("Auxiliar Administrativo")){
+                is=true;
+            }
+        }catch(java.lang.NullPointerException e){
+            return false;
         }
         return is;
     }

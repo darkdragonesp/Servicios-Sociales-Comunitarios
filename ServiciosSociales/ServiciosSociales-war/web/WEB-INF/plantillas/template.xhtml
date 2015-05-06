@@ -15,7 +15,7 @@
     </h:head>
 
     <h:body>
-        
+        <c:if test="#{login.auxiliarAdministrativo || login.tecnicoSuperior || login.tecnicoSuperior}">
         <p:layout fullPage="true">
             <p:layoutUnit position="center" footer="pie de pagina" >
                 <h:form>  
@@ -60,6 +60,13 @@
                 </h:panelGrid>
                 </p:layoutUnit>
             </p:layout>   
+            
+        </c:if>
+        <c:otherwise>
+             <h1>ATENCIÓN, no está autorizado a acceder a esta página. </h1>
+             <a href="login.xhtml">Ir a la página inicial.</a>
+        </c:otherwise>
+            
     </h:body>
 
 </html>
