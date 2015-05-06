@@ -44,7 +44,7 @@
                        <p:menuitem value="Informes" icon="ui-icon-calendar" url="/ssc/informeEstadistico.xhtml"/>
 
                         <f:facet name="options">
-                            <p:commandButton type="submit" value="Mi perfil" action="#"/>
+                            <p:commandButton type="url" value="Mi perfil" action="/ssc/usuarioEditar.xhtml"/>
                             <p:commandButton type="submit" value="Desconectar" action="#{controlAutorizacion.logout()}"/>
                         </f:facet>
                         
