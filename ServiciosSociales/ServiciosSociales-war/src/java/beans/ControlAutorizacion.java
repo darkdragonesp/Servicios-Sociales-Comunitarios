@@ -34,7 +34,7 @@ public class ControlAutorizacion {
     
     public boolean isTecnicoSuperior(){
         boolean is = false;
-        if(usuario.getTipoProfesional().equals("Tecnico Superior")){
+        if(usuario.getTipoProfesional().trim().toUpperCase().equals("Tecnico Superior".trim().toUpperCase())){
             is=true;
         }
         
@@ -42,7 +42,7 @@ public class ControlAutorizacion {
     }
     public boolean isProfesional(){
         boolean is = false;
-        if(usuario.getTipoProfesional().equals("Profesional")){
+        if(usuario.getTipoProfesional().trim().toUpperCase().equals("Profesional".trim().toUpperCase())){
             is=true;
         }
         
@@ -50,7 +50,7 @@ public class ControlAutorizacion {
     }
     public boolean isAuxiliarAdministrativo(){
         boolean is = false;
-        if(usuario.getTipoProfesional().equals("Auxiliar administrativo")){
+        if(usuario.getTipoProfesional().trim().toUpperCase().equals("Auxiliar administrativo".trim().toUpperCase())){
             is=true;
         }
         return is;
