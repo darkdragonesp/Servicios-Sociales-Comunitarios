@@ -15,13 +15,13 @@
                
                         
                         <h:form id="form">
-                           
+                           <c:if  test="#{controlAutorizacion.isTecnicoSuperior()}" >
                             <p:contextMenu for="utss">
                                 <p:menuitem value="Eliminar uts" icon="ui-icon-trash"  onclick="PF('dlg1').show()" 
                                             />
                                 
                             </p:contextMenu>
-                                 
+                           </c:if>
                             <p:dataTable id="utss" var="uts" value="#{datosFicticios.uts}"
                                          selection="#{utsBean.selectedUTS}" selectionMode="single" rowKey="#{uts.id}" 
                                          emptyMessage="No hay UTSs disponibles">
