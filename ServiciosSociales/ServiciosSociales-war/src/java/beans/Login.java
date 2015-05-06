@@ -145,4 +145,10 @@ public class Login implements Serializable {
         }
         return is;
     }
+    public String logout(){
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        ctx.getExternalContext().invalidateSession();
+        user=null;
+        return "login.xhtml";
+    }
 }
