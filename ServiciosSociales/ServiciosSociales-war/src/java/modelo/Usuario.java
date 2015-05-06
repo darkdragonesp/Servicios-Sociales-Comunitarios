@@ -40,16 +40,16 @@ public class Usuario implements Serializable {
     public Usuario(){
         this.persona = new Persona();
     }
-    public Usuario(String s,String c){
-        setDni(s);
+    public Usuario(String dni,String pass){
+        setDni(dni);
         this.persona = new Persona();
-        contrasena = c;
+        contrasena = pass;
     }
-    public Usuario(String s, String c, String s1){
-        setDni(s);
-        setContrasena(c);
+    public Usuario(String dni, String pass, String tipo_profesional){
+        setDni(dni);
+        setContrasena(pass);
         this.persona = new Persona();
-        setTipoProfesional(s1);
+        setTipoProfesional(tipo_profesional);
     }
 
     public List<Actividad> getActividades() {
