@@ -12,17 +12,16 @@
                 
                 
         
-                <c:choose>
-                    
-                    <c:when test="#{login.tecnicoSuperior}">
+               
                         
                         <h:form id="form">
+                           
                             <p:contextMenu for="utss">
                                 <p:menuitem value="Eliminar uts" icon="ui-icon-trash"  onclick="PF('dlg1').show()" 
                                             />
                                 
                             </p:contextMenu>
-                            
+                                 
                             <p:dataTable id="utss" var="uts" value="#{datosFicticios.uts}"
                                          selection="#{utsBean.selectedUTS}" selectionMode="single" rowKey="#{uts.id}" 
                                          emptyMessage="No hay UTSs disponibles">
@@ -58,13 +57,7 @@
                         </p:dialog> 
                         
                         
-                    </c:when>
-                    <c:otherwise>
-                        <ui:include src="noAutorizado.xhtml"/>
-                        
-                
-            </c:otherwise> 
-        </c:choose>
+                   
         
     </ui:define>
     

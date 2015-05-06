@@ -6,16 +6,23 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:p="http://primefaces.org/ui"
                 >
-                    
-                    
+    
+    
     
     <ui:define name="content">
-
+        <c:choose>                   
+            <c:when test="#{controlAutorizacion.isTecnicoSuperior()}">
                 <h:outputText value="#{utsBean.crearUTS()}" />
                 
                 <p:button outcome="utsAnyadir.xhtml" value="Crear nuevo UTS" icon="ui-icon-star"/>
-    
-            
+                
+            </c:when>
+            <c:otherwise>
+                <ui:include src="noAutorizado.xhtml"/>
+                
+                
+            </c:otherwise> 
+        </c:choose>     
     </ui:define>
 </ui:composition>
 

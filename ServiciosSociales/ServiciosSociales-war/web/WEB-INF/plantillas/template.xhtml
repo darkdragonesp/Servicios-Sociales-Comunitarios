@@ -34,12 +34,14 @@
                             </p:submenu>
                         </c:if>
 
-                        <c:if test="#{controlAutorizacion.isTecnicoSuperior()}">
+                        
                             <p:submenu label="UTS" icon="ui-icon-pencil">
+                                <c:if test="#{controlAutorizacion.isTecnicoSuperior()}" >
                                 <p:menuitem value="Añadir UTS" url="/ssc/utsAnyadir.xhtml" />
+                                 </c:if>
                                 <p:menuitem value="Lista UTS" url="/ssc/utsLista.xhtml" />
                             </p:submenu>
-                        </c:if>
+                       
 
                         <f:facet name="options">
                             <p:commandButton type="submit" value="Mi perfil" action="#"/>
