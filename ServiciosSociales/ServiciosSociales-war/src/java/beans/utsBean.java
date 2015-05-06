@@ -33,7 +33,7 @@ public class utsBean  implements Serializable{
         utss.add(new UTS((long)2,"Norte","Teatinos","Malaga"));
         utss.add(new UTS((long)3,"Centro","Antequera","Malaga"));
     }*/
-@ManagedProperty(value = "#{datosFicticios}")
+    @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
 
     public void setDatos(DatosFicticios datos) {

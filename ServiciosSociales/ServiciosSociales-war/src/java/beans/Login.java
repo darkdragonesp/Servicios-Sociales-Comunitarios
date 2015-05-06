@@ -6,14 +6,13 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import modelo.Usuario;
 
 /**
@@ -22,32 +21,36 @@ import modelo.Usuario;
  */
 
 @ManagedBean(name = "login")
-@SessionScoped
+@RequestScoped
 public class Login implements Serializable {
     private String usuario;
     private String password;
-    private ArrayList<Usuario> usuarios;
-    private Usuario user;
     
-   /*public Login(){
-        usuarios = new ArrayList<>();
-        usuarios.add(new Usuario("11111111H","1234"));
-    }*/
+
     @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
     
+    @ManagedProperty(value = "#{controlAutorizacion}")
+    private ControlAutorizacion ctrlau;
+    
     public Login(){
-        user = new Usuario();
+        
     }
     
     public void setDatos(DatosFicticios datos) {
         this.datos = datos;
     }
+
+    public void setCtrlau(ControlAutorizacion ctrlau) {
+        this.ctrlau = ctrlau;
+    }
+    
     public String getUsuario() {
         return usuario;
     }
 
     public void setUsuario(String usuario) {
+        //System.out.println("Uusario "+usuario);
         this.usuario = usuario;
     }
 
@@ -58,100 +61,21 @@ public class Login implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public ArrayList<Usuario> getUsuarios() {
-        return usuarios;
-    }
     
-    public void setUsuarios(ArrayList<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-    public void validarusuario(FacesContext context,UIComponent component,Object input) throws ValidatorException {
-        String var = (String)input;
-        boolean esta=false;
-        for(Usuario s: datos.getUsuarios()){
-            if(s.getDni().equals(var)){
-                esta=true;
-                usuario=var;
-                break;
-            }
-        }
-        if(!esta){
-            throw new ValidatorException(
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no existe", null));
+    public String autenticar(){
+        List<Usuario> usuarios = datos.getUsuarios();
+        Iterator<Usuario> it = usuarios.iterator();
+        while(it.hasNext()){
+            Usuario user = it.next();
+            if(user.getDni().equals(getUsuario()) && user.getContrasena().equals(getPassword()))
+                ctrlau.setUsuario(user);
         }
         
-    }
-    public void validarpassword(FacesContext context,UIComponent component,Object input) throws ValidatorException {
-        String var = (String)input;
-        boolean esta=false;
-        
-        for(Usuario s: datos.getUsuarios()){
-            if(s.getDni().equals(this.getUsuario())){
-                if(s.getContrasena().equals(var)){
-                    esta=true;
-                }
-            }
+        if(ctrlau.getUsuario() == null){
+            FacesContext ctx = FacesContext.getCurrentInstance();
+            ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "El usuario y/o contraseña es incorrecto"));
         }
-        if(!esta){
-            throw new ValidatorException(
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña Incorrecta.", null));
-        }
-        
-    }
-    
-    public Usuario getUser() {
-        return user;
-    }
-    
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
-    public String validar() throws ValidatorException{
-        /*  for(Usuario s : usuarios){
-        if(s.getDni().equals(usuario)){
-        if(s.getDni().equals(password)){
-        return "bienvenida.xhtml";
-        }else{
-        throw new ValidatorException(
-        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Contraseña incorrecta", null));
-        }
-        }
-        }
-        throw new ValidatorException(
-        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Existe", null));
-        }*/
-        Usuario user = 
-        user = datos.getUsuarios().get(datos.getUsuarios().indexOf(user));
-        return "bienvenida.xhtml";
-    }
-    public boolean isTecnicoSuperior(){
-        boolean is = false;
-        if(user.getTipoProfesional().equals("Tecnico Superior")){
-            is=true;
-        }
-        
-        return is;
-    }
-    public boolean isProfesional(){
-        boolean is = false;
-        if(user.getTipoProfesional().equals("Profesional")){
-            is=true;
-        }
-        
-        return is;
-    }
-    public boolean isAuxiliarAdministrativo(){
-        boolean is = false;
-        if(user.getTipoProfesional().equals("Auxiliar administrativo")){
-            is=true;
-        }
-        return is;
-    }
-    
-    public String logout(){
-        FacesContext ctx = FacesContext.getCurrentInstance();
-        ctx.getExternalContext().invalidateSession();
-        user = new Usuario();
-        return "login.xhtml";
+  
+        return ctrlau.redireccionar();
     }
 }

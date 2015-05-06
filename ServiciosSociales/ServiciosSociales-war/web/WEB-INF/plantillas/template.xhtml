@@ -38,15 +38,19 @@
                             <p:menuitem value="Lista UTS" url="/ssc/utsLista.xhtml" />
                         </p:submenu>
                             
+                        <f:facet name="options">
+                            <p:commandButton type="submit" value="Mi perfil" action="#"/>
+                            <p:commandButton type="submit" value="Desconectar" action="#{controlAutorizacion.logout()}"/>
+                        </f:facet>
                         
-                            <p:menuitem  value="Mi perfil" icon="ui-icon-home" url="#"/>
-                            <p:menuitem  value="Desconectar" icon="ui-icon-power" url="/ssc/#{login.logout()}"/>
                         
                     </p:menubar>
                 </h:form>
+                
                 <h:panelGrid class="panelContenido" columns="1">
-                <ui:insert name="content">Content</ui:insert>
+                    <ui:insert name="content">Content</ui:insert>
                 </h:panelGrid>
+                
                 </p:layoutUnit>
             </p:layout>   
     </h:body>

@@ -13,7 +13,7 @@
             <p:panel id="panelUsuarioEditar" header="Editar usuario">   
                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                     <h:outputLabel for="dni" value="DNI: " style="font-weight:bold" />
-                    <p:inputText id="dni" value="#{login.user.dni}" disabled="true"/>
+                    <p:inputText id="dni" value="#{controlAutorizacion.usuario.dni}" disabled="true"/>
                     
                     
                     <h:outputLabel for="contrasenya" value="Contraseña:*" style="font-weight:bold" />
@@ -28,13 +28,13 @@
                     
                     
                     <p:outputLabel for="tipo_profesional" value="Tipo profesional:"  style="font-weight:bold" />
-                    <p:selectOneMenu id="tipo_profesional" value="#{login.user.tipoProfesional}" style="width:200px" disabled="true">                    
+                    <p:selectOneMenu id="tipo_profesional" value="#{controlAutorizacion.usuario.tipoProfesional}" style="width:200px" disabled="true">                    
                     </p:selectOneMenu>
                     
                     <h:outputLabel for="email" value="Email:" style="font-weight:bold" />      
                     <p:inputText id="email" required="false" label="email" maxlength="50"
                                  validatorMessage="Introduzca un email válido."
-                                 value="#{login.user.persona.email}">
+                                 value="#{controlAutorizacion.usuario.persona.email}">
                         <f:validateRegex
                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                     </p:inputText>
@@ -44,20 +44,20 @@
                     
                     
                     <h:outputLabel for="nombre" value="Nombre:*" style="font-weight:bold" />
-                    <p:inputText id="nombre" value="#{login.user.persona.nombre}" disabled="true"/>
+                    <p:inputText id="nombre" value="#{controlAutorizacion.usuario.persona.nombre}" disabled="true"/>
                     
                     <h:outputLabel for="apellido1" value="Apellido1:*" style="font-weight:bold" />
-                    <p:inputText id="apellido1" value="#{login.user.persona.apellido1}" disabled="true"/>
+                    <p:inputText id="apellido1" value="#{controlAutorizacion.usuario.persona.apellido1}" disabled="true"/>
                     
                     <h:outputLabel for="apellido2" value="Apellido2:" style="font-weight:bold" />
-                    <p:inputText id="apellido2" value="#{login.user.persona.apellido2}" disabled="true" />
+                    <p:inputText id="apellido2" value="#{controlAutorizacion.usuario.persona.apellido2}" disabled="true" />
                     
                     <h:outputLabel for="direccion" value="Dirección:*" style="font-weight:bold" />
-                    <p:inputText id="direccion" value="#{login.user.persona.direccion}" required="true" maxlength="50"
+                    <p:inputText id="direccion" value="#{controlAutorizacion.usuario.persona.direccion}" required="true" maxlength="50"
                                  requiredMessage="Introduzca una dirección ."/>
                     
                     <h:outputLabel for="telefono" value="Telefono:*" style="font-weight:bold" />
-                    <p:inputText id="telefono" value="#{login.user.persona.telefono}" required="true" maxlength="9" converter="javax.faces.Integer"
+                    <p:inputText id="telefono" value="#{controlAutorizacion.usuario.persona.telefono}" required="true" maxlength="9" converter="javax.faces.Integer"
                                  requiredMessage="Introduzca un teléfono .">
                         <f:validateLength minimum="9" maximum="9"/>
                     </p:inputText>           
@@ -66,14 +66,14 @@
                     
                     
                     <h:outputLabel for="sexo" value="Sexo:*" style="font-weight:bold" />
-                    <p:selectOneMenu id="sexo" value="#{login.user.persona.sexo}" disabled="true">
+                    <p:selectOneMenu id="sexo" value="#{controlAutorizacion.usuario.persona.sexo}" disabled="true">
                     
                     </p:selectOneMenu>
                     
                     
                     
                     <p:outputLabel for="estado_civil" value="Estado civil:"  style="font-weight:bold" />
-                    <p:selectOneMenu id="estado_civil" value="#{login.user.persona.estadoCivil}" style="width:200px" required="true">
+                    <p:selectOneMenu id="estado_civil" value="#{controlAutorizacion.usuario.persona.estadoCivil}" style="width:200px" required="true">
                         <f:selectItem itemLabel="Soltero" itemValue="Soltero" />
                         <f:selectItem itemLabel="Casado" itemValue="Casado" />                     
                     </p:selectOneMenu>
@@ -84,10 +84,10 @@
                                 disabled="true" />
                    
                     <h:outputLabel for="localidad" value="Localidad:*" style="font-weight:bold" />
-                    <p:inputText id="localidad" value="#{login.user.persona.localidad}" required="true" maxlength="50" requiredMessage="Introduzca una localidad ."/>
+                    <p:inputText id="localidad" value="#{controlAutorizacion.usuario.persona.localidad}" required="true" maxlength="50" requiredMessage="Introduzca una localidad ."/>
                   
                     <h:outputLabel for="nacionalidad" value="Nacionalidad:*" style="font-weight:bold" />
-                    <p:inputText id="nacionalidad" value="#{login.user.persona.nacionalidad}" disabled="true"/>
+                    <p:inputText id="nacionalidad" value="#{controlAutorizacion.usuario.persona.nacionalidad}" disabled="true"/>
                     
                 </h:panelGrid>     
                 

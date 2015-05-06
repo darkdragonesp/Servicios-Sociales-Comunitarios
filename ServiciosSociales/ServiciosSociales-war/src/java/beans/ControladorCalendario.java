@@ -39,31 +39,19 @@ public class ControladorCalendario implements Serializable{
     private List<Actividad> actividades;
     private String lugar;
     
-    @ManagedProperty(value = "#{login}")
-    private Login login;
+    @ManagedProperty(value = "#{controlAutorizacion}")
+    private ControlAutorizacion controladorSesion;
     /**
      * Creates a new instance of VistaCalendario
      */
     public ControladorCalendario() {
-        /*usuario = login.getUser();
-        actividades = usuario.getActividades();
-        modelo = new DefaultScheduleModel();
         
-        for(Actividad a: actividades){
-            modelo.addEvent(new DefaultScheduleEvent(a.getDescripcion(), a.getFecha(), a.getFecha(), a));
-        }*/
-        
-        /*modelo.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
-        modelo.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
-        modelo.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
-        modelo.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));*/
-        //actividad = new DefaultScheduleEvent();
     }
     
     @PostConstruct
     public void init(){
         ac = new Actividad();
-        usuario = login.getUser();
+        usuario = controladorSesion.getUsuario();
         actividades = usuario.getActividades();
         modelo = new DefaultScheduleModel();
         
@@ -74,8 +62,8 @@ public class ControladorCalendario implements Serializable{
         }    
     }
 
-    public void setLogin(Login login) {
-        this.login = login;
+    public void setControladorSesion(ControlAutorizacion controladorSesion) {
+        this.controladorSesion = controladorSesion;
     }
     
     
@@ -188,75 +176,5 @@ public class ControladorCalendario implements Serializable{
  
         return calendar;
     }
-     
-//    private Date previousDay8Pm() {
-//        Calendar t = (Calendar) today().clone();
-//        t.set(Calendar.AM_PM, Calendar.PM);
-//        t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-//        t.set(Calendar.HOUR, 8);
-//         
-//        return t.getTime();
-//    }
-//     
-//    private Date previousDay11Pm() {
-//        Calendar t = (Calendar) today().clone();
-//        t.set(Calendar.AM_PM, Calendar.PM);
-//        t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-//        t.set(Calendar.HOUR, 11);
-//         
-//        return t.getTime();
-//    }
-//     
-//    private Date today1Pm() {
-//        Calendar t = (Calendar) today().clone();
-//        t.set(Calendar.AM_PM, Calendar.PM);
-//        t.set(Calendar.HOUR, 1);
-//         
-//        return t.getTime();
-//    }
-//     
-//    private Date theDayAfter3Pm() {
-//        Calendar t = (Calendar) today().clone();
-//        t.set(Calendar.DATE, t.get(Calendar.DATE) + 2);     
-//        t.set(Calendar.AM_PM, Calendar.PM);
-//        t.set(Calendar.HOUR, 3);
-//         
-//        return t.getTime();
-//    }
-// 
-//    private Date today6Pm() {
-//        Calendar t = (Calendar) today().clone(); 
-//        t.set(Calendar.AM_PM, Calendar.PM);
-//        t.set(Calendar.HOUR, 6);
-//         
-//        return t.getTime();
-//    }
-//     
-//    private Date nextDay9Am() {
-//        Calendar t = (Calendar) today().clone();
-//        t.set(Calendar.AM_PM, Calendar.AM);
-//        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-//        t.set(Calendar.HOUR, 9);
-//         
-//        return t.getTime();
-//    }
-//     
-//    private Date nextDay11Am() {
-//        Calendar t = (Calendar) today().clone();
-//        t.set(Calendar.AM_PM, Calendar.AM);
-//        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-//        t.set(Calendar.HOUR, 11);
-//         
-//        return t.getTime();
-//    }
-//     
-//    private Date fourDaysLater3pm() {
-//        Calendar t = (Calendar) today().clone(); 
-//        t.set(Calendar.AM_PM, Calendar.PM);
-//        t.set(Calendar.DATE, t.get(Calendar.DATE) + 4);
-//        t.set(Calendar.HOUR, 3);
-//         
-//        return t.getTime();
-//    }
     
 }
