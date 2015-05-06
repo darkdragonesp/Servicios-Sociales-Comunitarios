@@ -83,7 +83,7 @@ public class DatosFicticios {
         actividades = new ArrayList<Actividad>();
      
         usuarios.add(new Usuario("33333333P", "1234","Técnico Superior"));
-        usuarios.add(new Usuario("22222222J", "1234","Auxiliar Administrativo"));
+        usuarios.add(new Usuario("22222222J", "1234","Auxiliar administrativo"));
         usuarios.add(new Usuario("11111111H", "1234","Profesional"));
         
         usuarios.get(2).setActividades(actividades);

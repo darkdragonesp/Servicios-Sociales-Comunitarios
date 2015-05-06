@@ -15,7 +15,10 @@
     </h:head>
 
     <h:body>
-        <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior || controlAutorizacion.tecnicoSuperior}">
+        <c:choose>
+            
+        
+        <c:when test="#{controlAutorizacion.isAuxiliarAdministrativo() || controlAutorizacion.isTecnicoSuperior() || controlAutorizacion.isProfesional()}">
         <p:layout fullPage="true">
             <p:layoutUnit position="center" footer="Copyright © 2015 | Grupo C " >
                 <h:form>                   
@@ -24,14 +27,14 @@
 
                         <p:menuitem value="Expedientes" icon="ui-icon-folder-open" url="/ssc/expedientes.xhtml"/>
 
-                        <c:if test="#{controlAutorizacion.tecnicoSuperior}">
+                        <c:if test="#{controlAutorizacion.isTecnicoSuperior()}">
                             <p:submenu label="Usuarios" icon="ui-icon-person">
                                 <p:menuitem value="Añadir usuario" url="/ssc/usuarioanyadir.xhtml" />
                                 <p:menuitem value="Lista usuarios" url="/ssc/usuarios.xhtml" />
                             </p:submenu>
                         </c:if>
 
-                        <c:if test="#{controlAutorizacion.tecnicoSuperior}">
+                        <c:if test="#{controlAutorizacion.isTecnicoSuperior()}">
                             <p:submenu label="UTS" icon="ui-icon-pencil">
                                 <p:menuitem value="Añadir UTS" url="/ssc/utsAnyadir.xhtml" />
                                 <p:menuitem value="Lista UTS" url="/ssc/utsLista.xhtml" />
@@ -52,13 +55,13 @@
                 
                 </p:layoutUnit>
             </p:layout>
-        </c:if>
+        </c:when>
         
         <c:otherwise>
              <h1>ATENCIÓN, no está autorizado a acceder a esta página. </h1>
-             <a href="login.xhtml">Ir a la página inicial.</a>
+             <a href="/ssc/login.xhtml">Ir a la página inicial.</a>
         </c:otherwise>
-            
+        </c:choose>    
     </h:body>
 
 </html>
