@@ -13,8 +13,10 @@
                 <p:menuitem value="Añadir ciudadano" icon="ui-icon-person" url="anadir-ciudadano.xhtml"/>
                 <p:menuitem value="Añadir intervención" icon="ui-icon-plus" url="addIntervencion.xhtml"/>
                 <c:if test="#{not empty expedienteController.selectedExpediente}">
-                    <p:menuitem value="Editar expediente" icon="ui-icon-pencil" url="#{expedienteController.verExpediente(expedienteController.selectedExpediente)}"/>
-                </c:if>
+                    <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}">
+                        <p:menuitem value="Editar expediente" icon="ui-icon-pencil" url="#{expedienteController.verExpediente(expedienteController.selectedExpediente)}"/>
+                    </c:if>
+                </c:if>    
             </p:contextMenu>
             
 

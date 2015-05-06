@@ -5,113 +5,120 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+                    
     <ui:define name="title">Expediente #{expedienteController.expediente.id}</ui:define>
-
+        
     <ui:define name="content">
-        <h:outputScript library="script" name="calendario_espanol.js"/>
-        <h:form>
-            <h:panelGrid columns="3">
-                <h:outputLabel value="Expediente"/>
-                <h:outputLabel value="#{expedienteController.expediente.id}"/>
-                <h:outputLabel/>
-
-                <h:outputLabel value="Fecha de apertura:*"/>
-                <p:calendar id="fecha_apertura" value="#{expedienteController.expediente.fechaApertura}"
-                            requiredMessage="Campo fecha de apertura obligatorio" required="true"
-                            showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
-                            navigator="true"/>
-                <p:message for="fecha_apertura"/>
-
-                <h:outputLabel value="Fecha de cierre:"/>
-                <p:calendar id="fecha_cierre" value="#{expedienteController.expediente.fechaCierre}"
-                            showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
-                            navigator="true" />
-                <h:outputLabel/>
-
-                <h:outputLabel for="estado" value="Estado:*"/>
-                <p:inputText id="estado" value="#{expedienteController.expediente.estado}" required="true"
-                             requiredMessage="Campo estado obligatorio"/>
-                <p:message for="estado"/>
-
-                <p:commandButton value="Confirmar" action="expediente.xhtml" ajax="false"/>
-            </h:panelGrid>
-        </h:form>
-        <h:form>
-            <p:commandButton value="Descartar cambios" action="expediente.xhtml" ajax="false"/>
-        </h:form>
-        
-        
-        <h3>Ciudadanos</h3>
-        <h:form>
-            <p:dataTable id="lista_ciudadanos_editar" var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}"
-                         emptyMessage="No hay ciudadanos en este expediente">
-                <p:column headerText="DNI">
-                    <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
-                        <h:outputText value="#{ciudadanos.dni}"/>
-                    </p:commandLink>
-                </p:column>
-                <p:column headerText="Nombre">
-                    <h:outputText value="#{ciudadanos.persona.nombre}"/>
-                </p:column>
-                <p:column headerText="Primer apellido">
-                    <h:outputText value="#{ciudadanos.persona.apellido1}"/>
-                </p:column>
-                <p:column headerText="Segundo apellido">
-                    <h:outputText value="#{ciudadanos.persona.apellido2}"/>
-                </p:column>
-                <p:column width="90">
-                    <p:commandButton icon="ui-icon-pencil" action="#{expedienteController.verEditarCiudadano(ciudadanos.dni)}" ajax="false"/>
-                    <p:commandButton icon="ui-icon-trash" update="lista_ciudadanos_editar" action="#{datosFicticios.eliminarCiudadano(expedienteController.expediente, ciudadanos)}"/>
-                </p:column>
-                <f:facet name="footer">
-                    <p:selectOneMenu value="#{expedienteController.ciudadano.dni}">
-                        <f:selectItems value="#{datosFicticios.ciudadanos}" var="ciudadano"
-                                       itemValue="#{ciudadano.dni}" itemLabel="#{ciudadano.dni}"/>
-                    </p:selectOneMenu>
-                    <p:commandButton icon="ui-icon-plus" update="lista_ciudadanos_editar"
-                                     action="#{datosFicticios.anadirCiudadano(expedienteController.expediente, datosFicticios.obtenerCiudadano(expedienteController.ciudadano.dni))}"/>
-                    <p:commandButton value="Añadir nuevo ciudadano" icon="ui-icon-plus"  action="anadir-ciudadano.xhtml"/>
-                </f:facet>
-            </p:dataTable>
-        </h:form>
-        
-        
-        <h3>Intervenciones</h3>
-        <h:form id="form3">
-            <p:messages id="messages" showDetail="true" closable="true" />
-            <p:dataTable id="intervenciones" var="intervencion" value="#{expedienteController.expediente.intervenciones}"
-                         emptyMessage="Este expediente no ha recibido intervenciones">
-                <p:column headerText="ID">
-                    <h:outputText value="#{intervencion.id}"/>
-                </p:column>
-                <p:column headerText="Fecha de inicio">
-                    <h:outputText value="#{expedienteController.formatFecha(intervencion.fechaInicio)}"/>
-                </p:column>
-                <p:column headerText="Fecha fin">
-                    <h:outputText value="#{expedienteController.formatFecha(intervencion.fechaFin)}"/>
-                </p:column>
-                <p:column headerText="Valoracion">
-                    <h:outputText value="#{intervencion.valoracion}"/>
-                </p:column>
-                <p:column width="90">
-                    <p:button icon="ui-icon-pencil" outcome="#{expedienteController.editarIntervencion(intervencion)}"/>
-                    <p:commandButton icon="ui-icon-trash" update=":form3:intervenciones" actionListener="#{expedienteController.eliminarIntervencion(expedienteController.expediente, intervencion)}">
-                        <p:confirm header="Confirmación" message="¿Estás seguro?" icon="ui-icon-alert" />
-                    </p:commandButton>
-                </p:column>
-                <f:facet name="footer">
-                    <p:commandButton value="Añadir intervencion" icon="ui-icon-plus"  action="addIntervencion.xhtml"/>
-                </f:facet>
-            </p:dataTable>
+        <c:choose>                   
+            <c:when test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}" >
+                    
+                    
+                    <h:outputScript library="script" name="calendario_espanol.js"/>
+                    <h:form>
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="Expediente"/>
+                        <h:outputLabel value="#{expedienteController.expediente.id}"/>
+                        <h:outputLabel/>
+                    
+                        <h:outputLabel value="Fecha de apertura:*"/>
+                        <p:calendar id="fecha_apertura" value="#{expedienteController.expediente.fechaApertura}"
+                                    requiredMessage="Campo fecha de apertura obligatorio" required="true"
+                                    showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
+                                    navigator="true"/>
+                        <p:message for="fecha_apertura"/>
+                    
+                        <h:outputLabel value="Fecha de cierre:"/>
+                        <p:calendar id="fecha_cierre" value="#{expedienteController.expediente.fechaCierre}"
+                                    showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
+                                    navigator="true" />
+                        <h:outputLabel/>
+                    
+                        <h:outputLabel for="estado" value="Estado:*"/>
+                        <p:inputText id="estado" value="#{expedienteController.expediente.estado}" required="true"
+                                     requiredMessage="Campo estado obligatorio"/>
+                        <p:message for="estado"/>
+                    
+                        <p:commandButton value="Confirmar" action="expediente.xhtml" ajax="false"/>
+                    </h:panelGrid>
+                </h:form>
+                <h:form>
+                    <p:commandButton value="Descartar cambios" action="expediente.xhtml" ajax="false"/>
+                </h:form>
             
             
-            <p:confirmDialog global="true" showEffect="fade">
-                <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-            </p:confirmDialog>
-        </h:form>
-        
-        
+                <h3>Ciudadanos</h3>
+                <h:form>
+                    <p:dataTable id="lista_ciudadanos_editar" var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}"
+                                 emptyMessage="No hay ciudadanos en este expediente">
+                        <p:column headerText="DNI">
+                            <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
+                                <h:outputText value="#{ciudadanos.dni}"/>
+                            </p:commandLink>
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{ciudadanos.persona.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Primer apellido">
+                            <h:outputText value="#{ciudadanos.persona.apellido1}"/>
+                        </p:column>
+                        <p:column headerText="Segundo apellido">
+                            <h:outputText value="#{ciudadanos.persona.apellido2}"/>
+                        </p:column>
+                        <p:column width="90">
+                            <p:commandButton icon="ui-icon-pencil" action="#{expedienteController.verEditarCiudadano(ciudadanos.dni)}" ajax="false"/>
+                            <p:commandButton icon="ui-icon-trash" update="lista_ciudadanos_editar" action="#{datosFicticios.eliminarCiudadano(expedienteController.expediente, ciudadanos)}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:selectOneMenu value="#{expedienteController.ciudadano.dni}">
+                                <f:selectItems value="#{datosFicticios.ciudadanos}" var="ciudadano"
+                                               itemValue="#{ciudadano.dni}" itemLabel="#{ciudadano.dni}"/>
+                            </p:selectOneMenu>
+                            <p:commandButton icon="ui-icon-plus" update="lista_ciudadanos_editar"
+                                             action="#{datosFicticios.anadirCiudadano(expedienteController.expediente, datosFicticios.obtenerCiudadano(expedienteController.ciudadano.dni))}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </h:form>
+            
+            
+                <h3>Intervenciones</h3>
+                <h:form id="form3">
+                    <p:messages id="messages" showDetail="true" closable="true" />
+                    <p:dataTable id="intervenciones" var="intervencion" value="#{expedienteController.expediente.intervenciones}"
+                                 emptyMessage="Este expediente no ha recibido intervenciones">
+                        <p:column headerText="ID">
+                            <h:outputText value="#{intervencion.id}"/>
+                        </p:column>
+                        <p:column headerText="Fecha de inicio">
+                            <h:outputText value="#{expedienteController.formatFecha(intervencion.fechaInicio)}"/>
+                        </p:column>
+                        <p:column headerText="Fecha fin">
+                            <h:outputText value="#{expedienteController.formatFecha(intervencion.fechaFin)}"/>
+                        </p:column>
+                        <p:column headerText="Valoracion">
+                            <h:outputText value="#{intervencion.valoracion}"/>
+                        </p:column>
+                        <p:column width="90">
+                            <p:button icon="ui-icon-pencil" outcome="#{expedienteController.editarIntervencion(intervencion)}"/>
+                            <p:commandButton icon="ui-icon-trash" update=":form3:intervenciones" actionListener="#{expedienteController.eliminarIntervencion(expedienteController.expediente, intervencion)}">
+                                <p:confirm header="Confirmación" message="¿Estás seguro?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton value="Añadir intervencion" icon="ui-icon-plus"  action="addIntervencion.xhtml"/>
+                        </f:facet>
+                    </p:dataTable>
+                
+                
+                    <p:confirmDialog global="true" showEffect="fade">
+                        <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </h:form>
+            
+            </c:when>
+            <c:otherwise>
+                <ui:include src="noAutorizado.xhtml"/> 
+            </c:otherwise> 
+        </c:choose>
     </ui:define>
 </ui:composition>

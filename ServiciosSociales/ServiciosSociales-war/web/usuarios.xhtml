@@ -19,9 +19,9 @@
                     <p:contextMenu for="usuarios">
                         <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" onclick="PF('dlg1').show()" 
                                     />
-                        <c:if test="true">
-                            <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="#"/>
-                        </c:if>
+                        
+                            <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="/ssc/usuarioEditar.xhtml"/>
+                       
                     </p:contextMenu>
                     
                     <p:dataTable id="usuarios" var="usuario" value="#{datosFicticios.usuarios}"
