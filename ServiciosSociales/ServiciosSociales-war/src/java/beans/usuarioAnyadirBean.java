@@ -6,6 +6,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -17,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import modelo.Actividad;
 import modelo.Usuario;
 
 
@@ -238,7 +240,12 @@ public class usuarioAnyadirBean  implements Serializable{
         return "usuarioAnyadirExito.xhtml?faces-redirect=true";
     }
     public String crearUsuario(){
-        datos.getUsuarios().add(new Usuario(getDni(),this.getContrasenya(),this.getTipoProfesional()));
+        Usuario usuario = new Usuario();
+        usuario.setActividades(new ArrayList<Actividad>());
+        usuario.setDni(getDni());
+        usuario.setContrasena(getContrasenya());
+        usuario.setTipoProfesional(getTipoProfesional());
+        datos.getUsuarios().add(usuario);
         return "Usuario con DNI "+getDni()+ " creado con éxito.";
         //limpiar usuario?
     }

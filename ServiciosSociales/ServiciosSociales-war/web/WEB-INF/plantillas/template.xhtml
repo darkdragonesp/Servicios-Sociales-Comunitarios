@@ -16,53 +16,57 @@
 
     <h:body>
         <c:choose>
+            <c:when test="#{not empty controlAutorizacion.usuario}">
+                <c:when test="#{controlAutorizacion.isAuxiliarAdministrativo() || controlAutorizacion.isTecnicoSuperior() || controlAutorizacion.isProfesional()}">
+                <p:layout fullPage="true">
+                    <p:layoutUnit position="center" footer="Copyright © 2015 | Grupo C " >
+                        <h:form>                   
+                            <p:menubar autoDisplay="false" class="panelContenido" >
+                                <p:menuitem value="Agenda" icon="ui-icon-calendar" url="/ssc/calendario.xhtml"/>
+
+                                <p:menuitem value="Expedientes" icon="ui-icon-folder-open" url="/ssc/expedientes.xhtml"/>
+
+                                <c:if test="#{controlAutorizacion.isTecnicoSuperior()}">
+                                    <p:submenu label="Usuarios" icon="ui-icon-person">
+                                        <p:menuitem value="Añadir usuario" url="/ssc/usuarioanyadir.xhtml" />
+                                        <p:menuitem value="Lista usuarios" url="/ssc/usuarios.xhtml" />
+                                    </p:submenu>
+                                </c:if>
+
+
+                                    <p:submenu label="UTS" icon="ui-icon-pencil">
+                                        <c:if test="#{controlAutorizacion.isTecnicoSuperior()}" >
+                                        <p:menuitem value="Añadir UTS" url="/ssc/utsAnyadir.xhtml" />
+                                         </c:if>
+                                        <p:menuitem value="Lista UTS" url="/ssc/utsLista.xhtml" />
+                                    </p:submenu>
+
+
+                                <f:facet name="options">
+                                    <p:commandButton type="submit" value="Mi perfil" action="#"/>
+                                    <p:commandButton type="submit" value="Desconectar" action="#{controlAutorizacion.logout()}"/>
+                                </f:facet>
+
+                            </p:menubar>
+                        </h:form>
+
+                        <h:panelGrid class="panelContenido" columns="1">
+                            <ui:insert name="content">Content</ui:insert>
+                        </h:panelGrid>
+
+                        </p:layoutUnit>
+                    </p:layout>
+                </c:when>
+                <c:otherwise>
+                    <h1>ATENCIÓN, no está autorizado a acceder a esta página. </h1>
+                    <a href="../../login.xhtml">Ir a la página inicial.</a>
+                </c:otherwise>
+            </c:when>
             
-        
-        <c:when test="#{controlAutorizacion.isAuxiliarAdministrativo() || controlAutorizacion.isTecnicoSuperior() || controlAutorizacion.isProfesional()}">
-        <p:layout fullPage="true">
-            <p:layoutUnit position="center" footer="Copyright © 2015 | Grupo C " >
-                <h:form>                   
-                    <p:menubar autoDisplay="false" class="panelContenido" >
-                        <p:menuitem value="Agenda" icon="ui-icon-calendar" url="/ssc/calendario.xhtml"/>
-
-                        <p:menuitem value="Expedientes" icon="ui-icon-folder-open" url="/ssc/expedientes.xhtml"/>
-
-                        <c:if test="#{controlAutorizacion.isTecnicoSuperior()}">
-                            <p:submenu label="Usuarios" icon="ui-icon-person">
-                                <p:menuitem value="Añadir usuario" url="/ssc/usuarioanyadir.xhtml" />
-                                <p:menuitem value="Lista usuarios" url="/ssc/usuarios.xhtml" />
-                            </p:submenu>
-                        </c:if>
-
-                        
-                            <p:submenu label="UTS" icon="ui-icon-pencil">
-                                <c:if test="#{controlAutorizacion.isTecnicoSuperior()}" >
-                                <p:menuitem value="Añadir UTS" url="/ssc/utsAnyadir.xhtml" />
-                                 </c:if>
-                                <p:menuitem value="Lista UTS" url="/ssc/utsLista.xhtml" />
-                            </p:submenu>
-                       
-
-                        <f:facet name="options">
-                            <p:commandButton type="submit" value="Mi perfil" action="#"/>
-                            <p:commandButton type="submit" value="Desconectar" action="#{controlAutorizacion.logout()}"/>
-                        </f:facet>
-                        
-                    </p:menubar>
-                </h:form>
-                
-                <h:panelGrid class="panelContenido" columns="1">
-                    <ui:insert name="content">Content</ui:insert>
-                </h:panelGrid>
-                
-                </p:layoutUnit>
-            </p:layout>
-        </c:when>
-        
-        <c:otherwise>
-             <h1>ATENCIÓN, no está autorizado a acceder a esta página. </h1>
-             <a href="/ssc/login.xhtml">Ir a la página inicial.</a>
-        </c:otherwise>
+            <c:otherwise>
+                <ui:include src="../../login.xhtml"/>
+            </c:otherwise>
+            
         </c:choose>    
     </h:body>
 

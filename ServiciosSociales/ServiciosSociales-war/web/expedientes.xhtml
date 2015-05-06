@@ -10,8 +10,8 @@
     <ui:define name="content">
         <h:form id="form">
             <p:contextMenu for="expedientes" id="editar">
-                <p:menuitem value="Ver ciudadanos" icon="ui-icon-person" url="#"/>
-                <p:menuitem value="Ver intervenciones" icon="ui-icon-plus" url="#"/>
+                <p:menuitem value="Añadir ciudadano" icon="ui-icon-person" url="anadir-ciudadano.xhtml"/>
+                <p:menuitem value="Añadir intervención" icon="ui-icon-plus" url="addIntervencion.xhtml"/>
                 <c:if test="#{not empty expedienteController.selectedExpediente}">
                     <p:menuitem value="Editar expediente" icon="ui-icon-pencil" url="#{expedienteController.verExpediente(expedienteController.selectedExpediente)}"/>
                 </c:if>
@@ -23,6 +23,9 @@
                          emptyMessage="No hay expedientes disponibles">
                 <f:facet name="header">
                     Lista de Expedientes
+                    <p:button id="addExpediente" value="Añadir Expediente" style="float:right; font-size: 0.6em" 
+                                     icon="ui-icon-plus" outcome="anadir-expediente.xhtml">
+                    </p:button>
                 </f:facet>
                 <p:ajax event="rowSelect" listener="#{expedienteController.onRowSelect}" update=":form:editar"/>
                 <p:column headerText="Id de expediente" filterBy="#{expediente.id}" filterMatchMode="contains">

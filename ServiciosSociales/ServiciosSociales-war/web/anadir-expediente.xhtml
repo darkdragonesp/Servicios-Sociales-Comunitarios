@@ -13,7 +13,7 @@
         <h:form>
             <h:panelGrid columns="3">
                 <h:outputLabel value="Expediente"/>
-                <p:inputText id="id" value="#{expedienteController.expediente.id}" required="true"
+                <p:inputText id="id" required="true"
                              requiredMessage="Campo expediente obligatorio"
                              validatorMessage="Numero de expediente no valido">
                     <!--<f:validateRegex pattern="[0-9]+"/>-->
@@ -21,24 +21,24 @@
                 <p:message for="id"/>
 
                 <h:outputLabel value="Fecha de apertura:*"/>
-                <p:calendar id="fecha_apertura" value="#{expedienteController.fechaApertura}"
+                <p:calendar id="fecha_apertura"
                             requiredMessage="Campo fecha de apertura obligatorio" required="true"
-                            showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
+                            showOn="button" locale="es" maxdate="#" 
                             navigator="true" />
                 <p:message for="fecha_apertura"/>
 
                 <h:outputLabel value="Fecha de cierre:"/>
-                <p:calendar id="fecha_cierre" value="#{expedienteController.expediente.fechaCierre}"
-                            showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
+                <p:calendar id="fecha_cierre"
+                            showOn="button" locale="es" maxdate="#" 
                             navigator="true" />
                 <h:outputLabel/>
 
                 <h:outputLabel for="estado" value="Estado:*"/>
-                <p:inputText id="estado" value="#{expedienteController.expediente.estado}" required="true"
+                <p:inputText id="estado" required="true"
                              requiredMessage="Campo estado obligatorio"/>
                 <p:message for="estado"/>
 
-                <p:commandButton value="Confirmar" action="#{datosFicticios.crearExpediente(expedienteController.expediente)}" ajax="false"/>
+                <p:commandButton value="Confirmar" action="#" ajax="false"/>
             </h:panelGrid>
         </h:form>
     </ui:define>

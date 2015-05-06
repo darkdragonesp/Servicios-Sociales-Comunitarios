@@ -5,6 +5,7 @@
  */
 package beans;
 
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -16,7 +17,7 @@ import modelo.Usuario;
  */
 @ManagedBean(name = "controlAutorizacion")
 @SessionScoped
-public class ControlAutorizacion {
+public class ControlAutorizacion implements Serializable{
     private Usuario usuario;
     
     public ControlAutorizacion() {
@@ -24,7 +25,6 @@ public class ControlAutorizacion {
     }
 
     public Usuario getUsuario() {
-        System.out.println("Usuario "+usuario);
         return usuario;
     }
 

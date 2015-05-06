@@ -50,7 +50,6 @@ public class Login implements Serializable {
     }
 
     public void setUsuario(String usuario) {
-        //System.out.println("Uusario "+usuario);
         this.usuario = usuario;
     }
 

@@ -71,6 +71,7 @@
                     </p:selectOneMenu>
                     <p:commandButton icon="ui-icon-plus" update="lista_ciudadanos_editar"
                                      action="#{datosFicticios.anadirCiudadano(expedienteController.expediente, datosFicticios.obtenerCiudadano(expedienteController.ciudadano.dni))}"/>
+                    <p:commandButton value="Añadir nuevo ciudadano" icon="ui-icon-plus"  action="anadir-ciudadano.xhtml"/>
                 </f:facet>
             </p:dataTable>
         </h:form>

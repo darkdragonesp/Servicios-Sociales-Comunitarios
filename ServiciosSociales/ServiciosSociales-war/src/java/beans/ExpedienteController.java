@@ -5,6 +5,7 @@
  */
 package beans;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -24,7 +25,7 @@ import org.primefaces.event.SelectEvent;
 @ManagedBean(name = "expedienteController")
 @SessionScoped
 
-public class ExpedienteController {
+public class ExpedienteController implements Serializable{
     private Expediente expediente = new Expediente();
     private Ciudadano ciudadano = new Ciudadano();
     private Ciudadano pariente = new Ciudadano();
