@@ -10,7 +10,9 @@
     <ui:define name="content">
         <h:form id="form">
             <p:contextMenu for="expedientes" id="editar">
-                <p:menuitem value="Añadir ciudadano" icon="ui-icon-person" url="anadir-ciudadano.xhtml"/>
+                <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}" >
+                    <p:menuitem value="Añadir ciudadano" icon="ui-icon-person" url="anadir-ciudadano.xhtml"/>
+                </c:if>
                 <p:menuitem value="Añadir intervención" icon="ui-icon-plus" url="addIntervencion.xhtml"/>
                 <c:if test="#{not empty expedienteController.selectedExpediente}">
                     <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}">
@@ -19,14 +21,14 @@
                 </c:if>    
             </p:contextMenu>
             
-
+            
             <p:dataTable id="expedientes" var="expediente" value="#{datosFicticios.expedientes}"
                          selection="#{expedienteController.selectedExpediente}" selectionMode="single" rowKey="#{expediente.id}" 
                          emptyMessage="No hay expedientes disponibles">
                 <f:facet name="header">
                     Lista de Expedientes
                     <p:button id="addExpediente" value="Añadir Expediente" style="float:right; font-size: 0.6em" 
-                                     icon="ui-icon-plus" outcome="anadir-expediente.xhtml">
+                              icon="ui-icon-plus" outcome="anadir-expediente.xhtml">
                     </p:button>
                 </f:facet>
                 <p:ajax event="rowSelect" listener="#{expedienteController.onRowSelect}" update=":form:editar"/>
