@@ -12,7 +12,7 @@
             <p:contextMenu for="expedientes" id="editar">
                 <p:menuitem value="Ver ciudadanos" icon="ui-icon-person" url="#"/>
                 <p:menuitem value="Ver intervenciones" icon="ui-icon-plus" url="#"/>
-                <c:if test="#{not empty expedienteController.selectedExpediente}">
+                <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}">
                     <p:menuitem value="Editar expediente" icon="ui-icon-pencil" url="#{expedienteController.verExpediente(expedienteController.selectedExpediente)}"/>
                 </c:if>
             </p:contextMenu>
