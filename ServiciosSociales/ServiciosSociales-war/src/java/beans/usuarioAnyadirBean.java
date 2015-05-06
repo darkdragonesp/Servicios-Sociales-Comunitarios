@@ -46,7 +46,7 @@ public class usuarioAnyadirBean  implements Serializable{
     private String email;
     private String tipoProfesional;
     private String contrasenya;
-    private UTS uts;
+    private String uts;
     private List<Usuario> usuarios;
     private Usuario selectedUsuario;
     /**
@@ -275,11 +275,11 @@ public class usuarioAnyadirBean  implements Serializable{
        //return "usuarios.xhtml?faces-redirect=true";
     }
 
-    public UTS getUts() {
+    public String getUts() {
         return uts;
     }
 
-    public void setUts(UTS uts) {
+    public void setUts(String uts) {
         this.uts = uts;
     }
     
