@@ -81,12 +81,18 @@ public class DatosFicticios {
 
         
         actividades = new ArrayList<Actividad>();
+        Actividad a1 = new Actividad("Trabajo supervisión", today, today, "Málaga");
+        Actividad a2 = new Actividad("Descanso", today, today, "Málaga");
+        actividades.add(a1);
+        actividades.add(a2);
         
         usuarios.add(new Usuario("33333333P", "1234","Técnico"));
         usuarios.add(new Usuario("22222222J", "1234","Auxiliar administrativo"));
         usuarios.add(new Usuario("11111111H", "1234","Profesional"));
         
         usuarios.get(2).setActividades(actividades);
+        usuarios.get(0).setActividades(new ArrayList<Actividad>());
+        usuarios.get(1).setActividades(new ArrayList<Actividad>());
        
         uts.add(new UTS((long)1,"Sur","El Palo","Malaga"));
         uts.add(new UTS((long)2,"Norte","Teatinos","Malaga"));

@@ -10,38 +10,43 @@
                     
     <ui:define name="title">Agenda</ui:define>
     <ui:define name="content">
-        <h:form>
-            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+        <h:form>           
             <h:panelGrid class="calendar" columnClasses="value" >
-                <p:schedule value="#{vistaCalendario.modelo}" widgetVar="calendario" timeZone="GMT+2" locale="es" aspectRatio="2.3">
-                    <p:ajax event="dateSelect" listener="#{vistaCalendario.onSeleccionarFecha}"
+                <p:schedule value="#{controladorCalendario.modelo}" widgetVar="calendario" timeZone="GMT+2" locale="es" aspectRatio="2.3">
+                    <p:ajax event="dateSelect" listener="#{controladorCalendario.onSeleccionarFecha}"
                             update="detallesActividad" oncomplete="PF('dialogActividad').show();"/>
-                    <p:ajax event="eventSelect" listener="#{vistaCalendario.onSeleccionarActividad}" update="detallesActividad" oncomplete="PF('dialogActividad').show();" />
-                    <p:ajax event="eventMove" listener="#{vistaCalendario.onEventMove}" update="messages" />
-                    <p:ajax event="eventResize" listener="#{vistaCalendario.onEventResize}" update="messages" />
+                    <p:ajax event="eventSelect" listener="#{controladorCalendario.onSeleccionarActividad}" update="detallesActividad" oncomplete="PF('dialogActividad').show();" />
+                    <p:ajax event="eventMove" listener="#{controladorCalendario.onEventMove}" update="messages" />
+                    <p:ajax event="eventResize" listener="#{controladorCalendario.onEventResize}" update="messages" />
                 </p:schedule>
             </h:panelGrid>
+            <p:growl id="messages" showDetail="true" autoUpdate="true"/>
             
             <p:dialog widgetVar="dialogActividad" header="Detalles de actividad" showEffect="clip" hideEffect="clip">
                 <h:panelGrid id="detallesActividad" columns="2">
-                    <h:outputLabel for="descripcion" value="Descripción: "/>
-                    <p:inputText id="descripcion" value="#{vistaCalendario.actividad.description}"/>
+                    <h:outputLabel for="titulo" value="Título: "/>
+                    <p:inputText id="titulo" value="#{controladorCalendario.actividad.title}"/>
                                  
                     <h:outputLabel for="finicio" value="Fecha de comienzo: "/>
-                    <p:inputMask id="finicio" value="#{vistaCalendario.actividad.startDate}" mask="99/99/9999">
+                    <p:inputMask id="finicio" value="#{controladorCalendario.actividad.startDate}" mask="99/99/9999">
                         <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>
                     </p:inputMask>
                     
                     <h:outputLabel for="ffin" value="Fecha de finalización: "/>
-                    <p:inputMask id="ffin" value="#{vistaCalendario.actividad.endDate}" mask="99/99/9999">
+                    <p:inputMask id="ffin" value="#{controladorCalendario.actividad.endDate}" mask="99/99/9999">
                         <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>
                     </p:inputMask>
                     
-                    <h:outputLabel for="lugar" value="Lugar: "/>
-                    <p:inputText id="lugar" value="#{vistaCalendario.actividad.title}"/>
+                    <h:outputLabel for="descripcion" value="Descripción: "/>
+                    <p:inputText id="descripcion" value="#{controladorCalendario.actividad.description}"/>
                     
-                    <p:commandButton id="guardar" value="Guardar" actionListener="#{vistaCalendario.addActividad}" oncomplete="PF('calendario').update();PF('dialogActividad').hide();" />
-                    <p:commandButton id="cancelar" value="Borrar" actionListener="#{vistaCalendario.deleteActividad}" oncomplete="PF('calendario').update();PF('dialogActividad').hide();" />
+                    <h:outputLabel for="lugar" value="Lugar: "/>
+                    <p:inputText id="lugar" value="#{controladorCalendario.lugar}"/>
+                    
+                    <p:commandButton id="guardar" value="Guardar" actionListener="#{controladorCalendario.addActividad}" oncomplete="PF('calendario').update();PF('dialogActividad').hide();" style="float: left"/>
+                    <c:if test="#{not empty controladorCalendario.actividad.id}">
+                        <p:commandButton id="borrar" value="Borrar" actionListener="#{controladorCalendario.deleteActividad}" oncomplete="PF('calendario').update();PF('dialogActividad').hide();" />
+                    </c:if>    
                 </h:panelGrid>
             </p:dialog>
             

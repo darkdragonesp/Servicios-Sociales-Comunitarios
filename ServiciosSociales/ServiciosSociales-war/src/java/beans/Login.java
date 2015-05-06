@@ -20,9 +20,8 @@ import modelo.Usuario;
  *
  * @author Portátil
  */
-/*@Named(value = "login")
-@SessionScoped*/
-@ManagedBean
+
+@ManagedBean(name = "login")
 @SessionScoped
 public class Login implements Serializable {
     private String usuario;
@@ -120,6 +119,7 @@ public class Login implements Serializable {
         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Existe", null));
         }*/
         user = datos.getUsuarios().get(datos.getUsuarios().indexOf(user));
+        System.out.println(user);
         return "bienvenida.xhtml";
     }
     public boolean isTecnicoSuperior(){

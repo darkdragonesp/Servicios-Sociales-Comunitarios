@@ -16,7 +16,8 @@ public class Actividad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ID_ACTIVIDAD")
-    private Long id;
+    //private Long id;
+    private String id;
     @Column(name="LUGAR", nullable=true, length=50)
     private String lugar;
     @Column(name="FECHA", nullable=false)
@@ -36,17 +37,30 @@ public class Actividad implements Serializable {
         
     }
     
+    public Actividad(String descripcion, Date fecha){
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+    }
+    
     public Actividad(String descripcion, Date fecha, Date hora, String lugar){
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.hora = hora;
         this.lugar = lugar;
     }
-    public Long getId() {
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+    
+        public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
