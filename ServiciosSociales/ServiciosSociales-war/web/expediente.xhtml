@@ -5,9 +5,9 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+                    
     <ui:define name="title">Expediente #{expedienteController.expediente.id}</ui:define>
-
+        
     <ui:define name="content">
         <h:panelGrid columns="2">
             <h:outputLabel value="Expediente:"/>
@@ -51,15 +51,17 @@
                     <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaInicio)}"/>
                 </p:column>
                 <p:column headerText="Fecha fin">
-                <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaFin)}"/>   
+                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaFin)}"/>   
                 </p:column>
                 <p:column headerText="Valoracion">
                     <h:outputText value="#{intervenciones.valoracion}"/>
                 </p:column>
             </p:dataTable>
         </h:form>
-        <h:form>
-            <p:commandButton value="Editar expediente" action="editar-expediente.xhtml" ajax="false"/>
-        </h:form>
+        <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}">
+            <h:form>
+                <p:commandButton value="Editar expediente" action="editar-expediente.xhtml" ajax="false"/>
+            </h:form>
+        </c:if>
     </ui:define>
 </ui:composition>
