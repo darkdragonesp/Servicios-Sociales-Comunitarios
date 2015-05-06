@@ -141,7 +141,7 @@ public class ExpedienteController {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Intervención "+id+" añadida"));
             context.getExternalContext().getFlash().setKeepMessages(true);
         }
-        return "expediente.xhtml";
+        return "editar-expediente.xhtml";
     }
     
     public long asignarIdIntervencion(){

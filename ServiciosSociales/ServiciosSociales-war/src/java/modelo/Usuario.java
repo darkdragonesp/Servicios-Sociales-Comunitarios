@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +34,9 @@ public class Usuario implements Serializable {
     @JoinColumn(name="DNI", referencedColumnName="DNI", insertable=false, updatable=false)
     private Persona persona;
     
+    private List<Actividad> actividades;
+    
+    
     public Usuario(){
         this.persona = new Persona();
     }
@@ -47,6 +51,15 @@ public class Usuario implements Serializable {
         this.persona = new Persona();
         setTipoProfesional(s1);
     }
+
+    public List<Actividad> getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(List<Actividad> actividades) {
+        this.actividades = actividades;
+    }
+    
     
     public String getTipoProfesional() {
         return tipoProfesional;
