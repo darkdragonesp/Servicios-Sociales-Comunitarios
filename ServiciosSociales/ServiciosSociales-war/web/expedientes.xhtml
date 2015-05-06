@@ -27,9 +27,11 @@
                          emptyMessage="No hay expedientes disponibles">
                 <f:facet name="header">
                     Lista de Expedientes
-                    <p:button id="addExpediente" value="Añadir Expediente" style="float:right; font-size: 0.6em" 
-                              icon="ui-icon-plus" outcome="anadir-expediente.xhtml">
-                    </p:button>
+                    <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}" >
+                        <p:button id="addExpediente" value="Añadir Expediente" style="float:right; font-size: 0.6em" 
+                                  icon="ui-icon-plus" outcome="anadir-expediente.xhtml">
+                        </p:button>
+                    </c:if>
                 </f:facet>
                 <p:ajax event="rowSelect" listener="#{expedienteController.onRowSelect}" update=":form:editar"/>
                 <p:column headerText="Id de expediente" filterBy="#{expediente.id}" filterMatchMode="contains">
