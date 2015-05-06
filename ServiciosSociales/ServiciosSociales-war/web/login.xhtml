@@ -27,7 +27,7 @@ and open the template in the editor.
                     <h:form>
                         <h:panelGrid columns="3" cellpadding="6">
                             <p:outputLabel for="usuario" value="Usuario: " />
-                            <p:inputText id="usuario" value="#{login.user.dni}" label="usuario"
+                            <p:inputText id="usuario" value="#{login.usuario}" label="usuario"
                                          validator="#{login.validarusuario}"
                                          requiredMessage="Introduzca un DNI ."
                                          required="true"/>
@@ -36,7 +36,7 @@ and open the template in the editor.
                             
 
                             <p:outputLabel for="password" value="Contraseña: "/>
-                            <p:inputText id="password" value="#{login.user.contrasena}" label="password" type="PASSWORD"
+                            <p:inputText id="password" value="#{login.password}" label="password" type="PASSWORD"
                                          validator="#{login.validarpassword}"
                                          requiredMessage="Introduzca contraseña ."
                                          required="true"/>

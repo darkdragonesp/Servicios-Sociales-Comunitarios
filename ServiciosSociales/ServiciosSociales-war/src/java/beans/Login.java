@@ -27,7 +27,7 @@ public class Login implements Serializable {
     private String usuario;
     private String password;
     private ArrayList<Usuario> usuarios;
-    private Usuario user = new Usuario();
+    private Usuario user;
     
    /*public Login(){
         usuarios = new ArrayList<>();
@@ -35,6 +35,10 @@ public class Login implements Serializable {
     }*/
     @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
+    
+    public Login(){
+        user = new Usuario();
+    }
     
     public void setDatos(DatosFicticios datos) {
         this.datos = datos;
@@ -82,8 +86,6 @@ public class Login implements Serializable {
         boolean esta=false;
         
         for(Usuario s: datos.getUsuarios()){
-            System.out.println(s.getContrasena());
-            System.out.println(this.getUsuario());
             if(s.getDni().equals(this.getUsuario())){
                 if(s.getContrasena().equals(var)){
                     esta=true;
@@ -118,8 +120,8 @@ public class Login implements Serializable {
         throw new ValidatorException(
         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no Existe", null));
         }*/
+        Usuario user = 
         user = datos.getUsuarios().get(datos.getUsuarios().indexOf(user));
-        System.out.println(user);
         return "bienvenida.xhtml";
     }
     public boolean isTecnicoSuperior(){
@@ -149,7 +151,7 @@ public class Login implements Serializable {
     public String logout(){
         FacesContext ctx = FacesContext.getCurrentInstance();
         ctx.getExternalContext().invalidateSession();
-        user = null;
-        return "login.xthml";
+        user = new Usuario();
+        return "login.xhtml";
     }
 }

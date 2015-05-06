@@ -38,10 +38,10 @@
                             <p:menuitem value="Lista UTS" url="/ssc/utsLista.xhtml" />
                         </p:submenu>
                             
-                        <f:facet name="options">
+                        
                             <p:menuitem  value="Mi perfil" icon="ui-icon-home" url="#"/>
-                            <p:menuitem  value="Desconectar" icon="ui-icon-power" url="#{login.logout()}"/>
-                        </f:facet>
+                            <p:menuitem  value="Desconectar" icon="ui-icon-power" url="/ssc/#{login.logout()}"/>
+                        
                     </p:menubar>
                 </h:form>
                 <h:panelGrid class="panelContenido" columns="1">
