@@ -101,6 +101,7 @@ public class ExpedienteController implements Serializable{
 
     public void setSelectedExpediente(Expediente selectedExpediente) {
         this.selectedExpediente = selectedExpediente;
+        expediente = selectedExpediente;
     }
     
     public String editarIntervencion(Intervencion intervencion){
