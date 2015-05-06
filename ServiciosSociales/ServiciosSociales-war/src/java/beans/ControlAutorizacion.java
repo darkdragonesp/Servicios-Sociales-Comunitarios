@@ -17,7 +17,7 @@ import modelo.Usuario;
  */
 @ManagedBean(name = "controlAutorizacion")
 @SessionScoped
-public class ControlAutorizacion implements Serializable{
+public class ControlAutorizacion{
     private Usuario usuario;
     
     public ControlAutorizacion() {

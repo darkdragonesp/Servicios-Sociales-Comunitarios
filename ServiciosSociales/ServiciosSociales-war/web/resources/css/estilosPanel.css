@@ -28,3 +28,8 @@ and open the template in the editor.
 .panelIntervencion {
     margin-bottom: 5px;
 }
+
+.p-layoutUnit-footer {
+   margin-left: 100px !important;
+   margin-right:100px !important;
+ }
