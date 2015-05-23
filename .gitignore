@@ -15,3 +15,4 @@ ServiciosSociales/ServiciosSociales-ejb/dist/
 ServiciosSociales/ServiciosSociales-war/dist/
 ServiciosSociales/dist/
 ServiciosSociales/ServiciosSociales-ejb/setup
+ServiciosSociales/ServiciosSociales-ejb/src/conf/persistence.xml

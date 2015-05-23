@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -17,35 +19,49 @@ import javax.persistence.OneToOne;
 @Entity
 public class Persona implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="DNI")
     private String dni;
+    
     @Column(name="NOMBRE", nullable=false)
     private String nombre;
+    
     @Column(name="APELLIDO_1",nullable=false)
     private String apellido1;
+    
     @Column(name="APELLIDO_2")
     private String apellido2;
+    
     @Column(name="DIRECCION", nullable=false)
     private String direccion;
+    
     @Column(name="TELEFONO", nullable=false)
     private Integer telefono;
+    
     @Column(name="SEXO", nullable=false)
     private Character sexo;
+    
     @Column(name="ESTADO_CIVIL", nullable=false)
     private String estadoCivil;
+    
+    @Temporal(TemporalType.DATE)
     @Column(name="FECHA_NACIMIENTO", nullable=false)
     private Date fechaNacimiento;
+    
     @Column(name="LOCALIDAD", nullable=false)
     private String localidad;
+    
     @Column(name="NACIONALIDAD", nullable=false)
     private String nacionalidad;
+    
     @Column(name="EMAIL")
     private String email;
     
     @OneToOne(mappedBy="persona")
     private Ciudadano ciudadano;
+    
     @OneToOne(mappedBy="persona")
     private Usuario usuario;
     
