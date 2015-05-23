@@ -12,3 +12,5 @@ ServiciosSociales/ServiciosSociales-ejb/build/
 ServiciosSociales/ServiciosSociales-ejb/dist/
 ServiciosSociales/ServiciosSociales-war/dist/
 ServiciosSociales/dist/
+ServiciosSociales/ServiciosSociales-ejb/build.xml
+ServiciosSociales/ServiciosSociales-war/build.xml
