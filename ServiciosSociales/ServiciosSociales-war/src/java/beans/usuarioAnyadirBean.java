@@ -18,8 +18,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import modelo.Actividad;
-import modelo.Usuario;
+import entidades.Actividad;
+import entidades.Usuario;
 
 
 /**
