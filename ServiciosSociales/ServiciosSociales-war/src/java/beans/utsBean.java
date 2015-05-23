@@ -11,9 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
 import entidades.UTS;
-import negocio.UTSEJB;
 import negocio.UTSLocal;
 /**
  *
@@ -31,16 +29,12 @@ public class utsBean  implements Serializable{
     private UTS selectedUTS;
     
     
+    private UTS uts1;
   @EJB
     private UTSLocal ejb;
     
-    
-   /* public utsBean(){
-        utss = new ArrayList<UTS>();
-        utss.add(new UTS((long)1,"Sur","El Palo","Malaga"));
-        utss.add(new UTS((long)2,"Norte","Teatinos","Malaga"));
-        utss.add(new UTS((long)3,"Centro","Antequera","Malaga"));
-    }*/
+    public utsBean(){}
+  
     @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
 
@@ -103,15 +97,14 @@ public String enviar() {
     }
     public String crearUTS(){
         long ide=0;
-       /* if(! datos.getUts().isEmpty()){
-            ide=( datos.getUts().get( datos.getUts().size()-1).getId())+1;
-        }*/
+        if(! ejb.getUTSs().isEmpty()){
+            ide=( ejb.getUTSs().get( ejb.getUTSs().size()-1).getId())+1;
+        }
         setId(ide);
        // datos.getUts().add(new UTS(ide,getUts(),getZona(),getCss()));
         
-        
         ejb.insertar(new UTS(ide,getUts(),getZona(),getCss()));
         return "UTS "+getUts()+ "con id "+id+" creado con éxito .";
-        //limpiar uts?
+        
     }
 }
