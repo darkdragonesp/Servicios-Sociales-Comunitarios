@@ -90,7 +90,7 @@ public class utsBean  implements Serializable{
     }
     public void eliminar(){
         //datos.getUts().remove(this.getSelectedUTS());
-        ejb.getUTSs().remove(this.getSelectedUTS());
+        ejb.eliminar(this.getSelectedUTS());
 //       return "usuarios.xhtml?faces-redirect=true";
     }
     public String enviar() {
