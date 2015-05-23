@@ -5,11 +5,14 @@
  */
 package beans;
 
+import entidades.Expediente;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import modelo.Usuario;
+//import modelo.Usuario;
+import entidades.Usuario;
 
 /**
  *
@@ -30,6 +33,10 @@ public class ControlAutorizacion implements Serializable{
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+    
+    public synchronized List<Expediente> getExpedientes(){
+        return usuario != null ? usuario.getExpedientes() : null;
     }
     
     public boolean isTecnicoSuperior(){

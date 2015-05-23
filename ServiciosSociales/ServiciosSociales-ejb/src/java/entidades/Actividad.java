@@ -54,7 +54,7 @@ public class Actividad implements Serializable {
 //        this.id = id;
 //    }
     
-        public String getId() {
+    public String getId() {
         return id;
     }
 

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -54,6 +55,9 @@ public class Expediente implements Serializable {
 
     @OneToMany(mappedBy = "expediente")
     private List<Intervencion> intervenciones;
+    
+    @ManyToMany(mappedBy = "expedientes")
+    private List<Usuario> usuarios;
     
     
     public Expediente(){
@@ -140,6 +144,14 @@ public class Expediente implements Serializable {
 
     public void setUts(UTS uts) {
         this.uts = uts;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     @Override

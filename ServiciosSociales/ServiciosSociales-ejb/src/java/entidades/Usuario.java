@@ -3,10 +3,13 @@ package entidades;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -39,6 +42,12 @@ public class Usuario implements Serializable {
     
     @OneToMany(mappedBy = "usuario")
     private List<Actividad> actividades;
+    
+    @ManyToMany(cascade = {CascadeType.PERSIST,  })
+    @JoinTable(name = "ACCESO EXPEDIENTES", 
+            joinColumns = @JoinColumn(name = "USUARIO"), 
+            inverseJoinColumns = @JoinColumn(name = "EXPEDIENTE"))
+    private List<Expediente> expedientes;
     
     
     public Usuario(){
@@ -104,6 +113,14 @@ public class Usuario implements Serializable {
 
     public void setPersona(Persona persona) {
         this.persona = persona;
+    }
+
+    public List<Expediente> getExpedientes() {
+        return expedientes;
+    }
+
+    public void setExpedientes(List<Expediente> expedientes) {
+        this.expedientes = expedientes;
     }
 
     @Override
