@@ -30,69 +30,70 @@ public class utsBean  implements Serializable{
     
     
     private UTS uts1;
-  @EJB
+    @EJB
     private UTSLocal ejb;
     
     public utsBean(){}
-  
+    
     @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
-
+    
     public void setDatos(DatosFicticios datos) {
         this.datos = datos;
     }
     public long getId() {
         return id;
     }
-
+    
     public void setId(long id) {
         this.id = id;
     }
-
+    
     public String getUts() {
         return uts;
     }
-
+    
     public void setUts(String uts) {
         this.uts = uts;
     }
-
+    
     public String getZona() {
         return zona;
     }
-
+    
     public void setZona(String zona) {
         this.zona = zona;
     }
-
+    
     public String getCss() {
         return css;
     }
-
+    
     public void setCss(String css) {
         this.css = css;
     }
-
+    
     public List<UTS> getUtss() {
         return utss;
     }
-
+    
     public void setUtss(List<UTS> utss) {
         this.utss = utss;
     }
-
+    
     public UTS getSelectedUTS() {
         return selectedUTS;
     }
-
+    
     public void setSelectedUTS(UTS selectedUTS) {
         this.selectedUTS = selectedUTS;
     }
-     public void eliminar(){
+    public void eliminar(){
         //datos.getUts().remove(this.getSelectedUTS());
+        ejb.getUTSs().remove(this.getSelectedUTS());
 //       return "usuarios.xhtml?faces-redirect=true";
     }
-public String enviar() {
+    public String enviar() {
         return "utsAnyadirExito.xhtml?faces-redirect=true";
     }
     public String crearUTS(){
@@ -101,7 +102,7 @@ public String enviar() {
             ide=( ejb.getUTSs().get( ejb.getUTSs().size()-1).getId())+1;
         }
         setId(ide);
-       // datos.getUts().add(new UTS(ide,getUts(),getZona(),getCss()));
+        // datos.getUts().add(new UTS(ide,getUts(),getZona(),getCss()));
         
         ejb.insertar(new UTS(ide,getUts(),getZona(),getCss()));
         return "UTS "+getUts()+ "con id "+id+" creado con éxito .";

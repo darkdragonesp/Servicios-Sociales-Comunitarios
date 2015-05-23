@@ -34,7 +34,13 @@ public class UTSEJB implements UTSLocal {
     
     @Override
     public boolean eliminar(UTS uts) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (uts == null) return false;
+        try {
+            em.remove(em.merge(uts));
+        } catch(Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
