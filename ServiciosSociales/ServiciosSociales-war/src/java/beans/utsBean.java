@@ -108,4 +108,7 @@ public class utsBean  implements Serializable{
         return "UTS "+getUts()+ "con id "+id+" creado con éxito .";
         
     }
+    public List<UTS> listar(){
+        return ejb.getUTSs();
+    }
 }
