@@ -7,10 +7,14 @@ package beans;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import modelo.UTS;
+import javax.inject.Inject;
+import entidades.UTS;
+import negocio.UTSEJB;
+import negocio.UTSLocal;
 /**
  *
  * @author DarkDragon
@@ -25,6 +29,11 @@ public class utsBean  implements Serializable{
     
     private List<UTS> utss;
     private UTS selectedUTS;
+    
+    
+  @EJB
+    private UTSLocal ejb;
+    
     
    /* public utsBean(){
         utss = new ArrayList<UTS>();
@@ -86,7 +95,7 @@ public class utsBean  implements Serializable{
         this.selectedUTS = selectedUTS;
     }
      public void eliminar(){
-        datos.getUts().remove(this.getSelectedUTS());
+        //datos.getUts().remove(this.getSelectedUTS());
 //       return "usuarios.xhtml?faces-redirect=true";
     }
 public String enviar() {
@@ -94,11 +103,14 @@ public String enviar() {
     }
     public String crearUTS(){
         long ide=0;
-        if(! datos.getUts().isEmpty()){
+       /* if(! datos.getUts().isEmpty()){
             ide=( datos.getUts().get( datos.getUts().size()-1).getId())+1;
-        }
+        }*/
         setId(ide);
-        datos.getUts().add(new UTS(ide,getUts(),getZona(),getCss()));
+       // datos.getUts().add(new UTS(ide,getUts(),getZona(),getCss()));
+        
+        
+        ejb.insertar(new UTS(ide,getUts(),getZona(),getCss()));
         return "UTS "+getUts()+ "con id "+id+" creado con éxito .";
         //limpiar uts?
     }
