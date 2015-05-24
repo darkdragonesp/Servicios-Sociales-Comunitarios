@@ -24,7 +24,7 @@
                        
                     </p:contextMenu>
                     
-                    <p:dataTable id="usuarios" var="usuario" value="#{datosFicticios.usuarios}"
+                    <p:dataTable id="usuarios" var="usuario" value="#{usuarioAnyadirBean.listar()}"
                                  selection="#{usuarioAnyadirBean.selectedUsuario}" selectionMode="single" rowKey="#{usuario.dni}" 
                                  emptyMessage="No hay usuarios disponibles">
                         <f:facet name="header">

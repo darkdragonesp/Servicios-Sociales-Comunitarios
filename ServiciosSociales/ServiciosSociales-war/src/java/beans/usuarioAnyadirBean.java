@@ -20,6 +20,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import entidades.Actividad;
 import entidades.Usuario;
+import javax.ejb.EJB;
+import negocio.UsuarioLocal;
 
 
 /**
@@ -58,6 +60,9 @@ public class usuarioAnyadirBean  implements Serializable{
         usuarios.add(new Usuario("22222222J", "1234","Auxiliar administrativo"));
         usuarios.add(new Usuario("11111111H", "1234","Profesional"));
     }*/
+    @EJB
+    private UsuarioLocal ejb;
+    
     @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
 
@@ -289,5 +294,7 @@ public class usuarioAnyadirBean  implements Serializable{
     }
 
 
-    
+    public List<Usuario> listar(){
+       return  ejb.getUsuarios();
+    }
 }
