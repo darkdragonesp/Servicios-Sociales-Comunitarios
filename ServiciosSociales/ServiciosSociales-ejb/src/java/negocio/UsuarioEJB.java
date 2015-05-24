@@ -42,9 +42,7 @@ public class UsuarioEJB implements UsuarioLocal{
     public boolean eliminar(Usuario u) {
         if (u == null) return false;
         try {
-            //String dni= u.getDni();
             em.remove(em.merge(u));
-            //em.remove(em.createQuery("SELECT a FROM Persona a WHERE UPPER(a.dni)==UPPER(dni)", Persona.class).getSingleResult());
         } catch(Exception e) {
             return false;
         }
@@ -54,6 +52,17 @@ public class UsuarioEJB implements UsuarioLocal{
     @Override
     public boolean editar(Usuario u) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public boolean insertar(Persona u) {
+        if (u == null) return false;
+        try {
+            em.persist(u);
+        } catch (Exception e){
+            return false;
+        }
+        return true;
     }
     
 }

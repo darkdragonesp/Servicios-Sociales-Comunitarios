@@ -5,6 +5,7 @@
  */
 package negocio;
 
+import entidades.Persona;
 import entidades.Usuario;
 import java.util.List;
 import javax.ejb.Local;
@@ -19,5 +20,7 @@ public interface UsuarioLocal {
     public boolean insertar(Usuario u);
     public boolean eliminar(Usuario u);
     public boolean editar(Usuario u);
+
+    public boolean insertar(Persona p);
     
 }

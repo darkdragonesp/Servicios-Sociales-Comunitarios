@@ -73,7 +73,20 @@ public class Persona implements Serializable {
         this.apellido1=apellido1;
         this.apellido2=apellido2;
     }
-    
+        public Persona (String dni, String nombre, String apellido1, String apellido2,String dir,Integer tel,Character sex,String est,Date fech,String loc,String nac,String ema) {
+        this.dni=dni;
+        this.nombre=nombre;
+        this.apellido1=apellido1;
+        this.apellido2=apellido2;
+        direccion=dir;
+        telefono=tel;
+        this.estadoCivil=est;
+        this.fechaNacimiento=fech;
+        localidad=loc;
+        nacionalidad=nac;
+        email=ema;
+        sexo=sex;
+    }
     public String getDni() {
         return dni;
     }

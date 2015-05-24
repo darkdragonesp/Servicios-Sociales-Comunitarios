@@ -55,6 +55,7 @@ public class Usuario implements Serializable {
         setContrasena(pass);
         this.persona = new Persona();
         setTipoProfesional(tipo_profesional);
+        
     }
 
     public List<Actividad> getActividades() {
