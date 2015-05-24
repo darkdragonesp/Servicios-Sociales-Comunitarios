@@ -19,6 +19,7 @@ import javax.faces.validator.ValidatorException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import entidades.Actividad;
+import entidades.Persona;
 import entidades.Usuario;
 import javax.ejb.EJB;
 import negocio.UsuarioLocal;
@@ -39,8 +40,8 @@ public class usuarioAnyadirBean  implements Serializable{
     private String apellido1;
     private String apellido2;
     private String direccion;
-    private String telefono;
-    private String sexo;
+    private Integer telefono;
+    private Character sexo;
     private String estadoCivil;
     private Date fechaNacimiento;
     private String localidad;
@@ -124,19 +125,19 @@ public class usuarioAnyadirBean  implements Serializable{
         this.direccion = direccion;
     }
     
-    public String getTelefono() {
+    public Integer getTelefono() {
         return telefono;
     }
     
-    public void setTelefono(String telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
     
-    public String getSexo() {
+    public Character getSexo() {
         return sexo;
     }
     
-    public void setSexo(String sexo) {
+    public void setSexo(Character sexo) {
         this.sexo = sexo;
     }
     
@@ -236,7 +237,7 @@ public class usuarioAnyadirBean  implements Serializable{
         }
         //si ya existe el DNI
         
-        for (Usuario user : datos.getUsuarios()) {
+        for (Usuario user : ejb.getUsuarios()) {
             if (user.getDni().equalsIgnoreCase(var))throw new ValidatorException(
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "El DNI introducido ya existe en la base de datos.", null));
         }
@@ -250,7 +251,11 @@ public class usuarioAnyadirBean  implements Serializable{
         usuario.setDni(getDni());
         usuario.setContrasena(getContrasenya());
         usuario.setTipoProfesional(getTipoProfesional());
-        datos.getUsuarios().add(usuario);
+        Persona p =new Persona(getDni(),getNombre(),getApellido1(),getApellido2(),getDireccion(),getTelefono(),getSexo(),this.getEstadoCivil(),this.getFechaNacimiento(),this.getLocalidad(),this.getNacionalidad(),this.getEmail());
+        
+        
+        ejb.insertar(p);
+        //ejb.insertar(usuario);
         return "Usuario con DNI "+getDni()+ " creado con éxito.";
         //limpiar usuario?
     }
@@ -281,7 +286,7 @@ public class usuarioAnyadirBean  implements Serializable{
     }
     
     public void eliminar(){
-        datos.getUsuarios().remove(this.getSelectedUsuario());
+        ejb.eliminar(this.getSelectedUsuario());
        //return "usuarios.xhtml?faces-redirect=true";
     }
 
