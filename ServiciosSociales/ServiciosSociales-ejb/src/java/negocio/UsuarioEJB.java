@@ -6,6 +6,7 @@
 package negocio;
 
 import entidades.Persona;
+import entidades.UTS;
 import entidades.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -64,5 +65,8 @@ public class UsuarioEJB implements UsuarioLocal{
         }
         return true;
     }
-    
+    @Override
+    public List<UTS> getUTSs() {
+         return em.createQuery("SELECT a FROM UTS a", UTS.class).getResultList();
+    }
 }

@@ -6,6 +6,7 @@
 package negocio;
 
 import entidades.Persona;
+import entidades.UTS;
 import entidades.Usuario;
 import java.util.List;
 import javax.ejb.Local;
@@ -22,5 +23,5 @@ public interface UsuarioLocal {
     public boolean editar(Usuario u);
 
     public boolean insertar(Persona p);
-    
+     public List<UTS> getUTSs();
 }
