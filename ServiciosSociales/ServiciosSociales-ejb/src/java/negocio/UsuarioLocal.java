@@ -15,7 +15,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface UsuarioLocal {
-    public List<Usuario> getUTSs();
+    public List<Usuario> getUsuarios();
     public boolean insertar(Usuario u);
     public boolean eliminar(Usuario u);
     public boolean editar(Usuario u);
