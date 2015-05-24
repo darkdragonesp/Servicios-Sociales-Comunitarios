@@ -10,13 +10,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import modelo.Actividad;
-import modelo.Usuario;
+import entidades.Actividad;
+import entidades.Usuario;
+import negocio.ActividadLocal;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -38,6 +40,9 @@ public class ControladorCalendario implements Serializable{
     private Usuario usuario;
     private List<Actividad> actividades;
     private String lugar;
+    
+    @EJB
+    private ActividadLocal bd;
     
     @ManagedProperty(value = "#{controlAutorizacion}")
     private ControlAutorizacion controladorSesion;
@@ -146,6 +151,7 @@ public class ControladorCalendario implements Serializable{
             a.setId(aux.getId());
             aux.setData(a);
             actividades.add(a);
+            
         }else{
             modelo.updateEvent(actividad);
             Actividad aux = (Actividad)actividad.getData();
@@ -155,12 +161,16 @@ public class ControladorCalendario implements Serializable{
             nueva.setLugar(new String(lugar));
             actividades.set(actividades.indexOf(aux), nueva);
         }
+        usuario.setActividades(actividades);
+        bd.actualizar(usuario);
         actividad = new DefaultScheduleEvent();
     }
     
     public void deleteActividad(){
         modelo.deleteEvent(actividad);
         actividades.remove((Actividad)actividad.getData());
+        usuario.setActividades(actividades);
+        bd.actualizar(usuario);
     }
     
     public Date getInitialDate() {
