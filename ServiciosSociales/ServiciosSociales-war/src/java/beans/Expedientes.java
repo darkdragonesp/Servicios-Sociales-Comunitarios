@@ -103,6 +103,7 @@ public class Expedientes implements Serializable{
         intervencion.setExpediente(expediente);
         
         boolean estado = negocioIntervencion.insertar(intervencion);
+        sesion.refrescarUsuario();
 
         return "editar-expediente.xhtml";
     }

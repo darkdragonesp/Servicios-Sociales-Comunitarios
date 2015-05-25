@@ -1,5 +1,6 @@
 package negocio;
 
+import entidades.Expediente;
 import entidades.Intervencion;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,7 +17,10 @@ public class IntervencionEJB implements IntervencionLocal {
     private EntityManager em;
     
     public boolean insertar(Intervencion intervencion) {
+        Expediente expediente = em.find(Expediente.class, intervencion.getExpediente().getId());
         em.persist(intervencion);
+        expediente.getIntervenciones().add(intervencion);
+        em.merge(expediente);
         
         return true;
     }

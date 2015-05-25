@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import entidades.Usuario;
 import javax.ejb.EJB;
+import negocio.CuentaLocal;
 import negocio.ExpedienteLocal;
 
 /**
@@ -23,6 +24,9 @@ public class ControlAutorizacion implements Serializable{
     
     @EJB
     private ExpedienteLocal negocioExpediente;
+    
+    @EJB
+    private CuentaLocal cuenta;
     
     public ControlAutorizacion() {
     
@@ -83,6 +87,10 @@ public class ControlAutorizacion implements Serializable{
             is=true;
         }
         return is;
+    }
+    
+    public void refrescarUsuario(){
+        usuario = cuenta.refrescarUsuario(usuario);
     }
     
     public String redireccionar(){
