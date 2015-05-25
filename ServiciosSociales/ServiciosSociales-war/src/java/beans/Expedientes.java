@@ -41,9 +41,16 @@ public class Expedientes implements Serializable{
     
     @PostConstruct
     public void init(){
-        intervencion = new Intervencion();
+        cargarExpediente();
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        System.out.println("Jola amigo *****************************************************"
+        String[] page = request.getRequestURI().split("/");
+        //ystem.out.println(page[page.length-1]);
+        if(page[page.length-1].equalsIgnoreCase("addIntervencion.xhtml")){
+            intervencion = new Intervencion();
+            intervencion.setId(idIntervencion());
+            intervencion.setExpediente(expediente);
+        }
+        System.out.println("*****************************************************"
                 + "*************************************************************************"
                 + "**************************************************************************"
                 + "**************************************************************************"+request.getRequestURI());
@@ -52,7 +59,7 @@ public class Expedientes implements Serializable{
     public void cargarExpediente(){
         expediente = sesion.getExpediente();
     }
-
+    
     public Expediente getExpediente() {
         return expediente;
     }
@@ -93,10 +100,10 @@ public class Expedientes implements Serializable{
     }
     
     public String insertarIntervencion(){
-        System.out.println("hola primo");
         intervencion.setExpediente(expediente);
+        
         boolean estado = negocioIntervencion.insertar(intervencion);
-        System.out.println("hola primo");
+
         return "editar-expediente.xhtml";
     }
     

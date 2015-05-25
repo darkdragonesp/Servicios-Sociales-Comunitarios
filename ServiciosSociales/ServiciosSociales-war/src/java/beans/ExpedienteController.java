@@ -106,7 +106,7 @@ public class ExpedienteController implements Serializable{
     
     public String editarIntervencion(Intervencion intervencion){
         this.intervencion = intervencion;
-        editIntervencion = new Intervencion(this.intervencion);
+        //editIntervencion = new Intervencion(this.intervencion);
 
         return "editar_intervencion.xhtml";
     }

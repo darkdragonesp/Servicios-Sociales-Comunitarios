@@ -42,9 +42,7 @@
                 
                 
                 <p:column headerText="Id de expediente" filterBy="#{expediente.id}" filterMatchMode="contains">
-                    <p:commandLink action="#{expedientes.consultarExpediente(expediente)}" ajax="false" style="text-decoration: none">
-                        <h:outputText value="Expediente nº #{expediente.id}" />
-                    </p:commandLink>
+                    <p:link outcome="#{expedientes.consultarExpediente(expediente)}" value="Expediente nº #{expediente.id}" style="text-decoration: none"/>
                 </p:column>
                 
             </p:dataTable>

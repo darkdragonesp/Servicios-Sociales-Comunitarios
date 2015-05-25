@@ -9,9 +9,7 @@
     <ui:define name="title">Expediente</ui:define>
         
     <ui:define name="content">
-        <f:metadata>
-            <f:event type="preRenderView" listener="#{expedientes.cargarExpediente}"/>
-        </f:metadata>
+        
         <h:panelGrid columns="2">
             <h:outputLabel value="Expediente:"/>
             <h:outputLabel value="#{expedientes.expediente.id}"/>

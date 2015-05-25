@@ -8,11 +8,9 @@
     
     <ui:define name="title">Intervencion</ui:define>
     <ui:define name="content">
-        <f:metadata>
-            <f:event type="preRenderView" listener="#{expedientes.cargarExpediente}"/>
-        </f:metadata>
+        
         <h3>Datos de Intervención</h3>
-        <p:outputLabel value="Identificador: #{expedientes.idIntervencion()}"/>
+        <p:outputLabel value="Identificador: #{expedientes.intervencion.id}"/>
         <p:separator/>
         <h:form>
             <h:panelGrid style="margin-right: 200px; float:left">
@@ -40,8 +38,9 @@
             
             <h:panelGrid style="float:left">
                 <p:outputLabel class="label" for="actividad" value="Actividad" />
-                <p:selectOneMenu id="actividad" value="#{expedientes.intervencion.actividad}" style="width:200px" required="true">
-                    <f:selectItems value="#{controlAutorizacion.usuario.actividades}" var="actividadd" itemLabel="#{actividadd.descripcion}" itemValue="#{actividadd}"/>
+                <p:selectOneMenu id="actividad" value="#{expedientes.intervencion.actividad}" converter="actividadconverter" style="width:200px" >
+                    <f:selectItems value="#{controlAutorizacion.usuario.actividades}" var="actividad" itemLabel="#{actividad.descripcion}" itemValue="#{actividad}"/>
+                    <p:ajax event="change" listener="#{expedientes.onItemSelect}" />
                 </p:selectOneMenu>
             </h:panelGrid>
             

@@ -2,6 +2,7 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -61,18 +62,6 @@ public class Intervencion implements Serializable {
     
     public Intervencion(){
         
-    }
-    
-    public Intervencion(Intervencion intervencion){
-        setId(intervencion.getId());
-        setTipo(intervencion.getTipo());
-        setRecursoAplicado(intervencion.getRecursoAplicado());
-        setRecursoIdeal(intervencion.getRecursoIdeal());
-        setAyuda(intervencion.getAyuda());
-        setFechaInicio(intervencion.getFechaInicio());
-        setFechaFin(intervencion.getFechaFin());
-        setNotas(intervencion.getNotas());
-        setValoracion(intervencion.getValoracion());
     }
     
     public Long getId() {
