@@ -43,7 +43,10 @@ public class UsuarioEJB implements UsuarioLocal{
     public boolean eliminar(Usuario u) {
         if (u == null) return false;
         try {
+            String dni=u.getDni();
             em.remove(em.merge(u));
+           Persona p= em.createQuery("SELECT a FROM Persona a WHERE a.dni =:dni", Persona.class).getSingleResult();
+           em.remove(em.merge(p));
         } catch(Exception e) {
             return false;
         }
