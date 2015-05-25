@@ -1,13 +1,11 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -16,26 +14,30 @@ import javax.persistence.OneToMany;
 @Entity
 public class UTS implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ID_UTS")
     private Long id;
+    
     @Column(name="UTS", nullable=false)
     private String uts;
+    
     @Column(name="ZONA", nullable=false)
     private String zona;
+    
     @Column(name="CSS", nullable=false)
     private String css;
     
     public UTS(){
         
     }
-    public UTS(Long id,String uts,String z,String c){
+    /*public UTS(Long id,String uts,String z,String c){
         setUts(uts);
         setId(id);
         setCss(c);
         setZona(z);
-    }
+    }*/
     public Long getId() {
         return id;
     }

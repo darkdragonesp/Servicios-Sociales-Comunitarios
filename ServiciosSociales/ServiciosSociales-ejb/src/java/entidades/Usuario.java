@@ -43,8 +43,8 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "usuario")
     private List<Actividad> actividades;
     
-    @ManyToMany(cascade = {CascadeType.PERSIST,  })
-    @JoinTable(name = "ACCESO EXPEDIENTES", 
+    @ManyToMany(cascade = {CascadeType.PERSIST,  CascadeType.REMOVE})
+    @JoinTable(name = "ACCESO_EXPEDIENTES", 
             joinColumns = @JoinColumn(name = "USUARIO"), 
             inverseJoinColumns = @JoinColumn(name = "EXPEDIENTE"))
     private List<Expediente> expedientes;

@@ -98,7 +98,7 @@ public String enviar() {
             ide=( datos.getUts().get( datos.getUts().size()-1).getId())+1;
         }
         setId(ide);
-        datos.getUts().add(new UTS(ide,getUts(),getZona(),getCss()));
+        //datos.getUts().add(new UTS(ide,getUts(),getZona(),getCss()));
         return "UTS "+getUts()+ "con id "+id+" creado con éxito .";
         //limpiar uts?
     }

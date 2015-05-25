@@ -25,7 +25,7 @@ public class Intervenciones {
     public String insertar(){
         boolean estado = bd.insertar(intervencion);
         
-        return "";
+        return "editar-expedien";
     }
     
     public String modificar(){

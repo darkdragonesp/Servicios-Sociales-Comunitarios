@@ -13,9 +13,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import modelo.Ciudadano;
-import modelo.Expediente;
-import modelo.Intervencion;
+import entidades.Ciudadano;
+import entidades.Expediente;
+import entidades.Intervencion;
 import org.primefaces.event.SelectEvent;
 
 /**

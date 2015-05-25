@@ -6,14 +6,17 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import entidades.Usuario;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import negocio.CuentaLocal;
 
 /**
  *
@@ -23,58 +26,66 @@ import entidades.Usuario;
 @ManagedBean(name = "login")
 @RequestScoped
 public class Login implements Serializable {
-    private String usuario;
-    private String password;
-    
+    private Usuario usuario;
 
-    @ManagedProperty(value = "#{datosFicticios}")
-    private DatosFicticios datos;
+    /*@ManagedProperty(value = "#{datosFicticios}")
+    private DatosFicticios datos;*/
     
     @ManagedProperty(value = "#{controlAutorizacion}")
-    private ControlAutorizacion ctrlau;
+    private ControlAutorizacion sesion;
+    
+    @EJB
+    private CuentaLocal cuenta;
     
     public Login(){
         
     }
     
-    public void setDatos(DatosFicticios datos) {
-        this.datos = datos;
+    @PostConstruct
+    public void init() {
+        usuario = new Usuario();
     }
 
-    public void setCtrlau(ControlAutorizacion ctrlau) {
-        this.ctrlau = ctrlau;
+    public void setSesion(ControlAutorizacion sesion) {
+        this.sesion = sesion;
     }
-    
-    public String getUsuario() {
+
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
     }
     
     public String autenticar(){
-        List<Usuario> usuarios = datos.getUsuarios();
-        Iterator<Usuario> it = usuarios.iterator();
-        while(it.hasNext()){
-            Usuario user = it.next();
-            if(user.getDni().equals(getUsuario()) && user.getContrasena().equals(getPassword()))
-                ctrlau.setUsuario(user);
-        }
         
-        if(ctrlau.getUsuario() == null){
+        Usuario user = cuenta.refrescarUsuario(usuario);
+        
+        if(user == null || !user.getContrasena().equalsIgnoreCase(sha256(usuario.getContrasena()))){
             FacesContext ctx = FacesContext.getCurrentInstance();
             ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "El usuario y/o contraseña es incorrecto"));
+        }else
+            sesion.setUsuario(user);
+        
+        
+        return sesion.redireccionar();
+    }
+    
+    public String sha256(String s){
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException ex) {
+            return null;
         }
-  
-        return ctrlau.redireccionar();
+        byte[] mdbytes = md.digest(s.getBytes());
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < mdbytes.length; i++) {
+          sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        
+        return sb.toString();
     }
 }

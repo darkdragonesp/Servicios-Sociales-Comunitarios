@@ -51,7 +51,7 @@
                     <p:dataTable id="lista_ciudadanos_editar" var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}"
                                  emptyMessage="No hay ciudadanos en este expediente">
                         <p:column headerText="DNI">
-                            <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
+                            <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false" style="text-decoration: none">
                                 <h:outputText value="#{ciudadanos.dni}"/>
                             </p:commandLink>
                         </p:column>

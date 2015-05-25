@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 import entidades.Expediente;
@@ -11,8 +6,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-//import modelo.Usuario;
 import entidades.Usuario;
+import javax.ejb.EJB;
+import negocio.ExpedienteLocal;
 
 /**
  *
@@ -22,6 +18,11 @@ import entidades.Usuario;
 @SessionScoped
 public class ControlAutorizacion implements Serializable{
     private Usuario usuario;
+    private Expediente expediente;
+    private int numtabs;
+    
+    @EJB
+    private ExpedienteLocal negocioExpediente;
     
     public ControlAutorizacion() {
     
@@ -34,9 +35,30 @@ public class ControlAutorizacion implements Serializable{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public Expediente getExpediente() {
+        return expediente;
+    }
+
+    public void setExpediente(Expediente expediente) {
+        this.expediente = expediente;
+    }
+    
+    public int getNumtabs() {
+        return numtabs;
+    }
+
+    public void setNumtabs(int numtabs) {
+        this.numtabs = numtabs;
+    } 
     
     public synchronized List<Expediente> getExpedientes(){
-        return usuario != null ? usuario.getExpedientes() : null;
+        if(usuario == null)
+            return null;
+        else if(isTecnicoSuperior() || isAuxiliarAdministrativo())
+           return negocioExpediente.getExpedientes();
+        else
+           return usuario.getExpedientes();
     }
     
     public boolean isTecnicoSuperior(){

@@ -4,24 +4,27 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
-                    
-    <ui:define name="title">Expediente #{expedienteController.expediente.id}</ui:define>
+                xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    
+    <ui:define name="title">Expediente</ui:define>
         
     <ui:define name="content">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{expedientes.cargarExpediente}"/>
+        </f:metadata>
         <h:panelGrid columns="2">
             <h:outputLabel value="Expediente:"/>
-            <h:outputLabel value="#{expedienteController.expediente.id}"/>
+            <h:outputLabel value="#{expedientes.expediente.id}"/>
             <h:outputLabel value="Fecha de apertura"/>
             <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaApertura)}"/>
             <h:outputLabel value="Fecha de cierre"/>
             <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaCierre)}"/>
             <h:outputLabel value="Estado"/>
-            <h:outputLabel value="#{expedienteController.expediente.estado}"/>
+            <h:outputLabel value="#{expedientes.expediente.estado}"/>
         </h:panelGrid>
         <h3>Ciudadanos</h3>
         <h:form>
-            <p:dataTable var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}"
+            <p:dataTable var="ciudadanos" value="#{expedientes.expediente.ciudadanos}"
                          emptyMessage="No hay ciudadanos en este expediente">
                 <p:column headerText="DNI">
                     <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
@@ -42,7 +45,7 @@
         <h3>Intervenciones</h3>
         <h:form>
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-            <p:dataTable var="intervenciones" value="#{expedienteController.expediente.intervenciones}"
+            <p:dataTable var="intervenciones" value="#{expedientes.expediente.intervenciones}"
                          emptyMessage="Este expediente no ha recibido intervenciones">
                 <p:column headerText="ID">
                     <h:outputText value="#{intervenciones.id}"/>
@@ -57,10 +60,13 @@
                     <h:outputText value="#{intervenciones.valoracion}"/>
                 </p:column>
             </p:dataTable>
+            <c:if test="#{controlAutorizacion.profesional}">
+                <p:button outcome="addIntervencion.xhtml" value="Añadir intervención"/>
+            </c:if>    
         </h:form>
         <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}">
             <h:form>
-                <p:commandButton value="Editar expediente" action="editar-expediente.xhtml" ajax="false"/>
+                <p:button outcome="editar-expediente.xhtml" value="Editar expediente"/>
             </h:form>
         </c:if>
     </ui:define>

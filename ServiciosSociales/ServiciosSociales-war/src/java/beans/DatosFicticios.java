@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 import java.util.ArrayList;
@@ -97,9 +92,9 @@ public class DatosFicticios {
         usuarios.get(0).setActividades(new ArrayList<Actividad>());
         usuarios.get(1).setActividades(new ArrayList<Actividad>());
        
-        uts.add(new UTS((long)1,"Sur","El Palo","Malaga"));
+        /*uts.add(new UTS((long)1,"Sur","El Palo","Malaga"));
         uts.add(new UTS((long)2,"Norte","Teatinos","Malaga"));
-        uts.add(new UTS((long)3,"Centro","Antequera","Malaga"));
+        uts.add(new UTS((long)3,"Centro","Antequera","Malaga"));*/
     }
 
     public List<Usuario> getUsuarios() {

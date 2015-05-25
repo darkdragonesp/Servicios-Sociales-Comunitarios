@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 public class Intervencion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="ID_INTERVENCION")
     private Long id;
     
