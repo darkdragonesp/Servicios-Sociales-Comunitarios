@@ -285,6 +285,7 @@ public class usuarioAnyadirBean  implements Serializable{
         */
         
         //Persona p =new Persona(person.getDni(),person.getNombre(),person.getApellido1(),person.getApellido2(),person.getDireccion(),person.getTelefono(),person.getSexo(),person.getEstadoCivil(),person.getFechaNacimiento(),person.getLocalidad(),person.getNacionalidad(),person.getEmail());
+        person.setDni(person.getDni().toUpperCase());
         user.setDni(person.getDni());
         
         ejb.insertar(person);
