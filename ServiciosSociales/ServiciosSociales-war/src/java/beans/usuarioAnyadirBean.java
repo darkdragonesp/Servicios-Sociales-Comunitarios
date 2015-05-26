@@ -262,7 +262,7 @@ public class usuarioAnyadirBean  implements Serializable{
             throw new ValidatorException(
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca un DNI válido con una longitud igual a 9.", null));
         }
-        if(!var.substring(8).equals(calcularDNI(var.substring(0,8)))){
+        if(!var.substring(8).equalsIgnoreCase(calcularDNI(var.substring(0,8)))){
             throw new ValidatorException(
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca un DNI válido.La letra no coincide", null));
         }
