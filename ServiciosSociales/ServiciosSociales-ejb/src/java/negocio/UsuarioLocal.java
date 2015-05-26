@@ -26,4 +26,6 @@ public interface UsuarioLocal {
      public List<UTS> getUTSs();
 
     public List<Persona> getPersonas();
+
+    public void eliminarP(Usuario selectedUsuario, String dni);
 }
