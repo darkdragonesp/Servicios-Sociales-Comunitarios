@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -45,6 +46,13 @@ public class UTSEJB implements UTSLocal {
 
     @Override
     public List<UTS> getUTSs() {
-         return em.createQuery("SELECT a FROM UTS a", UTS.class).getResultList();
+        Query a;
+         a=em.createQuery("SELECT DISTINCT a FROM UTS a  ORDER BY a.id", UTS.class);
+        
+         
+         List<UTS> b= a.getResultList();
+         
+         System.out.println(b);
+         return b;
     }
 }

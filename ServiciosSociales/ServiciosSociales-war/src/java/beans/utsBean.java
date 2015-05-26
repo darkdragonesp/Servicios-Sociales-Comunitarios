@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import entidades.UTS;
+import javax.annotation.PostConstruct;
 import negocio.UTSLocal;
 /**
  *
@@ -25,7 +26,7 @@ public class utsBean  implements Serializable{
     private String zona;
     private String css;
     
-    private List<UTS> utss;
+   // private List<UTS> utss;
     private UTS selectedUTS;
     
     
@@ -34,6 +35,11 @@ public class utsBean  implements Serializable{
     private UTSLocal ejb;
     
     public utsBean(){}
+    
+    @PostConstruct
+    public void init(){
+        uts1=new UTS();
+    }
     
     @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
@@ -73,14 +79,14 @@ public class utsBean  implements Serializable{
         this.css = css;
     }
     
-    public List<UTS> getUtss() {
+   /* public List<UTS> getUtss() {
         return utss;
     }
     
     public void setUtss(List<UTS> utss) {
         this.utss = utss;
     }
-    
+    */
     public UTS getSelectedUTS() {
         return selectedUTS;
     }
@@ -97,18 +103,33 @@ public class utsBean  implements Serializable{
         return "utsAnyadirExito.xhtml?faces-redirect=true";
     }
     public String crearUTS(){
-        long ide=0;
+        Long ide=new Long("0");
         if(! ejb.getUTSs().isEmpty()){
             ide=( ejb.getUTSs().get( ejb.getUTSs().size()-1).getId())+1;
         }
-        setId(ide);
+        uts1.setId(ide);
         // datos.getUts().add(new UTS(ide,getUts(),getZona(),getCss()));
-        
-        ejb.insertar(new UTS(ide,getUts(),getZona(),getCss()));
-        return "UTS "+getUts()+ "con id "+id+" creado con éxito .";
+        ejb.insertar(uts1);
+        //ejb.insertar(new UTS(ide,getUts(),getZona(),getCss()));
+        return "UTS "+uts1.getUts()+ "con id "+uts1.getId()+" creado con éxito .";
         
     }
     public List<UTS> listar(){
         return ejb.getUTSs();
     }
+
+ 
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UTS getUts1() {
+        return uts1;
+    }
+
+    public void setUts1(UTS uts1) {
+        this.uts1 = uts1;
+    }
+    
 }
