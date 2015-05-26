@@ -44,9 +44,7 @@ public class UsuarioEJB implements UsuarioLocal{
     public boolean eliminar(Usuario u) {
         if (u == null) return false;
         try {
-            String dni=u.getDni();
             em.remove(em.merge(u));
-           
         } catch(Exception e) {
             return false;
         }

@@ -321,9 +321,9 @@ public class usuarioAnyadirBean  implements Serializable{
     }
     
     public void eliminar(){
-        String dni= this.getSelectedUsuario().getDni();
+        String dni1= this.getSelectedUsuario().getDni();
         ejb.eliminar(this.getSelectedUsuario());
-        ejb.eliminarP(this.getSelectedUsuario(),dni);
+        ejb.eliminarP(this.getSelectedUsuario(),dni1);
        //return "usuarios.xhtml?faces-redirect=true";
     }
 
