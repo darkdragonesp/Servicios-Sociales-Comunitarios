@@ -29,7 +29,7 @@ public class UTSConverter implements Converter{
                 utsBean sesion = (utsBean) context.getExternalContext().getSessionMap().get("utsBean");
                 //System.out.println("killoss "+(ControlAutorizacion) context.getExternalContext().getSessionMap().get("controlAutorizacion"));
                 //System.out.println(sesion.getUsuario().getActividades());
-                return sesion.getUtss().get(Integer.parseInt(value));
+                return sesion.listar().get(Integer.parseInt(value));
             } catch(NumberFormatException e) {
                 System.out.println("error");
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid theme."));
@@ -44,7 +44,7 @@ public class UTSConverter implements Converter{
     public String getAsString(FacesContext context, UIComponent component, Object object) {
         if(object != null) {
             utsBean sesion = (utsBean) context.getExternalContext().getSessionMap().get("utsBean");
-            int i = sesion.getUtss().indexOf((Actividad) object);
+            int i = sesion.listar().indexOf((Actividad) object);
             return Integer.toString(i);
         }else {
             return null;
