@@ -2,6 +2,7 @@ package beans;
 
 import entidades.Actividad;
 import entidades.UTS;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -44,7 +45,7 @@ public class UTSConverter implements Converter{
     public String getAsString(FacesContext context, UIComponent component, Object object) {
         if(object != null) {
             utsBean sesion = (utsBean) context.getExternalContext().getSessionMap().get("utsBean");
-            int i = sesion.listar().indexOf((Actividad) object);
+           int i = sesion.listar().indexOf((UTS) object);
             return Integer.toString(i);
         }else {
             return null;
