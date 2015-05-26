@@ -20,8 +20,11 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import entidades.Actividad;
 import entidades.Persona;
+import entidades.UTS;
 import entidades.Usuario;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import negocio.UTSLocal;
 import negocio.UsuarioLocal;
 
 
@@ -61,14 +64,40 @@ public class usuarioAnyadirBean  implements Serializable{
         usuarios.add(new Usuario("22222222J", "1234","Auxiliar administrativo"));
         usuarios.add(new Usuario("11111111H", "1234","Profesional"));
     }*/
+    
+    private Usuario user;
+    private Persona person;
+      @PostConstruct
+    public void init(){
+        user=new Usuario();
+        person=new Persona();
+    }
+    
     @EJB
     private UsuarioLocal ejb;
+   
     
     @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
 
     public void setDatos(DatosFicticios datos) {
         this.datos = datos;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
+
+    public Persona getPerson() {
+        return person;
+    }
+
+    public void setPerson(Persona person) {
+        this.person = person;
     }
     
     public Usuario getSelectedUsuario() {
@@ -246,17 +275,19 @@ public class usuarioAnyadirBean  implements Serializable{
         return "usuarioAnyadirExito.xhtml?faces-redirect=true";
     }
     public String crearUsuario(){
-        Usuario usuario = new Usuario();
+        /*Usuario usuario = new Usuario();
         usuario.setActividades(new ArrayList<Actividad>());
         usuario.setDni(getDni());
         usuario.setContrasena(getContrasenya());
         usuario.setTipoProfesional(getTipoProfesional());
-        Persona p =new Persona(getDni(),getNombre(),getApellido1(),getApellido2(),getDireccion(),getTelefono(),getSexo(),this.getEstadoCivil(),this.getFechaNacimiento(),this.getLocalidad(),this.getNacionalidad(),this.getEmail());
+        */
+        
+        //Persona p =new Persona(person.getDni(),person.getNombre(),person.getApellido1(),person.getApellido2(),person.getDireccion(),person.getTelefono(),person.getSexo(),person.getEstadoCivil(),person.getFechaNacimiento(),person.getLocalidad(),person.getNacionalidad(),person.getEmail());
         
         
-        ejb.insertar(p);
-        ejb.insertar(usuario);
-        return "Usuario con DNI "+getDni()+ " creado con éxito.";
+        ejb.insertar(person);
+        ejb.insertar(user);
+        return "Usuario con DNI "+user.getDni()+ " creado con éxito.";
         //limpiar usuario?
     }
     
@@ -302,4 +333,6 @@ public class usuarioAnyadirBean  implements Serializable{
     public List<Usuario> listar(){
        return  ejb.getUsuarios();
     }
+    
+  
 }
