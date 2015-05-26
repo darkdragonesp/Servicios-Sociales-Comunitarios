@@ -40,10 +40,10 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "usuario")
     private List<Actividad> actividades;
     
-    
-    public Usuario(){
-        this.persona = new Persona();
+      public Usuario(){
+       
     }
+
 
     public Usuario(String dni, String pass){
         setDni(dni);

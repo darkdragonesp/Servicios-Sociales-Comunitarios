@@ -288,7 +288,7 @@ public class usuarioAnyadirBean  implements Serializable{
         user.setDni(person.getDni());
         
         ejb.insertar(person);
-        //ejb.insertar(user);
+        ejb.insertar(user);
         
         return "Usuario con DNI "+person.getDni()+ " creado con éxito.";
         //limpiar usuario?
