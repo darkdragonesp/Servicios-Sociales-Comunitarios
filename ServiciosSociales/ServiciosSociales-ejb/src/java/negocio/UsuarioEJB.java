@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -45,8 +46,7 @@ public class UsuarioEJB implements UsuarioLocal{
         try {
             String dni=u.getDni();
             em.remove(em.merge(u));
-           Persona p= em.createQuery("SELECT a FROM Persona a WHERE a.dni =:dni", Persona.class).getSingleResult();
-           em.remove(em.merge(p));
+           
         } catch(Exception e) {
             return false;
         }
@@ -76,5 +76,15 @@ public class UsuarioEJB implements UsuarioLocal{
     @Override
     public List<Persona> getPersonas() {
          return em.createQuery("SELECT a FROM Persona a", Persona.class).getResultList();
+    }
+
+    @Override
+    public void eliminarP(Usuario selectedUsuario, String dni) {
+        Query q = em.createQuery("SELECT p FROM Persona p WHERE p.dni = :d", Persona.class);
+            q.setParameter("d", dni);
+            Object p=q.getSingleResult();
+            System.out.println(p);
+            
+            em.remove(em.merge(p));
     }
 }
