@@ -24,4 +24,6 @@ public interface UsuarioLocal {
 
     public boolean insertar(Persona p);
      public List<UTS> getUTSs();
+
+    public List<Persona> getPersonas();
 }

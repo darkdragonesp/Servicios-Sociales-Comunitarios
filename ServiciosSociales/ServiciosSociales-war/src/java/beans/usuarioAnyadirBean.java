@@ -268,7 +268,7 @@ public class usuarioAnyadirBean  implements Serializable{
         }
         //si ya existe el DNI
         
-        for (Usuario useri : ejb.getUsuarios()) {
+        for (Persona useri : ejb.getPersonas()) {
             if (useri.getDni().equalsIgnoreCase(var))throw new ValidatorException(
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "El DNI introducido ya existe en la base de datos.", null));
         }
@@ -285,11 +285,12 @@ public class usuarioAnyadirBean  implements Serializable{
         */
         
         //Persona p =new Persona(person.getDni(),person.getNombre(),person.getApellido1(),person.getApellido2(),person.getDireccion(),person.getTelefono(),person.getSexo(),person.getEstadoCivil(),person.getFechaNacimiento(),person.getLocalidad(),person.getNacionalidad(),person.getEmail());
+        user.setDni(person.getDni());
         
-        
-        //ejb.insertar(person);
+        ejb.insertar(person);
         //ejb.insertar(user);
-        return "Usuario con DNI "+user.getDni()+ " creado con éxito.";
+        
+        return "Usuario con DNI "+person.getDni()+ " creado con éxito.";
         //limpiar usuario?
     }
     

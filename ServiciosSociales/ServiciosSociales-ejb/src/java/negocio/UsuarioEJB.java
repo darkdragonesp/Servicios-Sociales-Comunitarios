@@ -72,4 +72,9 @@ public class UsuarioEJB implements UsuarioLocal{
     public List<UTS> getUTSs() {
          return em.createQuery("SELECT a FROM UTS a", UTS.class).getResultList();
     }
+
+    @Override
+    public List<Persona> getPersonas() {
+         return em.createQuery("SELECT a FROM Persona a", Persona.class).getResultList();
+    }
 }
