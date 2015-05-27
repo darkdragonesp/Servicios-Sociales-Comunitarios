@@ -1,8 +1,6 @@
 package beans;
 
-import entidades.Actividad;
 import entidades.UTS;
-import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -26,7 +24,7 @@ public class UTSConverter implements Converter {
             try {
 //                utsBean sesion = (utsBean) context.getExternalContext().getSessionMap().get("utsBean");
 //                return sesion.listar().get(Integer.parseInt(value));
-                ExpedienteController sesion = (ExpedienteController) context.getExternalContext().getSessionMap().get("expedienteController");
+                ControlAutorizacion sesion = (ControlAutorizacion) context.getExternalContext().getSessionMap().get("controlAutorizacion");
                 return sesion.getUtss().get(Integer.parseInt(value));
             } catch (NumberFormatException e) {
                 System.out.println("error");
@@ -42,7 +40,7 @@ public class UTSConverter implements Converter {
         if (object != null) {
 //            utsBean sesion = (utsBean) context.getExternalContext().getSessionMap().get("utsBean");
 //            int i = sesion.listar().indexOf((UTS) object);
-            ExpedienteController sesion = (ExpedienteController) context.getExternalContext().getSessionMap().get("expedienteController");
+            ControlAutorizacion sesion = (ControlAutorizacion) context.getExternalContext().getSessionMap().get("controlAutorizacion");
             int i = sesion.getUtss().indexOf((UTS) object);
             return Integer.toString(i);
         } else {
