@@ -5,6 +5,7 @@
  */
 package negocio;
 import entidades.Usuario;
+import entidades.Actividad;
 import javax.ejb.Local;
 
 /**
@@ -13,6 +14,8 @@ import javax.ejb.Local;
  */
 @Local
 public interface ActividadLocal {
-    public boolean actualizar(Usuario usuario);
-   
+    public boolean actualizarUsuario(Usuario usuario);
+    public boolean actualizarActividad(Actividad actividad);
+    public boolean insertarActividad(Actividad actividad);
+    public boolean borrarActividad(Actividad actividad);
 }

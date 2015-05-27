@@ -29,7 +29,7 @@ import org.primefaces.model.ScheduleModel;
 
 /**
  *
- * @author JuanJo
+ * @author Laura
  */
 @ManagedBean(name = "controladorCalendario")
 @SessionScoped
@@ -141,9 +141,9 @@ public class ControladorCalendario implements Serializable{
     public void addActividad(){
         if(actividad.getId() == null){
             Actividad a = new Actividad(actividad.getTitle(), actividad.getStartDate());
+            a.setUsuario(usuario);
             a.setLugar(new String(lugar));
             DefaultScheduleEvent aux = (DefaultScheduleEvent)actividad;
-            System.out.println("event "+aux);
             
             modelo.addEvent(aux);
             // Ya esta en el calendario, ahora la procesamos en las actividades de usuario
@@ -151,26 +151,31 @@ public class ControladorCalendario implements Serializable{
             a.setId(aux.getId());
             aux.setData(a);
             actividades.add(a);
-            
+            bd.insertarActividad(a);
         }else{
             modelo.updateEvent(actividad);
             Actividad aux = (Actividad)actividad.getData();
             Actividad nueva = new Actividad(actividad.getTitle(), actividad.getStartDate());
+            nueva.setUsuario(usuario);
+            nueva.setId(actividad.getId());
             System.out.println(ac);
             System.out.println(aux);
             nueva.setLugar(new String(lugar));
             actividades.set(actividades.indexOf(aux), nueva);
+            bd.actualizarActividad(nueva);
         }
         usuario.setActividades(actividades);
-        bd.actualizar(usuario);
+        bd.actualizarUsuario(usuario);
         actividad = new DefaultScheduleEvent();
     }
     
     public void deleteActividad(){
         modelo.deleteEvent(actividad);
+        bd.borrarActividad((Actividad)actividad.getData());
         actividades.remove((Actividad)actividad.getData());
         usuario.setActividades(actividades);
-        bd.actualizar(usuario);
+        bd.actualizarUsuario(usuario);
+        
     }
     
     public Date getInitialDate() {

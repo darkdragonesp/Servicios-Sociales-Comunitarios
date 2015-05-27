@@ -10,14 +10,14 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
-import modelo.Actividad;
-import modelo.Ciudadano;
-import modelo.Expediente;
-import modelo.Intervencion;
-import modelo.Parentesco;
-import modelo.ParentescoID;
-import modelo.UTS;
-import modelo.Usuario;
+import entidades.Actividad;
+import entidades.Ciudadano;
+import entidades.Expediente;
+import entidades.Intervencion;
+import entidades.Parentesco;
+import entidades.ParentescoID;
+import entidades.UTS;
+import entidades.Usuario;
 
 /**
  *

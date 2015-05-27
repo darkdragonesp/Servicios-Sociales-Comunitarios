@@ -19,8 +19,26 @@ public class ActividadUsuarioEJB implements ActividadLocal{
     @PersistenceContext(unitName = "ServiciosSocialesPU")
     private EntityManager em;
 
-    public boolean actualizar(Usuario usuario) {
+    @Override
+    public boolean actualizarUsuario(Usuario usuario) {
          em.merge(usuario);
+        
+        return true;
+    }
+    @Override
+    public boolean actualizarActividad(Actividad actividad){
+        em.merge(actividad);
+        return true;
+    }
+    @Override
+    public boolean insertarActividad(Actividad actividad){
+        em.persist(actividad);
+        return true;
+    }
+
+    @Override
+    public boolean borrarActividad(Actividad actividad){
+        em.remove(actividad);
         
         return true;
     }

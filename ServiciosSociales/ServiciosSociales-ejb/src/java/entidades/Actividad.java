@@ -21,7 +21,7 @@ public class Actividad implements Serializable {
     @Column(name="FECHA", nullable=false)
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @Column(name="HORA", nullable=false)
+    @Column(name="HORA", nullable=true)
     @Temporal(TemporalType.TIME)
     private Date hora;
     @Column(name="DESCRIPCION", nullable=true, length=200)
