@@ -6,21 +6,16 @@
 package beans;
 
 
-import java.util.List;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import entidades.Usuario;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import negocio.EditarUsuarioLocal;
-
 /**
  *
  * @author Portátil
@@ -232,6 +227,4 @@ public class UsuarioEditar implements Serializable {
         }
         
     }
-  
-    
 }

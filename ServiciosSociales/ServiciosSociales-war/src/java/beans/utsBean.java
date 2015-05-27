@@ -5,13 +5,14 @@
 */
 package beans;
 
+import entidades.UTS;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import entidades.UTS;
+import negocio.ExpedienteLocal;
 import javax.annotation.PostConstruct;
 import negocio.UTSLocal;
 /**
@@ -26,13 +27,14 @@ public class utsBean  implements Serializable{
     private String zona;
     private String css;
     
-   // private List<UTS> utss;
+    private List<UTS> utss;
     private UTS selectedUTS;
-    
     
     private UTS uts1;
     @EJB
     private UTSLocal ejb;
+    @EJB
+    private ExpedienteLocal expedienteEJB;
     
     public utsBean(){}
     
@@ -78,15 +80,11 @@ public class utsBean  implements Serializable{
     public void setCss(String css) {
         this.css = css;
     }
-    
-   /* public List<UTS> getUtss() {
+
+    public List<UTS> getUtss() {
+        this.utss = expedienteEJB.getUtss();
         return utss;
     }
-    
-    public void setUtss(List<UTS> utss) {
-        this.utss = utss;
-    }
-    */
     public UTS getSelectedUTS() {
         return selectedUTS;
     }

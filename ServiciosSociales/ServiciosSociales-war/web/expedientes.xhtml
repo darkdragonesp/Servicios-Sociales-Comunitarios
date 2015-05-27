@@ -19,7 +19,8 @@
                     <p:menuitem value="Añadir intervención" icon="ui-icon-plus" url="addIntervencion.xhtml" />
                 
                     <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}">
-                        <p:menuitem value="Editar expediente" icon="ui-icon-pencil" url="editar-expediente.xhtml" />
+                        <p:menuitem value="Editar expediente" icon="ui-icon-pencil"
+                                    url="#{expedienteController.verExpediente(expedienteController.selectedExpediente)}"/>
                     </c:if>
                 </c:if>    
             </p:contextMenu>
@@ -32,9 +33,9 @@
                 <f:facet name="header">
                     Lista de Expedientes
                     <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}" >
-                        <p:button id="addExpediente" value="Añadir Expediente" style="float:right; font-size: 0.6em" 
-                                  icon="ui-icon-plus" outcome="anadir-expediente.xhtml">
-                        </p:button>
+                        <p:commandButton id="addExpediente" value="Añadir Expediente" style="float:right; font-size: 0.6em" 
+                                         icon="ui-icon-plus" action="#{expedienteController.verAnadirExpediente()}">
+                        </p:commandButton>
                     </c:if>
                 </f:facet>
                 <p:ajax event="rowSelect" listener="#{expedientes.onRowSelect}" update=":form:editar"/>

@@ -1,19 +1,19 @@
 package beans;
 
+import entidades.Usuario;
 import entidades.Expediente;
 import entidades.Intervencion;
 import java.io.Serializable;
-import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import entidades.Usuario;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import negocio.CuentaLocal;
 import negocio.ExpedienteLocal;
 
@@ -160,5 +160,4 @@ public class ControlAutorizacion implements Serializable{
         
         return sb.toString();
     }
-    
 }
