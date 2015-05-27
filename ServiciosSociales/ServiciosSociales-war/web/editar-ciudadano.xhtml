@@ -97,7 +97,7 @@
                             navigator="true" />
                 <p:message for="fecha_nacimiento"/>
             </h:panelGrid>
-            <p:commandButton value="Confirmar" action="ciudadano.xhtml" ajax="false"/>
+            <p:commandButton value="Confirmar" action="#{expedienteController.modificarCiudadano(expedienteController.ciudadano)}" ajax="false"/>
         </h:form>
         <h:form>
             <p:commandButton value="Descartar cambios" action="ciudadano.xhtml" ajax="false"/>
@@ -129,17 +129,17 @@
                     <p:rowEditor/>
                 </p:column>
                 <p:column width="38">
-                    <p:commandButton icon="ui-icon-trash" update="listaParentescos" action="#{datosFicticios.eliminarParentesco(expedienteController.ciudadano, parentesco.ciudadano2)}"/>
+                    <p:commandButton icon="ui-icon-trash" update="listaParentescos" action="#{expedienteController.eliminarParentesco(expedienteController.ciudadano, parentesco.ciudadano2)}"/>
                 </p:column>
                 <f:facet name="footer">
                     <p:selectOneMenu value="#{expedienteController.pariente.dni}">
-                        <f:selectItems value="#{datosFicticios.ciudadanos}" var="pariente"
+                        <f:selectItems value="#{expedienteController.ciudadanos}" var="pariente"
                                        itemValue="#{pariente.dni}" itemLabel="#{pariente.dni}"/>
                     </p:selectOneMenu>
                     <p:inputText value="#{expedienteController.parentescoSeleccionado1}"/>
                     <p:inputText value="#{expedienteController.parentescoSeleccionado2}"/>
                     <p:commandButton icon="ui-icon-plus"
-                                     action="#{datosFicticios.anadirParentesco(expedienteController.ciudadano, datosFicticios.obtenerCiudadano(expedienteController.pariente.dni),
+                                     action="#{expedienteController.anadirParentesco(expedienteController.ciudadano, expedienteController.obtenerCiudadano(expedienteController.pariente.dni),
                                                expedienteController.parentescoSeleccionado1, expedienteController.parentescoSeleccionado2)}" update="listaParentescos"/>
                 </f:facet>
             </p:dataTable>

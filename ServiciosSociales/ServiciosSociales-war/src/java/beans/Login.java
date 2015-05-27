@@ -1,21 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
+import entidades.Usuario;
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import entidades.Usuario;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import negocio.CuentaLocal;
 
 /**
@@ -67,7 +62,6 @@ public class Login implements Serializable {
             ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "El usuario y/o contraseña es incorrecto"));
         }else
             sesion.setUsuario(user);
-        
         
         return sesion.redireccionar();
     }

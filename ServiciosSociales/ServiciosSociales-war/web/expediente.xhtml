@@ -4,24 +4,27 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
-                    
-    <ui:define name="title">Expediente #{expedienteController.expediente.id}</ui:define>
+                xmlns:f="http://xmlns.jcp.org/jsf/core">  
+    
+    <ui:define name="title">Expediente</ui:define>
         
     <ui:define name="content">
+        
         <h:panelGrid columns="2">
             <h:outputLabel value="Expediente:"/>
-            <h:outputLabel value="#{expedienteController.expediente.id}"/>
+            <h:outputLabel value="#{expedientes.expediente.id}"/>
+            <h:outputLabel value="UTS:"/>
+            <h:outputLabel value="#{expedientes.expediente.uts.uts}"/>
             <h:outputLabel value="Fecha de apertura"/>
-            <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaApertura)}"/>
+            <h:outputLabel value="#{controlAutorizacion.formatFecha(expedientes.expediente.fechaApertura)}"/>
             <h:outputLabel value="Fecha de cierre"/>
-            <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaCierre)}"/>
+            <h:outputLabel value="#{controlAutorizacion.formatFecha(expedientes.expediente.fechaCierre)}"/>
             <h:outputLabel value="Estado"/>
-            <h:outputLabel value="#{expedienteController.expediente.estado}"/>
+            <h:outputLabel value="#{expedientes.expediente.estado}"/>
         </h:panelGrid>
         <h3>Ciudadanos</h3>
         <h:form>
-            <p:dataTable var="ciudadanos" value="#{expedienteController.expediente.ciudadanos}"
+            <p:dataTable var="ciudadanos" value="#{expedientes.expediente.ciudadanos}"
                          emptyMessage="No hay ciudadanos en este expediente">
                 <p:column headerText="DNI">
                     <p:commandLink action="#{expedienteController.verCiudadano(ciudadanos.dni)}" ajax="false">
@@ -42,25 +45,28 @@
         <h3>Intervenciones</h3>
         <h:form>
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-            <p:dataTable var="intervenciones" value="#{expedienteController.expediente.intervenciones}"
+            <p:dataTable var="intervencion" value="#{expedientes.expediente.intervenciones}"
                          emptyMessage="Este expediente no ha recibido intervenciones">
                 <p:column headerText="ID">
-                    <h:outputText value="#{intervenciones.id}"/>
+                    <h:outputText value="#{intervencion.id}"/>
                 </p:column>
                 <p:column headerText="Fecha de inicio">
-                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaInicio)}"/>
+                    <h:outputText value="#{controlAutorizacion.formatFecha(intervencion.fechaInicio)}"/>
                 </p:column>
                 <p:column headerText="Fecha fin">
-                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaFin)}"/>   
+                    <h:outputText value="#{controlAutorizacion.formatFecha(intervencion.fechaFin)}"/>   
                 </p:column>
                 <p:column headerText="Valoracion">
-                    <h:outputText value="#{intervenciones.valoracion}"/>
+                    <h:outputText value="#{intervencion.valoracion}"/>
                 </p:column>
             </p:dataTable>
+            <c:if test="#{controlAutorizacion.profesional}">
+                <p:button outcome="addIntervencion.xhtml" value="Añadir intervención"/>
+            </c:if>    
         </h:form>
         <c:if test="#{controlAutorizacion.auxiliarAdministrativo || controlAutorizacion.tecnicoSuperior}">
             <h:form>
-                <p:commandButton value="Editar expediente" action="editar-expediente.xhtml" ajax="false"/>
+                <p:button outcome="editar-expediente.xhtml" value="Editar expediente"/>
             </h:form>
         </c:if>
     </ui:define>

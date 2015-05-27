@@ -1,0 +1,6 @@
+insert into APP.UTS values(0,'123','Malaga','El Palo');
+insert into APP.PERSONA values('22222222J','Perez','Suarez','Calle Nueva','a@mail.com','soltero','1/9/1980','Malaga','Española','Pepe','M',952292222); 
+insert into APP.USUARIO values('22222222J','pass','Admin',0);
+select * from APP.PERSONA;
+select * from APP.USUARIO;
+select * from APP.UTS;

@@ -1,21 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
+import entidades.Ciudadano;
+import entidades.Expediente;
+import entidades.Intervencion;
+import entidades.Parentesco;
+import entidades.UTS;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import entidades.Ciudadano;
-import entidades.Expediente;
-import entidades.Intervencion;
+import negocio.CiudadanoLocal;
+import negocio.ExpedienteLocal;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -24,8 +25,10 @@ import org.primefaces.event.SelectEvent;
  */
 @ManagedBean(name = "expedienteController")
 @SessionScoped
-
 public class ExpedienteController implements Serializable{
+    private List<Expediente> expedientes;
+    private List<Ciudadano> ciudadanos;
+    private List<UTS> utss;
     private Expediente expediente = new Expediente();
     private Ciudadano ciudadano = new Ciudadano();
     private Ciudadano pariente = new Ciudadano();
@@ -34,9 +37,29 @@ public class ExpedienteController implements Serializable{
     private Expediente selectedExpediente;
     private Intervencion intervencion, editIntervencion;
     
+    @EJB
+    private ExpedienteLocal expedienteEJB;
+    @EJB
+    private CiudadanoLocal ciudadanoEJB;
+    
     public ExpedienteController(){ 
         pariente = new Ciudadano();
         ciudadano = new Ciudadano();
+    }
+    
+    public List<Expediente> getExpedientes() {
+        this.expedientes = expedienteEJB.getExpedientes();
+        return this.expedientes;
+    }
+    
+    public List<Ciudadano> getCiudadanos() {
+        this.ciudadanos = ciudadanoEJB.getCiudadanos();
+        return this.ciudadanos;
+    }
+
+    public List<UTS> getUtss() {
+        this.utss = expedienteEJB.getUtss();
+        return utss;
     }
     
     public Expediente getExpediente() {
@@ -106,13 +129,14 @@ public class ExpedienteController implements Serializable{
     
     public String editarIntervencion(Intervencion intervencion){
         this.intervencion = intervencion;
-        editIntervencion = new Intervencion(this.intervencion);
+        //editIntervencion = new Intervencion(this.intervencion);
 
         return "editar_intervencion.xhtml";
     }
     
     public String verExpediente(Expediente expediente){
-        this.expediente = expediente;
+//        expedienteEJB.refrescarExpediente(expediente);
+        this.expediente = expedienteEJB.getExpediente(expediente.getId());
         return "expediente.xhtml";
     }
     
@@ -127,12 +151,10 @@ public class ExpedienteController implements Serializable{
     }
 
     public Ciudadano obtenerCiudadano(String dni) {
-        for (Ciudadano ciudadano : this.expediente.getCiudadanos()) {
-            if(ciudadano.getDni().equals(dni)) {
-                return ciudadano;
-            }
-        }
-        return null;
+//        System.out.println("MB DNI: "+dni);
+        Ciudadano ciudadano = ciudadanoEJB.getCiudadano(dni);
+//        System.out.println("MB Ciudadano: "+ciudadano);
+        return ciudadano;
     }
     
     public String addIntervencion(Intervencion intervencion){
@@ -150,8 +172,64 @@ public class ExpedienteController implements Serializable{
         return expediente.getIntervenciones().size()+1;
     }
     
-    public void eliminarCiudadano(String dni) {
-        this.expediente.getCiudadanos().remove(obtenerCiudadano(dni));
+    public String modificarCiudadano(Ciudadano ciudadano) {
+        ciudadanoEJB.modificarCiudadano(ciudadano);
+        return "ciudadano.xhtml";
+    }
+    
+    public String modificarExpediente(Expediente expediente) {
+        expedienteEJB.modificarExpediente(expediente);
+        return "expediente.xhtml";
+    }
+    
+    public String verAnadirCiudadano() {
+        this.ciudadano = new Ciudadano();
+        return "anadir-ciudadano.xhtml";
+    }
+    
+    public String verAnadirExpediente() {
+        this.expediente = new Expediente();
+        return "anadir-expediente.xhtml";
+    }
+    
+    public String crearCiudadano(Ciudadano ciudadano) {
+        ciudadanoEJB.insertarCiudadano(ciudadano);
+        return "ciudadano.xhtml";
+    }
+    
+    public String crearExpediente(Expediente expediente) {
+        expedienteEJB.insertarExpediente(expediente);
+        return "expediente.xhtml";
+    }
+    
+    public void anadirCiudadano(Expediente expediente, String dni) {
+//        Ciudadano ciudadano = obtenerCiudadano(dni);
+//        ciudadano.setExpediente(expediente);
+//        ciudadanoEJB.modificarCiudadano(ciudadano);
+        
+//        System.out.println("MB Expediente: "+expediente);
+        Ciudadano ciudadano = obtenerCiudadano(dni);
+//        System.out.println("MB Ciudadano: "+ciudadano);
+        expedienteEJB.anadirCiudadano(expediente, ciudadano);
+    }
+    
+//    public void anadirCiudadano(Expediente expediente, Ciudadano ciudadano) {
+////        ciudadano.setExpediente(expediente);
+////        ciudadanoEJB.modificarCiudadano(ciudadano);
+//        System.out.println("MB Expediente: "+expediente);
+//        System.out.println("MB Ciudadano: "+ciudadano);
+//        expedienteEJB.anadirCiudadano(expediente, ciudadano);
+//    }
+    
+    public void eliminarCiudadano(Expediente expediente, String dni) {
+        Ciudadano ciudadano = obtenerCiudadano(dni);
+//        System.out.println("MB Expediente: "+expediente);
+//        System.out.println("MB Ciudadano: "+ciudadano);
+        this.expedienteEJB.eliminarCiudadano(expediente, ciudadano);
+    }
+    
+    public void eliminarCiudadano(Expediente expediente, Ciudadano ciudadano) {
+        this.expedienteEJB.eliminarCiudadano(expediente, ciudadano);
     }
     
     public void eliminarIntervencion(Expediente expediente, Intervencion intervencion){
@@ -160,6 +238,20 @@ public class ExpedienteController implements Serializable{
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Intervención "+id+" eliminada"));
         }
+    }
+    
+    public void anadirParentesco(Ciudadano ciudadano, Ciudadano pariente, String parentescoSeleccionado1, String parentescoSeleccionado2) {
+        System.out.println("MB Ciudadano: "+ciudadano);
+        System.out.println("MB Pariente: "+pariente);
+        Parentesco parentesco1 = new Parentesco(ciudadano.getDni(), pariente.getDni(), parentescoSeleccionado1);
+        Parentesco parentesco2 = new Parentesco(pariente.getDni(), ciudadano.getDni(), parentescoSeleccionado2);
+        ciudadanoEJB.insertarParentesco(parentesco1, parentesco2);
+    }
+    
+    public void eliminarParentesco(Ciudadano ciudadano, Ciudadano pariente) {
+//        pariente.getParentescos().remove(obtenerParentesco(pariente, ciudadano));
+//        ciudadano.getParentescos().remove(obtenerParentesco(ciudadano, pariente));
+        ciudadanoEJB.eliminarParentesco(ciudadano, pariente);
     }
     
     public String formatFecha(Date fecha){

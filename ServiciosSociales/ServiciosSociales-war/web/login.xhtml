@@ -7,6 +7,16 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Servicios Sociales</title>
+        
+        <script type="text/javascript">
+            function generarId(){
+                sessionStorage.tabId = #{controlAutorizacion.numtabs}
+                #{controlAutorizacion.setNumtabs(controlAutorizacion.numtabs + 1)};
+            }
+            
+            generarId();
+        </script>
+        
     </h:head>
     
     <c:choose>

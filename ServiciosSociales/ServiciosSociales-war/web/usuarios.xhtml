@@ -16,15 +16,17 @@
                     
                     
                     
-                    <p:contextMenu for="usuarios">
-                        <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" onclick="PF('dlg1').show()" 
-                                    />
-                        
-                            <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="/ssc/usuarioEditar.xhtml"/>
+                    <p:contextMenu for="usuarios" id="menu">
+                        <c:if test="#{not empty usuarioAnyadirBean.selectedUsuario}">
+                            <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" onclick="PF('dlg1').show()" 
+                                        />
+
+                            <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="#{usuarioAnyadirBean.aniadirselecionado()}"/>
+                        </c:if>    
                        
                     </p:contextMenu>
                     
-                    <p:dataTable id="usuarios" var="usuario" value="#{datosFicticios.usuarios}"
+                    <p:dataTable id="usuarios" var="usuario" value="#{usuarioAnyadirBean.listar()}"
                                  selection="#{usuarioAnyadirBean.selectedUsuario}" selectionMode="single" rowKey="#{usuario.dni}" 
                                  emptyMessage="No hay usuarios disponibles">
                         <f:facet name="header">
@@ -39,7 +41,7 @@
                         </p:column>  
                         
                         
-                        
+                        <p:ajax event="rowSelect" listener="#{usuarioAnyadirBean.onRowSelect}" update=":form:menu"/>
                     </p:dataTable>
                     
                     <p:remoteCommand name="irAConf"
