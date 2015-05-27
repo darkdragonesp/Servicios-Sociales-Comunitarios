@@ -22,27 +22,27 @@
                                 
                             </p:contextMenu>
                            </c:if>
-                            <p:dataTable id="utss" var="uts" value="#{datosFicticios.uts}"
-                                         selection="#{utsBean.selectedUTS}" selectionMode="single" rowKey="#{uts.id}" 
+                            <p:dataTable id="utss" var="u" value="#{utsBean.listar()}"
+                                         selection="#{utsBean.selectedUTS}" selectionMode="single" rowKey="#{u.id}" 
                                          emptyMessage="No hay UTSs disponibles">
                                 <f:facet name="header">
                                     Lista de UTS
                                 </f:facet>
                                 
-                                <p:column headerText="Id de UTS" filterBy="#{uts.id}" filterMatchMode="contains">
-                                    <h:outputText value="Id:   #{uts.id}" />
+                                <p:column headerText="Id de UTS" filterBy="#{u.id}" filterMatchMode="contains">
+                                    <h:outputText value="Id:   #{u.id}" />
                                 </p:column>   
                                 
-                                <p:column headerText="UTS" filterBy="#{uts.uts}" filterMatchMode="contains">
-                                    <h:outputText value="#{uts.uts}" />
+                                <p:column headerText="UTS" filterBy="#{u.uts}" filterMatchMode="contains">
+                                    <h:outputText value="#{u.uts}" />
                                 </p:column>   
                                 
-                                <p:column headerText="Zona" filterBy="#{uts.zona}" filterMatchMode="contains">
-                                    <h:outputText value="#{uts.zona}" />
+                                <p:column headerText="Zona" filterBy="#{u.zona}" filterMatchMode="contains">
+                                    <h:outputText value="#{u.zona}" />
                                 </p:column>   
                                 
-                                <p:column headerText="CSS" filterBy="#{uts.css}" filterMatchMode="contains">
-                                    <h:outputText value="#{uts.css}" />
+                                <p:column headerText="CSS" filterBy="#{u.css}" filterMatchMode="contains">
+                                    <h:outputText value="#{u.css}" />
                                 </p:column>   
                             </p:dataTable>
                             <p:remoteCommand name="irAConf"

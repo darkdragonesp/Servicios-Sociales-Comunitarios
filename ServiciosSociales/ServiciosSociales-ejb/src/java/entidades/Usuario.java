@@ -43,6 +43,7 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "usuario")
     private List<Actividad> actividades;
     
+
     @ManyToMany(cascade = {CascadeType.PERSIST,  CascadeType.REMOVE})
     @JoinTable(name = "ACCESO_EXPEDIENTES", 
             joinColumns = @JoinColumn(name = "USUARIO"), 
@@ -51,8 +52,9 @@ public class Usuario implements Serializable {
     
     
     public Usuario(){
-        this.persona = new Persona();
+
     }
+
 
     public Usuario(String dni, String pass){
         setDni(dni);
@@ -64,6 +66,7 @@ public class Usuario implements Serializable {
         setContrasena(pass);
         this.persona = new Persona();
         setTipoProfesional(tipo_profesional);
+        
     }
 
     public List<Actividad> getActividades() {

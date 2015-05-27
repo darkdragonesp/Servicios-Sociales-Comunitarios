@@ -6,7 +6,6 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -20,6 +19,13 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import entidades.Actividad;
 import entidades.Usuario;
+import entidades.Persona;
+import entidades.UTS;
+import entidades.Usuario;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import negocio.UTSLocal;
+import negocio.UsuarioLocal;
 
 
 /**
@@ -37,8 +43,8 @@ public class usuarioAnyadirBean  implements Serializable{
     private String apellido1;
     private String apellido2;
     private String direccion;
-    private String telefono;
-    private String sexo;
+    private Integer telefono;
+    private Character sexo;
     private String estadoCivil;
     private Date fechaNacimiento;
     private String localidad;
@@ -58,11 +64,42 @@ public class usuarioAnyadirBean  implements Serializable{
         usuarios.add(new Usuario("22222222J", "1234","Auxiliar administrativo"));
         usuarios.add(new Usuario("11111111H", "1234","Profesional"));
     }*/
+     
+    @EJB
+    private UsuarioLocal ejb;
+    
+    private Usuario user;
+    private Persona person;
+    
+      @PostConstruct
+    public void init(){
+        user=new Usuario();
+        person=new Persona();
+    }
+   
+   
+    
     @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
 
     public void setDatos(DatosFicticios datos) {
         this.datos = datos;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
+
+    public Persona getPerson() {
+        return person;
+    }
+
+    public void setPerson(Persona person) {
+        this.person = person;
     }
     
     public Usuario getSelectedUsuario() {
@@ -119,19 +156,19 @@ public class usuarioAnyadirBean  implements Serializable{
         this.direccion = direccion;
     }
     
-    public String getTelefono() {
+    public Integer getTelefono() {
         return telefono;
     }
     
-    public void setTelefono(String telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
     
-    public String getSexo() {
+    public Character getSexo() {
         return sexo;
     }
     
-    public void setSexo(String sexo) {
+    public void setSexo(Character sexo) {
         this.sexo = sexo;
     }
     
@@ -225,14 +262,14 @@ public class usuarioAnyadirBean  implements Serializable{
             throw new ValidatorException(
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca un DNI válido con una longitud igual a 9.", null));
         }
-        if(!var.substring(8).equals(calcularDNI(var.substring(0,8)))){
+        if(!var.substring(8).equalsIgnoreCase(calcularDNI(var.substring(0,8)))){
             throw new ValidatorException(
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca un DNI válido.La letra no coincide", null));
         }
         //si ya existe el DNI
         
-        for (Usuario user : datos.getUsuarios()) {
-            if (user.getDni().equalsIgnoreCase(var))throw new ValidatorException(
+        for (Usuario useri : ejb.getUsuarios()) {
+            if (useri.getDni().equalsIgnoreCase(var))throw new ValidatorException(
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "El DNI introducido ya existe en la base de datos.", null));
         }
     }
@@ -240,13 +277,21 @@ public class usuarioAnyadirBean  implements Serializable{
         return "usuarioAnyadirExito.xhtml?faces-redirect=true";
     }
     public String crearUsuario(){
-        Usuario usuario = new Usuario();
+        /*Usuario usuario = new Usuario();
         usuario.setActividades(new ArrayList<Actividad>());
         usuario.setDni(getDni());
         usuario.setContrasena(getContrasenya());
         usuario.setTipoProfesional(getTipoProfesional());
-        datos.getUsuarios().add(usuario);
-        return "Usuario con DNI "+getDni()+ " creado con éxito.";
+        */
+        
+        //Persona p =new Persona(person.getDni(),person.getNombre(),person.getApellido1(),person.getApellido2(),person.getDireccion(),person.getTelefono(),person.getSexo(),person.getEstadoCivil(),person.getFechaNacimiento(),person.getLocalidad(),person.getNacionalidad(),person.getEmail());
+        person.setDni(person.getDni().toUpperCase());
+        user.setDni(person.getDni());
+        
+        ejb.insertar(person);
+        ejb.insertar(user);
+        
+        return "Usuario con DNI "+person.getDni()+ " creado con éxito.";
         //limpiar usuario?
     }
     
@@ -276,7 +321,9 @@ public class usuarioAnyadirBean  implements Serializable{
     }
     
     public void eliminar(){
-        datos.getUsuarios().remove(this.getSelectedUsuario());
+        String dni1= this.getSelectedUsuario().getDni();
+        ejb.eliminar(this.getSelectedUsuario());
+        ejb.eliminarP(this.getSelectedUsuario(),dni1);
        //return "usuarios.xhtml?faces-redirect=true";
     }
 
@@ -289,5 +336,9 @@ public class usuarioAnyadirBean  implements Serializable{
     }
 
 
+    public List<Usuario> listar(){
+       return  ejb.getUsuarios();
+    }
     
+  
 }
