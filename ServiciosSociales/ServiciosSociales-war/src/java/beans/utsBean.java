@@ -8,12 +8,12 @@ package beans;
 import entidades.UTS;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import negocio.ExpedienteLocal;
-import javax.annotation.PostConstruct;
 import negocio.UTSLocal;
 /**
  *
