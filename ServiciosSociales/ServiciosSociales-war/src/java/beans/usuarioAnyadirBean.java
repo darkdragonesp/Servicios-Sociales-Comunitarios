@@ -336,6 +336,11 @@ public class usuarioAnyadirBean  implements Serializable{
         return "usuarioEditar.xhtml";
     }
     
+    public String miPerfil(){
+        sesion.setUsuarioSeleccionado(sesion.getUsuario());
+        return "usuarioEditar.xhtml";
+    }
+    
     public void onRowSelect(SelectEvent event){
        selectedUsuario = (Usuario) event.getObject();
     }

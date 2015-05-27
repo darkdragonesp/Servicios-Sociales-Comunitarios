@@ -12,24 +12,85 @@
         <h:form>
             <p:panel id="panelUsuarioEditar" header="Editar usuario">   
                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                    <h:outputLabel for="dni" value="DNI: " style="font-weight:bold" />
-                    <p:inputText id="dni" value="#{usuarioEditar.selectedUsuario.dni}" disabled="true"/>
                     
+                    <c:choose>
+                        <c:when test="#{controlAutorizacion.profesional || controlAutorizacion.auxiliarAdministrativo}">
+                            <h:outputLabel for="dni" value="DNI: " style="font-weight:bold" />
+                            <p:inputText id="dni" value="#{usuarioEditar.selectedUsuario.dni}" disabled="true"/>
+                            
+                            <p:outputLabel for="tipo_profesional" value="Tipo profesional:"  style="font-weight:bold" />
+                            <p:selectOneMenu id="tipo_profesional" value="#{usuarioEditar.selectedUsuario.tipoProfesional}" style="width:200px" disabled="true">                    
+                            </p:selectOneMenu>
+                            
+                            <h:outputLabel for="nombre" value="Nombre:*" style="font-weight:bold" />
+                            <p:inputText id="nombre" value="#{usuarioEditar.selectedUsuario.persona.nombre}" disabled="true"/>
                     
-                    <h:outputLabel for="contrasenya" value="Contraseña:*" style="font-weight:bold" />
-                    <p:password id="contrasenya" value="#{usuarioEditar.selectedUsuario.contrasena}" feedback="true" required="true" maxlength="50"
-                                requiredMessage="Introduzca nueva una contraseña."/>
+                            <h:outputLabel for="apellido1" value="Apellido1:*" style="font-weight:bold" />
+                            <p:inputText id="apellido1" value="#{usuarioEditar.selectedUsuario.persona.apellido1}" disabled="true"/>
                     
-                    <h:outputLabel for="contrasenya2" value="Confirme Contraseña:*" style="font-weight:bold" />
-                    <p:password id="contrasenya2" value="#{usuarioEditar.contrasenya2}" feedback="true" required="true" maxlength="50"
-                                requiredMessage="Introduzca nueva una contraseña."/>
+                            <h:outputLabel for="apellido2" value="Apellido2:" style="font-weight:bold" />
+                            <p:inputText id="apellido2" value="#{usuarioEditar.selectedUsuario.persona.apellido2}" disabled="true" />
+                            
+                            <h:outputLabel for="sexo" value="Sexo:*" style="font-weight:bold" />
+                            <p:selectOneMenu id="sexo" value="#{usuarioEditar.selectedUsuario.persona.sexo}" disabled="true">
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel for="fecha_nacimiento" value="Fecha nacimiento:" style="font-weight:bold"  />
+                            <p:calendar id="fecha_nacimiento" locale="es" navigator="true" disabled="true" />
+                            
+                            <h:outputLabel for="nacionalidad" value="Nacionalidad:*" style="font-weight:bold" />
+                            <p:inputText id="nacionalidad" value="#{usuarioEditar.selectedUsuario.persona.nacionalidad}" disabled="true"/>
+                            
+                            <h:outputLabel for="contrasenya" value="Contraseña:*" style="font-weight:bold" />
+                            <p:password id="contrasenya" value="#{usuarioEditar.selectedUsuario.contrasena}" feedback="true" required="true" maxlength="50"
+                                        requiredMessage="Introduzca nueva una contraseña."/>
+
+                            <h:outputLabel for="contrasenya2" value="Confirme Contraseña:*" style="font-weight:bold" />
+                            <p:password id="contrasenya2" value="#{usuarioEditar.contrasenya2}" feedback="true" required="true" maxlength="50"
+                                        requiredMessage="Introduzca nueva una contraseña."/>
+                            
+                        </c:when>
+                        <c:otherwise>
+                            <h:outputLabel for="dni" value="DNI: " style="font-weight:bold" />
+                            <p:inputText id="dni" value="#{usuarioEditar.selectedUsuario.dni}" />
+                            
+                            <p:outputLabel for="tipo_profesional" value="Tipo profesional:"  style="font-weight:bold" />
+                            <p:selectOneMenu id="tipo_profesional" value="#{usuarioEditar.selectedUsuario.tipoProfesional}" style="width:200px" >
+                                <f:selectItem itemLabel="Auxiliar administrativo" itemValue="Auxiliar Administrativo" />
+                                <f:selectItem itemLabel="Profesional" itemValue="Profesional" />
+                                <f:selectItem itemLabel="Tecnico Superior" itemValue="Tecnico Superior" />
+                            </p:selectOneMenu>
+                            
+                            <h:outputLabel for="nombre" value="Nombre:*" style="font-weight:bold" />
+                            <p:inputText id="nombre" value="#{usuarioEditar.selectedUsuario.persona.nombre}" />
                     
+                            <h:outputLabel for="apellido1" value="Apellido1:*" style="font-weight:bold" />
+                            <p:inputText id="apellido1" value="#{usuarioEditar.selectedUsuario.persona.apellido1}" />
                     
-                    
-                    
-                    <p:outputLabel for="tipo_profesional" value="Tipo profesional:"  style="font-weight:bold" />
-                    <p:selectOneMenu id="tipo_profesional" value="#{usuarioEditar.selectedUsuario.tipoProfesional}" style="width:200px" disabled="true">                    
-                    </p:selectOneMenu>
+                            <h:outputLabel for="apellido2" value="Apellido2:" style="font-weight:bold" />
+                            <p:inputText id="apellido2" value="#{usuarioEditar.selectedUsuario.persona.apellido2}" />
+                            
+                            <h:outputLabel for="sexo" value="Sexo:*" style="font-weight:bold" />
+                            <p:selectOneMenu id="sexo" value="#{usuarioEditar.selectedUsuario.persona.sexo}" >
+                                <f:selectItem itemLabel="Hombre" itemValue="H" />
+                                <f:selectItem itemLabel="Mujer" itemValue="M" />
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel for="fecha_nacimiento" value="Fecha nacimiento:" style="font-weight:bold" />
+                            <p:calendar id="fecha_nacimiento" locale="es" navigator="true"/>
+                            
+                            <h:outputLabel for="nacionalidad" value="Nacionalidad:*" style="font-weight:bold" />
+                            <p:inputText id="nacionalidad" value="#{usuarioEditar.selectedUsuario.persona.nacionalidad}" />
+                            
+                            <h:outputLabel for="contrasenya" value="Contraseña:" style="font-weight:bold" />
+                            <p:password id="contrasenya" value="#{usuarioEditar.selectedUsuario.contrasena}" feedback="true" maxlength="50"
+                                        requiredMessage="Introduzca nueva una contraseña."/>
+
+                            <h:outputLabel for="contrasenya2" value="Confirme Contraseña:" style="font-weight:bold" />
+                            <p:password id="contrasenya2" value="#{usuarioEditar.contrasenya2}" feedback="true" maxlength="50"
+                                        requiredMessage="Introduzca nueva una contraseña."/>
+                        </c:otherwise>
+                    </c:choose>
                     
                     <h:outputLabel for="email" value="Email:" style="font-weight:bold" />      
                     <p:inputText id="email" required="false" label="email" maxlength="50"
@@ -38,19 +99,6 @@
                         <f:validateRegex
                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                     </p:inputText>
-                    
-                    
-                    
-                    
-                    
-                    <h:outputLabel for="nombre" value="Nombre:*" style="font-weight:bold" />
-                    <p:inputText id="nombre" value="#{usuarioEditar.selectedUsuario.persona.nombre}" disabled="true"/>
-                    
-                    <h:outputLabel for="apellido1" value="Apellido1:*" style="font-weight:bold" />
-                    <p:inputText id="apellido1" value="#{usuarioEditar.selectedUsuario.persona.apellido1}" disabled="true"/>
-                    
-                    <h:outputLabel for="apellido2" value="Apellido2:" style="font-weight:bold" />
-                    <p:inputText id="apellido2" value="#{usuarioEditar.selectedUsuario.persona.apellido2}" disabled="true" />
                     
                     <h:outputLabel for="direccion" value="Dirección:*" style="font-weight:bold" />
                     <p:inputText id="direccion" value="#{usuarioEditar.selectedUsuario.persona.direccion}" required="true" maxlength="50"
@@ -64,14 +112,6 @@
                     
                     
                     
-                    
-                    <h:outputLabel for="sexo" value="Sexo:*" style="font-weight:bold" />
-                    <p:selectOneMenu id="sexo" value="#{usuarioEditar.selectedUsuario.persona.sexo}" disabled="true">
-                    
-                    </p:selectOneMenu>
-                    
-                    
-                    
                     <p:outputLabel for="estado_civil" value="Estado civil:"  style="font-weight:bold" />
                     <p:selectOneMenu id="estado_civil" value="#{usuarioEditar.selectedUsuario.persona.sexo}" style="width:200px" required="true">
                         <f:selectItem itemLabel="Soltero" itemValue="Soltero" />
@@ -79,15 +119,12 @@
                     </p:selectOneMenu>
                     
                     
-                    <p:outputLabel for="fecha_nacimiento" value="Fecha nacimiento:" style="font-weight:bold"  />
-                    <p:calendar id="fecha_nacimiento" locale="es" navigator="true" 
-                                disabled="true" />
+                    
                    
                     <h:outputLabel for="localidad" value="Localidad:*" style="font-weight:bold" />
                     <p:inputText id="localidad" value="#{usuarioEditar.selectedUsuario.persona.localidad}" required="true" maxlength="50" requiredMessage="Introduzca una localidad ."/>
                   
-                    <h:outputLabel for="nacionalidad" value="Nacionalidad:*" style="font-weight:bold" />
-                    <p:inputText id="nacionalidad" value="#{usuarioEditar.selectedUsuario.persona.nacionalidad}" disabled="true"/>
+                    
                     
                 </h:panelGrid>     
                 
