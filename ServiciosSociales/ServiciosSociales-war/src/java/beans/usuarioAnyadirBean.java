@@ -277,18 +277,17 @@ public class usuarioAnyadirBean  implements Serializable{
         return "usuarioAnyadirExito.xhtml?faces-redirect=true";
     }
     public String crearUsuario(){
-        /*Usuario usuario = new Usuario();
-        usuario.setActividades(new ArrayList<Actividad>());
-        usuario.setDni(getDni());
-        usuario.setContrasena(getContrasenya());
-        usuario.setTipoProfesional(getTipoProfesional());
-        */
         
-        //Persona p =new Persona(person.getDni(),person.getNombre(),person.getApellido1(),person.getApellido2(),person.getDireccion(),person.getTelefono(),person.getSexo(),person.getEstadoCivil(),person.getFechaNacimiento(),person.getLocalidad(),person.getNacionalidad(),person.getEmail());
         person.setDni(person.getDni().toUpperCase());
         user.setDni(person.getDni());
         
-        ejb.insertar(person);
+        if(ejb.PersonaExiste(person)){
+            ejb.actualizaPersona(person);
+        }else{
+            ejb.insertar(person);
+        }
+        
+        
         ejb.insertar(user);
         
         return "Usuario con DNI "+person.getDni()+ " creado con éxito.";
@@ -322,8 +321,9 @@ public class usuarioAnyadirBean  implements Serializable{
     
     public void eliminar(){
         String dni1= this.getSelectedUsuario().getDni();
+        ejb.eliminarAccesoExpediente(dni1);
         ejb.eliminar(this.getSelectedUsuario());
-        ejb.eliminarP(this.getSelectedUsuario(),dni1);
+        //ejb.eliminarP(this.getSelectedUsuario(),dni1);
        //return "usuarios.xhtml?faces-redirect=true";
     }
 
