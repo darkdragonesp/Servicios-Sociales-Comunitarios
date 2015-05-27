@@ -28,4 +28,11 @@ public interface UsuarioLocal {
     public List<Persona> getPersonas();
 
     public void eliminarP(Usuario selectedUsuario, String dni);
+
+    public boolean PersonaExiste(Persona person);
+
+    public void actualizaPersona(Persona person);
+
+    public void eliminarAccesoExpediente(String dni1);
+
 }

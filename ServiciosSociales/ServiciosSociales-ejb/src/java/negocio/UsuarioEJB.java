@@ -81,8 +81,37 @@ public class UsuarioEJB implements UsuarioLocal{
         Query q = em.createQuery("SELECT p FROM Persona p WHERE p.dni = :d", Persona.class);
             q.setParameter("d", dni);
             Object p=q.getSingleResult();
-            System.out.println(p);
+           // System.out.println(p);
             
             em.remove(em.merge(p));
     }
+
+    @Override
+    public boolean PersonaExiste(Persona person) {
+        return em.find(Persona.class, person.getDni())!=null;
+    }
+
+    @Override
+    public void actualizaPersona(Persona person) {
+        Persona p =em.find(Persona.class, person.getDni());
+        p.setApellido1(person.getApellido1());
+        p.setApellido2(person.getApellido2());
+        p.setDireccion(person.getDireccion());
+        p.setEmail(person.getEmail());
+        p.setEstadoCivil(person.getEstadoCivil());
+        p.setFechaNacimiento(person.getFechaNacimiento());
+        p.setLocalidad(person.getNacionalidad());
+        p.setNacionalidad(person.getNacionalidad());
+        p.setNombre(person.getNombre());
+        p.setSexo(person.getSexo());
+        p.setTelefono(person.getTelefono());
+    }
+
+    @Override
+    public void eliminarAccesoExpediente(String dni1) {
+        /*Query q = em.createQuery("SELECT p FROM ACCESO_EXPEDIENTES p");
+            //q.setParameter("d", dni1);
+            Object p=q.getSingleResult();
+             em.remove(em.merge(p));
+    */}
 }

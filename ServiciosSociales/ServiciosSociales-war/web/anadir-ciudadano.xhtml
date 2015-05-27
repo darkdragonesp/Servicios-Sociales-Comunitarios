@@ -108,13 +108,13 @@
                         <p:message for="nacionalidad"/>
                     
                         <h:outputLabel value="Fecha de nacimiento:*"/>
-                        <p:calendar id="fecha_nacimiento"
+                        <p:calendar id="fecha_nacimiento" value="#{expedienteController.ciudadano.persona.fechaNacimiento}"
                                     requiredMessage="Campo fecha de nacimiento obligatorio" required="true"
                                     showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
                                     navigator="true" />
                         <p:message for="fecha_nacimiento"/>
                     </h:panelGrid>
-                    <p:commandButton value="Crear" action="#{datosFicticios.crearCiudadano(expedienteController.ciudadano, datosFicticios.obtenerExpediente(expedienteController.expediente.id))}" ajax="false"/>
+                    <p:commandButton value="Crear" action="#{expedienteController.crearCiudadano(expedienteController.ciudadano)}" ajax="false"/>
                 </h:form>
             
             </c:when>

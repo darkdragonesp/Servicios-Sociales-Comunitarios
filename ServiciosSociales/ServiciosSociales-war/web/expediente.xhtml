@@ -13,6 +13,8 @@
         <h:panelGrid columns="2">
             <h:outputLabel value="Expediente:"/>
             <h:outputLabel value="#{expedientes.expediente.id}"/>
+            <h:outputLabel value="UTS:"/>
+            <h:outputLabel value="#{expedientes.expediente.uts.uts}"/>
             <h:outputLabel value="Fecha de apertura"/>
             <h:outputLabel value="#{controlAutorizacion.formatFecha(expedientes.expediente.fechaApertura)}"/>
             <h:outputLabel value="Fecha de cierre"/>
