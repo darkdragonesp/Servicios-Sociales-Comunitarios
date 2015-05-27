@@ -14,7 +14,6 @@ import java.util.Locale;
 import javax.ejb.EJB;
 import negocio.CuentaLocal;
 import negocio.ExpedienteLocal;
-import negocio.IntervencionLocal;
 
 /**
  *
