@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import entidades.Usuario;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -25,6 +27,7 @@ public class ControlAutorizacion implements Serializable{
     private Usuario usuario;
     private Expediente expediente;
     private Intervencion intervencion;
+    private Usuario usuarioSeleccionado;
     private int numtabs;
     
     @EJB
@@ -68,6 +71,14 @@ public class ControlAutorizacion implements Serializable{
     public void setNumtabs(int numtabs) {
         this.numtabs = numtabs;
     } 
+
+    public Usuario getUsuarioSeleccionado() {
+        return usuarioSeleccionado;
+    }
+
+    public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
+        this.usuarioSeleccionado = usuarioSeleccionado;
+    }
     
     public synchronized List<Expediente> getExpedientes(){
         if(usuario == null)
@@ -131,6 +142,23 @@ public class ControlAutorizacion implements Serializable{
         if(fecha == null)
             return "";
         return df.format(fecha);     
+    }
+    
+    public String sha256(String s){
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException ex) {
+            return null;
+        }
+        byte[] mdbytes = md.digest(s.getBytes());
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < mdbytes.length; i++) {
+          sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        
+        return sb.toString();
     }
     
 }

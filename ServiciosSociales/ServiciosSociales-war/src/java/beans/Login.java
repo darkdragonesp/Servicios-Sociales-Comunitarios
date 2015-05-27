@@ -63,7 +63,6 @@ public class Login implements Serializable {
         }else
             sesion.setUsuario(user);
         
-        
         return sesion.redireccionar();
     }
     

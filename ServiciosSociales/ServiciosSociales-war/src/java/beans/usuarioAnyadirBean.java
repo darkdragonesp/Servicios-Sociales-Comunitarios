@@ -18,6 +18,7 @@ import javax.faces.validator.ValidatorException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import entidades.Actividad;
+import entidades.Expediente;
 import entidades.Usuario;
 import entidades.Persona;
 import entidades.UTS;
@@ -26,6 +27,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import negocio.UTSLocal;
 import negocio.UsuarioLocal;
+import org.primefaces.event.SelectEvent;
 
 
 /**
@@ -71,6 +73,9 @@ public class usuarioAnyadirBean  implements Serializable{
     private Usuario user;
     private Persona person;
     
+    @ManagedProperty(value = "#{controlAutorizacion}")
+    private ControlAutorizacion sesion;
+    
       @PostConstruct
     public void init(){
         user=new Usuario();
@@ -86,6 +91,10 @@ public class usuarioAnyadirBean  implements Serializable{
         this.datos = datos;
     }
 
+    public void setSesion(ControlAutorizacion sesion) {
+        this.sesion = sesion;
+    }
+    
     public Usuario getUser() {
         return user;
     }
@@ -277,17 +286,11 @@ public class usuarioAnyadirBean  implements Serializable{
         return "usuarioAnyadirExito.xhtml?faces-redirect=true";
     }
     public String crearUsuario(){
-        /*Usuario usuario = new Usuario();
-        usuario.setActividades(new ArrayList<Actividad>());
-        usuario.setDni(getDni());
-        usuario.setContrasena(getContrasenya());
-        usuario.setTipoProfesional(getTipoProfesional());
-        */
         
         //Persona p =new Persona(person.getDni(),person.getNombre(),person.getApellido1(),person.getApellido2(),person.getDireccion(),person.getTelefono(),person.getSexo(),person.getEstadoCivil(),person.getFechaNacimiento(),person.getLocalidad(),person.getNacionalidad(),person.getEmail());
         person.setDni(person.getDni().toUpperCase());
         user.setDni(person.getDni());
-        
+        user.setContrasena(sesion.sha256(user.getContrasena()));
         ejb.insertar(person);
         ejb.insertar(user);
         
@@ -325,6 +328,16 @@ public class usuarioAnyadirBean  implements Serializable{
         ejb.eliminar(this.getSelectedUsuario());
         ejb.eliminarP(this.getSelectedUsuario(),dni1);
        //return "usuarios.xhtml?faces-redirect=true";
+    }
+    public String aniadirselecionado(){
+        System.out.println(selectedUsuario);
+        sesion.setUsuarioSeleccionado(selectedUsuario);
+        
+        return "usuarioEditar.xhtml";
+    }
+    
+    public void onRowSelect(SelectEvent event){
+       selectedUsuario = (Usuario) event.getObject();
     }
 
     public Long getUts() {
