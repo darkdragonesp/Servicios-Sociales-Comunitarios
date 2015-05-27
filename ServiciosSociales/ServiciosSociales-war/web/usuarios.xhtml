@@ -16,11 +16,13 @@
                     
                     
                     
-                    <p:contextMenu for="usuarios">
-                        <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" onclick="PF('dlg1').show()" 
-                                    />
-                        
-                            <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="/ssc/usuarioEditar.xhtml"/>
+                    <p:contextMenu for="usuarios" id="menu">
+                        <c:if test="#{not empty usuarioAnyadirBean.selectedUsuario}">
+                            <p:menuitem value="Eliminar usuario" icon="ui-icon-trash" onclick="PF('dlg1').show()" 
+                                        />
+
+                            <p:menuitem value="Editar usuario" icon="ui-icon-pencil" url="#{usuarioAnyadirBean.aniadirselecionado()}"/>
+                        </c:if>    
                        
                     </p:contextMenu>
                     
@@ -39,7 +41,7 @@
                         </p:column>  
                         
                         
-                        
+                        <p:ajax event="rowSelect" listener="#{usuarioAnyadirBean.onRowSelect}" update=":form:menu"/>
                     </p:dataTable>
                     
                     <p:remoteCommand name="irAConf"

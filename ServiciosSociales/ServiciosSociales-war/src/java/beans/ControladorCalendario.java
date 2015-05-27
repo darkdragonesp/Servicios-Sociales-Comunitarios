@@ -5,6 +5,8 @@
  */
 package beans;
 
+import entidades.Actividad;
+import entidades.Usuario;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,8 +17,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import entidades.Actividad;
-import entidades.Usuario;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;

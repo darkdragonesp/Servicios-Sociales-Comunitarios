@@ -28,8 +28,7 @@ public class Parentesco implements Serializable {
     public Parentesco() { }
     
     public Parentesco(String dni1, String dni2, String parentesco) {
-        this.parentescoPK.setCiudadanoDni1(dni1);
-        this.parentescoPK.setCiudadanoDni2(dni2);
+        this.parentescoPK = new ParentescoID(dni1,dni2);
         this.parentesco = parentesco;
     }
 
