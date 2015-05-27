@@ -13,6 +13,7 @@ import java.util.Locale;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import negocio.CiudadanoLocal;
@@ -37,6 +38,9 @@ public class ExpedienteController implements Serializable{
     private Expediente selectedExpediente;
     private Intervencion intervencion, editIntervencion;
     
+    @ManagedProperty(value = "#{controlAutorizacion}")
+    private ControlAutorizacion sesion;
+     
     @EJB
     private ExpedienteLocal expedienteEJB;
     @EJB
@@ -45,6 +49,10 @@ public class ExpedienteController implements Serializable{
     public ExpedienteController(){ 
         pariente = new Ciudadano();
         ciudadano = new Ciudadano();
+    }
+
+    public void setSesion(ControlAutorizacion sesion) {
+        this.sesion = sesion;
     }
     
     public List<Expediente> getExpedientes() {
@@ -127,13 +135,6 @@ public class ExpedienteController implements Serializable{
         expediente = selectedExpediente;
     }
     
-    public String editarIntervencion(Intervencion intervencion){
-        this.intervencion = intervencion;
-        //editIntervencion = new Intervencion(this.intervencion);
-
-        return "editar_intervencion.xhtml";
-    }
-    
     public String verExpediente(Expediente expediente){
 //        expedienteEJB.refrescarExpediente(expediente);
         this.expediente = expedienteEJB.getExpediente(expediente.getId());
@@ -155,17 +156,6 @@ public class ExpedienteController implements Serializable{
         Ciudadano ciudadano = ciudadanoEJB.getCiudadano(dni);
 //        System.out.println("MB Ciudadano: "+ciudadano);
         return ciudadano;
-    }
-    
-    public String addIntervencion(Intervencion intervencion){
-        intervencion.setId(asignarIdIntervencion());
-        long id = intervencion.getId();
-        if(expediente.getIntervenciones().add(intervencion)){
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Intervención "+id+" añadida"));
-            context.getExternalContext().getFlash().setKeepMessages(true);
-        }
-        return "editar-expediente.xhtml";
     }
     
     public long asignarIdIntervencion(){
@@ -199,6 +189,7 @@ public class ExpedienteController implements Serializable{
     
     public String crearExpediente(Expediente expediente) {
         expedienteEJB.insertarExpediente(expediente);
+        sesion.setExpediente(expediente);
         return "expediente.xhtml";
     }
     
@@ -230,14 +221,6 @@ public class ExpedienteController implements Serializable{
     
     public void eliminarCiudadano(Expediente expediente, Ciudadano ciudadano) {
         this.expedienteEJB.eliminarCiudadano(expediente, ciudadano);
-    }
-    
-    public void eliminarIntervencion(Expediente expediente, Intervencion intervencion){
-        long id = intervencion.getId();
-        if(expediente.getIntervenciones().remove(intervencion)){
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Intervención "+id+" eliminada"));
-        }
     }
     
     public void anadirParentesco(Ciudadano ciudadano, Ciudadano pariente, String parentescoSeleccionado1, String parentescoSeleccionado2) {

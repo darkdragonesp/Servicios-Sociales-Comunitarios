@@ -22,11 +22,15 @@
             </h:panelGrid>
             <p:growl id="messages" showDetail="true" autoUpdate="true"/>
             
+            
             <p:dialog widgetVar="dialogActividad" header="Detalles de actividad" showEffect="clip" hideEffect="clip">
                 <h:panelGrid id="detallesActividad" columns="2">
                     <h:outputLabel for="titulo" value="Título: "/>
                     <p:inputText id="titulo" value="#{controladorCalendario.actividad.title}"/>
-                                 
+                    
+                    <p:outputLabel for="hora" value="Hora: " />
+                    <p:inputMask id="hora" value="#{controladorCalendario.hora}" mask="99:99" required="true"/>
+                    
                     <h:outputLabel for="finicio" value="Fecha de comienzo: "/>
                     <p:inputMask id="finicio" value="#{controladorCalendario.actividad.startDate}" mask="99/99/9999">
                         <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2"/>

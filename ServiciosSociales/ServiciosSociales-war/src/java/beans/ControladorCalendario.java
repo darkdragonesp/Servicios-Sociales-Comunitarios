@@ -1,16 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 import entidades.Actividad;
 import entidades.Usuario;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -40,15 +39,14 @@ public class ControladorCalendario implements Serializable{
     private Usuario usuario;
     private List<Actividad> actividades;
     private String lugar;
+    private String hora;
     
     @EJB
     private ActividadLocal bd;
     
     @ManagedProperty(value = "#{controlAutorizacion}")
     private ControlAutorizacion controladorSesion;
-    /**
-     * Creates a new instance of VistaCalendario
-     */
+    
     public ControladorCalendario() {
         
     }
@@ -96,13 +94,13 @@ public class ControladorCalendario implements Serializable{
         this.lugar = lugar;
     }
 
-//    public Date getHora() {
-//        return hora;
-//    }
-//
-//    public void setHora(Date hora) {
-//        this.hora = hora;
-//    }
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
     
 
     public ScheduleEvent getActividad() {
@@ -138,7 +136,9 @@ public class ControladorCalendario implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
     
-    public void addActividad(){
+    public void addActividad() throws ParseException{
+        DateFormat format = new SimpleDateFormat("hh:mm", Locale.FRANCE);
+        Date horaDate = format.parse(hora);
         if(actividad.getId() == null){
             Actividad a = new Actividad(actividad.getTitle(), actividad.getStartDate());
             a.setUsuario(usuario);
@@ -147,7 +147,7 @@ public class ControladorCalendario implements Serializable{
             
             modelo.addEvent(aux);
             // Ya esta en el calendario, ahora la procesamos en las actividades de usuario
-            
+            a.setHora(horaDate);
             a.setId(aux.getId());
             aux.setData(a);
             actividades.add(a);
@@ -158,8 +158,7 @@ public class ControladorCalendario implements Serializable{
             Actividad nueva = new Actividad(actividad.getTitle(), actividad.getStartDate());
             nueva.setUsuario(usuario);
             nueva.setId(actividad.getId());
-            System.out.println(ac);
-            System.out.println(aux);
+            nueva.setHora(horaDate);
             nueva.setLugar(new String(lugar));
             actividades.set(actividades.indexOf(aux), nueva);
             bd.actualizarActividad(nueva);
