@@ -1,15 +1,20 @@
 package beans;
 
 import entidades.Expediente;
+import entidades.Intervencion;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import entidades.Usuario;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 import javax.ejb.EJB;
 import negocio.CuentaLocal;
 import negocio.ExpedienteLocal;
+import negocio.IntervencionLocal;
 
 /**
  *
@@ -20,6 +25,7 @@ import negocio.ExpedienteLocal;
 public class ControlAutorizacion implements Serializable{
     private Usuario usuario;
     private Expediente expediente;
+    private Intervencion intervencion;
     private int numtabs;
     
     @EJB
@@ -47,6 +53,14 @@ public class ControlAutorizacion implements Serializable{
     public void setExpediente(Expediente expediente) {
         this.expediente = expediente;
     }
+
+    public Intervencion getIntervencion() {
+        return intervencion;
+    }
+
+    public void setIntervencion(Intervencion intervencion) {
+        this.intervencion = intervencion;
+    }
     
     public int getNumtabs() {
         return numtabs;
@@ -63,6 +77,10 @@ public class ControlAutorizacion implements Serializable{
            return negocioExpediente.getExpedientes();
         else
            return usuario.getExpedientes();
+    }
+    
+    public synchronized List<Intervencion> getIntervenciones(){
+        return negocioExpediente.getIntervenciones();
     }
     
     public boolean isTecnicoSuperior(){
@@ -91,6 +109,11 @@ public class ControlAutorizacion implements Serializable{
     
     public void refrescarUsuario(){
         usuario = cuenta.refrescarUsuario(usuario);
+        refrescarExpediente();
+    }
+    
+    public void refrescarExpediente(){
+        expediente = negocioExpediente.refrescarExpediente(expediente);
     }
     
     public String redireccionar(){
@@ -102,6 +125,13 @@ public class ControlAutorizacion implements Serializable{
         ctx.getExternalContext().invalidateSession();
         usuario = null;
         return "login.xhtml";
+    }
+    
+    public String formatFecha(Date fecha){
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRENCH);
+        if(fecha == null)
+            return "";
+        return df.format(fecha);     
     }
     
 }

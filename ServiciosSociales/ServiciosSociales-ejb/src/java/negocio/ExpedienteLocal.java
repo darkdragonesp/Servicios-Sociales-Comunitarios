@@ -1,6 +1,7 @@
 package negocio;
 
 import entidades.Expediente;
+import entidades.Intervencion;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -14,4 +15,6 @@ public interface ExpedienteLocal {
     public boolean modificar(Expediente expediente);
     public boolean eliminar(Expediente expediente);
     public List<Expediente> getExpedientes();
+    public List<Intervencion> getIntervenciones();
+    public Expediente refrescarExpediente(Expediente expediente);
 }

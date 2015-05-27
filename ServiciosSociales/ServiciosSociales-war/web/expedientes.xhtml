@@ -26,7 +26,7 @@
             
             
             <p:dataTable id="expedientes" var="expediente" value="#{controlAutorizacion.expedientes}"
-                         selection="#{expedienteController.selectedExpediente}" selectionMode="single" rowKey="#{expediente.id}" 
+                         selection="#{controlAutorizacion.expediente}" selectionMode="single" rowKey="#{expediente.id}" 
                          emptyMessage="No hay expedientes disponibles">
                 
                 <f:facet name="header">
@@ -42,7 +42,7 @@
                 
                 
                 <p:column headerText="Id de expediente" filterBy="#{expediente.id}" filterMatchMode="contains">
-                    <p:link outcome="#{expedientes.consultarExpediente(expediente)}" value="Expediente nº #{expediente.id}" style="text-decoration: none"/>
+                    <p:commandLink action="expediente.xhtml" actionListener="#{controlAutorizacion.setExpediente(expediente)}" value="Expediente nº #{expediente.id}" style="text-decoration: none"/>
                 </p:column>
                 
             </p:dataTable>

@@ -31,6 +31,9 @@ public class Actividad implements Serializable {
     @JoinColumn(name="USUARIO_DNI", referencedColumnName="DNI", nullable = false)
     private Usuario usuario;
     
+    @OneToOne(mappedBy = "actividad")
+    private Intervencion intervencion;
+    
     public Actividad(){
         
     }
@@ -101,7 +104,15 @@ public class Actividad implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-   
+
+    public Intervencion getIntervencion() {
+        return intervencion;
+    }
+
+    public void setIntervencion(Intervencion intervencion) {
+        this.intervencion = intervencion;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 public class Intervencion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ID_INTERVENCION")
     private Long id;
     
@@ -52,11 +52,11 @@ public class Intervencion implements Serializable {
     @Column(name="NOTAS")
     private String notas;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="ACTIVIDAD", referencedColumnName="ID_ACTIVIDAD", nullable = false)
     private Actividad actividad;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable = false)
     private Expediente expediente;
     

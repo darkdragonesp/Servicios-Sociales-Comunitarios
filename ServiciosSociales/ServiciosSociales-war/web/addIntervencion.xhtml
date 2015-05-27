@@ -12,7 +12,7 @@
         <h3>Datos de Intervención</h3>
         <p:outputLabel value="Identificador: #{expedientes.intervencion.id}"/>
         <p:separator/>
-        <h:form>
+        <h:form id="form">
             <h:panelGrid style="margin-right: 200px; float:left">
                 <p:outputLabel class="label" for="tipo" value="Tipo"/>
                 <p:inputText id="tipo" value="#{expedientes.intervencion.tipo}" required="true" maxlength="50"/>
@@ -40,7 +40,6 @@
                 <p:outputLabel class="label" for="actividad" value="Actividad" />
                 <p:selectOneMenu id="actividad" value="#{expedientes.intervencion.actividad}" converter="actividadconverter" style="width:200px" >
                     <f:selectItems value="#{controlAutorizacion.usuario.actividades}" var="actividad" itemLabel="#{actividad.descripcion}" itemValue="#{actividad}"/>
-                    <p:ajax event="change" listener="#{expedientes.onItemSelect}" />
                 </p:selectOneMenu>
             </h:panelGrid>
             
@@ -58,7 +57,8 @@
             
 
             
-            <p:dataTable>
+            <p:dataTable id="notas" var="nota" value="#{expedientes.listarNotas(expedientes.intervencion.notas)}"> 
+                         emptyMessage="No existen notas en la intervención">
                 <f:facet name="header">
                     Notas
                     <p:commandButton id="addNota" type="button" value="Añadir Nota" style="float:right; font-size: 0.6em" 
@@ -66,19 +66,44 @@
                         actionListener="#">
                     </p:commandButton>
                 </f:facet>
+                <p:column>
+                    <h:outputText value="#{nota}"/>
+                </p:column>
             </p:dataTable>
             
             <p:dialog header="Nota" widgetVar="notaDialog" minHeight="40" resizable="false">
-                <p:inputTextarea/>
+                <h:inputTextarea id="plus"/>
                 <p:separator/>
-                <p:commandButton value="Añadir" type="button" onclick="PF('notaDialog').hide()" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Añadir" type="submit" update=":form:notas" onclick="PF('notaDialog').hide();sumaNota()" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                 <p:commandButton value="Cancelar" type="button" onclick="PF('notaDialog').hide()" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
             </p:dialog>
-            
+            <h:inputHidden id="note" value="#{expedientes.intervencion.notas}"/>
             <p/>
-            
-            <p:commandButton type="submit" icon="ui-icon-check" value="Enviar" action="#{expedientes.insertarIntervencion()}" ajax="false"/>
+            <c:choose>
+                <c:when test="#{empty controlAutorizacion.intervencion}">
+                    <p:commandButton icon="ui-icon-check" value="Enviar" action="#{expedientes.insertarIntervencion()}" ajax="false"/>
+                </c:when>    
+                <c:otherwise>
+                    <p:commandButton icon="ui-icon-check" value="Confirmar cambios" action="#{expedientes.editarIntervencion()}" ajax="false"/>
+                </c:otherwise>
+            </c:choose>    
+            <p:button icon="ui-icon-check" value="Cancelar" outcome="#{expedientes.cancelarEditarIntervencion()}" />
+            <script type="text/javascript">
+                function sumaNota(){
+                    plus = document.getElementById('form:plus').value;
+                    note = document.getElementById('form:note').value;
+
+                    if(note === ""){
+                        note = plus;
+                    }else{
+                        note = note + "| " + plus;
+                    }
+                    document.getElementById('form:note').value = note;
+                }
+            </script>
         </h:form>
+        
+        
     </ui:define>
 
     

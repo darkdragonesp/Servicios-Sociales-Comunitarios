@@ -14,9 +14,9 @@
             <h:outputLabel value="Expediente:"/>
             <h:outputLabel value="#{expedientes.expediente.id}"/>
             <h:outputLabel value="Fecha de apertura"/>
-            <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaApertura)}"/>
+            <h:outputLabel value="#{controlAutorizacion.formatFecha(expedientes.expediente.fechaApertura)}"/>
             <h:outputLabel value="Fecha de cierre"/>
-            <h:outputLabel value="#{expedienteController.formatFecha(expedienteController.expediente.fechaCierre)}"/>
+            <h:outputLabel value="#{controlAutorizacion.formatFecha(expedientes.expediente.fechaCierre)}"/>
             <h:outputLabel value="Estado"/>
             <h:outputLabel value="#{expedientes.expediente.estado}"/>
         </h:panelGrid>
@@ -43,19 +43,19 @@
         <h3>Intervenciones</h3>
         <h:form>
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-            <p:dataTable var="intervenciones" value="#{expedientes.expediente.intervenciones}"
+            <p:dataTable var="intervencion" value="#{expedientes.expediente.intervenciones}"
                          emptyMessage="Este expediente no ha recibido intervenciones">
                 <p:column headerText="ID">
-                    <h:outputText value="#{intervenciones.id}"/>
+                    <h:outputText value="#{intervencion.id}"/>
                 </p:column>
                 <p:column headerText="Fecha de inicio">
-                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaInicio)}"/>
+                    <h:outputText value="#{controlAutorizacion.formatFecha(intervencion.fechaInicio)}"/>
                 </p:column>
                 <p:column headerText="Fecha fin">
-                    <h:outputText value="#{expedienteController.formatFecha(intervenciones.fechaFin)}"/>   
+                    <h:outputText value="#{controlAutorizacion.formatFecha(intervencion.fechaFin)}"/>   
                 </p:column>
                 <p:column headerText="Valoracion">
-                    <h:outputText value="#{intervenciones.valoracion}"/>
+                    <h:outputText value="#{intervencion.valoracion}"/>
                 </p:column>
             </p:dataTable>
             <c:if test="#{controlAutorizacion.profesional}">
