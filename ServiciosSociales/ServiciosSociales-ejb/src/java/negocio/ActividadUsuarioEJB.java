@@ -38,8 +38,8 @@ public class ActividadUsuarioEJB implements ActividadLocal{
 
     @Override
     public boolean borrarActividad(Actividad actividad){
-        em.remove(actividad);
-        
+        Actividad ac = em.find(Actividad.class, actividad.getId());
+        em.remove(ac);
         return true;
     }
 }
