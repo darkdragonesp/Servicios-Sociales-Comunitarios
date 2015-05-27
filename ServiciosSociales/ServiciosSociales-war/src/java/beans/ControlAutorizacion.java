@@ -1,8 +1,10 @@
 package beans;
 
+import entidades.Ciudadano;
 import entidades.Usuario;
 import entidades.Expediente;
 import entidades.Intervencion;
+import entidades.UTS;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -14,6 +16,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import negocio.CiudadanoLocal;
 import negocio.CuentaLocal;
 import negocio.ExpedienteLocal;
 
@@ -25,6 +28,7 @@ import negocio.ExpedienteLocal;
 @SessionScoped
 public class ControlAutorizacion implements Serializable{
     private Usuario usuario;
+    private Ciudadano ciudadano;
     private Expediente expediente;
     private Intervencion intervencion;
     private Usuario usuarioSeleccionado;
@@ -36,6 +40,9 @@ public class ControlAutorizacion implements Serializable{
     @EJB
     private CuentaLocal cuenta;
     
+    @EJB
+    private CiudadanoLocal ciudadanoEJB;
+    
     public ControlAutorizacion() {
     
     }
@@ -46,6 +53,14 @@ public class ControlAutorizacion implements Serializable{
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Ciudadano getCiudadano() {
+        return ciudadano;
+    }
+
+    public void setCiudadano(Ciudadano ciudadano) {
+        this.ciudadano = ciudadano;
     }
 
     public Expediente getExpediente() {
@@ -91,6 +106,14 @@ public class ControlAutorizacion implements Serializable{
     
     public synchronized List<Intervencion> getIntervenciones(){
         return negocioExpediente.getIntervenciones();
+    }
+    
+    public synchronized List<UTS> getUtss() {
+        return negocioExpediente.getUtss();
+    }
+    
+    public synchronized List<Ciudadano> getCiudadanos() {
+        return ciudadanoEJB.getCiudadanos();
     }
     
     public boolean isTecnicoSuperior(){

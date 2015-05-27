@@ -1,6 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package beans;
 
-import entidades.UTS;
+import entidades.Actividad;
+import entidades.Expediente;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -10,22 +16,20 @@ import javax.faces.convert.FacesConverter;
 
 /**
  *
- * @author JuanJo-DarkDragon
+ * @author frasc_000
  */
-@FacesConverter("utsconverter")
-public class UTSConverter implements Converter {
+@FacesConverter("expedienteconverter")
+public class ExpedienteConverter implements Converter {
 
-    public UTSConverter() {
+    public ExpedienteConverter() {
     }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         if (value != null && value.trim().length() > 0) {
             try {
-//                utsBean sesion = (utsBean) context.getExternalContext().getSessionMap().get("utsBean");
-//                return sesion.listar().get(Integer.parseInt(value));
                 ControlAutorizacion sesion = (ControlAutorizacion) context.getExternalContext().getSessionMap().get("controlAutorizacion");
-                return sesion.getUtss().get(Integer.parseInt(value));
+                return sesion.getExpedientes().get(Integer.parseInt(value));
             } catch (NumberFormatException e) {
                 System.out.println("error");
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid theme."));
@@ -38,13 +42,12 @@ public class UTSConverter implements Converter {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object object) {
         if (object != null) {
-//            utsBean sesion = (utsBean) context.getExternalContext().getSessionMap().get("utsBean");
-//            int i = sesion.listar().indexOf((UTS) object);
             ControlAutorizacion sesion = (ControlAutorizacion) context.getExternalContext().getSessionMap().get("controlAutorizacion");
-            int i = sesion.getUtss().indexOf((UTS) object);
+            int i = sesion.getExpedientes().indexOf((Expediente) object);
             return Integer.toString(i);
         } else {
             return null;
         }
     }
+
 }

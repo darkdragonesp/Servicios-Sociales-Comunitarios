@@ -55,12 +55,12 @@
                         <p:message for="sexo"/>
                     
                         <h:outputText id="expediente" value="Expediente:"/>
-                        <p:selectOneMenu value="#{expedienteController.expediente}">
-                            <f:selectItem itemValue="" itemLabel=""/>
-                            <f:selectItems value="#{datosFicticios.expedientes}" var="expediente"
-                                           itemValue="#{expediente.id}" itemLabel="#{expediente.id}"/>
+                        <h:outputText value="#{expedienteController.expediente.id}"/>
+<!--                        <p:selectOneMenu value="#{expedienteController.ciudadano.expediente}" converter="expedienteconverter">
+                            <f:selectItems value="#{expedienteController.expedientes}" var="expediente"
+                                           itemValue="#{expediente}" itemLabel="#{expediente.id}"/>
                         </p:selectOneMenu>
-                        <p:message for="expediente"/>
+                        <p:message for="expediente"/>-->
                     
                         <h:outputLabel value="Localidad:*"/>
                         <p:inputText id="localidad" value="#{expedienteController.ciudadano.persona.localidad}" required="true"

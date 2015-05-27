@@ -36,7 +36,9 @@ public class ExpedienteController implements Serializable{
     private String parentescoSeleccionado1;
     private String parentescoSeleccionado2;
     private Expediente selectedExpediente;
-    private Intervencion intervencion, editIntervencion;
+    
+    @ManagedProperty(value="#{controlAutorizacion}")
+    private ControlAutorizacion sesion;
     
     @ManagedProperty(value = "#{controlAutorizacion}")
     private ControlAutorizacion sesion;
@@ -84,22 +86,6 @@ public class ExpedienteController implements Serializable{
 
     public void setCiudadano(Ciudadano ciudadano) {
         this.ciudadano = ciudadano;
-    }
-
-    public Intervencion getIntervencion() {
-        return intervencion;
-    }
-
-    public void setIntervencion(Intervencion intervencion) {
-        this.intervencion = intervencion;
-    }
-
-    public Intervencion getEditIntervencion() {
-        return editIntervencion;
-    }
-
-    public void setEditIntervencion(Intervencion editIntervencion) {
-        this.editIntervencion = editIntervencion;
     }
     
     public Ciudadano getPariente() {
@@ -158,10 +144,6 @@ public class ExpedienteController implements Serializable{
         return ciudadano;
     }
     
-    public long asignarIdIntervencion(){
-        return expediente.getIntervenciones().size()+1;
-    }
-    
     public String modificarCiudadano(Ciudadano ciudadano) {
         ciudadanoEJB.modificarCiudadano(ciudadano);
         return "ciudadano.xhtml";
@@ -183,6 +165,8 @@ public class ExpedienteController implements Serializable{
     }
     
     public String crearCiudadano(Ciudadano ciudadano) {
+        ciudadano.setExpediente(sesion.getExpediente());
+        ciudadano.getPersona().setDni(ciudadano.getDni());
         ciudadanoEJB.insertarCiudadano(ciudadano);
         return "ciudadano.xhtml";
     }
@@ -203,14 +187,7 @@ public class ExpedienteController implements Serializable{
 //        System.out.println("MB Ciudadano: "+ciudadano);
         expedienteEJB.anadirCiudadano(expediente, ciudadano);
     }
-    
-//    public void anadirCiudadano(Expediente expediente, Ciudadano ciudadano) {
-////        ciudadano.setExpediente(expediente);
-////        ciudadanoEJB.modificarCiudadano(ciudadano);
-//        System.out.println("MB Expediente: "+expediente);
-//        System.out.println("MB Ciudadano: "+ciudadano);
-//        expedienteEJB.anadirCiudadano(expediente, ciudadano);
-//    }
+   
     
     public void eliminarCiudadano(Expediente expediente, String dni) {
         Ciudadano ciudadano = obtenerCiudadano(dni);
@@ -229,6 +206,7 @@ public class ExpedienteController implements Serializable{
         Parentesco parentesco1 = new Parentesco(ciudadano.getDni(), pariente.getDni(), parentescoSeleccionado1);
         Parentesco parentesco2 = new Parentesco(pariente.getDni(), ciudadano.getDni(), parentescoSeleccionado2);
         ciudadanoEJB.insertarParentesco(parentesco1, parentesco2);
+        this.ciudadano = ciudadanoEJB.getCiudadano(this.ciudadano.getDni());
     }
     
     public void eliminarParentesco(Ciudadano ciudadano, Ciudadano pariente) {

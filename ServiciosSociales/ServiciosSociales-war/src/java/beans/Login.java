@@ -17,25 +17,24 @@ import negocio.CuentaLocal;
  *
  * @author Portátil
  */
-
 @ManagedBean(name = "login")
 @RequestScoped
 public class Login implements Serializable {
+
     private Usuario usuario;
 
     /*@ManagedProperty(value = "#{datosFicticios}")
-    private DatosFicticios datos;*/
-    
+     private DatosFicticios datos;*/
     @ManagedProperty(value = "#{controlAutorizacion}")
     private ControlAutorizacion sesion;
-    
+
     @EJB
     private CuentaLocal cuenta;
-    
-    public Login(){
-        
+
+    public Login() {
+
     }
-    
+
     @PostConstruct
     public void init() {
         usuario = new Usuario();
@@ -52,21 +51,24 @@ public class Login implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    public String autenticar(){
-        
+
+    public String autenticar() {
+        System.out.println("LOGIN: "+usuario);
         Usuario user = cuenta.refrescarUsuario(usuario);
+        System.out.println("BR: "+user);
         
-        if(user == null || !user.getContrasena().equalsIgnoreCase(sha256(usuario.getContrasena()))){
+
+        if (user == null || !user.getContrasena().equalsIgnoreCase(sha256(usuario.getContrasena()))) {
             FacesContext ctx = FacesContext.getCurrentInstance();
             ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "El usuario y/o contraseña es incorrecto"));
-        }else
+        } else {
             sesion.setUsuario(user);
-        
+        }
+
         return sesion.redireccionar();
     }
-    
-    public String sha256(String s){
+
+    public String sha256(String s) {
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-256");
@@ -77,9 +79,9 @@ public class Login implements Serializable {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < mdbytes.length; i++) {
-          sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+            sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
         }
-        
+
         return sb.toString();
     }
 }
