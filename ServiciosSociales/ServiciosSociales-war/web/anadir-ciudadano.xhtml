@@ -108,7 +108,7 @@
                         <p:message for="nacionalidad"/>
                     
                         <h:outputLabel value="Fecha de nacimiento:*"/>
-                        <p:calendar id="fecha_nacimiento"
+                        <p:calendar id="fecha_nacimiento" value="#{expedienteController.ciudadano.persona.fechaNacimiento}"
                                     requiredMessage="Campo fecha de nacimiento obligatorio" required="true"
                                     showOn="button" locale="es" maxdate="#{fechaBean.fechaActual}" 
                                     navigator="true" />
