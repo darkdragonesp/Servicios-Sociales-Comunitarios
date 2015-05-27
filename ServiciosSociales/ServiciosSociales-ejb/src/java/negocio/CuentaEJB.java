@@ -17,8 +17,7 @@ public class CuentaEJB implements CuentaLocal {
     
     public Usuario refrescarUsuario(Usuario usuario) {
         Usuario user = em.find(Usuario.class, usuario.getDni());
-        if(user == null)
-            return null;
+        if(user == null) return null;
                     
         em.refresh(user);
         

@@ -26,6 +26,7 @@ public class CiudadanoEJB implements CiudadanoLocal {
 
     @Override
     public void insertarCiudadano(Ciudadano ciudadano) {
+        System.out.println("INSERTAR CIUDADANO: "+ciudadano);
         em.persist(ciudadano.getPersona());
         em.persist(ciudadano);
     }

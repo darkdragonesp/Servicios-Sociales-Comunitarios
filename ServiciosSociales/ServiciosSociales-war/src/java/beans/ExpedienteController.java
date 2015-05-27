@@ -13,6 +13,7 @@ import java.util.Locale;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import negocio.CiudadanoLocal;
@@ -35,7 +36,9 @@ public class ExpedienteController implements Serializable{
     private String parentescoSeleccionado1;
     private String parentescoSeleccionado2;
     private Expediente selectedExpediente;
-    private Intervencion intervencion, editIntervencion;
+    
+    @ManagedProperty(value="#{controlAutorizacion}")
+    private ControlAutorizacion sesion;
     
     @EJB
     private ExpedienteLocal expedienteEJB;
@@ -45,6 +48,10 @@ public class ExpedienteController implements Serializable{
     public ExpedienteController(){ 
         pariente = new Ciudadano();
         ciudadano = new Ciudadano();
+    }
+
+    public void setSesion(ControlAutorizacion sesion) {
+        this.sesion = sesion;
     }
     
     public List<Expediente> getExpedientes() {
@@ -76,22 +83,6 @@ public class ExpedienteController implements Serializable{
 
     public void setCiudadano(Ciudadano ciudadano) {
         this.ciudadano = ciudadano;
-    }
-
-    public Intervencion getIntervencion() {
-        return intervencion;
-    }
-
-    public void setIntervencion(Intervencion intervencion) {
-        this.intervencion = intervencion;
-    }
-
-    public Intervencion getEditIntervencion() {
-        return editIntervencion;
-    }
-
-    public void setEditIntervencion(Intervencion editIntervencion) {
-        this.editIntervencion = editIntervencion;
     }
     
     public Ciudadano getPariente() {
@@ -127,13 +118,6 @@ public class ExpedienteController implements Serializable{
         expediente = selectedExpediente;
     }
     
-    public String editarIntervencion(Intervencion intervencion){
-        this.intervencion = intervencion;
-        //editIntervencion = new Intervencion(this.intervencion);
-
-        return "editar_intervencion.xhtml";
-    }
-    
     public String verExpediente(Expediente expediente){
 //        expedienteEJB.refrescarExpediente(expediente);
         this.expediente = expedienteEJB.getExpediente(expediente.getId());
@@ -157,21 +141,6 @@ public class ExpedienteController implements Serializable{
         return ciudadano;
     }
     
-    public String addIntervencion(Intervencion intervencion){
-        intervencion.setId(asignarIdIntervencion());
-        long id = intervencion.getId();
-        if(expediente.getIntervenciones().add(intervencion)){
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Intervención "+id+" añadida"));
-            context.getExternalContext().getFlash().setKeepMessages(true);
-        }
-        return "editar-expediente.xhtml";
-    }
-    
-    public long asignarIdIntervencion(){
-        return expediente.getIntervenciones().size()+1;
-    }
-    
     public String modificarCiudadano(Ciudadano ciudadano) {
         ciudadanoEJB.modificarCiudadano(ciudadano);
         return "ciudadano.xhtml";
@@ -193,6 +162,8 @@ public class ExpedienteController implements Serializable{
     }
     
     public String crearCiudadano(Ciudadano ciudadano) {
+        ciudadano.setExpediente(sesion.getExpediente());
+        ciudadano.getPersona().setDni(ciudadano.getDni());
         ciudadanoEJB.insertarCiudadano(ciudadano);
         return "ciudadano.xhtml";
     }
@@ -246,6 +217,7 @@ public class ExpedienteController implements Serializable{
         Parentesco parentesco1 = new Parentesco(ciudadano.getDni(), pariente.getDni(), parentescoSeleccionado1);
         Parentesco parentesco2 = new Parentesco(pariente.getDni(), ciudadano.getDni(), parentescoSeleccionado2);
         ciudadanoEJB.insertarParentesco(parentesco1, parentesco2);
+        this.ciudadano = ciudadanoEJB.getCiudadano(this.ciudadano.getDni());
     }
     
     public void eliminarParentesco(Ciudadano ciudadano, Ciudadano pariente) {
