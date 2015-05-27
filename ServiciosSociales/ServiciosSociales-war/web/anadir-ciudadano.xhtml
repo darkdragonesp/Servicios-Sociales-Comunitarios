@@ -114,7 +114,7 @@
                                     navigator="true" />
                         <p:message for="fecha_nacimiento"/>
                     </h:panelGrid>
-                    <p:commandButton value="Crear" action="#{datosFicticios.crearCiudadano(expedienteController.ciudadano, datosFicticios.obtenerExpediente(expedienteController.expediente.id))}" ajax="false"/>
+                    <p:commandButton value="Crear" action="#{expedienteController.crearCiudadano(expedienteController.ciudadano)}" ajax="false"/>
                 </h:form>
             
             </c:when>

@@ -5,13 +5,13 @@
  */
 package beans;
 
+import entidades.Expediente;
+import entidades.Intervencion;
 import java.io.Serializable;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import modelo.Expediente;
-import modelo.Intervencion;
 
 /**
  *

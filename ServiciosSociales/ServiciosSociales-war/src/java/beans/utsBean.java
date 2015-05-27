@@ -5,12 +5,14 @@
 */
 package beans;
 
+import entidades.UTS;
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import modelo.UTS;
+import negocio.ExpedienteLocal;
 /**
  *
  * @author DarkDragon
@@ -26,12 +28,9 @@ public class utsBean  implements Serializable{
     private List<UTS> utss;
     private UTS selectedUTS;
     
-   /* public utsBean(){
-        utss = new ArrayList<UTS>();
-        utss.add(new UTS((long)1,"Sur","El Palo","Malaga"));
-        utss.add(new UTS((long)2,"Norte","Teatinos","Malaga"));
-        utss.add(new UTS((long)3,"Centro","Antequera","Malaga"));
-    }*/
+    @EJB
+    private ExpedienteLocal expedienteEJB;
+    
     @ManagedProperty(value = "#{datosFicticios}")
     private DatosFicticios datos;
 
@@ -71,6 +70,11 @@ public class utsBean  implements Serializable{
     }
 
     public List<UTS> getUtss() {
+        this.utss = expedienteEJB.getUtss();
+//        System.out.println("LISTA UTS:");
+//        for (UTS uts : utss) {
+//            System.out.println(uts);
+//        }
         return utss;
     }
 

@@ -19,6 +19,13 @@
                         <h:outputLabel value="Expediente"/>
                         <h:outputLabel value="#{expedienteController.expediente.id}"/>
                         <h:outputLabel/>
+                        
+                        <h:outputLabel value="UTS:"/>
+                        <p:selectOneMenu id="uts" value="#{expedienteController.expediente.uts}" converter="utsconverter">
+                            <f:selectItems value="#{expedienteController.utss}" var="uts"
+                                           itemValue="#{uts}" itemLabel="#{uts.uts}"/>
+                        </p:selectOneMenu>
+                        <p:message for="uts"/>
                     
                         <h:outputLabel value="Fecha de apertura:*"/>
                         <p:calendar id="fecha_apertura" value="#{expedienteController.expediente.fechaApertura}"
@@ -38,7 +45,7 @@
                                      requiredMessage="Campo estado obligatorio"/>
                         <p:message for="estado"/>
                     
-                        <p:commandButton value="Confirmar" action="expediente.xhtml" ajax="false"/>
+                        <p:commandButton value="Confirmar" action="#{expedienteController.modificarExpediente(expedienteController.expediente)}" ajax="false"/>
                     </h:panelGrid>
                 </h:form>
                 <h:form>
@@ -66,19 +73,23 @@
                         </p:column>
                         <p:column width="90">
                             <p:commandButton icon="ui-icon-pencil" action="#{expedienteController.verEditarCiudadano(ciudadanos.dni)}" ajax="false"/>
-                            <p:commandButton icon="ui-icon-trash" update="lista_ciudadanos_editar" action="#{datosFicticios.eliminarCiudadano(expedienteController.expediente, ciudadanos)}"/>
+                            <p:commandButton icon="ui-icon-trash" update="lista_ciudadanos_editar"
+                                             action="#{expedienteController.eliminarCiudadano(expedienteController.expediente, ciudadanos)}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:selectOneMenu value="#{expedienteController.ciudadano.dni}">
-                                <f:selectItems value="#{datosFicticios.ciudadanos}" var="ciudadano"
+                                <f:selectItems value="#{expedienteController.ciudadanos}" var="ciudadano"
                                                itemValue="#{ciudadano.dni}" itemLabel="#{ciudadano.dni}"/>
                             </p:selectOneMenu>
                             <p:commandButton icon="ui-icon-plus" update="lista_ciudadanos_editar"
-                                             action="#{datosFicticios.anadirCiudadano(expedienteController.expediente, datosFicticios.obtenerCiudadano(expedienteController.ciudadano.dni))}"/>
+                                             action="#{expedienteController.anadirCiudadano(expedienteController.expediente, expedienteController.ciudadano.dni)}"/>
                         </f:facet>
                     </p:dataTable>
                 </h:form>
-            
+                
+                <h:form>
+                    <p:commandButton icon="ui-icon-plus" value="Añadir ciudadano" action="#{expedienteController.verAnadirCiudadano()}" ajax="false"/>
+                </h:form>
             
                 <h3>Intervenciones</h3>
                 <h:form id="form3">
