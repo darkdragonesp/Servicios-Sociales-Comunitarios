@@ -268,7 +268,7 @@ public class usuarioAnyadirBean  implements Serializable{
         }
         //si ya existe el DNI
         
-        for (Persona useri : ejb.getPersonas()) {
+        for (Usuario useri : ejb.getUsuarios()) {
             if (useri.getDni().equalsIgnoreCase(var))throw new ValidatorException(
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "El DNI introducido ya existe en la base de datos.", null));
         }

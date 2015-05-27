@@ -98,7 +98,7 @@
                         <p:outputLabel for="uts" value="UTS:"  style="font-weight:bold" />
                         <p:selectOneMenu id="uts" value="#{usuarioAnyadirBean.user.uts}" converter="utsconverter" style="width:200px" required="true">
                             
-                            <f:selectItems value="#{utsBean.listar()}" var="u" itemLabel="#{u.toString()}" itemValue="#{u}"/>
+                            <f:selectItems value="#{utsBean.listar()}" var="u" itemLabel="#{u.zona},#{u.uts},#{u.css}" itemValue="#{u}"/>
                         </p:selectOneMenu>
                         <p:message for="uts"/>
                         
