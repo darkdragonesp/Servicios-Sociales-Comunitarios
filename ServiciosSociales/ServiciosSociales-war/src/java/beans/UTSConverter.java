@@ -24,6 +24,8 @@ public class UTSConverter implements Converter {
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         if (value != null && value.trim().length() > 0) {
             try {
+//                utsBean sesion = (utsBean) context.getExternalContext().getSessionMap().get("utsBean");
+//                return sesion.listar().get(Integer.parseInt(value));
                 ExpedienteController sesion = (ExpedienteController) context.getExternalContext().getSessionMap().get("expedienteController");
                 return sesion.getUtss().get(Integer.parseInt(value));
             } catch (NumberFormatException e) {
@@ -38,16 +40,13 @@ public class UTSConverter implements Converter {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object object) {
         if (object != null) {
+//            utsBean sesion = (utsBean) context.getExternalContext().getSessionMap().get("utsBean");
+//            int i = sesion.listar().indexOf((UTS) object);
             ExpedienteController sesion = (ExpedienteController) context.getExternalContext().getSessionMap().get("expedienteController");
-            
-            System.out.println("UTS CONVERTER: "+object);
-            if (sesion == null) System.out.println("SESION ES NULA");
-            
             int i = sesion.getUtss().indexOf((UTS) object);
             return Integer.toString(i);
         } else {
             return null;
         }
     }
-
 }

@@ -7,6 +7,16 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Servicios Sociales</title>
+        
+        <script type="text/javascript">
+            function generarId(){
+                sessionStorage.tabId = #{controlAutorizacion.numtabs}
+                #{controlAutorizacion.setNumtabs(controlAutorizacion.numtabs + 1)};
+            }
+            
+            generarId();
+        </script>
+        
     </h:head>
     
     <c:choose>
@@ -17,12 +27,12 @@
 
                         <h:panelGrid columns="1" cellpadding="6">
                                 <p:outputLabel for="usuario" value="Usuario: " />
-                                <p:inputText id="usuario" value="#{login.usuario}" label="usuario"
+                                <p:inputText id="usuario" value="#{login.usuario.dni}" label="usuario"
                                              requiredMessage="Introduzca un DNI ."
                                              required="true"/>
 
                                 <p:outputLabel for="password" value="Contraseña: "/>
-                                <p:password id="password" value="#{login.password}" label="password"
+                                <p:password id="password" value="#{login.usuario.contrasena}" label="password"
                                              requiredMessage="Introduzca contraseña ."
                                              required="true"/>
 

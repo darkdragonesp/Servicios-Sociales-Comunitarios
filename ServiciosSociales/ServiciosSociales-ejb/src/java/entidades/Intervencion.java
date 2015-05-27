@@ -2,6 +2,7 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,28 +52,16 @@ public class Intervencion implements Serializable {
     @Column(name="NOTAS")
     private String notas;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="ACTIVIDAD", referencedColumnName="ID_ACTIVIDAD", nullable = false)
     private Actividad actividad;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="EXPEDIENTE", referencedColumnName="ID_EXPEDIENTE", nullable = false)
     private Expediente expediente;
     
     public Intervencion(){
         
-    }
-    
-    public Intervencion(Intervencion intervencion){
-        setId(intervencion.getId());
-        setTipo(intervencion.getTipo());
-        setRecursoAplicado(intervencion.getRecursoAplicado());
-        setRecursoIdeal(intervencion.getRecursoIdeal());
-        setAyuda(intervencion.getAyuda());
-        setFechaInicio(intervencion.getFechaInicio());
-        setFechaFin(intervencion.getFechaFin());
-        setNotas(intervencion.getNotas());
-        setValoracion(intervencion.getValoracion());
     }
     
     public Long getId() {
