@@ -42,13 +42,7 @@ public class utsBean  implements Serializable{
     public void init(){
         uts1=new UTS();
     }
-    
-    @ManagedProperty(value = "#{datosFicticios}")
-    private DatosFicticios datos;
-    
-    public void setDatos(DatosFicticios datos) {
-        this.datos = datos;
-    }
+ 
     public long getId() {
         return id;
     }

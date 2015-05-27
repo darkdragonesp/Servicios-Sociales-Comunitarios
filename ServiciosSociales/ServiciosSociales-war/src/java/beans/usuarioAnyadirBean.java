@@ -79,13 +79,6 @@ public class usuarioAnyadirBean implements Serializable {
         person = new Persona();
     }
 
-    @ManagedProperty(value = "#{datosFicticios}")
-    private DatosFicticios datos;
-
-    public void setDatos(DatosFicticios datos) {
-        this.datos = datos;
-    }
-
     public void setSesion(ControlAutorizacion sesion) {
         this.sesion = sesion;
     }
