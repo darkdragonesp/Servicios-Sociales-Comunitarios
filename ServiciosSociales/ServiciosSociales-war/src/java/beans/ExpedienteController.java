@@ -40,8 +40,6 @@ public class ExpedienteController implements Serializable{
     @ManagedProperty(value="#{controlAutorizacion}")
     private ControlAutorizacion sesion;
     
-    @ManagedProperty(value = "#{controlAutorizacion}")
-    private ControlAutorizacion sesion;
      
     @EJB
     private ExpedienteLocal expedienteEJB;
